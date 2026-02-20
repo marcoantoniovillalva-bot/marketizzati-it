@@ -6,7 +6,8 @@
       "learnMore": "Scopri di più",
       "downloadFramework": "Scarica il Framework Z·START",
       "writeWhatsapp": "Scrivici su WhatsApp",
-      "getStarted": "Inizia Ora"
+      "getStarted": "Inizia Ora",
+      "microcopy": "30 minuti · Senza impegno · 100% personalizzata"
     },
     "nav": {
       "services": "Servizi",
@@ -103,17 +104,20 @@
       "launchpad": {
         "name": "Launchpad",
         "description": "Per chi parte da zero e vuole le basi giuste.",
-        "cta": "Inizia con Launchpad"
+        "cta": "Inizia con Launchpad",
+        "features": ["Analisi iniziale", "Strategia di posizionamento", "Sito web professionale", "Setup Google Business"]
       },
       "scale": {
         "name": "Scale",
         "description": "Per chi ha già un business e vuole crescere con metodo.",
-        "cta": "Scala con Scale"
+        "cta": "Scala con Scale",
+        "features": ["Tutto di Launchpad", "Funnel completo", "Automazioni email", "Content strategy", "Gestione campagne ads"]
       },
       "dominate": {
         "name": "Dominate",
         "description": "Per chi vuole dominare il proprio mercato con AI e automazione.",
-        "cta": "Domina con Dominate"
+        "cta": "Domina con Dominate",
+        "features": ["Tutto di Scale", "AI e automazione", "Portale clienti", "Ottimizzazione continua", "Supporto prioritario", "Consulenza settimanale"]
       }
     }
   },
@@ -136,7 +140,7 @@
     },
     "step4": {
       "title": "A — Activation",
-      "description": "Lanciamo tutto sul mercato con campagne mirate, contenuti strategici e funnel ottimizzati. Primi risultati visibili in 30 giorni."
+      "description": "Lanciamo tutto sul mercato con campagne mirate, contenuti strategici e funnel ottimizzati. Monitoriamo le performance dal primo giorno per ottimizzare in tempo reale."
     },
     "step5": {
       "title": "R — Results",
@@ -150,10 +154,24 @@
       "title": "Risultati del Metodo",
       "subtitle": "Numeri reali dai nostri clienti."
     },
+    "phases": {
+      "step1": "Fase 1 di 6",
+      "step2": "Fase 2 di 6",
+      "step3": "Fase 3 di 6",
+      "step4": "Fase 4 di 6",
+      "step5": "Fase 5 di 6",
+      "step6": "Fase 6 di 6"
+    },
+    "timelines": {
+      "title": "Quanto tempo ci vuole?",
+      "weeks": "settimane",
+      "allPhases": "Tutte le 6 fasi"
+    },
     "cta": {
       "title": "Pronto a Iniziare?",
       "subtitle": "Prenota la tua sessione diagnostica gratuita e scopri come Z·START può trasformare il tuo business."
-    }
+    },
+    "microcopy": "30 minuti · Senza impegno · 100% personalizzata"
   },
   "about": {
     "hero": {

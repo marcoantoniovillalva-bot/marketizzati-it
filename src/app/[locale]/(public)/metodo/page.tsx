@@ -32,7 +32,7 @@ export default function MetodoPage() {
             {/* Vertical line */}
             <div className="absolute left-8 top-0 bottom-0 w-px bg-surface-border" />
 
-            {steps.map((step, i) => (
+            {steps.map((step) => (
               <div key={step.number} className="relative flex gap-8 mb-16 last:mb-0">
                 {/* Letter circle */}
                 <div className="relative z-10 w-16 h-16 rounded-full bg-accent/10 border-2 border-accent flex items-center justify-center shrink-0">
@@ -42,7 +42,7 @@ export default function MetodoPage() {
                 {/* Content */}
                 <div className="pt-2">
                   <span className="text-body-xs text-accent font-medium uppercase tracking-wider">
-                    {step.duration}
+                    {t(`phases.step${step.number}`)}
                   </span>
                   <h3 className="font-heading text-display-xs mt-2">
                     {t(`step${step.number}.title`)}
@@ -54,6 +54,31 @@ export default function MetodoPage() {
               </div>
             ))}
           </div>
+
+          {/* Timelines Box */}
+          <div className="mt-16 rounded-2xl border border-surface-border bg-surface-elevated p-8">
+            <h3 className="font-heading text-display-xs mb-6">{t('timelines.title')}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center p-4">
+                <p className="text-accent font-heading font-bold text-display-xs">4-6</p>
+                <p className="text-body-sm text-foreground-secondary mt-1">{t('timelines.weeks')}</p>
+                <p className="text-body-sm font-semibold mt-3">Launchpad</p>
+                <p className="text-body-xs text-foreground-muted mt-1">Z + S + T</p>
+              </div>
+              <div className="text-center p-4 border-x border-surface-border">
+                <p className="text-accent font-heading font-bold text-display-xs">8-12</p>
+                <p className="text-body-sm text-foreground-secondary mt-1">{t('timelines.weeks')}</p>
+                <p className="text-body-sm font-semibold mt-3">Scale</p>
+                <p className="text-body-xs text-foreground-muted mt-1">Z + S + T + A</p>
+              </div>
+              <div className="text-center p-4">
+                <p className="text-accent font-heading font-bold text-display-xs">12-16</p>
+                <p className="text-body-sm text-foreground-secondary mt-1">{t('timelines.weeks')}</p>
+                <p className="text-body-sm font-semibold mt-3">Dominate</p>
+                <p className="text-body-xs text-foreground-muted mt-1">{t('timelines.allPhases')}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -62,7 +87,7 @@ export default function MetodoPage() {
         subtitle={t('cta.subtitle')}
         ctaText={tCommon('cta.bookMy')}
         ctaHref="/consulenza"
-        microcopy="30 minuti · Senza impegno · 100% personalizzata"
+        microcopy={t('microcopy')}
       />
     </>
   )

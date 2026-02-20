@@ -12,11 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: t('services.title'), description: t('services.description') }
 }
 
-const packages = [
-  { key: 'launchpad', features: ['Analisi iniziale', 'Strategia base', 'Sito web landing', 'Setup social'] },
-  { key: 'scale', features: ['Tutto di Launchpad', 'Funnel completo', 'Automazioni email', 'Content strategy', 'Report mensili'] },
-  { key: 'dominate', features: ['Tutto di Scale', 'AI integration', 'Portale clienti', 'Community setup', 'Supporto prioritario', 'Consulenza settimanale'] },
-]
+const packageKeys = ['launchpad', 'scale', 'dominate'] as const
+const featureCounts = { launchpad: 4, scale: 5, dominate: 6 }
 
 export default function ServiziPage() {
   const t = useTranslations('services')
@@ -54,22 +51,22 @@ export default function ServiziPage() {
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeading title={t('pricing.title')} subtitle={t('pricing.subtitle')} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {packages.map((pkg, i) => (
+            {packageKeys.map((key, i) => (
               <div
-                key={pkg.key}
+                key={key}
                 className={`rounded-2xl p-8 border ${
                   i === 1
                     ? 'border-accent bg-surface-elevated shadow-glow-red'
                     : 'border-surface-border bg-surface-elevated'
                 }`}
               >
-                <h3 className="font-heading text-display-xs">{t(`pricing.${pkg.key}.name`)}</h3>
-                <p className="mt-2 text-body-sm text-foreground-secondary">{t(`pricing.${pkg.key}.description`)}</p>
+                <h3 className="font-heading text-display-xs">{t(`pricing.${key}.name`)}</h3>
+                <p className="mt-2 text-body-sm text-foreground-secondary">{t(`pricing.${key}.description`)}</p>
                 <ul className="mt-8 space-y-3">
-                  {pkg.features.map((f) => (
-                    <li key={f} className="flex items-center gap-3 text-body-sm text-foreground-secondary">
+                  {Array.from({ length: featureCounts[key] }, (_, j) => (
+                    <li key={j} className="flex items-center gap-3 text-body-sm text-foreground-secondary">
                       <Check size={16} className="text-accent shrink-0" />
-                      {f}
+                      {t(`pricing.${key}.features.${j}`)}
                     </li>
                   ))}
                 </ul>
@@ -78,7 +75,7 @@ export default function ServiziPage() {
                     ? 'bg-accent hover:bg-accent-hover text-white'
                     : 'border border-surface-border text-foreground hover:bg-surface'
                 }`}>
-                  {t(`pricing.${pkg.key}.cta`)}
+                  {t(`pricing.${key}.cta`)}
                 </button>
               </div>
             ))}
@@ -91,7 +88,7 @@ export default function ServiziPage() {
         subtitle=""
         ctaText={tCommon('cta.bookMy')}
         ctaHref="/consulenza"
-        microcopy="30 minuti · Senza impegno · 100% personalizzata"
+        microcopy={tCommon('cta.microcopy')}
       />
     </>
   )
