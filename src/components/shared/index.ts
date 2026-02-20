@@ -1,0 +1,6 @@
+export { LanguageSwitcher } from './language-switcher'
+export { SectionHeading } from './section-heading'
+export { ServiceCard } from './service-card'
+export { TestimonialCard } from './testimonial-card'
+export { CTABanner } from './cta-banner'
+export { CookieBanner } from './cookie-banner'

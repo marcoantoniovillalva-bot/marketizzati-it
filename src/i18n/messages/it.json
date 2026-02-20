@@ -1,0 +1,358 @@
+{
+  "common": {
+    "cta": {
+      "bookConsultation": "Prenota la Tua Consulenza Gratuita",
+      "bookMy": "Prenoto la Mia Consulenza Gratuita",
+      "learnMore": "Scopri di più",
+      "downloadFramework": "Scarica il Framework Z·START",
+      "writeWhatsapp": "Scrivici su WhatsApp",
+      "getStarted": "Inizia Ora"
+    },
+    "nav": {
+      "services": "Servizi",
+      "method": "Metodo Z·START",
+      "about": "Chi Siamo",
+      "blog": "Blog",
+      "consultation": "Consulenza",
+      "login": "Accedi",
+      "dashboard": "Dashboard"
+    },
+    "footer": {
+      "company": "Azienda",
+      "services": "Servizi",
+      "legal": "Legale",
+      "privacy": "Privacy Policy",
+      "cookie": "Cookie Policy",
+      "terms": "Termini e Condizioni",
+      "rights": "Tutti i diritti riservati",
+      "about": "Chi Siamo",
+      "method": "Metodo Z·START",
+      "blog": "Blog",
+      "consultation": "Consulenza Gratuita"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Trasforma la Tua Visione in un Business Digitale Strutturato",
+      "subtitle": "Il Metodo Z·START e una Digital Factory potenziata dall'AI: tutto ciò che serve per costruire il tuo ecosistema digitale completo.",
+      "socialProof": "consulenze strategiche erogate"
+    },
+    "ecosystem": {
+      "title": "La Digital Factory Marketizzati",
+      "subtitle": "Non vendiamo singoli servizi. Costruiamo il tuo ecosistema digitale completo con un processo replicabile e potenziato dall'AI.",
+      "step1": "Lead Magnet",
+      "step1Desc": "Framework Z·START gratuito",
+      "step2": "Mini-Corso",
+      "step2Desc": "5 giorni via WhatsApp",
+      "step3": "Consulenza",
+      "step3Desc": "Sessione diagnostica gratuita",
+      "step4": "Portale Premium",
+      "step4Desc": "Abbonamento + Community"
+    },
+    "services": {
+      "title": "I Nostri Servizi",
+      "subtitle": "Ogni elemento della tua Digital Factory, progettato per lavorare in sinergia."
+    },
+    "method": {
+      "title": "Il Metodo Z·START",
+      "subtitle": "6 fasi testate per portarti da zero a un business digitale strutturato che genera clienti ogni giorno.",
+      "cta": "Scopri il Metodo Completo"
+    },
+    "testimonials": {
+      "title": "Chi Ha Già Svoltato",
+      "subtitle": "Risultati reali da persone reali."
+    },
+    "cta": {
+      "title": "Non Ti Chiediamo di Fidarti delle Parole",
+      "subtitle": "Ti chiediamo 30 minuti per dimostrartelo. Scopri cosa sta bloccando la tua crescita con una consulenza strategica gratuita.",
+      "microcopy": "30 minuti · Senza impegno · 100% personalizzata"
+    }
+  },
+  "services": {
+    "hero": {
+      "title": "I Nostri Servizi",
+      "subtitle": "Ogni servizio è un modulo della tua Digital Factory, progettato per integrarsi e portarti risultati misurabili."
+    },
+    "strategia": {
+      "title": "Strategia Digitale",
+      "description": "Analisi approfondita del tuo mercato e posizionamento. Definiamo insieme la roadmap per la tua crescita."
+    },
+    "branding": {
+      "title": "Branding & Identità",
+      "description": "Costruiamo un brand che comunica autorevolezza e attira il tuo cliente ideale."
+    },
+    "web": {
+      "title": "Siti Web & Portali",
+      "description": "Siti web premium ad alta conversione. Dal design alla messa online, tutto ottimizzato."
+    },
+    "ai": {
+      "title": "AI & Automazione",
+      "description": "Integriamo sistemi intelligenti nei tuoi processi per risparmiare tempo e aumentare i risultati."
+    },
+    "funnel": {
+      "title": "Funnel & Conversione",
+      "description": "Progettiamo percorsi di vendita che trasformano visitatori in clienti fidelizzati."
+    },
+    "content": {
+      "title": "Content Marketing",
+      "description": "Creiamo contenuti strategici che posizionano il tuo brand come punto di riferimento nel settore."
+    },
+    "pricing": {
+      "title": "Pacchetti",
+      "subtitle": "Scegli il percorso più adatto a te.",
+      "launchpad": {
+        "name": "Launchpad",
+        "description": "Per chi parte da zero e vuole le basi giuste.",
+        "cta": "Inizia con Launchpad"
+      },
+      "scale": {
+        "name": "Scale",
+        "description": "Per chi ha già un business e vuole crescere con metodo.",
+        "cta": "Scala con Scale"
+      },
+      "dominate": {
+        "name": "Dominate",
+        "description": "Per chi vuole dominare il proprio mercato con AI e automazione.",
+        "cta": "Domina con Dominate"
+      }
+    }
+  },
+  "method": {
+    "hero": {
+      "title": "Il Metodo Z·START",
+      "subtitle": "Un framework proprietario in 6 fasi per costruire il tuo business digitale con precisione industriale."
+    },
+    "step1": {
+      "title": "Z — Zero Point",
+      "description": "Analisi e diagnosi completa: dove sei ora, dove vuoi arrivare e cosa ti sta bloccando. Niente intuizioni — dati, numeri e verità. Il punto di partenza per ogni decisione strategica."
+    },
+    "step2": {
+      "title": "S — Strategy",
+      "description": "Trasformiamo i dati dello Zero Point in un piano d'azione chiaro. Definiamo CHI vuoi raggiungere, COSA ti rende unico e COME ti posizioni nel mercato."
+    },
+    "step3": {
+      "title": "T — Technology",
+      "description": "La strategia diventa infrastruttura concreta. Sito web, automazioni, CRM, funnel: tutto ciò che serve per far funzionare il tuo business digitale come una macchina ben oliata."
+    },
+    "step4": {
+      "title": "A — Activation",
+      "description": "Lanciamo tutto sul mercato con campagne mirate, contenuti strategici e funnel ottimizzati. Primi risultati visibili in 30 giorni."
+    },
+    "step5": {
+      "title": "R — Results",
+      "description": "Il business diventa scientifico. Analizziamo i dati, identifichiamo cosa funziona e cosa no, e ottimizziamo ogni elemento per massimizzare il ROI."
+    },
+    "step6": {
+      "title": "T — Transformation",
+      "description": "La fase che distingue i business che sopravvivono da quelli che prosperano. Pianifichiamo l'evoluzione strategica, nuove opportunità e la scalabilità del sistema."
+    },
+    "results": {
+      "title": "Risultati del Metodo",
+      "subtitle": "Numeri reali dai nostri clienti."
+    },
+    "cta": {
+      "title": "Pronto a Iniziare?",
+      "subtitle": "Prenota la tua sessione diagnostica gratuita e scopri come Z·START può trasformare il tuo business."
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Chi Siamo",
+      "subtitle": "Marketizzati è la Digital Factory che trasforma la tua visione in un business digitale strutturato."
+    },
+    "mission": {
+      "title": "La Nostra Mission",
+      "text": "Aiutiamo PMI e professionisti a costruire il proprio ecosistema digitale completo — non singoli servizi, ma un sistema integrato potenziato dall'AI attraverso il Metodo Z·START."
+    },
+    "values": {
+      "title": "I Nostri Valori",
+      "transparency": "Trasparenza Totale",
+      "transparencyDesc": "Pricing chiaro, processi visibili, risultati misurabili. Zero sorprese.",
+      "results": "Risultati Prima di Tutto",
+      "resultsDesc": "Non contiamo le ore lavorate. Contiamo i risultati generati.",
+      "innovation": "Digital Factory AI-Native",
+      "innovationDesc": "Usiamo l'AI non come buzzword, ma come motore della nostra Digital Factory per costruire più velocemente e meglio.",
+      "ecosystem": "Ecosistema, Non Servizi",
+      "ecosystemDesc": "Non siamo un fornitore. Siamo un partner nel tuo percorso di crescita."
+    },
+    "team": {
+      "title": "Il Team",
+      "subtitle": "Le persone dietro Marketizzati."
+    }
+  },
+  "consultation": {
+    "hero": {
+      "title": "Consulenza Strategica Gratuita",
+      "subtitle": "In 30 minuti scoprirai cosa sta davvero bloccando la tua crescita."
+    },
+    "benefits": {
+      "title": "Cosa Otterrai",
+      "benefit1": "Dove stai perdendo opportunità",
+      "benefit2": "Quale strategia è più adatta al tuo caso",
+      "benefit3": "I primi 3 passi concreti da fare subito"
+    },
+    "form": {
+      "name": "Nome e Cognome",
+      "email": "Email",
+      "whatsapp": "Numero WhatsApp",
+      "challenge": "Qual è la tua sfida principale?",
+      "challenges": {
+        "non-so-da-dove-iniziare": "Non so da dove iniziare",
+        "ho-un-business-ma-non-cresce": "Ho un business ma non cresce",
+        "voglio-monetizzare-online": "Voglio monetizzare online",
+        "ho-bisogno-di-una-strategia": "Ho bisogno di una strategia chiara",
+        "voglio-automatizzare": "Voglio automatizzare i miei processi",
+        "altro": "Altro"
+      },
+      "submit": "Prenoto la Mia Consulenza Gratuita",
+      "microcopy": "30 minuti · Senza impegno · 100% personalizzata",
+      "privacy": "I tuoi dati sono al sicuro. Zero spam, promesso.",
+      "success": "Grazie! Ti contatteremo entro 24 ore per fissare la consulenza.",
+      "error": "Si è verificato un errore. Riprova o contattaci direttamente."
+    },
+    "scarcity": "Accettiamo solo {max} consulenze a settimana per garantire qualità",
+    "testimonials": {
+      "title": "Chi Lo Ha Già Fatto"
+    }
+  },
+  "blog": {
+    "hero": {
+      "title": "Blog",
+      "subtitle": "Strategie, insight e risorse per far crescere il tuo business digitale."
+    },
+    "comingSoon": "Contenuti in arrivo. Iscriviti alla newsletter per non perderti nulla."
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Ultimo aggiornamento"
+    },
+    "cookie": {
+      "title": "Cookie Policy",
+      "lastUpdated": "Ultimo aggiornamento"
+    },
+    "terms": {
+      "title": "Termini e Condizioni",
+      "lastUpdated": "Ultimo aggiornamento"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Accedi",
+      "subtitle": "Entra nel tuo portale Marketizzati.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Accedi",
+      "forgotPassword": "Hai dimenticato la password?",
+      "noAccount": "Non hai un account?",
+      "signUp": "Registrati"
+    },
+    "signup": {
+      "title": "Crea il Tuo Account",
+      "subtitle": "Inizia il tuo percorso con Marketizzati.",
+      "name": "Nome e Cognome",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Registrati",
+      "hasAccount": "Hai già un account?",
+      "logIn": "Accedi"
+    },
+    "forgotPassword": {
+      "title": "Recupera Password",
+      "subtitle": "Inserisci la tua email per ricevere il link di reset.",
+      "email": "Email",
+      "submit": "Invia Link di Reset",
+      "backToLogin": "Torna al login",
+      "success": "Controlla la tua email",
+      "successMessage": "Ti abbiamo inviato un link per reimpostare la password."
+    },
+    "updatePassword": {
+      "title": "Nuova Password",
+      "subtitle": "Scegli una password sicura che non hai usato prima.",
+      "password": "Nuova password",
+      "hint": "Minimo 6 caratteri",
+      "submit": "Aggiorna Password"
+    },
+    "checkEmail": {
+      "title": "Controlla la Tua Email",
+      "message": "Ti abbiamo inviato un link di conferma. Clicca il link per attivare il tuo account.",
+      "spam": "Non hai ricevuto l'email? Controlla la cartella spam o",
+      "resend": "richiedine una nuova",
+      "backToLogin": "Torna al login"
+    },
+    "terms": {
+      "prefix": "Registrandoti, accetti i nostri",
+      "termsOfService": "Termini di Servizio",
+      "and": "e",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "passwordHint": "Minimo 6 caratteri"
+  },
+  "portal": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "course": "Mini-Corso",
+      "resources": "Risorse",
+      "profile": "Profilo"
+    },
+    "dashboard": {
+      "welcome": "Benvenuto in Marketizzati!",
+      "welcomeSubtitle": "Ecco i tuoi primi passi per iniziare.",
+      "courseProgress": "Il Tuo Mini-Corso",
+      "resources": "Risorse Disponibili",
+      "consultation": "Prenota una Consulenza"
+    },
+    "course": {
+      "title": "Mini-Corso: 5 Giorni per Sbloccarti",
+      "subtitle": "Un percorso pratico per capire dove sei e dove puoi arrivare.",
+      "day": "Giorno",
+      "completed": "Completato",
+      "start": "Inizia",
+      "continue": "Continua"
+    },
+    "resources": {
+      "title": "Risorse",
+      "subtitle": "Strumenti e materiali per accelerare la tua crescita.",
+      "download": "Scarica",
+      "free": "Gratuito"
+    },
+    "profile": {
+      "title": "Il Tuo Profilo",
+      "save": "Salva Modifiche",
+      "saved": "Profilo aggiornato con successo!"
+    }
+  },
+  "cookieBanner": {
+    "text": "Usiamo cookie per migliorare la tua esperienza.",
+    "acceptAll": "Accetta tutti",
+    "rejectAll": "Solo necessari",
+    "customize": "Personalizza",
+    "privacyLink": "Privacy Policy"
+  },
+  "seo": {
+    "home": {
+      "title": "Marketizzati — La Digital Factory per il Tuo Business Digitale",
+      "description": "Aiutiamo PMI e professionisti a trasformare la loro visione in un business digitale strutturato con il Metodo Z·START e una Digital Factory potenziata dall'AI."
+    },
+    "services": {
+      "title": "Servizi — Marketizzati",
+      "description": "Strategia digitale, branding, siti web, AI e automazione. Scopri i servizi dell'ecosistema Marketizzati."
+    },
+    "method": {
+      "title": "Metodo Z·START — Marketizzati",
+      "description": "Il framework proprietario in 6 fasi per costruire il tuo business digitale con precisione industriale."
+    },
+    "about": {
+      "title": "Chi Siamo — Marketizzati",
+      "description": "Marketizzati è la Digital Factory che trasforma la tua visione in un business digitale strutturato con il Metodo Z·START."
+    },
+    "consultation": {
+      "title": "Consulenza Strategica Gratuita — Marketizzati",
+      "description": "Scopri cosa sta bloccando la tua crescita con una consulenza strategica gratuita di 30 minuti."
+    },
+    "blog": {
+      "title": "Blog — Marketizzati",
+      "description": "Strategie, insight e risorse per far crescere il tuo business digitale."
+    }
+  }
+}
