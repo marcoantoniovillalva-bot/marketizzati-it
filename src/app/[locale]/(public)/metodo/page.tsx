@@ -78,6 +78,9 @@ export default function MetodoPage() {
                 <p className="text-body-xs text-foreground-muted mt-1">{t('timelines.allPhases')}</p>
               </div>
             </div>
+            <p className="mt-6 text-body-xs text-foreground-muted text-center">
+              {t('timelines.disclaimer')}
+            </p>
           </div>
         </div>
       </section>
