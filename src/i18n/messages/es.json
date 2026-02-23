@@ -36,7 +36,17 @@
     "hero": {
       "title": "Transforma Tu Visión en un Negocio Digital Estructurado",
       "subtitle": "El Método Z·START y una Digital Factory potenciada por IA: todo lo que necesitas para construir tu ecosistema digital completo.",
-      "socialProof": "consultorías estratégicas realizadas"
+      "socialProof": "Tu garantía no es nuestra experiencia. Es el Método Z·START potenciado por IA."
+    },
+    "whyItWorks": {
+      "title": "Por Qué Funciona",
+      "subtitle": "No gana quien tiene más años de experiencia. Gana quien domina las herramientas correctas.",
+      "pillar1": "Método Z·START",
+      "pillar1Desc": "6 fases estructuradas que eliminan la improvisación. Cada decisión está guiada por datos, no por opiniones.",
+      "pillar2": "IA Como Palanca Estratégica",
+      "pillar2Desc": "La inteligencia artificial no es un extra: es el motor de nuestra Digital Factory. Más velocidad, más precisión, menos desperdicios.",
+      "pillar3": "Ecosistema Integrado",
+      "pillar3Desc": "Cada componente está diseñado para trabajar con los demás. Sin piezas desconectadas, sin proveedores que coordinar."
     },
     "ecosystem": {
       "title": "La Digital Factory Marketizzati",
@@ -61,7 +71,8 @@
     },
     "testimonials": {
       "title": "Quienes Ya Lo Lograron",
-      "subtitle": "Resultados reales de personas reales."
+      "subtitle": "Resultados reales de personas reales.",
+      "comingSoon": "Estamos recopilando las primeras historias de éxito. Pronto podrás leer los resultados de quienes ya comenzaron el recorrido."
     },
     "cta": {
       "title": "No Te Pedimos Que Confíes en las Palabras",

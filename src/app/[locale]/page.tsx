@@ -4,33 +4,10 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { SectionHeading } from '@/components/shared/section-heading'
 import { ServiceCard } from '@/components/shared/service-card'
-import { TestimonialCard } from '@/components/shared/testimonial-card'
 import { CTABanner } from '@/components/shared/cta-banner'
 import { CookieBanner } from '@/components/shared/cookie-banner'
 import { siteConfig } from '@/config/siteConfig'
-import { ArrowRight, Sparkles, MessageCircle, Search, LayoutDashboard } from 'lucide-react'
-
-// Placeholder testimonials
-const testimonials = [
-  {
-    quote: 'In 3 mesi sono passato da zero a un business che genera contatti ogni giorno. Il metodo Z·START ha cambiato tutto.',
-    name: 'Marco R.',
-    role: 'E-commerce Owner',
-    result: '+340% lead in 90 giorni',
-  },
-  {
-    quote: 'Finalmente qualcuno che non vende fumo. Strategia chiara, esecuzione impeccabile, risultati misurabili.',
-    name: 'Laura S.',
-    role: 'Consulente Freelance',
-    result: 'Da 0 a 15 clienti/mese',
-  },
-  {
-    quote: "L'ecosistema Marketizzati è diverso da qualsiasi agenzia con cui ho lavorato. Non sono un fornitore, sono un partner.",
-    name: 'Andrea B.',
-    role: 'Startup Founder',
-    result: 'Revenue +200% in 6 mesi',
-  },
-]
+import { ArrowRight, Sparkles, MessageCircle, Search, LayoutDashboard, Cpu, Target, Layers } from 'lucide-react'
 
 export default function HomePage() {
   const t = useTranslations('home')
@@ -63,10 +40,10 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Social Proof */}
-          <div className="mt-16 flex items-center gap-3">
-            <span className="text-display-xs font-heading text-accent">100+</span>
-            <span className="text-body-sm text-foreground-muted">{t('hero.socialProof')}</span>
+          {/* Method Proof */}
+          <div className="mt-16 inline-flex items-center gap-3 bg-surface-elevated border border-surface-border rounded-full px-6 py-3">
+            <Cpu size={18} className="text-accent" />
+            <span className="text-body-sm text-foreground-secondary">{t('hero.socialProof')}</span>
           </div>
         </section>
 
@@ -137,23 +114,26 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* Why It Works */}
         <section className="section-padding">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeading
-              title={t('testimonials.title')}
-              subtitle={t('testimonials.subtitle')}
+              title={t('whyItWorks.title')}
+              subtitle={t('whyItWorks.subtitle')}
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map((item, i) => (
-                <TestimonialCard
-                  key={i}
-                  quote={item.quote}
-                  name={item.name}
-                  role={item.role}
-                  result={item.result}
-                  index={i}
-                />
+              {[
+                { icon: <Target size={28} />, title: t('whyItWorks.pillar1'), desc: t('whyItWorks.pillar1Desc') },
+                { icon: <Cpu size={28} />, title: t('whyItWorks.pillar2'), desc: t('whyItWorks.pillar2Desc') },
+                { icon: <Layers size={28} />, title: t('whyItWorks.pillar3'), desc: t('whyItWorks.pillar3Desc') },
+              ].map((item, i) => (
+                <div key={i} className="bg-surface-elevated border border-surface-border rounded-2xl p-8 text-center hover:border-accent/30 transition-colors">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4 text-accent">
+                    {item.icon}
+                  </div>
+                  <h3 className="font-heading text-display-xs mb-3">{item.title}</h3>
+                  <p className="text-body-sm text-foreground-secondary">{item.desc}</p>
+                </div>
               ))}
             </div>
           </div>

@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
-import { TestimonialCard } from '@/components/shared/testimonial-card'
-import { CheckCircle, Clock, Shield, Users } from 'lucide-react'
+import { CheckCircle, Users } from 'lucide-react'
 import { ConsultationForm } from './consultation-form'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -9,19 +8,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'seo' })
   return { title: t('consultation.title'), description: t('consultation.description') }
 }
-
-const testimonials = [
-  {
-    quote: 'La consulenza mi ha aperto gli occhi su errori che commettevo da mesi. In 30 minuti ho avuto più chiarezza che in 6 mesi da solo.',
-    name: 'Giulia M.',
-    role: 'Digital Creator',
-  },
-  {
-    quote: 'Pensavo di aver bisogno di più traffico. In realtà avevo bisogno di una strategia. La diagnosi è stata illuminante.',
-    name: 'Luca P.',
-    role: 'E-commerce Owner',
-  },
-]
 
 export default function ConsulenzaPage() {
   const t = useTranslations('consultation')
@@ -63,17 +49,7 @@ export default function ConsulenzaPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-heading text-display-xs text-center mb-12">{t('testimonials.title')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.map((item, i) => (
-              <TestimonialCard key={i} quote={item.quote} name={item.name} role={item.role} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
+{/* Testimonials - Coming Soon */}
     </>
   )
 }
