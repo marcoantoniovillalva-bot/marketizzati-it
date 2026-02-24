@@ -31,6 +31,10 @@ export async function generateMetadata({
   return {
     title: t('home.title'),
     description: t('home.description'),
+    icons: {
+      icon: '/images/icon-dark.png',
+      apple: '/images/icon-dark.png',
+    },
     openGraph: {
       title: t('home.title'),
       description: t('home.description'),

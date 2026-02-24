@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { LanguageSwitcher } from '@/components/shared/language-switcher'
 
@@ -32,8 +33,15 @@ export function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-display-xs font-heading font-bold tracking-tight">
-          MARKETIZZATI
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/images/logo-dark.png"
+            alt="Marketizzati"
+            width={180}
+            height={40}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}

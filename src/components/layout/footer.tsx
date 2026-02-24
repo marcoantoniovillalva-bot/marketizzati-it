@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import Image from 'next/image'
 import { siteConfig } from '@/config/siteConfig'
 import { Instagram, Linkedin, Facebook } from 'lucide-react'
 
@@ -13,8 +14,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="text-display-xs font-heading font-bold">
-              MARKETIZZATI
+            <Link href="/" className="inline-block">
+              <Image
+                src="/images/logo-dark.png"
+                alt="Marketizzati"
+                width={180}
+                height={40}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-4 text-body-sm text-foreground-secondary leading-relaxed">
               {siteConfig.companyDescription}
