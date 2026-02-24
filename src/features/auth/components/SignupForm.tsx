@@ -6,6 +6,7 @@ import { signup } from '@/actions/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Eye, EyeOff } from 'lucide-react'
+import { ConsentCheckboxes } from './ConsentCheckboxes'
 
 export function SignupForm() {
   const t = useTranslations('auth.signup')
@@ -56,6 +57,8 @@ export function SignupForm() {
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>
       </div>
+
+      <ConsentCheckboxes />
 
       {error && (
         <div className="rounded-lg bg-red-500/10 border border-red-500/30 p-3">

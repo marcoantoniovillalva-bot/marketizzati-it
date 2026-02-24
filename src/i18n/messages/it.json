@@ -316,7 +316,20 @@
       "and": "e",
       "privacyPolicy": "Privacy Policy"
     },
-    "passwordHint": "Minimo 6 caratteri"
+    "passwordHint": "Minimo 6 caratteri",
+    "consent": {
+      "termsPrefix": "Accetto i",
+      "termsOfService": "Termini di Servizio",
+      "and": "e la",
+      "privacyPolicy": "Privacy Policy",
+      "marketing": "Acconsento al trattamento dei dati per comunicazioni commerciali",
+      "newsletter": "Desidero ricevere la newsletter con aggiornamenti e risorse"
+    },
+    "oauth": {
+      "continueWithGoogle": "Continua con Google",
+      "separator": "oppure",
+      "error": "Errore durante l'autenticazione. Riprova."
+    }
   },
   "portal": {
     "sidebar": {

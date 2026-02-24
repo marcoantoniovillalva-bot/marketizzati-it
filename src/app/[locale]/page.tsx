@@ -6,6 +6,7 @@ import { SectionHeading } from '@/components/shared/section-heading'
 import { ServiceCard } from '@/components/shared/service-card'
 import { CTABanner } from '@/components/shared/cta-banner'
 import { CookieBanner } from '@/components/shared/cookie-banner'
+import { GatedSection } from '@/components/shared/gated-section'
 import { siteConfig } from '@/config/siteConfig'
 import { ArrowRight, Sparkles, MessageCircle, Search, LayoutDashboard, Cpu, Target, Layers } from 'lucide-react'
 
@@ -98,21 +99,23 @@ export default function HomePage() {
         </section>
 
         {/* Method Preview */}
-        <section className="section-padding bg-surface">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <SectionHeading
-              title={t('method.title')}
-              subtitle={t('method.subtitle')}
-            />
-            <Link
-              href="/metodo"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-accent text-accent hover:bg-accent hover:text-white font-semibold rounded-xl transition-all text-body-lg"
-            >
-              {t('method.cta')}
-              <ArrowRight size={20} />
-            </Link>
-          </div>
-        </section>
+        <GatedSection>
+          <section className="section-padding bg-surface">
+            <div className="max-w-4xl mx-auto px-6 text-center">
+              <SectionHeading
+                title={t('method.title')}
+                subtitle={t('method.subtitle')}
+              />
+              <Link
+                href="/metodo"
+                className="inline-flex items-center gap-2 px-8 py-4 border border-accent text-accent hover:bg-accent hover:text-white font-semibold rounded-xl transition-all text-body-lg"
+              >
+                {t('method.cta')}
+                <ArrowRight size={20} />
+              </Link>
+            </div>
+          </section>
+        </GatedSection>
 
         {/* Why It Works */}
         <section className="section-padding">

@@ -6,16 +6,33 @@ import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { LanguageSwitcher } from '@/components/shared/language-switcher'
+import { createClient } from '@/lib/supabase/client'
+import type { User } from '@supabase/supabase-js'
 
 export function Navbar() {
   const t = useTranslations('common')
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const supabase = createClient()
+
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user)
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   const navLinks = [
@@ -61,6 +78,12 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-4">
           <LanguageSwitcher />
           <Link
+            href={user ? '/dashboard' : '/login'}
+            className="text-body-sm text-foreground-secondary hover:text-foreground transition-colors font-medium"
+          >
+            {user ? t('nav.dashboard') : t('nav.login')}
+          </Link>
+          <Link
             href="/consulenza"
             className="px-5 py-2.5 bg-accent hover:bg-accent-hover text-white text-body-sm font-semibold rounded-lg transition-colors"
           >
@@ -92,6 +115,13 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href={user ? '/dashboard' : '/login'}
+              onClick={() => setIsMobileOpen(false)}
+              className="text-body-lg text-foreground-secondary hover:text-foreground py-2 transition-colors"
+            >
+              {user ? t('nav.dashboard') : t('nav.login')}
+            </Link>
             <div className="pt-4 border-t border-surface-border flex flex-col gap-4">
               <LanguageSwitcher />
               <Link

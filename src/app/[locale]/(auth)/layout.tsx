@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 export default function AuthLayout({
   children,
@@ -14,9 +15,13 @@ export default function AuthLayout({
 
         <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
           <div className="mb-10">
-            <span className="text-2xl font-bold tracking-tight text-foreground">
-              MARKET<span className="text-accent">IZZATI</span>
-            </span>
+            <Image
+              src="/images/logo-dark.png"
+              alt="Marketizzati"
+              width={200}
+              height={40}
+              className="h-10 w-auto"
+            />
           </div>
 
           <AuthBranding />

@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { ForgotPasswordForm } from '@/features/auth/components'
 import { ArrowLeft } from 'lucide-react'
@@ -10,9 +11,13 @@ export default function ForgotPasswordPage() {
     <div className="space-y-8">
       {/* Mobile logo */}
       <div className="lg:hidden flex items-center justify-center mb-8">
-        <span className="text-xl font-bold tracking-tight text-foreground">
-          MARKET<span className="text-accent">IZZATI</span>
-        </span>
+        <Image
+          src="/images/logo-dark.png"
+          alt="Marketizzati"
+          width={160}
+          height={32}
+          className="h-8 w-auto"
+        />
       </div>
 
       <div className="text-center lg:text-left">
