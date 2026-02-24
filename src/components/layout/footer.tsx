@@ -20,7 +20,7 @@ export function Footer() {
                 alt="Marketizzati"
                 width={220}
                 height={48}
-                className="h-10 md:h-12 w-auto"
+                className="h-14 md:h-16 w-auto"
               />
             </Link>
             <p className="mt-4 text-body-sm text-foreground-secondary leading-relaxed">
