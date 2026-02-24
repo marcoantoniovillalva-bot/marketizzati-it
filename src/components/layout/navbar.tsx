@@ -31,7 +31,7 @@ export function Navbar() {
         isScrolled ? 'glass-dark' : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <Image
@@ -39,7 +39,7 @@ export function Navbar() {
             alt="Marketizzati"
             width={220}
             height={48}
-            className="h-14 md:h-16 w-auto"
+            className="h-20 md:h-24 w-auto"
             priority
           />
         </Link>
