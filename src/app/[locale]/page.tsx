@@ -98,8 +98,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Method Preview */}
-        <GatedSection>
+        {/* Method Preview - Only show for authenticated users */}
+        <GatedSection hideWhenNotAuthenticated={true}>
           <section className="section-padding bg-surface">
             <div className="max-w-4xl mx-auto px-6 text-center">
               <SectionHeading

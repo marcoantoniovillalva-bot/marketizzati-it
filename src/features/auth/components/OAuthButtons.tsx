@@ -40,6 +40,7 @@ export function OAuthButtons() {
   const buttonRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [clientId] = useState(() => process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '')
 
   const handleCredentialResponse = useCallback(async (response: { credential: string }) => {
     setLoading(true)
@@ -61,20 +62,19 @@ export function OAuthButtons() {
   }, [router, t])
 
   useEffect(() => {
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
     if (!clientId || !buttonRef.current) return
 
     function initializeGoogle() {
       if (!window.google?.accounts || !buttonRef.current) return
 
       window.google.accounts.id.initialize({
-        client_id: clientId!,
+        client_id: clientId,
         callback: handleCredentialResponse,
         ux_mode: 'popup',
         use_fedcm_for_prompt: false,
       })
 
-      window.google.accounts.id.renderButton(buttonRef.current!, {
+      window.google.accounts.id.renderButton(buttonRef.current, {
         type: 'standard',
         theme: 'filled_black',
         size: 'large',
@@ -84,14 +84,12 @@ export function OAuthButtons() {
       })
     }
 
-    // Check if script already loaded
     if (window.google?.accounts) {
       initializeGoogle()
       return
     }
 
     if (document.querySelector('script[src="https://accounts.google.com/gsi/client"]')) {
-      // Script tag exists but not loaded yet, wait for it
       const interval = setInterval(() => {
         if (window.google?.accounts) {
           initializeGoogle()
@@ -107,16 +105,15 @@ export function OAuthButtons() {
     script.defer = true
     script.onload = () => initializeGoogle()
     document.head.appendChild(script)
-  }, [handleCredentialResponse])
+  }, [clientId, handleCredentialResponse])
 
-  // Don't render if no client ID configured
-  if (!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
+  // Only hide after client-side hydration confirms no client ID
+  if (!clientId && typeof window !== 'undefined') {
     return null
   }
 
   return (
     <div className="space-y-4">
-      {/* Google renders its own button here */}
       <div className="flex justify-center">
         <div ref={buttonRef} />
       </div>
