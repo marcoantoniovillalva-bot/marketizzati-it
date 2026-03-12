@@ -7,22 +7,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#090909',
+        background: '#F7F7F7',
         surface: {
-          DEFAULT: '#111111',
-          elevated: '#1a1a1a',
-          border: '#2a2a2a',
+          DEFAULT: '#FFFFFF',
+          elevated: '#FFFFFF',
+          border: '#E5E5E5',
         },
         foreground: {
-          DEFAULT: '#ffffff',
-          secondary: '#a0a0a0',
+          DEFAULT: '#090909',
+          secondary: '#4A4A4A',
           muted: '#666666',
         },
         accent: {
-          DEFAULT: '#FE3314',
+          DEFAULT: '#FE3313',
           hover: '#FF4D33',
           dark: '#CC2910',
-          glow: 'rgba(254, 51, 20, 0.3)',
+          glow: 'rgba(254, 51, 19, 0.3)',
         },
         success: {
           DEFAULT: '#10B981',
@@ -35,6 +35,10 @@ const config: Config = {
         error: {
           DEFAULT: '#EF4444',
           light: '#FEE2E2',
+        },
+        gold: {
+          DEFAULT: '#D4AF37',
+          light: '#F5E6A3',
         },
       },
       fontFamily: {
@@ -59,18 +63,25 @@ const config: Config = {
         '5xl': '2.5rem',
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgb(0 0 0 / 0.3)',
-        'card-hover': '0 4px 12px -1px rgb(0 0 0 / 0.4)',
-        'elevated': '0 10px 25px -3px rgb(0 0 0 / 0.5)',
-        'modal': '0 25px 50px -12px rgb(0 0 0 / 0.6)',
-        'glow-red': '0 0 20px rgba(254, 51, 20, 0.3)',
-        'glow-red-lg': '0 0 40px rgba(254, 51, 20, 0.2)',
+        'card': '0 1px 3px 0 rgb(0 0 0 / 0.05)',
+        'card-hover': '0 4px 12px -1px rgb(0 0 0 / 0.1)',
+        'elevated': '0 10px 25px -3px rgb(0 0 0 / 0.1)',
+        'modal': '0 25px 50px -12px rgb(0 0 0 / 0.15)',
+        'glow-red': '0 0 20px rgba(254, 51, 19, 0.3)',
+        'glow-red-lg': '0 0 40px rgba(254, 51, 19, 0.2)',
+        'glow-gold': '0 0 20px rgba(212, 175, 55, 0.3)',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-out',
         'slide-up': 'slideUp 0.4s ease-out',
         'slide-down': 'slideDown 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
+        'float': 'float 6s ease-in-out infinite',
+        'float-delayed': 'float 6s ease-in-out 2s infinite',
+        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+        'orbit': 'orbit 20s linear infinite',
+        'slide-in-right': 'slideInRight 0.5s ease-out',
+        'slide-in-left': 'slideInLeft 0.5s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -89,10 +100,31 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'scale(0.95)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        pulseGlow: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(254, 51, 19, 0.2)' },
+          '50%': { boxShadow: '0 0 40px rgba(254, 51, 19, 0.4)' },
+        },
+        orbit: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(50px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-50px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       backgroundImage: {
-        'gradient-dark': 'linear-gradient(180deg, #090909 0%, #111111 100%)',
-        'gradient-red': 'linear-gradient(135deg, #FE3314 0%, #FF4D33 100%)',
+        'gradient-light': 'linear-gradient(180deg, #FFFFFF 0%, #F7F7F7 100%)',
+        'gradient-red': 'linear-gradient(135deg, #FE3313 0%, #FF4D33 100%)',
+        'gradient-gold': 'linear-gradient(135deg, #D4AF37 0%, #F5E6A3 100%)',
       },
     },
   },
