@@ -1,5 +1,7 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default function AuthLayout({
   children,
@@ -16,7 +18,7 @@ export default function AuthLayout({
         <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
           <div className="mb-10">
             <Image
-              src="/images/logo-dark.png"
+              src="/images/logo-light.png"
               alt="Marketizzati"
               width={200}
               height={40}
@@ -34,8 +36,32 @@ export default function AuthLayout({
       </div>
 
       {/* Right panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md">
+          {/* Mobile back button */}
+          <div className="lg:hidden mb-6">
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-foreground-secondary hover:text-accent transition-colors"
+            >
+              <ArrowLeft size={20} />
+              <span>Torna al sito</span>
+            </Link>
+          </div>
+          
+          {/* Mobile logo */}
+          <div className="lg:hidden flex items-center justify-center mb-6">
+            <Link href="/">
+              <Image
+                src="/images/logo-light.png"
+                alt="Marketizzati"
+                width={160}
+                height={32}
+                className="h-8 w-auto"
+              />
+            </Link>
+          </div>
+          
           {children}
         </div>
       </div>

@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl'
 import { ArrowRight, Sparkles, MessageCircle, Search, LayoutDashboard, Cpu, Target, Layers, Menu, X, ChevronRight } from 'lucide-react'
 import { ParticleBackground } from '@/components/shared/particle-background'
 import { TechLines } from '@/components/shared/tech-lines'
-import { VideoEmbed } from '@/components/shared/video-embed'
 
 export function Navbar() {
   const t = useTranslations('common')
@@ -15,9 +14,9 @@ export function Navbar() {
 
   const navLinks = [
     { name: t('nav.services'), href: '/servizi' },
-    { name: t('nav.metodo'), href: '/metodo' },
-    { name: t('nav.chiSiamo'), href: '/chi-siamo' },
-    { name: t('nav.consulenza'), href: '/consulenza' },
+    { name: t('nav.method'), href: '/metodo' },
+    { name: t('nav.about'), href: '/chi-siamo' },
+    { name: t('nav.consultation'), href: '/consulenza' },
   ]
 
   return (

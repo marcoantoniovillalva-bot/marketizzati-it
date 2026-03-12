@@ -10,13 +10,13 @@
    ============================================ */
 
 :root {
-  --color-background: #090909;
-  --color-surface: #111111;
-  --color-surface-elevated: #1a1a1a;
-  --color-surface-border: #2a2a2a;
+  --color-background: #F7F7F7;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-border: #E5E5E5;
 
-  --color-foreground: #ffffff;
-  --color-foreground-secondary: #a0a0a0;
+  --color-foreground: #090909;
+  --color-foreground-secondary: #4A4A4A;
   --color-foreground-muted: #666666;
 
   --color-accent: #FE3314;

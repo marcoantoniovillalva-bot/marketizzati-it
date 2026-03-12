@@ -8,7 +8,7 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { ParticleBackground } from '@/components/shared/particle-background'
 import { TechLines } from '@/components/shared/tech-lines'
-import { VideoEmbed } from '@/components/shared/video-embed'
+import { GifEmbed, heroGifUrl, aiAutomationGifUrl, marketingGifUrl, consulenzaGifUrl } from '@/components/shared/gif-embed'
 import { ArrowRight, Sparkles, MessageCircle, Search, LayoutDashboard, Cpu, Target, Layers, ChevronRight } from 'lucide-react'
 
 export default function HomePage() {
@@ -95,7 +95,7 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-12"
             >
-              <VideoEmbed canvaId="DAHDu6kH-RQ/UrVpybRPs4KNAXR8ZSqs2g" className="rounded-2xl shadow-elevated" />
+              <GifEmbed src={heroGifUrl} alt="Hero Video" className="rounded-2xl shadow-elevated" />
             </motion.div>
           </motion.div>
 
@@ -186,9 +186,9 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { icon: <Cpu size={32} />, title: 'AI Automation', desc: 'Automazione intelligente dei processi', video: 'DAHDvAerLQ8/QztHtqKP4JNH9IlrdHCCTg' },
-                { icon: <MessageCircle size={32} />, title: 'Marketing Digital', desc: 'Strategie di marketing innovative', video: 'DAHDvJGSZIs/ZCro6nZKTcNJ1AbU6sRr7g' },
-                { icon: <Search size={32} />, title: 'SEO & Content', desc: 'Posizionamento e contenuti', video: 'DAHDvJGSZIs/ZCro6nZKTcNJ1AbU6sRr7g' },
+                { icon: <Cpu size={32} />, title: 'AI Automation', desc: 'Automazione intelligente dei processi', gif: aiAutomationGifUrl },
+                { icon: <MessageCircle size={32} />, title: 'Marketing Digital', desc: 'Strategie di marketing innovative', gif: marketingGifUrl },
+                { icon: <Search size={32} />, title: 'SEO & Content', desc: 'Posizionamento e contenuti', gif: marketingGifUrl },
               ].map((service, i) => (
                 <motion.div
                   key={i}
@@ -200,7 +200,7 @@ export default function HomePage() {
                   className="bg-white rounded-3xl overflow-hidden border-2 border-surface-border hover:border-accent hover:shadow-elevated transition-all"
                 >
                   <div className="aspect-video">
-                    <VideoEmbed canvaId={service.video} className="h-full" />
+                    <GifEmbed src={service.gif} alt={service.title} className="h-full" />
                   </div>
                   <div className="p-6">
                     <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-4">
@@ -266,7 +266,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6 }}
                 className="rounded-3xl overflow-hidden shadow-elevated"
               >
-                <VideoEmbed canvaId="DAHDvKJMA5g/rK-FY_l-p166ANNHHdPvdQ" />
+                <GifEmbed src={consulenzaGifUrl} alt="Consulenza" />
               </motion.div>
             </div>
           </div>

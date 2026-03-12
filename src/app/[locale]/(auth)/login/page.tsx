@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
+import Link from 'next/link'
 import { LoginForm, OAuthButtons } from '@/features/auth/components'
 
 export default function LoginPage() {
@@ -8,20 +8,9 @@ export default function LoginPage() {
 
   return (
     <div className="space-y-8">
-      {/* Mobile logo */}
-      <div className="lg:hidden flex items-center justify-center mb-8">
-        <Image
-          src="/images/logo-dark.png"
-          alt="Marketizzati"
-          width={160}
-          height={32}
-          className="h-8 w-auto"
-        />
-      </div>
-
       <div className="text-center lg:text-left">
-        <h1 className="text-display-xs text-foreground">{t('title')}</h1>
-        <p className="mt-2 text-foreground-secondary">{t('subtitle')}</p>
+        <h1 className="text-2xl md:text-3xl lg:text-display-xs text-foreground font-bold">{t('title')}</h1>
+        <p className="mt-2 text-foreground-secondary text-sm md:text-base">{t('subtitle')}</p>
       </div>
 
       <OAuthButtons />

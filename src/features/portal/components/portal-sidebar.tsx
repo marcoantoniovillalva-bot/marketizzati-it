@@ -3,7 +3,8 @@
 import { useTranslations } from 'next-intl'
 import { Link, usePathname } from '@/i18n/navigation'
 import { signout } from '@/actions/auth'
-import { LayoutDashboard, BookOpen, FolderOpen, User, LogOut } from 'lucide-react'
+import Image from 'next/image'
+import { LayoutDashboard, BookOpen, FolderOpen, User, LogOut, Zap } from 'lucide-react'
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, key: 'dashboard' },
@@ -20,8 +21,17 @@ export function PortalSidebar() {
     <aside className="w-64 bg-surface border-r border-surface-border min-h-screen flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-surface-border">
-        <Link href="/dashboard" className="text-lg font-bold tracking-tight text-foreground">
-          MARKET<span className="text-accent">IZZATI</span>
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <Image
+            src="/images/icon-light.png"
+            alt="Marketizzati"
+            width={32}
+            height={32}
+            className="h-8 w-auto"
+          />
+          <span className="text-lg font-bold tracking-tight text-foreground">
+            MARKET<span className="text-accent">IZZATI</span>
+          </span>
         </Link>
       </div>
 
@@ -47,6 +57,17 @@ export function PortalSidebar() {
             </Link>
           )
         })}
+
+        {/* Z-START Section */}
+        <div className="pt-4 mt-4 border-t border-surface-border">
+          <Link
+            href="/metodo"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-foreground-secondary hover:text-foreground hover:bg-surface-elevated transition-all"
+          >
+            <Zap size={20} className="text-accent" />
+            Z-START
+          </Link>
+        </div>
       </nav>
 
       {/* Logout */}
