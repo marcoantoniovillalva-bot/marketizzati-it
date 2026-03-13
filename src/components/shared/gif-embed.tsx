@@ -37,3 +37,5 @@ export const aiAutomationGifUrl = `${SUPABASE_URL}/gif-ai-automation.gif`
 export const marketingGifUrl = `${SUPABASE_URL}/gif-digital-marketing.gif`
 export const consulenzaGifUrl = `${SUPABASE_URL}/gif-consulenza.gif`
 export const formazioneGifUrl = `${SUPABASE_URL}/gif-formazione.gif`
+export const youtubeCaseStudyGifUrl = `${SUPABASE_URL}/gif-youtube-casestudy.gif`
+export const lurumiGifUrl = `${SUPABASE_URL}/gif-lurumi.gif`

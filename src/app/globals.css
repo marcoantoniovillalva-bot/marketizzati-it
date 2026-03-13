@@ -128,6 +128,26 @@ h1, h2, h3, h4, h5, h6, .heading {
   100% { background-position: 0% 50%; }
 }
 
+/* Ripple button effect */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.ripple-btn:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}
+
 @layer utilities {
   /* Text gradient red */
   .text-gradient-red {
