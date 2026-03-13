@@ -1,10 +1,10 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { ArrowRight, Sparkles, Award, ExternalLink, Check, Target, Zap, Users } from 'lucide-react'
+import { ArrowRight, Sparkles, Award, ExternalLink, Check, Target, Zap, Users, ChevronDown } from 'lucide-react'
 import { ParticleBackground } from '@/components/shared/particle-background'
 import { TechLines } from '@/components/shared/tech-lines'
 import {
@@ -34,21 +34,9 @@ const zstartSteps = [
 ]
 
 const services = [
-  {
-    title: 'Strategia & Posizionamento',
-    desc: 'Definiamo chi sei, a chi parli e come ti distingui nel mercato.',
-    gif: marketingGifUrl,
-  },
-  {
-    title: 'AI & Automazione',
-    desc: "L'AI che lavora per te mentre tu lavori sul tuo business.",
-    gif: aiAutomationGifUrl,
-  },
-  {
-    title: 'Web & Funnel',
-    desc: 'Infrastrutture digitali che portano traffico e convertono.',
-    gif: consulenzaGifUrl,
-  },
+  { title: 'Strategia & Posizionamento', desc: 'Definiamo chi sei, a chi parli e come ti distingui nel mercato.', gif: marketingGifUrl },
+  { title: 'AI & Automazione', desc: "L'intelligenza artificiale che lavora per te mentre tu lavori sul tuo business.", gif: aiAutomationGifUrl },
+  { title: 'Web & Funnel', desc: 'Infrastrutture digitali che portano traffico e convertono.', gif: consulenzaGifUrl },
 ]
 
 const values = [
@@ -59,8 +47,8 @@ const values = [
   },
   {
     icon: <Zap size={20} />,
-    title: 'AI-Native',
-    desc: "Usiamo l'AI non come buzzword, ma come motore per costruire più velocemente e meglio.",
+    title: 'Potenziati dall\'AI',
+    desc: "Integriamo l'intelligenza artificiale come motore reale — non come parola di moda — per costruire più velocemente e meglio.",
   },
   {
     icon: <Users size={20} />,
@@ -69,14 +57,130 @@ const values = [
   },
 ]
 
-// Wave SVG divider
+const caseStudies = [
+  {
+    id: 'chistes',
+    title: 'Chistes Malisimos',
+    tag: 'Contenuto Virale AI',
+    brief: 'Canale creato da zero con contenuto AI-ottimizzato: 140.000+ views su YouTube e 100.000+ su Facebook in meno di 30 giorni. Senza ads.',
+    detail: {
+      headline: '140.000+ Views. Zero Clienti.',
+      body: [
+        'Ho creato un canale con contenuto AI-ottimizzato. In meno di 30 giorni: 140.000+ views su YouTube (32.000+ su un solo video) e 100.000+ su Facebook. Traffico organico puro, zero ads.',
+        'Risultato? Zero clienti. Perché senza un sistema che converte il traffico, hai solo numeri su uno schermo.',
+        'Quella lezione — imparata sulla mia pelle — è il motivo per cui esiste il Metodo Z·START.',
+      ],
+      gif: youtubeCaseStudyGifUrl,
+      gifCaption: '32.000+ views su un solo video · Clicca per guardare',
+      gifLink: 'https://youtube.com/shorts/03avyCsZ8us',
+      quote: 'Il contenuto porta le persone. Il sistema le converte. Io costruisco entrambi.',
+    },
+  },
+  {
+    id: 'lurumi',
+    title: 'lurumi.it',
+    tag: 'Infrastruttura Digitale',
+    brief: 'Prima infrastruttura digitale completa lanciata da Marketizzati: PWA full-stack con AI, pagamenti Stripe e 200+ funzionalità — live in meno di 1 mese.',
+    detail: {
+      headline: 'Da zero a produzione in meno di 1 mese.',
+      body: [
+        'lurumi.it è una PWA full-stack per il mondo del crochet: AI integrata per generare pattern e immagini, pagamenti Stripe, oltre 200 funzionalità tra cui contatori, progetti, tutorial e chat AI.',
+        'Costruita interamente con la Digital Factory Marketizzati — lo stesso sistema che offro ai miei clienti. Non una demo, un prodotto reale con utenti reali.',
+        'È la prova concreta che il Metodo Z·START funziona: dall\'idea alla messa in produzione, senza mesi di tentativi.',
+      ],
+      gif: lurumiGifUrl,
+      gifCaption: 'lurumi.it — live in produzione',
+      gifLink: 'https://lurumi.it',
+      quote: 'Costruisco sistemi digitali prima di venderli.',
+    },
+  },
+]
+
 function WaveDivider({ flip = false, fill = '#FFFFFF' }: { flip?: boolean; fill?: string }) {
   return (
-    <div className={`w-full overflow-hidden leading-none ${flip ? 'rotate-180' : ''}`} style={{ height: 60 }}>
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="w-full h-full">
-        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill={fill} />
+    <div className={`w-full overflow-hidden leading-none ${flip ? 'rotate-180' : ''}`} style={{ height: 56 }}>
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none" className="w-full h-full">
+        <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill={fill} />
       </svg>
     </div>
+  )
+}
+
+function CaseStudyCard({ study }: { study: typeof caseStudies[0] }) {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <motion.div
+      layout
+      className="bg-white rounded-3xl border border-surface-border overflow-hidden hover:border-accent/40 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all min-w-[300px] md:min-w-0 flex-1"
+    >
+      {/* Card header */}
+      <div className="p-6">
+        <span className="inline-block text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full mb-3">
+          {study.tag}
+        </span>
+        <h3 className="font-heading font-bold text-xl mb-2">{study.title}</h3>
+        <p className="text-foreground-secondary text-sm leading-relaxed">{study.brief}</p>
+
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="mt-4 flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all group"
+        >
+          {expanded ? 'Mostra meno' : 'Scopri di più'}
+          <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+            <ChevronDown size={16} />
+          </motion.div>
+        </button>
+      </div>
+
+      {/* Expanded content */}
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            key="expanded"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 border-t border-surface-border pt-5 space-y-4">
+              <h4 className="font-bold text-lg text-foreground">{study.detail.headline}</h4>
+
+              {study.detail.body.map((para, i) => (
+                <p key={i} className="text-foreground-secondary text-sm leading-relaxed">{para}</p>
+              ))}
+
+              {/* GIF cliccabile */}
+              <motion.a
+                href={study.detail.gifLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                className="block rounded-2xl overflow-hidden border border-surface-border relative group mt-2"
+              >
+                <img
+                  src={study.detail.gif}
+                  alt={study.title}
+                  className="w-full h-auto"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-accent/90 flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ExternalLink size={18} className="text-white" />
+                  </div>
+                </div>
+              </motion.a>
+              <p className="text-xs text-foreground-muted text-center">{study.detail.gifCaption}</p>
+
+              {/* Quote */}
+              <div className="bg-foreground rounded-2xl p-4 mt-2">
+                <p className="text-white font-bold text-sm">&ldquo;{study.detail.quote}&rdquo;</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   )
 }
 
@@ -92,8 +196,6 @@ export default function HomePage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 120])
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
-
-  const headlineLines = ['Mentre Tu Ci Pensi,', 'i Tuoi Competitor', 'Stanno Costruendo.']
 
   return (
     <>
@@ -113,20 +215,8 @@ export default function HomePage() {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 overflow-hidden"
         >
-          {/* GIF hero come sfondo */}
-          <motion.div
-            style={{ scale: bgScale }}
-            className="absolute inset-0 z-0"
-          >
-            <Image
-              src={heroGifUrl}
-              alt=""
-              fill
-              className="object-cover"
-              unoptimized
-              priority
-            />
-            {/* Overlay gradiente per leggibilità */}
+          <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0">
+            <Image src={heroGifUrl} alt="" fill className="object-cover" unoptimized priority />
             <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95" />
           </motion.div>
 
@@ -137,7 +227,6 @@ export default function HomePage() {
             style={{ y: heroY, opacity: heroOpacity }}
             className="relative z-10 max-w-5xl mx-auto text-center w-full"
           >
-            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -146,14 +235,15 @@ export default function HomePage() {
             >
               <Sparkles className="w-4 h-4 text-accent" />
               <span className="text-sm font-semibold text-accent tracking-wide">
-                Digital Factory · Traffic Master Certified · AI-Native
+                Digital Factory Marketizzati
               </span>
             </motion.div>
 
-            {/* Headline staggered */}
-            <h1 style={{ fontSize: 'clamp(2.6rem, 7.5vw, 7rem)', lineHeight: 1.05 }}
-              className="font-heading font-black mb-4">
-              {headlineLines.map((line, i) => (
+            <h1
+              style={{ fontSize: 'clamp(2.6rem, 7.5vw, 7rem)', lineHeight: 1.05 }}
+              className="font-heading font-black mb-4"
+            >
+              {['Mentre Tu Ci Pensi,', 'i Tuoi Competitor', 'Stanno Costruendo.'].map((line, i) => (
                 <motion.span
                   key={i}
                   className="block"
@@ -174,7 +264,6 @@ export default function HomePage() {
               </motion.span>
             </h1>
 
-            {/* Sub */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -185,7 +274,6 @@ export default function HomePage() {
               che genera clienti — con precisione industriale e l&apos;AI che fa il lavoro pesante.
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -219,7 +307,6 @@ export default function HomePage() {
             </motion.p>
           </motion.div>
 
-          {/* Scroll indicator */}
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -235,9 +322,17 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* ── S2: PROOF BAR ── */}
-        <section className="py-10 bg-foreground overflow-hidden">
+        {/* ── S2: RISULTATI ── */}
+        <section className="py-12 bg-foreground overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-white font-heading font-black text-2xl md:text-3xl text-center mb-8"
+            >
+              Risultati
+            </motion.h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 text-center">
               {[
                 { value: 140, suffix: 'k+', label: 'Views YouTube organiche' },
@@ -274,91 +369,56 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── S3: CASO STUDIO ── */}
+        {/* ── S3: SERVIZI ── */}
         <WaveDivider fill="#090909" flip />
         <section className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-              {/* Copy */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-14"
+            >
+              <h2
+                className="font-heading font-bold mb-4"
+                style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
               >
-                <h2
-                  className="font-heading font-black mb-2"
-                  style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}
-                >
-                  140.000+ Views.
-                </h2>
-                <h2
-                  className="font-heading font-black text-accent mb-6"
-                  style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}
-                >
-                  Zero Clienti.
-                </h2>
+                Servizi
+              </h2>
+              <p className="text-foreground-secondary text-lg max-w-xl mx-auto">
+                Nella Digital Factory ogni elemento è progettato per lavorare in sinergia.
+              </p>
+            </motion.div>
 
-                <div className="space-y-4 text-foreground-secondary text-base md:text-lg leading-relaxed">
-                  <p>
-                    Ho creato un canale con contenuto AI-ottimizzato. In meno di 30 giorni:
-                    <strong className="text-foreground"> 140.000+ views su YouTube</strong> (32.000+ su un solo video)
-                    e <strong className="text-foreground">100.000+ su Facebook</strong>.
-                    Traffico organico puro, zero ads.
-                  </p>
-                  <p>
-                    Risultato? <strong className="text-accent">Zero clienti.</strong>
-                  </p>
-                  <p>
-                    Perché senza un sistema che converte il traffico in clienti, hai solo
-                    numeri su uno schermo. Quella lezione — imparata sulla mia pelle —
-                    è il motivo per cui esiste il Metodo Z·START.
-                  </p>
-                </div>
-
-                <div className="mt-8 p-5 bg-foreground rounded-2xl">
-                  <p className="text-white font-bold text-base md:text-lg">
-                    &ldquo;Il contenuto porta le persone.
-                    Il sistema le converte.
-                    Io costruisco entrambi.&rdquo;
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* YouTube GIF cliccabile */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="relative"
-              >
-                <motion.a
-                  href="https://youtube.com/shorts/03avyCsZ8us"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.02 }}
-                  className="block max-w-xs mx-auto md:max-w-sm lg:max-w-full rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-surface-border group relative"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {services.map((service, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  className="bg-surface rounded-3xl overflow-hidden border border-surface-border hover:border-accent/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] transition-all"
                 >
-                  <img
-                    src={youtubeCaseStudyGifUrl}
-                    alt="Video YouTube case study — 32k views"
-                    className="w-full h-auto"
-                  />
-                  {/* Play overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
-                    <div className="w-14 h-14 rounded-full bg-accent/90 flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                      <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6 ml-1">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
+                  <div className="overflow-hidden">
+                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }}>
+                      <GifEmbed src={service.gif} alt={service.title} />
+                    </motion.div>
                   </div>
-                </motion.a>
-                <p className="mt-3 text-center text-sm text-foreground-muted">
-                  32.000+ views · Clicca per guardare il video →
-                </p>
-              </motion.div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">{service.title}</h3>
+                    <p className="text-foreground-secondary text-sm mb-4">{service.desc}</p>
+                    <Link
+                      href="/servizi"
+                      className="text-accent font-semibold text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all group"
+                    >
+                      Scopri di più
+                      <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -368,8 +428,6 @@ export default function HomePage() {
         <section id="metodo" className="py-24 bg-surface overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-              {/* Left: headline + steps */}
               <div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -378,7 +436,7 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full mb-6"
                 >
                   <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                    ✦ Framework Proprietario — Già applicato su lurumi.it
+                    Metodo Z·START
                   </span>
                 </motion.div>
 
@@ -432,7 +490,7 @@ export default function HomePage() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
-                  className="mt-8 flex flex-col sm:flex-row gap-4"
+                  className="mt-8"
                 >
                   <Link
                     href="/metodo"
@@ -444,7 +502,7 @@ export default function HomePage() {
                 </motion.div>
               </div>
 
-              {/* Right: lurumi come proof + GIF sticky */}
+              {/* Right: AI GIF + lurumi proof */}
               <div className="hidden lg:block sticky top-24 self-start space-y-6">
                 <motion.div
                   initial={{ opacity: 0, x: 40 }}
@@ -461,7 +519,6 @@ export default function HomePage() {
                   </motion.div>
                 </motion.div>
 
-                {/* Lurumi come proof del metodo */}
                 <motion.a
                   href="https://lurumi.it"
                   target="_blank"
@@ -473,7 +530,7 @@ export default function HomePage() {
                   whileHover={{ scale: 1.02 }}
                   className="block rounded-2xl overflow-hidden border border-surface-border shadow-md"
                 >
-                  <img src={lurumiGifUrl} alt="lurumi.it — primo progetto Marketizzati live" className="w-full h-auto" />
+                  <img src={lurumiGifUrl} alt="lurumi.it" className="w-full h-auto" />
                   <div className="bg-foreground px-4 py-2.5 flex items-center justify-between">
                     <div>
                       <p className="text-white text-xs font-bold">lurumi.it — Il Metodo in Azione</p>
@@ -491,8 +548,6 @@ export default function HomePage() {
         <WaveDivider fill="#FFFFFF" />
         <section className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
-
-            {/* Section header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -511,8 +566,6 @@ export default function HomePage() {
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-              {/* Sinistra: foto + certificato */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -534,7 +587,6 @@ export default function HomePage() {
                   />
                 </motion.div>
 
-                {/* Certificate badge */}
                 <motion.button
                   onClick={() => setCertOpen(true)}
                   whileHover={{ scale: 1.03 }}
@@ -550,14 +602,12 @@ export default function HomePage() {
                 </motion.button>
               </motion.div>
 
-              {/* Destra: mission + valori */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                {/* Mission */}
                 <div className="mb-8">
                   <h3 className="font-heading font-bold text-xl mb-3 text-accent">La Mission</h3>
                   <p className="text-foreground-secondary text-base md:text-lg leading-relaxed">
@@ -568,13 +618,15 @@ export default function HomePage() {
                     Digital Factory che offro ai miei clienti.
                   </p>
                   <p className="text-foreground-secondary text-base md:text-lg leading-relaxed mt-3">
-                    La mission è semplice: <strong className="text-foreground">aiutare PMI e professionisti
-                    a costruire il proprio ecosistema digitale completo</strong> — non singoli servizi, ma
-                    un sistema integrato potenziato dall&apos;AI attraverso il Metodo Z·START.
+                    La mission è semplice:{' '}
+                    <strong className="text-foreground">
+                      aiutare PMI e professionisti a costruire il proprio ecosistema digitale completo
+                    </strong>{' '}
+                    — non singoli servizi, ma un sistema integrato potenziato dall&apos;intelligenza
+                    artificiale attraverso il Metodo Z·START.
                   </p>
                 </div>
 
-                {/* Valori */}
                 <div>
                   <h3 className="font-heading font-bold text-xl mb-4 text-accent">I Valori</h3>
                   <div className="space-y-4">
@@ -599,12 +651,11 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Check list */}
                 <div className="mt-8 space-y-2">
                   {[
                     'Traffic Master Certified · Florida Global University 2025',
                     'lurumi.it — Digital Product live in meno di 1 mese',
-                    'AI applicata a contenuto, automazione e prodotto',
+                    'Intelligenza artificiale applicata a contenuto, automazione e prodotto',
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
@@ -619,7 +670,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── S6: SERVIZI ── */}
+        {/* ── S6: CASI STUDIO ── */}
         <WaveDivider fill="#F7F7F7" />
         <section className="py-24 bg-surface overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
@@ -627,46 +678,30 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-14"
+              className="text-center mb-12"
             >
               <h2
                 className="font-heading font-bold mb-4"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
               >
-                La Digital Factory al Completo
+                Casi Studio
               </h2>
               <p className="text-foreground-secondary text-lg max-w-xl mx-auto">
-                Ogni elemento progettato per lavorare in sinergia.
+                Risultati reali. Sistemi reali. Costruiti con il Metodo Z·START.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {services.map((service, i) => (
+            {/* Cards scrollabili su mobile, griglia su desktop */}
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+              {caseStudies.map((study, i) => (
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={study.id}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.12 }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-3xl overflow-hidden border border-surface-border hover:border-accent/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] transition-all"
+                  transition={{ duration: 0.5, delay: i * 0.15 }}
                 >
-                  <div className="overflow-hidden">
-                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }}>
-                      <GifEmbed src={service.gif} alt={service.title} />
-                    </motion.div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                    <p className="text-foreground-secondary text-sm mb-4">{service.desc}</p>
-                    <Link
-                      href="/servizi"
-                      className="text-accent font-semibold text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all group"
-                    >
-                      Scopri di più
-                      <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
+                  <CaseStudyCard study={study} />
                 </motion.div>
               ))}
             </div>
