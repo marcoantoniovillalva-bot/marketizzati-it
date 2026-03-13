@@ -74,13 +74,16 @@ export function OAuthButtons() {
         use_fedcm_for_prompt: false,
       })
 
+      const containerWidth = buttonRef.current.parentElement?.clientWidth ?? 400
+      const buttonWidth = Math.min(containerWidth, 400)
+
       window.google.accounts.id.renderButton(buttonRef.current, {
         type: 'standard',
         theme: 'filled_black',
         size: 'large',
         text: 'continue_with',
         shape: 'rectangular',
-        width: 400,
+        width: buttonWidth,
       })
     }
 

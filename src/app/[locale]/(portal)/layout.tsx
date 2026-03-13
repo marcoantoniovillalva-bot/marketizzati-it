@@ -1,5 +1,5 @@
+import { Navbar } from '@/components/layout/navbar'
 import { PortalSidebar } from '@/features/portal/components'
-import { PortalMobileNav } from '@/features/portal/components'
 
 export default function PortalLayout({
   children,
@@ -8,10 +8,10 @@ export default function PortalLayout({
 }) {
   return (
     <div className="min-h-screen bg-background">
-      {/* Mobile nav */}
-      <PortalMobileNav />
+      {/* Same navbar as public site */}
+      <Navbar />
 
-      <div className="flex">
+      <div className="flex pt-20">
         {/* Desktop sidebar */}
         <div className="hidden lg:block">
           <PortalSidebar />

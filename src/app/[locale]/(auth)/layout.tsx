@@ -18,7 +18,7 @@ export default function AuthLayout({
         <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
           <div className="mb-10">
             <Image
-              src="/images/logo-light.png"
+              src="/images/icon-light.png"
               alt="Marketizzati"
               width={200}
               height={40}
@@ -53,7 +53,7 @@ export default function AuthLayout({
           <div className="lg:hidden flex items-center justify-center mb-6">
             <Link href="/">
               <Image
-                src="/images/logo-light.png"
+                src="/images/icon-light.png"
                 alt="Marketizzati"
                 width={160}
                 height={32}
