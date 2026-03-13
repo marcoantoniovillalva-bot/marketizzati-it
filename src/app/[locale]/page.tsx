@@ -1,10 +1,10 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { ArrowRight, Sparkles, Award, ExternalLink, Check } from 'lucide-react'
+import { ArrowRight, Sparkles, Award, ExternalLink, Check, Target, Zap, Users } from 'lucide-react'
 import { ParticleBackground } from '@/components/shared/particle-background'
 import { TechLines } from '@/components/shared/tech-lines'
 import {
@@ -18,16 +18,19 @@ import {
 } from '@/components/shared/gif-embed'
 import { AnimatedCounter } from '@/components/shared/animated-counter'
 import { Lightbox } from '@/components/shared/lightbox'
+import { WhatsAppButton } from '@/components/shared/whatsapp-button'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 
+const WA_LINK = 'https://wa.link/psnpym'
+
 const zstartSteps = [
-  { letter: 'Z', title: 'Zero Point', desc: 'Dove sei davvero. Senza illusioni.' },
-  { letter: 'S', title: 'Strategy', desc: 'Il piano. Ogni decisione guidata dai dati.' },
-  { letter: 'T', title: 'Technology', desc: "L'infrastruttura concreta che fa girare tutto." },
-  { letter: 'A', title: 'Activation', desc: 'Sul mercato. Campagne, funnel, contenuti.' },
-  { letter: 'R', title: 'Results', desc: 'Analizziamo. Ottimizziamo. Massimizziamo il ROI.' },
-  { letter: 'T2', title: 'Transformation', desc: 'Il business che scala. Non quello che sopravvive.' },
+  { letter: 'Z', title: 'Punto Zero', desc: 'Dove sei davvero. Senza illusioni.' },
+  { letter: 'S', title: 'Strategia', desc: 'Il piano. Ogni decisione guidata dai dati.' },
+  { letter: 'T', title: 'Tecnologia', desc: "L'infrastruttura concreta che fa girare tutto." },
+  { letter: 'A', title: 'Attivazione', desc: 'Sul mercato. Campagne, funnel, contenuti.' },
+  { letter: 'R', title: 'Risultati', desc: 'Analizziamo. Ottimizziamo. Massimizziamo il ROI.' },
+  { letter: 'T2', title: 'Trasformazione', desc: 'Il business che scala. Non quello che sopravvive.' },
 ]
 
 const services = [
@@ -48,9 +51,37 @@ const services = [
   },
 ]
 
+const values = [
+  {
+    icon: <Target size={20} />,
+    title: 'Risultati Prima di Tutto',
+    desc: 'Non contiamo le ore lavorate. Contiamo i risultati generati.',
+  },
+  {
+    icon: <Zap size={20} />,
+    title: 'AI-Native',
+    desc: "Usiamo l'AI non come buzzword, ma come motore per costruire più velocemente e meglio.",
+  },
+  {
+    icon: <Users size={20} />,
+    title: 'Ecosistema, Non Servizi',
+    desc: 'Non siamo un fornitore. Siamo un partner nel tuo percorso di crescita.',
+  },
+]
+
+// Wave SVG divider
+function WaveDivider({ flip = false, fill = '#FFFFFF' }: { flip?: boolean; fill?: string }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none ${flip ? 'rotate-180' : ''}`} style={{ height: 60 }}>
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="w-full h-full">
+        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill={fill} />
+      </svg>
+    </div>
+  )
+}
+
 export default function HomePage() {
   const heroRef = useRef(null)
-  const methodRef = useRef(null)
   const [certOpen, setCertOpen] = useState(false)
 
   const { scrollYProgress } = useScroll({
@@ -58,16 +89,16 @@ export default function HomePage() {
     offset: ['start start', 'end start'],
   })
 
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 180])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
-  const gifY = useTransform(scrollYProgress, [0, 1], [0, 80])
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
-  const headlineWords = ['Mentre Tu Ci Pensi,', 'i Tuoi Competitor', 'Stanno Costruendo.']
+  const headlineLines = ['Mentre Tu Ci Pensi,', 'i Tuoi Competitor', 'Stanno Costruendo.']
 
   return (
     <>
       <Navbar />
-      <ParticleBackground />
+      <WhatsAppButton />
       <Lightbox
         src="/images/Certificato Florida University.PNG"
         alt="Certificato Traffic Master – Florida Global University"
@@ -82,9 +113,30 @@ export default function HomePage() {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 overflow-hidden"
         >
+          {/* GIF hero come sfondo */}
+          <motion.div
+            style={{ scale: bgScale }}
+            className="absolute inset-0 z-0"
+          >
+            <Image
+              src={heroGifUrl}
+              alt=""
+              fill
+              className="object-cover"
+              unoptimized
+              priority
+            />
+            {/* Overlay gradiente per leggibilità */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95" />
+          </motion.div>
+
+          <ParticleBackground />
           <TechLines />
 
-          <div className="relative z-10 max-w-5xl mx-auto text-center w-full">
+          <motion.div
+            style={{ y: heroY, opacity: heroOpacity }}
+            className="relative z-10 max-w-5xl mx-auto text-center w-full"
+          >
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -99,11 +151,9 @@ export default function HomePage() {
             </motion.div>
 
             {/* Headline staggered */}
-            <motion.h1
-              style={{ y: heroY, opacity: heroOpacity, fontSize: 'clamp(2.6rem, 7.5vw, 7rem)', lineHeight: 1.05 }}
-              className="font-heading font-bold mb-4"
-            >
-              {headlineWords.map((line, i) => (
+            <h1 style={{ fontSize: 'clamp(2.6rem, 7.5vw, 7rem)', lineHeight: 1.05 }}
+              className="font-heading font-black mb-4">
+              {headlineLines.map((line, i) => (
                 <motion.span
                   key={i}
                   className="block"
@@ -122,7 +172,7 @@ export default function HomePage() {
               >
                 Con l&apos;IA.
               </motion.span>
-            </motion.h1>
+            </h1>
 
             {/* Sub */}
             <motion.p
@@ -142,20 +192,19 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.8 }}
               className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Link
-                href="/consulenza"
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="ripple-btn px-8 py-4 bg-accent hover:bg-accent-hover text-white font-bold rounded-xl transition-all text-base md:text-lg hover:shadow-[0_0_30px_rgba(254,51,20,0.4)] hover:scale-[1.03] active:scale-[0.98]"
               >
                 Prenota la Mia Consulenza Gratuita
-              </Link>
+              </a>
               <button
-                onClick={() => {
-                  const el = document.getElementById('metodo')
-                  el?.scrollIntoView({ behavior: 'smooth' })
-                }}
+                onClick={() => document.getElementById('metodo')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 border-2 border-foreground/20 hover:border-accent text-foreground hover:text-accent font-semibold rounded-xl transition-all text-base md:text-lg flex items-center gap-2 group"
               >
-                Scopri il Metodo Z·START
+                Risparmia Mesi. Porta Clienti.
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </motion.div>
@@ -168,31 +217,13 @@ export default function HomePage() {
             >
               30 minuti · Senza impegno · 100% personalizzata
             </motion.p>
-
-            {/* Hero GIF floating */}
-            <motion.div
-              style={{ y: gifY }}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="mt-14 relative max-w-3xl mx-auto"
-            >
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.02, rotate: 0.5 }}
-                className="rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(254,51,20,0.15)] border border-surface-border"
-              >
-                <GifEmbed src={heroGifUrl} alt="Digital Factory in azione" />
-              </motion.div>
-            </motion.div>
-          </div>
+          </motion.div>
 
           {/* Scroll indicator */}
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
           >
             <div className="w-6 h-10 border-2 border-foreground/20 rounded-full flex justify-center pt-2">
               <motion.div
@@ -205,7 +236,7 @@ export default function HomePage() {
         </section>
 
         {/* ── S2: PROOF BAR ── */}
-        <section className="py-8 bg-foreground overflow-hidden">
+        <section className="py-10 bg-foreground overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 text-center">
               {[
@@ -225,17 +256,15 @@ export default function HomePage() {
                   onClick={item.cert ? () => setCertOpen(true) : undefined}
                 >
                   <div className="text-2xl md:text-3xl font-black text-white mb-1">
-                    {item.value !== null ? (
-                      <AnimatedCounter target={item.value} suffix={item.suffix} />
-                    ) : (
-                      item.raw
-                    )}
+                    {item.value !== null
+                      ? <AnimatedCounter target={item.value} suffix={item.suffix ?? ''} />
+                      : item.raw}
                   </div>
                   <div className="text-xs text-white/50 font-medium leading-tight">
                     {item.label}
                     {item.cert && (
                       <span className="block text-accent/80 mt-0.5 text-[10px]">
-                        Florida Global University · Tap per vedere
+                        Florida Global University · Clicca per vedere
                       </span>
                     )}
                   </div>
@@ -246,9 +275,11 @@ export default function HomePage() {
         </section>
 
         {/* ── S3: CASO STUDIO ── */}
+        <WaveDivider fill="#090909" flip />
         <section className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
               {/* Copy */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -256,18 +287,18 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                <motion.h2
-                  className="font-heading font-bold mb-2"
+                <h2
+                  className="font-heading font-black mb-2"
                   style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}
                 >
                   140.000+ Views.
-                </motion.h2>
-                <motion.h2
-                  className="font-heading font-bold text-accent mb-6"
+                </h2>
+                <h2
+                  className="font-heading font-black text-accent mb-6"
                   style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.1 }}
                 >
                   Zero Clienti.
-                </motion.h2>
+                </h2>
 
                 <div className="space-y-4 text-foreground-secondary text-base md:text-lg leading-relaxed">
                   <p>
@@ -286,22 +317,16 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="mt-8 p-5 bg-foreground rounded-2xl"
-                >
+                <div className="mt-8 p-5 bg-foreground rounded-2xl">
                   <p className="text-white font-bold text-base md:text-lg">
                     &ldquo;Il contenuto porta le persone.
                     Il sistema le converte.
                     Io costruisco entrambi.&rdquo;
                   </p>
-                </motion.div>
+                </div>
               </motion.div>
 
-              {/* YouTube GIF */}
+              {/* YouTube GIF cliccabile */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -309,28 +334,41 @@ export default function HomePage() {
                 transition={{ duration: 0.7 }}
                 className="relative"
               >
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                <motion.a
+                  href="https://youtube.com/shorts/03avyCsZ8us"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
-                  className="rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-surface-border"
+                  className="block max-w-xs mx-auto md:max-w-sm lg:max-w-full rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-surface-border group relative"
                 >
-                  <GifEmbed src={youtubeCaseStudyGifUrl} alt="Canale YouTube case study" />
-                </motion.div>
-                <div className="mt-4 text-center">
-                  <p className="text-sm text-foreground-muted">
-                    32.000+ views su un solo video · Contenuto AI-ottimizzato
-                  </p>
-                </div>
+                  <img
+                    src={youtubeCaseStudyGifUrl}
+                    alt="Video YouTube case study — 32k views"
+                    className="w-full h-auto"
+                  />
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
+                    <div className="w-14 h-14 rounded-full bg-accent/90 flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                      <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6 ml-1">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </motion.a>
+                <p className="mt-3 text-center text-sm text-foreground-muted">
+                  32.000+ views · Clicca per guardare il video →
+                </p>
               </motion.div>
             </div>
           </div>
         </section>
 
         {/* ── S4: METODO Z·START ── */}
+        <WaveDivider fill="#F7F7F7" />
         <section id="metodo" className="py-24 bg-surface overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
               {/* Left: headline + steps */}
               <div>
                 <motion.div
@@ -340,7 +378,7 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full mb-6"
                 >
                   <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                    ✦ Framework Proprietario — Applicato su lurumi.it
+                    ✦ Framework Proprietario — Già applicato su lurumi.it
                   </span>
                 </motion.div>
 
@@ -362,28 +400,28 @@ export default function HomePage() {
                   transition={{ delay: 0.2 }}
                   className="text-foreground-secondary mb-10 text-base md:text-lg"
                 >
-                  Non consulenza generica. Non un corso da guardare in pigiama.
-                  Un framework in 6 fasi che costruisce il tuo ecosistema digitale
-                  come una macchina industriale.
+                  Non consulenza generica. Un framework in 6 fasi che costruisce il tuo
+                  ecosistema digitale come una macchina industriale — e ti porta clienti
+                  risparmiando mesi di tentativi.
                 </motion.p>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {zstartSteps.map((step, i) => (
                     <motion.div
                       key={step.letter}
                       initial={{ opacity: 0, x: -30 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      transition={{ duration: 0.5, delay: i * 0.08 }}
                       whileHover={{ x: 4 }}
                       className="flex items-center gap-4 p-4 bg-white rounded-2xl border border-surface-border hover:border-accent/40 hover:shadow-md transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-accent text-white font-black text-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-11 h-11 rounded-xl bg-accent text-white font-black text-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                         {step.letter === 'T2' ? 'T' : step.letter}
                       </div>
                       <div>
                         <p className="font-bold text-foreground text-sm md:text-base">{step.title}</p>
-                        <p className="text-foreground-secondary text-sm">{step.desc}</p>
+                        <p className="text-foreground-muted text-sm">{step.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -393,8 +431,8 @@ export default function HomePage() {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.7 }}
-                  className="mt-8"
+                  transition={{ delay: 0.6 }}
+                  className="mt-8 flex flex-col sm:flex-row gap-4"
                 >
                   <Link
                     href="/metodo"
@@ -406,8 +444,8 @@ export default function HomePage() {
                 </motion.div>
               </div>
 
-              {/* Right: GIF sticky */}
-              <div className="hidden lg:block sticky top-24 self-start">
+              {/* Right: lurumi come proof + GIF sticky */}
+              <div className="hidden lg:block sticky top-24 self-start space-y-6">
                 <motion.div
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -422,33 +460,76 @@ export default function HomePage() {
                     <GifEmbed src={aiAutomationGifUrl} alt="AI in azione" />
                   </motion.div>
                 </motion.div>
+
+                {/* Lurumi come proof del metodo */}
+                <motion.a
+                  href="https://lurumi.it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="block rounded-2xl overflow-hidden border border-surface-border shadow-md"
+                >
+                  <img src={lurumiGifUrl} alt="lurumi.it — primo progetto Marketizzati live" className="w-full h-auto" />
+                  <div className="bg-foreground px-4 py-2.5 flex items-center justify-between">
+                    <div>
+                      <p className="text-white text-xs font-bold">lurumi.it — Il Metodo in Azione</p>
+                      <p className="text-white/40 text-[10px]">Primo progetto Marketizzati · Live in &lt;1 mese</p>
+                    </div>
+                    <ExternalLink size={12} className="text-white/40 shrink-0" />
+                  </div>
+                </motion.a>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── S5: CHI SONO ── */}
+        <WaveDivider fill="#FFFFFF" />
         <section className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Sinistra: foto + badge */}
+
+            {/* Section header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2
+                className="font-heading font-bold mb-4"
+                style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
+              >
+                Chi c&apos;è Dietro Marketizzati
+              </h2>
+              <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
+                Non un&apos;agenzia. Una Digital Factory fondata su risultati reali.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+              {/* Sinistra: foto + certificato */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="flex flex-col items-center lg:items-start gap-6"
+                className="flex flex-col items-center lg:items-start gap-5"
               >
                 <motion.div
                   whileHover={{ rotate: 1, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="relative w-72 h-80 rounded-3xl overflow-hidden border-4 border-accent shadow-[0_20px_60px_rgba(254,51,20,0.2)]"
+                  className="relative w-72 h-96 rounded-3xl overflow-hidden border-4 border-accent shadow-[0_20px_60px_rgba(254,51,20,0.2)]"
                 >
                   <Image
                     src="/images/Chi sono.jpg"
                     alt="Marco Antonio Villalva"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     unoptimized
                   />
                 </motion.div>
@@ -458,7 +539,7 @@ export default function HomePage() {
                   onClick={() => setCertOpen(true)}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-3 px-5 py-3 bg-surface border-2 border-surface-border hover:border-accent rounded-2xl transition-all shadow-sm group"
+                  className="flex items-center gap-3 px-5 py-3 bg-surface border-2 border-surface-border hover:border-accent rounded-2xl transition-all shadow-sm group w-full max-w-xs"
                 >
                   <Award size={20} className="text-accent shrink-0" />
                   <div className="text-left">
@@ -467,83 +548,70 @@ export default function HomePage() {
                   </div>
                   <ExternalLink size={14} className="text-foreground-muted group-hover:text-accent transition-colors ml-auto" />
                 </motion.button>
-
-                {/* Lurumi GIF */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="w-full"
-                >
-                  <motion.a
-                    href="https://lurumi.it"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    className="block rounded-2xl overflow-hidden border border-surface-border shadow-md"
-                  >
-                    <GifEmbed src={lurumiGifUrl} alt="lurumi.it — primo progetto Marketizzati" />
-                    <div className="bg-foreground px-4 py-2 flex items-center justify-between">
-                      <p className="text-white text-xs font-semibold">lurumi.it — Primo progetto Marketizzati live</p>
-                      <ExternalLink size={12} className="text-white/50" />
-                    </div>
-                  </motion.a>
-                </motion.div>
               </motion.div>
 
-              {/* Destra: copy */}
+              {/* Destra: mission + valori */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                <h2
-                  className="font-heading font-bold mb-6"
-                  style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', lineHeight: 1.1 }}
-                >
-                  Non un&apos;Agenzia.<br />
-                  <span className="text-accent">Una Digital Factory</span><br />
-                  Fondata su Risultati Reali.
-                </h2>
-
-                <div className="space-y-4 text-foreground-secondary text-base leading-relaxed mb-8">
-                  <p>
+                {/* Mission */}
+                <div className="mb-8">
+                  <h3 className="font-heading font-bold text-xl mb-3 text-accent">La Mission</h3>
+                  <p className="text-foreground-secondary text-base md:text-lg leading-relaxed">
                     Ho costruito sistemi digitali prima di venderli.
+                    lurumi.it è il primo prodotto lanciato da Marketizzati: una PWA full-stack
+                    con AI, pagamenti Stripe e più di 200 funzionalità — costruita in{' '}
+                    <strong className="text-foreground">meno di un mese</strong> usando la stessa
+                    Digital Factory che offro ai miei clienti.
                   </p>
-                  <p>
-                    <strong className="text-foreground">lurumi.it</strong> è il primo prodotto lanciato
-                    da Marketizzati: una PWA full-stack con AI, pagamenti Stripe e più di 200 funzionalità
-                    — costruita in <strong className="text-foreground">meno di un mese</strong> usando
-                    la stessa Digital Factory che offro ai miei clienti.
-                  </p>
-                  <p>
-                    Il Metodo Z·START nasce dall&apos;esperienza diretta: dall&apos;aver visto 140.000+
-                    views non portare nemmeno un cliente, e dall&apos;aver costruito sistemi
-                    che invece funzionano.
+                  <p className="text-foreground-secondary text-base md:text-lg leading-relaxed mt-3">
+                    La mission è semplice: <strong className="text-foreground">aiutare PMI e professionisti
+                    a costruire il proprio ecosistema digitale completo</strong> — non singoli servizi, ma
+                    un sistema integrato potenziato dall&apos;AI attraverso il Metodo Z·START.
                   </p>
                 </div>
 
-                <div className="space-y-3">
+                {/* Valori */}
+                <div>
+                  <h3 className="font-heading font-bold text-xl mb-4 text-accent">I Valori</h3>
+                  <div className="space-y-4">
+                    {values.map((val, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        className="flex items-start gap-4 p-4 rounded-2xl bg-surface border border-surface-border hover:border-accent/30 transition-colors"
+                      >
+                        <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent shrink-0">
+                          {val.icon}
+                        </div>
+                        <div>
+                          <p className="font-bold text-sm text-foreground">{val.title}</p>
+                          <p className="text-foreground-muted text-sm mt-0.5">{val.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Check list */}
+                <div className="mt-8 space-y-2">
                   {[
                     'Traffic Master Certified · Florida Global University 2025',
-                    'lurumi.it — Digital Product live (< 1 mese con la Digital Factory)',
+                    'lurumi.it — Digital Product live in meno di 1 mese',
                     'AI applicata a contenuto, automazione e prodotto',
                   ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-accent/15 flex items-center justify-center shrink-0 mt-0.5">
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
                         <Check size={12} className="text-accent" />
                       </div>
                       <span className="text-sm text-foreground-secondary">{item}</span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -552,6 +620,7 @@ export default function HomePage() {
         </section>
 
         {/* ── S6: SERVIZI ── */}
+        <WaveDivider fill="#F7F7F7" />
         <section className="py-24 bg-surface overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <motion.div
@@ -605,6 +674,7 @@ export default function HomePage() {
         </section>
 
         {/* ── S7: CTA FINALE ── */}
+        <WaveDivider fill="#FE3314" />
         <section className="py-28 bg-accent relative overflow-hidden">
           <div className="absolute inset-0 opacity-15 pointer-events-none">
             <TechLines />
@@ -630,21 +700,20 @@ export default function HomePage() {
                 Scopri esattamente cosa blocca la tua crescita e i 3 passi concreti da fare subito.
               </p>
 
-              <motion.div
+              <motion.a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 px-10 py-5 bg-white text-accent font-black text-lg rounded-2xl hover:shadow-[0_8px_40px_rgba(0,0,0,0.25)] transition-all"
               >
-                <Link
-                  href="/consulenza"
-                  className="inline-flex items-center gap-3 px-10 py-5 bg-white text-accent font-black text-lg rounded-2xl hover:shadow-[0_8px_40px_rgba(0,0,0,0.25)] transition-all"
-                >
-                  Prenoto la Mia Consulenza Gratuita
-                  <ArrowRight size={22} />
-                </Link>
-              </motion.div>
+                Scrivimi su WhatsApp
+                <ArrowRight size={22} />
+              </motion.a>
 
               <p className="mt-5 text-white/50 text-sm">
-                Zero spam · Zero impegno · 100% strategica
+                Zero spam · Zero impegno · Rispondo entro poche ore
               </p>
               <p className="mt-2 text-white/40 text-xs">
                 Accettiamo un numero limitato di consulenze a settimana per garantire qualità

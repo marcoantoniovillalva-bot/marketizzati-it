@@ -28,6 +28,9 @@ export function Footer() {
         <p className="text-xs text-foreground-muted">
           © {year} Marketizzati · Tutti i diritti riservati
         </p>
+        <p className="text-xs text-foreground-muted/60">
+          Via Mentana 21 · Vigevano (PV) · Italia
+        </p>
       </div>
     </footer>
   )
