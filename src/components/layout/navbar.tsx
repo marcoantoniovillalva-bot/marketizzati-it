@@ -15,9 +15,9 @@ export function Navbar() {
   const { user, loading } = useAuth()
 
   const publicNavLinks = [
-    { name: t('nav.services'), href: '/servizi' },
-    { name: t('nav.about'), href: '/chi-siamo' },
-    { name: t('nav.consultation'), href: '/consulenza' },
+    { name: t('nav.services'), href: '/#servizi' },
+    { name: t('nav.about'), href: '/#chi-sono' },
+    { name: t('nav.consultation'), href: '/#contatti' },
   ]
 
   const handleLogout = async () => {
@@ -101,20 +101,12 @@ export function Navbar() {
                   )}
                 </div>
               ) : (
-                <>
-                  <Link
-                    href="/login"
-                    className="text-foreground font-medium hover:text-accent transition-colors"
-                  >
-                    {t('nav.login')}
-                  </Link>
-                  <Link
-                    href="/consulenza"
-                    className="px-6 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-all hover:shadow-glow-red"
-                  >
-                    {t('cta.bookMy')}
-                  </Link>
-                </>
+                <a
+                  href="/#contatti"
+                  className="px-6 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-all hover:shadow-glow-red"
+                >
+                  {t('cta.bookMy')}
+                </a>
               )
             )}
           </div>
@@ -167,22 +159,13 @@ export function Navbar() {
                   Esci
                 </button>
               ) : (
-                <>
-                  <Link
-                    href="/login"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-foreground font-medium py-2"
-                  >
-                    {t('nav.login')}
-                  </Link>
-                  <Link
-                    href="/consulenza"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block w-full text-center px-6 py-3 bg-accent text-white font-semibold rounded-xl"
-                  >
-                    {t('cta.bookMy')}
-                  </Link>
-                </>
+                <a
+                  href="/#contatti"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block w-full text-center px-6 py-3 bg-accent text-white font-semibold rounded-xl"
+                >
+                  {t('cta.bookMy')}
+                </a>
               )
             )}
           </div>

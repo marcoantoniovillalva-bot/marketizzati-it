@@ -1,10 +1,10 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { ArrowRight, Sparkles, Award, ExternalLink, Check, Target, Zap, Users, ChevronDown } from 'lucide-react'
+import { ArrowRight, Sparkles, Award, ExternalLink, Check, Target, Zap, Users, ChevronDown, Bot, Cpu, Globe, TrendingUp, Mail, Palette, BarChart2, X } from 'lucide-react'
 import { ParticleBackground } from '@/components/shared/particle-background'
 import { TechLines } from '@/components/shared/tech-lines'
 import {
@@ -34,9 +34,69 @@ const zstartSteps = [
 ]
 
 const services = [
-  { title: 'Strategia & Posizionamento', desc: 'Definiamo chi sei, a chi parli e come ti distingui nel mercato.', gif: marketingGifUrl },
-  { title: 'AI & Automazione', desc: "L'intelligenza artificiale che lavora per te mentre tu lavori sul tuo business.", gif: aiAutomationGifUrl },
-  { title: 'Web & Funnel', desc: 'Infrastrutture digitali che portano traffico e convertono.', gif: consulenzaGifUrl },
+  {
+    title: 'Strategia & Posizionamento',
+    desc: 'Definiamo chi sei, a chi parli e come ti distingui nel mercato.',
+    gif: marketingGifUrl,
+    subServices: [
+      { Icon: Target, label: 'Analisi di Mercato', desc: 'Mappiamo concorrenti, opportunità e il tuo posizionamento ideale.' },
+      { Icon: Palette, label: 'Identità di Brand', desc: 'Voce, visual e messaggio: un brand che attira il cliente giusto.' },
+      { Icon: BarChart2, label: 'Roadmap Strategica', desc: 'Obiettivi misurabili e tappe concrete, senza attività inutili.' },
+    ],
+  },
+  {
+    title: 'AI & Automazione',
+    desc: "L'intelligenza artificiale che lavora per te mentre tu lavori sul tuo business.",
+    gif: aiAutomationGifUrl,
+    subServices: [
+      { Icon: Bot, label: 'Chatbot & Assistenti AI', desc: 'Rispondi ai clienti h24 e qualifica i lead automaticamente.' },
+      { Icon: Zap, label: 'Automazioni di Processo', desc: 'Email, CRM, follow-up: tutto automatico, zero tempo sprecato.' },
+      { Icon: Cpu, label: 'AI per i Contenuti', desc: 'Testo, immagini e video: produci 10x più contenuto nello stesso tempo.' },
+    ],
+  },
+  {
+    title: 'Web & Funnel',
+    desc: 'Infrastrutture digitali che portano traffico e convertono.',
+    gif: consulenzaGifUrl,
+    subServices: [
+      { Icon: Globe, label: 'Sito Web ad Alta Conversione', desc: 'Design premium ottimizzato per trasformare visitatori in clienti.' },
+      { Icon: TrendingUp, label: 'Funnel di Vendita', desc: 'Percorsi che portano da zero contatto a cliente fidelizzato.' },
+      { Icon: Mail, label: 'Email Marketing', desc: 'Sequenze che nutrono il lead automaticamente fino alla vendita.' },
+    ],
+  },
+]
+
+const zstartModalSteps = [
+  {
+    letter: 'Z', title: 'Punto Zero',
+    desc: 'Analisi e diagnosi completa: dove sei ora, dove vuoi arrivare e cosa ti sta bloccando. Niente intuizioni — dati, numeri e verità.',
+    benefit: 'Sai esattamente dove sei e cosa fare per crescere',
+  },
+  {
+    letter: 'S', title: 'Strategia',
+    desc: "Trasformiamo i dati in un piano d'azione chiaro. Definiamo CHI vuoi raggiungere, COSA ti rende unico e COME ti posizioni nel mercato.",
+    benefit: 'Un piano concreto, non ipotesi o opinioni',
+  },
+  {
+    letter: 'T', title: 'Tecnologia',
+    desc: 'La strategia diventa infrastruttura: sito web, automazioni, CRM, funnel. Tutto ciò che serve per far girare il tuo business come una macchina.',
+    benefit: 'Il tuo business lavora per te, anche quando non ci sei',
+  },
+  {
+    letter: 'A', title: 'Attivazione',
+    desc: 'Lanciamo tutto sul mercato con campagne mirate, contenuti strategici e funnel ottimizzati. Monitoriamo le performance dal primo giorno.',
+    benefit: 'Clienti reali, contatti reali — dal primo giorno',
+  },
+  {
+    letter: 'R', title: 'Risultati',
+    desc: 'Il business diventa scientifico. Analizziamo i dati, identifichiamo cosa funziona e ottimizziamo ogni elemento per massimizzare il ROI.',
+    benefit: 'Ogni euro investito ha un ritorno misurabile',
+  },
+  {
+    letter: 'T', title: 'Trasformazione',
+    desc: "La fase che distingue chi sopravvive da chi prospera. Pianifichiamo l'evoluzione strategica, nuove opportunità e la scalabilità del sistema.",
+    benefit: 'Un sistema che scala con te, non contro di te',
+  },
 ]
 
 const values = [
@@ -95,6 +155,182 @@ const caseStudies = [
     },
   },
 ]
+
+function ZStartModal({ onClose }: { onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.92, opacity: 0, y: 24 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.92, opacity: 0, y: 24 }}
+        transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[88vh] overflow-y-auto"
+      >
+        <div className="sticky top-0 bg-white border-b border-surface-border flex items-center justify-between px-6 py-4 rounded-t-3xl z-10">
+          <div>
+            <span className="text-xs font-bold text-accent tracking-wider uppercase">Metodo Z·START</span>
+            <h2 className="font-heading font-bold text-xl leading-tight">Il Sistema Operativo del Business</h2>
+          </div>
+          <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-surface flex items-center justify-center transition-colors shrink-0 ml-4">
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="px-6 py-5 space-y-3">
+          {zstartModalSteps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.06 }}
+              className="flex gap-4 p-4 rounded-2xl bg-surface border border-surface-border"
+            >
+              <div className="w-10 h-10 rounded-xl bg-accent text-white font-black text-base flex items-center justify-center shrink-0">
+                {step.letter}
+              </div>
+              <div>
+                <p className="font-bold text-foreground text-sm">{step.title}</p>
+                <p className="text-foreground-muted text-xs mt-1 leading-relaxed">{step.desc}</p>
+                <div className="mt-2 flex items-center gap-1.5">
+                  <Check size={12} className="text-accent shrink-0" />
+                  <p className="text-accent font-semibold text-xs">{step.benefit}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="px-6 pb-6">
+          <div className="rounded-2xl border border-surface-border bg-surface p-5">
+            <h3 className="font-bold text-sm mb-4 text-center">Quanto tempo ci vuole?</h3>
+            <div className="grid grid-cols-3 gap-3 text-center">
+              <div className="p-3">
+                <p className="text-accent font-black text-2xl">4-6</p>
+                <p className="text-[11px] text-foreground-muted mt-0.5">settimane</p>
+                <p className="text-sm font-bold mt-2">Base di Lancio</p>
+                <p className="text-[11px] text-foreground-muted mt-1">Z + S + T</p>
+              </div>
+              <div className="p-3 border-x border-surface-border">
+                <p className="text-accent font-black text-2xl">8-12</p>
+                <p className="text-[11px] text-foreground-muted mt-0.5">settimane</p>
+                <p className="text-sm font-bold mt-2">Scala</p>
+                <p className="text-[11px] text-foreground-muted mt-1">Z + S + T + A</p>
+              </div>
+              <div className="p-3">
+                <p className="text-accent font-black text-2xl">12-16</p>
+                <p className="text-[11px] text-foreground-muted mt-0.5">settimane</p>
+                <p className="text-sm font-bold mt-2">Domina</p>
+                <p className="text-[11px] text-foreground-muted mt-1">Tutte le 6 fasi</p>
+              </div>
+            </div>
+            <p className="mt-4 text-[11px] text-foreground-muted text-center leading-relaxed">
+              Le tempistiche si riferiscono alla costruzione del tuo ecosistema digitale. I risultati crescono progressivamente nei mesi successivi.
+            </p>
+          </div>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ripple-btn mt-4 flex items-center justify-center gap-2 w-full py-4 bg-accent hover:bg-accent-hover text-white font-bold rounded-2xl transition-all text-sm"
+          >
+            Prenota la Consulenza Gratuita
+            <ArrowRight size={16} />
+          </a>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function ServiceCardItem({ service }: { service: typeof services[0] }) {
+  const [expanded, setExpanded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start 0.95', 'end 0.05'],
+  })
+  const liftY = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.65, 1], [10, -12, -20, -12, 10])
+  const liftScale = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.65, 1], [0.97, 1.02, 1.04, 1.02, 0.97])
+
+  return (
+    <div ref={cardRef}>
+      <motion.div
+        style={isMobile ? { y: liftY, scale: liftScale } : {}}
+        className="bg-surface rounded-3xl overflow-hidden border border-surface-border hover:border-accent/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] transition-all"
+      >
+        <div className="overflow-hidden">
+          <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }}>
+            <GifEmbed src={service.gif} alt={service.title} />
+          </motion.div>
+        </div>
+        <div className="p-6">
+          <h3 className="font-bold text-lg mb-2">{service.title}</h3>
+          <p className="text-foreground-secondary text-sm mb-4">{service.desc}</p>
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="flex items-center gap-1.5 text-accent font-semibold text-sm hover:gap-2.5 transition-all group"
+          >
+            {expanded ? 'Mostra meno' : 'Scopri di più'}
+            <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.25 }}>
+              <ChevronDown size={15} />
+            </motion.div>
+          </button>
+        </div>
+        <AnimatePresence initial={false}>
+          {expanded && (
+            <motion.div
+              key="sub"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.32, ease: 'easeInOut' }}
+              className="overflow-hidden"
+            >
+              <div className="px-6 pb-6 pt-2 border-t border-surface-border space-y-3">
+                {service.subServices.map((sub, i) => (
+                  <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-background hover:bg-accent/5 transition-colors">
+                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                      <sub.Icon size={16} className="text-accent" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm text-foreground">{sub.label}</p>
+                      <p className="text-xs text-foreground-muted mt-0.5">{sub.desc}</p>
+                    </div>
+                  </div>
+                ))}
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all group"
+                >
+                  Chiedi informazioni su WhatsApp
+                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  )
+}
 
 function WaveDivider({ flip = false, fill = '#FFFFFF' }: { flip?: boolean; fill?: string }) {
   return (
@@ -187,6 +423,7 @@ function CaseStudyCard({ study }: { study: typeof caseStudies[0] }) {
 export default function HomePage() {
   const heroRef = useRef(null)
   const [certOpen, setCertOpen] = useState(false)
+  const [zstartOpen, setZstartOpen] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -207,6 +444,9 @@ export default function HomePage() {
         isOpen={certOpen}
         onClose={() => setCertOpen(false)}
       />
+      <AnimatePresence>
+        {zstartOpen && <ZStartModal onClose={() => setZstartOpen(false)} />}
+      </AnimatePresence>
 
       <main className="relative">
 
@@ -323,7 +563,7 @@ export default function HomePage() {
         </section>
 
         {/* ── S2: RISULTATI ── */}
-        <section className="py-12 bg-foreground overflow-hidden">
+        <section id="risultati" className="py-12 bg-foreground overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -358,9 +598,21 @@ export default function HomePage() {
                   <div className="text-xs text-white/50 font-medium leading-tight">
                     {item.label}
                     {item.cert && (
-                      <span className="block text-accent/80 mt-0.5 text-[10px]">
-                        Florida Global University · Clicca per vedere
-                      </span>
+                      <>
+                        <span className="block text-white/60 mt-0.5 text-[10px]">
+                          Florida Global University
+                        </span>
+                        <div className="mt-2 mx-auto w-16 h-10 rounded-lg overflow-hidden border border-white/20 opacity-70 hover:opacity-100 transition-opacity">
+                          <img
+                            src="/images/Certificato Florida University.PNG"
+                            alt="Certificato"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <span className="block text-accent/80 mt-1 text-[10px]">
+                          Clicca per vedere
+                        </span>
+                      </>
                     )}
                   </div>
                 </motion.div>
@@ -371,7 +623,7 @@ export default function HomePage() {
 
         {/* ── S3: SERVIZI ── */}
         <WaveDivider fill="#090909" flip />
-        <section className="py-24 bg-white overflow-hidden">
+        <section id="servizi" className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -398,25 +650,8 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12 }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="bg-surface rounded-3xl overflow-hidden border border-surface-border hover:border-accent/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] transition-all"
                 >
-                  <div className="overflow-hidden">
-                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }}>
-                      <GifEmbed src={service.gif} alt={service.title} />
-                    </motion.div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                    <p className="text-foreground-secondary text-sm mb-4">{service.desc}</p>
-                    <Link
-                      href="/servizi"
-                      className="text-accent font-semibold text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all group"
-                    >
-                      Scopri di più
-                      <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
+                  <ServiceCardItem service={service} />
                 </motion.div>
               ))}
             </div>
@@ -492,13 +727,13 @@ export default function HomePage() {
                   transition={{ delay: 0.6 }}
                   className="mt-8"
                 >
-                  <Link
-                    href="/metodo"
+                  <button
+                    onClick={() => setZstartOpen(true)}
                     className="inline-flex items-center gap-2 text-accent font-bold hover:gap-3 transition-all group"
                   >
                     Scopri il Metodo Completo
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </button>
                 </motion.div>
               </div>
 
@@ -546,7 +781,7 @@ export default function HomePage() {
 
         {/* ── S5: CHI SONO ── */}
         <WaveDivider fill="#FFFFFF" />
-        <section className="py-24 bg-white overflow-hidden">
+        <section id="chi-sono" className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -672,7 +907,7 @@ export default function HomePage() {
 
         {/* ── S6: CASI STUDIO ── */}
         <WaveDivider fill="#F7F7F7" />
-        <section className="py-24 bg-surface overflow-hidden">
+        <section id="casi-studio" className="py-24 bg-surface overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -710,7 +945,7 @@ export default function HomePage() {
 
         {/* ── S7: CTA FINALE ── */}
         <WaveDivider fill="#FE3314" />
-        <section className="py-28 bg-accent relative overflow-hidden">
+        <section id="contatti" className="py-28 bg-accent relative overflow-hidden">
           <div className="absolute inset-0 opacity-15 pointer-events-none">
             <TechLines />
           </div>
