@@ -29,7 +29,7 @@ export function Footer() {
           © {year} Marketizzati · Tutti i diritti riservati
         </p>
         <p className="text-xs text-foreground-muted/60">
-          Via Mentana 21 · Vigevano (PV) · Italia
+          Via Mentana 21 · Vigevano (PV) · Italia · P.IVA 03028360182
         </p>
       </div>
     </footer>

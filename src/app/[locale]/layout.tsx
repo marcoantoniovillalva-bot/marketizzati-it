@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import { Inter, DM_Sans } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
+import { JsonLd } from '@/components/seo/JsonLd'
 import '../globals.css'
 
 const inter = Inter({
@@ -20,6 +21,14 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
+const BASE_URL = 'https://www.marketizzati.it'
+
+const keywordsByLocale: Record<string, string> = {
+  it: 'digital marketing PMI, consulenza digitale, metodo z start, marketing automation Italia, digital factory, strategia digitale piccole imprese, AI marketing, funnel marketing, web design alta conversione, Vigevano, Traffic Master Certified',
+  en: 'digital marketing SMB, digital consulting Italy, z start method, marketing automation, digital factory, AI marketing strategy, funnel marketing, high conversion web design',
+  es: 'marketing digital PYME, consultoría digital Italia, método z start, automatización marketing, digital factory, estrategia digital IA, funnel marketing',
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -28,19 +37,64 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo' })
 
+  const canonicalUrl = `${BASE_URL}/${locale}`
+
   return {
-    title: t('home.title'),
+    title: {
+      default: t('home.title'),
+      template: `%s | Marketizzati`,
+    },
     description: t('home.description'),
+    keywords: keywordsByLocale[locale] ?? keywordsByLocale.it,
+    authors: [{ name: 'Marco Antonio Villalva', url: BASE_URL }],
+    creator: 'Marketizzati',
+    publisher: 'Marketizzati',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    },
     icons: {
       icon: '/images/icon-dark.png',
       apple: '/images/icon-dark.png',
     },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'it': `${BASE_URL}/it`,
+        'en': `${BASE_URL}/en`,
+        'es': `${BASE_URL}/es`,
+        'x-default': `${BASE_URL}/it`,
+      },
+    },
     openGraph: {
       title: t('home.title'),
       description: t('home.description'),
-      locale,
+      url: canonicalUrl,
       siteName: 'Marketizzati',
+      locale,
       type: 'website',
+      images: [
+        {
+          url: `${BASE_URL}/images/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: 'Marketizzati — Digital Factory per PMI | Metodo Z·START',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('home.title'),
+      description: t('home.description'),
+      images: [`${BASE_URL}/images/og-image.png`],
+    },
+    verification: {
+      google: '',
+    },
+    other: {
+      'theme-color': '#FE3314',
+      'msapplication-TileColor': '#090909',
     },
   }
 }
@@ -66,6 +120,10 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${dmSans.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://djatdyhqliotgnsljdja.supabase.co" />
+        <JsonLd />
+      </head>
       <body className="font-sans bg-background text-foreground antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}

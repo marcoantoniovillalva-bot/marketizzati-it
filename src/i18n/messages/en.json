@@ -116,19 +116,37 @@
         "name": "Launchpad",
         "description": "For those starting from zero who want the right foundations.",
         "cta": "Start with Launchpad",
-        "features": ["Initial analysis", "Positioning strategy", "Professional website", "Google Business setup"]
+        "features": [
+          "Initial analysis",
+          "Positioning strategy",
+          "Professional website",
+          "Google Business setup"
+        ]
       },
       "scale": {
         "name": "Scale",
         "description": "For those who already have a business and want to grow with method.",
         "cta": "Grow with Scale",
-        "features": ["Everything in Launchpad", "Complete funnel", "Email automations", "Content strategy", "Ads campaign management"]
+        "features": [
+          "Everything in Launchpad",
+          "Complete funnel",
+          "Email automations",
+          "Content strategy",
+          "Ads campaign management"
+        ]
       },
       "dominate": {
         "name": "Dominate",
         "description": "For those who want to dominate their market with AI and automation.",
         "cta": "Dominate with Dominate",
-        "features": ["Everything in Scale", "AI & automation", "Client portal", "Continuous optimization", "Priority support", "Weekly consulting"]
+        "features": [
+          "Everything in Scale",
+          "AI & automation",
+          "Client portal",
+          "Continuous optimization",
+          "Priority support",
+          "Weekly consulting"
+        ]
       }
     }
   },
@@ -374,16 +392,16 @@
   },
   "seo": {
     "home": {
-      "title": "Marketizzati — The Digital Factory for Your Digital Business",
-      "description": "We help SMBs and professionals transform their vision into a structured digital business with the Z·START Method and an AI-powered Digital Factory."
+      "title": "Marketizzati — Digital Factory for SMBs | Z·START Method | Italy",
+      "description": "Transform your vision into a client-generating digital business. The Z·START Method in 6 phases + AI = complete digital ecosystem for SMBs and professionals. Free 30-min consultation."
     },
     "services": {
-      "title": "Services — Marketizzati",
-      "description": "Digital strategy, branding, websites, AI and automation. Discover the Marketizzati ecosystem services."
+      "title": "Services — Strategy, AI & Automation, Web & Funnel | Marketizzati",
+      "description": "Digital strategy, brand identity, AI automation, high-conversion websites and sales funnels. Every service in the Marketizzati Digital Factory works in synergy to bring you clients."
     },
     "method": {
-      "title": "Z·START Method — Marketizzati",
-      "description": "The proprietary 6-phase framework to build your digital business with industrial precision."
+      "title": "Z·START Method — 6-Phase Framework for Digital Business | Marketizzati",
+      "description": "The proprietary 6-phase framework (Zero Point, Strategy, Technology, Activation, Results, Transformation) to build a complete digital ecosystem with industrial precision and AI."
     },
     "about": {
       "title": "About Us — Marketizzati",
@@ -396,6 +414,168 @@
     "blog": {
       "title": "Blog — Marketizzati",
       "description": "Strategies, insights, and resources to grow your digital business."
+    }
+  },
+  "landing": {
+    "hero": {
+      "badge": "Digital Factory Marketizzati",
+      "line1": "While You're Thinking,",
+      "line2": "Your Competitors",
+      "line3": "Are Building.",
+      "accent": "With AI.",
+      "subtitle": "The Z·START Method in 6 phases transforms your vision into a client-generating digital business — with industrial precision and AI doing the heavy lifting.",
+      "cta1": "Book My Free Consultation",
+      "cta2": "Save Months. Bring Clients.",
+      "microcopy": "30 minutes · No commitment · + Free digital resources included"
+    },
+    "risultati": {
+      "title": "Results",
+      "stat1Label": "Organic YouTube views",
+      "stat2Label": "Organic Facebook views",
+      "stat3Label": "To launch lurumi.it",
+      "stat4Label": "Z·START Method phases",
+      "stat5Label": "Traffic Master Certified",
+      "stat5Sub": "Florida Global University",
+      "stat5Cta": "Click to view"
+    },
+    "services": {
+      "title": "Services",
+      "subtitle": "In the Digital Factory every element is designed to work in synergy.",
+      "expandBtn": "Learn more",
+      "collapseBtn": "Show less",
+      "waBtn": "Ask us on WhatsApp",
+      "card1Title": "Strategy & Positioning",
+      "card1Desc": "We define who you are, who you speak to, and how you stand out in the market.",
+      "card1Sub1Label": "Market Analysis",
+      "card1Sub1Desc": "We map competitors, opportunities and your ideal positioning.",
+      "card1Sub2Label": "Brand Identity",
+      "card1Sub2Desc": "Voice, visuals and message: a brand that attracts the right client.",
+      "card1Sub3Label": "Strategic Roadmap",
+      "card1Sub3Desc": "Measurable goals and concrete milestones, without wasted effort.",
+      "card2Title": "AI & Automation",
+      "card2Desc": "Artificial intelligence working for you while you work on your business.",
+      "card2Sub1Label": "Chatbots & AI Assistants",
+      "card2Sub1Desc": "Answer clients 24/7 and qualify leads automatically.",
+      "card2Sub2Label": "Process Automation",
+      "card2Sub2Desc": "Email, CRM, follow-up: fully automated, zero time wasted.",
+      "card2Sub3Label": "AI for Content",
+      "card2Sub3Desc": "Text, images and video: produce 10x more content in the same time.",
+      "card3Title": "Web & Funnel",
+      "card3Desc": "Digital infrastructure that drives traffic and converts.",
+      "card3Sub1Label": "High-Conversion Website",
+      "card3Sub1Desc": "Premium design optimized to turn visitors into clients.",
+      "card3Sub2Label": "Sales Funnel",
+      "card3Sub2Desc": "Journeys that take a prospect from zero to loyal client.",
+      "card3Sub3Label": "Email Marketing",
+      "card3Sub3Desc": "Automated sequences that nurture leads all the way to the sale."
+    },
+    "metodo": {
+      "badge": "Z·START Method",
+      "title1": "The Operating System",
+      "title2": "of Your Digital Business",
+      "subtitle": "Not generic consulting. A 6-phase framework that builds your digital ecosystem like an industrial machine — and brings you clients while saving months of trial and error.",
+      "cta": "Discover the Full Method",
+      "step1Title": "Zero Point",
+      "step1Desc": "Where you really are. No illusions.",
+      "step2Title": "Strategy",
+      "step2Desc": "The plan. Every decision data-driven.",
+      "step3Title": "Technology",
+      "step3Desc": "The concrete infrastructure that makes it all run.",
+      "step4Title": "Activation",
+      "step4Desc": "To market. Campaigns, funnels, content.",
+      "step5Title": "Results",
+      "step5Desc": "Analyze. Optimize. Maximize ROI.",
+      "step6Title": "Transformation",
+      "step6Desc": "The business that scales. Not the one that survives.",
+      "lurumiLabel": "lurumi.it — The Method in Action",
+      "lurumiSub": "First Marketizzati project · Live in <1 month"
+    },
+    "chiSono": {
+      "title": "Who's Behind Marketizzati",
+      "subtitle": "Not an agency. A Digital Factory built on real results.",
+      "missionTitle": "The Mission",
+      "missionP1": "I built digital systems before selling them. lurumi.it is the first product launched by Marketizzati: a full-stack PWA with AI, Stripe payments and over 200 features — built in {bold} using the same Digital Factory I offer my clients.",
+      "missionP1Bold": "less than one month",
+      "missionP2": "The mission is simple: {bold} — not individual services, but an integrated system powered by artificial intelligence through the Z·START Method.",
+      "missionP2Bold": "help SMBs and professionals build their complete digital ecosystem",
+      "valoriTitle": "Our Values",
+      "val1Title": "Results First",
+      "val1Desc": "We don't count hours worked. We count results generated.",
+      "val2Title": "Powered by AI",
+      "val2Desc": "We integrate artificial intelligence as a real engine — not a buzzword — to build faster and better.",
+      "val3Title": "Ecosystem, Not Services",
+      "val3Desc": "We're not a vendor. We're a partner on your growth journey.",
+      "check1": "Traffic Master Certified · Florida Global University 2025",
+      "check2": "lurumi.it — Digital Product live in less than 1 month",
+      "check3": "Artificial intelligence applied to content, automation and product",
+      "certLabel": "Traffic Master Certified",
+      "certSub": "Florida Global University · 2025"
+    },
+    "casiStudio": {
+      "title": "Case Studies",
+      "subtitle": "Real results. Real systems. Built with the Z·START Method.",
+      "expandBtn": "Learn more",
+      "collapseBtn": "Show less",
+      "study1Tag": "AI Viral Content",
+      "study1Title": "Chistes Malisimos",
+      "study1Brief": "Channel built from zero with AI-optimized content: 140,000+ YouTube views and 100,000+ Facebook views in under 30 days. Zero ads.",
+      "study1Headline": "140,000+ Views. Zero Clients.",
+      "study1Body1": "I built a channel with AI-optimized content. In under 30 days: 140,000+ YouTube views (32,000+ on a single video) and 100,000+ on Facebook. Pure organic traffic, zero ads.",
+      "study1Body2": "Result? Zero clients. Because without a system that converts traffic, you only have numbers on a screen.",
+      "study1Body3": "That lesson — learned the hard way — is why the Z·START Method exists.",
+      "study1GifCaption": "32,000+ views on a single video · Click to watch",
+      "study1Quote": "Content brings people. The system converts them. I build both.",
+      "study2Tag": "Digital Infrastructure",
+      "study2Title": "lurumi.it",
+      "study2Brief": "First complete digital infrastructure launched by Marketizzati: full-stack PWA with AI, Stripe payments and 200+ features — live in less than 1 month.",
+      "study2Headline": "From zero to production in less than 1 month.",
+      "study2Body1": "lurumi.it is a full-stack PWA for the crochet world: AI integrated for generating patterns and images, Stripe payments, over 200 features including counters, projects, tutorials and AI chat.",
+      "study2Body2": "Built entirely with the Marketizzati Digital Factory — the same system I offer my clients. Not a demo, a real product with real users.",
+      "study2Body3": "It's concrete proof that the Z·START Method works: from idea to production, without months of attempts.",
+      "study2GifCaption": "lurumi.it — live in production",
+      "study2Quote": "I build digital systems before selling them."
+    },
+    "ctaFinale": {
+      "title1": "30 Minutes.",
+      "title2": "One Conversation.",
+      "title3": "Everything Changes.",
+      "subtitle": "Discover exactly what's blocking your growth and the 3 concrete steps to take right now.",
+      "cta": "Message Me on WhatsApp",
+      "micro1": "Zero spam · Zero commitment · I reply within hours",
+      "micro2": "All participants receive free access to Marketizzati's digital resources — regardless of the outcome.",
+      "micro3": "We accept a limited number of consultations per week to guarantee quality"
+    },
+    "modal": {
+      "badge": "Z·START Method",
+      "title": "The Business Operating System",
+      "step1Title": "Zero Point",
+      "step1Desc": "Complete analysis and diagnosis: where you are now, where you want to go, and what's blocking you. No guessing — data, numbers and truth.",
+      "step1Benefit": "You know exactly where you are and what to do to grow",
+      "step2Title": "Strategy",
+      "step2Desc": "We transform data into a clear action plan. We define WHO you want to reach, WHAT makes you unique and HOW you position yourself in the market.",
+      "step2Benefit": "A concrete plan, not guesses or opinions",
+      "step3Title": "Technology",
+      "step3Desc": "Strategy becomes infrastructure: website, automations, CRM, funnels. Everything needed to make your business run like a machine.",
+      "step3Benefit": "Your business works for you, even when you're not there",
+      "step4Title": "Activation",
+      "step4Desc": "We launch everything to market with targeted campaigns, strategic content and optimized funnels. We monitor performance from day one.",
+      "step4Benefit": "Real clients, real contacts — from day one",
+      "step5Title": "Results",
+      "step5Desc": "Business becomes scientific. We analyze data, identify what works and optimize every element to maximize ROI.",
+      "step5Benefit": "Every euro invested has a measurable return",
+      "step6Title": "Transformation",
+      "step6Desc": "The phase that separates those who survive from those who thrive. We plan strategic evolution, new opportunities and system scalability.",
+      "step6Benefit": "A system that scales with you, not against you",
+      "timelineTitle": "How long does it take?",
+      "timeline1Name": "Launch Base",
+      "timeline1Phases": "Z + S + T",
+      "timeline2Name": "Scale",
+      "timeline2Phases": "Z + S + T + A",
+      "timeline3Name": "Dominate",
+      "timeline3Phases": "All 6 phases",
+      "timelineWeeks": "weeks",
+      "timelineDisclaimer": "Timelines refer to building your digital ecosystem. Business results grow progressively in the following months.",
+      "modalCta": "Book My Free Consultation"
     }
   }
 }

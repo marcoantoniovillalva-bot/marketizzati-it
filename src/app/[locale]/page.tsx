@@ -577,7 +577,7 @@ export default function HomePage() {
               transition={{ delay: 1 }}
               className="mt-4 text-sm text-foreground-muted"
             >
-              30 minuti · Senza impegno · 100% personalizzata
+              30 minuti · Senza impegno · + Risorse digitali incluse gratis
             </motion.p>
           </motion.div>
 
@@ -1015,7 +1015,10 @@ export default function HomePage() {
               <p className="mt-5 text-white/50 text-sm">
                 Zero spam · Zero impegno · Rispondo entro poche ore
               </p>
-              <p className="mt-2 text-white/40 text-xs">
+              <p className="mt-2 text-white/80 text-xs font-medium">
+                Tutti i partecipanti ricevono accesso gratuito alle risorse digitali Marketizzati — indipendentemente dall&apos;esito.
+              </p>
+              <p className="mt-1.5 text-white/40 text-xs">
                 Accettiamo un numero limitato di consulenze a settimana per garantire qualità
               </p>
             </motion.div>

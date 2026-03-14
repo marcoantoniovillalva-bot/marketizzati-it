@@ -116,19 +116,37 @@
         "name": "Launchpad",
         "description": "Para quienes parten de cero y quieren las bases correctas.",
         "cta": "Empieza con Launchpad",
-        "features": ["Análisis inicial", "Estrategia de posicionamiento", "Sitio web profesional", "Setup Google Business"]
+        "features": [
+          "Análisis inicial",
+          "Estrategia de posicionamiento",
+          "Sitio web profesional",
+          "Setup Google Business"
+        ]
       },
       "scale": {
         "name": "Scale",
         "description": "Para quienes ya tienen un negocio y quieren crecer con método.",
         "cta": "Crece con Scale",
-        "features": ["Todo de Launchpad", "Funnel completo", "Automatizaciones email", "Content strategy", "Gestión campañas ads"]
+        "features": [
+          "Todo de Launchpad",
+          "Funnel completo",
+          "Automatizaciones email",
+          "Content strategy",
+          "Gestión campañas ads"
+        ]
       },
       "dominate": {
         "name": "Dominate",
         "description": "Para quienes quieren dominar su mercado con IA y automatización.",
         "cta": "Domina con Dominate",
-        "features": ["Todo de Scale", "IA y automatización", "Portal clientes", "Optimización continua", "Soporte prioritario", "Consultoría semanal"]
+        "features": [
+          "Todo de Scale",
+          "IA y automatización",
+          "Portal clientes",
+          "Optimización continua",
+          "Soporte prioritario",
+          "Consultoría semanal"
+        ]
       }
     }
   },
@@ -374,16 +392,16 @@
   },
   "seo": {
     "home": {
-      "title": "Marketizzati — La Digital Factory para Tu Negocio Digital",
-      "description": "Ayudamos a PYMEs y profesionales a transformar su visión en un negocio digital estructurado con el Método Z·START y una Digital Factory potenciada por IA."
+      "title": "Marketizzati — Digital Factory para PYMEs | Método Z·START | Italia",
+      "description": "Transforma tu visión en un negocio digital que genera clientes. El Método Z·START en 6 fases + IA = ecosistema digital completo para PYMEs y profesionales. Consultoría gratuita 30 min."
     },
     "services": {
-      "title": "Servicios — Marketizzati",
-      "description": "Estrategia digital, branding, sitios web, IA y automatización. Descubre los servicios del ecosistema Marketizzati."
+      "title": "Servicios — Estrategia, IA & Automatización, Web & Funnel | Marketizzati",
+      "description": "Estrategia digital, identidad de marca, automatización con IA, sitios web de alta conversión y funnels de ventas. Cada servicio de la Digital Factory Marketizzati trabaja en sinergia."
     },
     "method": {
-      "title": "Método Z·START — Marketizzati",
-      "description": "El framework propietario en 6 fases para construir tu negocio digital con precisión industrial."
+      "title": "Método Z·START — Framework de 6 Fases para el Negocio Digital | Marketizzati",
+      "description": "El framework propietario de 6 fases (Punto Cero, Estrategia, Tecnología, Activación, Resultados, Transformación) para construir un ecosistema digital completo con precisión industrial e IA."
     },
     "about": {
       "title": "Quiénes Somos — Marketizzati",
@@ -396,6 +414,168 @@
     "blog": {
       "title": "Blog — Marketizzati",
       "description": "Estrategias, insights y recursos para hacer crecer tu negocio digital."
+    }
+  },
+  "landing": {
+    "hero": {
+      "badge": "Digital Factory Marketizzati",
+      "line1": "Mientras Tú Lo Piensas,",
+      "line2": "Tu Competencia",
+      "line3": "Está Construyendo.",
+      "accent": "Con IA.",
+      "subtitle": "El Método Z·START en 6 fases transforma tu visión en un negocio digital que genera clientes — con precisión industrial y la IA haciendo el trabajo pesado.",
+      "cta1": "Reservo Mi Consultoría Gratuita",
+      "cta2": "Ahorra Meses. Trae Clientes.",
+      "microcopy": "30 minutos · Sin compromiso · + Recursos digitales incluidos gratis"
+    },
+    "risultati": {
+      "title": "Resultados",
+      "stat1Label": "Views orgánicos en YouTube",
+      "stat2Label": "Views orgánicos en Facebook",
+      "stat3Label": "Para lanzar lurumi.it",
+      "stat4Label": "Fases Método Z·START",
+      "stat5Label": "Traffic Master Certified",
+      "stat5Sub": "Florida Global University",
+      "stat5Cta": "Clic para ver"
+    },
+    "services": {
+      "title": "Servicios",
+      "subtitle": "En la Digital Factory cada elemento está diseñado para trabajar en sinergia.",
+      "expandBtn": "Descubrir más",
+      "collapseBtn": "Mostrar menos",
+      "waBtn": "Pregunta por WhatsApp",
+      "card1Title": "Estrategia & Posicionamiento",
+      "card1Desc": "Definimos quién eres, a quién le hablas y cómo te distingues en el mercado.",
+      "card1Sub1Label": "Análisis de Mercado",
+      "card1Sub1Desc": "Mapeamos competidores, oportunidades y tu posicionamiento ideal.",
+      "card1Sub2Label": "Identidad de Marca",
+      "card1Sub2Desc": "Voz, visual y mensaje: una marca que atrae al cliente correcto.",
+      "card1Sub3Label": "Hoja de Ruta Estratégica",
+      "card1Sub3Desc": "Objetivos medibles y etapas concretas, sin actividades inútiles.",
+      "card2Title": "IA & Automatización",
+      "card2Desc": "La inteligencia artificial trabajando para ti mientras tú trabajas en tu negocio.",
+      "card2Sub1Label": "Chatbots & Asistentes IA",
+      "card2Sub1Desc": "Responde a clientes 24/7 y califica leads automáticamente.",
+      "card2Sub2Label": "Automatización de Procesos",
+      "card2Sub2Desc": "Email, CRM, seguimiento: todo automático, cero tiempo perdido.",
+      "card2Sub3Label": "IA para Contenidos",
+      "card2Sub3Desc": "Texto, imágenes y video: produce 10x más contenido en el mismo tiempo.",
+      "card3Title": "Web & Funnel",
+      "card3Desc": "Infraestructuras digitales que traen tráfico y convierten.",
+      "card3Sub1Label": "Sitio Web de Alta Conversión",
+      "card3Sub1Desc": "Diseño premium optimizado para convertir visitantes en clientes.",
+      "card3Sub2Label": "Funnel de Ventas",
+      "card3Sub2Desc": "Recorridos que llevan de cero contacto a cliente fidelizado.",
+      "card3Sub3Label": "Email Marketing",
+      "card3Sub3Desc": "Secuencias automáticas que nutren al lead hasta la venta."
+    },
+    "metodo": {
+      "badge": "Método Z·START",
+      "title1": "El Sistema Operativo",
+      "title2": "de Tu Negocio Digital",
+      "subtitle": "No consultoría genérica. Un framework de 6 fases que construye tu ecosistema digital como una máquina industrial — y te trae clientes ahorrando meses de intentos.",
+      "cta": "Descubre el Método Completo",
+      "step1Title": "Punto Cero",
+      "step1Desc": "Dónde estás realmente. Sin ilusiones.",
+      "step2Title": "Estrategia",
+      "step2Desc": "El plan. Cada decisión guiada por datos.",
+      "step3Title": "Tecnología",
+      "step3Desc": "La infraestructura concreta que hace girar todo.",
+      "step4Title": "Activación",
+      "step4Desc": "Al mercado. Campañas, funnels, contenido.",
+      "step5Title": "Resultados",
+      "step5Desc": "Analizamos. Optimizamos. Maximizamos el ROI.",
+      "step6Title": "Transformación",
+      "step6Desc": "El negocio que escala. No el que sobrevive.",
+      "lurumiLabel": "lurumi.it — El Método en Acción",
+      "lurumiSub": "Primer proyecto Marketizzati · En vivo en <1 mes"
+    },
+    "chiSono": {
+      "title": "Quién Está Detrás de Marketizzati",
+      "subtitle": "No una agencia. Una Digital Factory fundada en resultados reales.",
+      "missionTitle": "La Misión",
+      "missionP1": "Construyo sistemas digitales antes de venderlos. lurumi.it es el primer producto lanzado por Marketizzati: una PWA full-stack con IA, pagos Stripe y más de 200 funcionalidades — construida en {bold} usando la misma Digital Factory que ofrezco a mis clientes.",
+      "missionP1Bold": "menos de un mes",
+      "missionP2": "La misión es simple: {bold} — no servicios individuales, sino un sistema integrado potenciado por la inteligencia artificial a través del Método Z·START.",
+      "missionP2Bold": "ayudar a PYMEs y profesionales a construir su ecosistema digital completo",
+      "valoriTitle": "Los Valores",
+      "val1Title": "Resultados Ante Todo",
+      "val1Desc": "No contamos horas trabajadas. Contamos resultados generados.",
+      "val2Title": "Potenciados por IA",
+      "val2Desc": "Integramos la inteligencia artificial como motor real — no como palabra de moda — para construir más rápido y mejor.",
+      "val3Title": "Ecosistema, No Servicios",
+      "val3Desc": "No somos un proveedor. Somos un socio en tu camino de crecimiento.",
+      "check1": "Traffic Master Certified · Florida Global University 2025",
+      "check2": "lurumi.it — Producto Digital en vivo en menos de 1 mes",
+      "check3": "Inteligencia artificial aplicada a contenido, automatización y producto",
+      "certLabel": "Traffic Master Certified",
+      "certSub": "Florida Global University · 2025"
+    },
+    "casiStudio": {
+      "title": "Casos de Estudio",
+      "subtitle": "Resultados reales. Sistemas reales. Construidos con el Método Z·START.",
+      "expandBtn": "Descubrir más",
+      "collapseBtn": "Mostrar menos",
+      "study1Tag": "Contenido Viral IA",
+      "study1Title": "Chistes Malisimos",
+      "study1Brief": "Canal creado de cero con contenido optimizado por IA: 140.000+ views en YouTube y 100.000+ en Facebook en menos de 30 días. Sin anuncios.",
+      "study1Headline": "140.000+ Views. Cero Clientes.",
+      "study1Body1": "Creé un canal con contenido optimizado por IA. En menos de 30 días: 140.000+ views en YouTube (32.000+ en un solo video) y 100.000+ en Facebook. Tráfico orgánico puro, cero anuncios.",
+      "study1Body2": "Resultado? Cero clientes. Porque sin un sistema que convierta el tráfico, solo tienes números en una pantalla.",
+      "study1Body3": "Esa lección — aprendida en carne propia — es el motivo por el que existe el Método Z·START.",
+      "study1GifCaption": "32.000+ views en un solo video · Clic para ver",
+      "study1Quote": "El contenido trae a las personas. El sistema las convierte. Yo construyo ambos.",
+      "study2Tag": "Infraestructura Digital",
+      "study2Title": "lurumi.it",
+      "study2Brief": "Primera infraestructura digital completa lanzada por Marketizzati: PWA full-stack con IA, pagos Stripe y 200+ funcionalidades — en vivo en menos de 1 mes.",
+      "study2Headline": "De cero a producción en menos de 1 mes.",
+      "study2Body1": "lurumi.it es una PWA full-stack para el mundo del crochet: IA integrada para generar patrones e imágenes, pagos Stripe, más de 200 funcionalidades incluyendo contadores, proyectos, tutoriales y chat IA.",
+      "study2Body2": "Construida íntegramente con la Digital Factory Marketizzati — el mismo sistema que ofrezco a mis clientes. No una demo, un producto real con usuarios reales.",
+      "study2Body3": "Es la prueba concreta de que el Método Z·START funciona: de la idea a la producción, sin meses de intentos.",
+      "study2GifCaption": "lurumi.it — en vivo en producción",
+      "study2Quote": "Construyo sistemas digitales antes de venderlos."
+    },
+    "ctaFinale": {
+      "title1": "30 Minutos.",
+      "title2": "Una Conversación.",
+      "title3": "Todo Cambia.",
+      "subtitle": "Descubre exactamente qué bloquea tu crecimiento y los 3 pasos concretos a dar ahora mismo.",
+      "cta": "Escríbeme por WhatsApp",
+      "micro1": "Cero spam · Cero compromiso · Respondo en pocas horas",
+      "micro2": "Todos los participantes reciben acceso gratuito a los recursos digitales de Marketizzati — independientemente del resultado.",
+      "micro3": "Aceptamos un número limitado de consultorías por semana para garantizar calidad"
+    },
+    "modal": {
+      "badge": "Método Z·START",
+      "title": "El Sistema Operativo del Negocio",
+      "step1Title": "Punto Cero",
+      "step1Desc": "Análisis y diagnóstico completo: dónde estás ahora, a dónde quieres llegar y qué te bloquea. Sin suposiciones — datos, números y verdad.",
+      "step1Benefit": "Sabes exactamente dónde estás y qué hacer para crecer",
+      "step2Title": "Estrategia",
+      "step2Desc": "Transformamos los datos en un plan de acción claro. Definimos A QUIÉN quieres llegar, QUÉ te hace único y CÓMO te posicionas en el mercado.",
+      "step2Benefit": "Un plan concreto, no hipótesis ni opiniones",
+      "step3Title": "Tecnología",
+      "step3Desc": "La estrategia se convierte en infraestructura: sitio web, automatizaciones, CRM, funnels. Todo lo necesario para que tu negocio funcione como una máquina.",
+      "step3Benefit": "Tu negocio trabaja para ti, incluso cuando no estás",
+      "step4Title": "Activación",
+      "step4Desc": "Lanzamos todo al mercado con campañas dirigidas, contenido estratégico y funnels optimizados. Monitoreamos el rendimiento desde el primer día.",
+      "step4Benefit": "Clientes reales, contactos reales — desde el primer día",
+      "step5Title": "Resultados",
+      "step5Desc": "El negocio se vuelve científico. Analizamos datos, identificamos qué funciona y optimizamos cada elemento para maximizar el ROI.",
+      "step5Benefit": "Cada euro invertido tiene un retorno medible",
+      "step6Title": "Transformación",
+      "step6Desc": "La fase que distingue a los que sobreviven de los que prosperan. Planificamos la evolución estratégica, nuevas oportunidades y la escalabilidad del sistema.",
+      "step6Benefit": "Un sistema que escala contigo, no contra ti",
+      "timelineTitle": "¿Cuánto tiempo toma?",
+      "timeline1Name": "Base de Lanzamiento",
+      "timeline1Phases": "Z + S + T",
+      "timeline2Name": "Escala",
+      "timeline2Phases": "Z + S + T + A",
+      "timeline3Name": "Domina",
+      "timeline3Phases": "Las 6 fases",
+      "timelineWeeks": "semanas",
+      "timelineDisclaimer": "Los plazos se refieren a la construcción de tu ecosistema digital. Los resultados crecen progresivamente en los meses siguientes.",
+      "modalCta": "Reservo Mi Consultoría Gratuita"
     }
   }
 }

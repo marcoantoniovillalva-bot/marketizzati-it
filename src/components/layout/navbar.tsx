@@ -1,18 +1,33 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Link } from '@/i18n/navigation'
-import { useTranslations } from 'next-intl'
-import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { useTranslations, useLocale } from 'next-intl'
+import { Menu, X, User, LogOut, ChevronDown, Globe } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
+
+const LOCALES = [
+  { code: 'it', label: 'IT', flag: '🇮🇹' },
+  { code: 'en', label: 'EN', flag: '🇬🇧' },
+  { code: 'es', label: 'ES', flag: '🇪🇸' },
+]
 
 export function Navbar() {
   const t = useTranslations('common')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showLangMenu, setShowLangMenu] = useState(false)
   const { user, loading } = useAuth()
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleLocaleChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale })
+    setShowLangMenu(false)
+  }
 
   const publicNavLinks = [
     { name: t('nav.services'), href: '/#servizi' },
@@ -60,6 +75,43 @@ export function Navbar() {
                 {t('nav.method')}
               </Link>
             )}
+          </div>
+
+          {/* Language Switcher (desktop) */}
+          <div className="hidden md:flex items-center relative">
+            <button
+              onClick={() => setShowLangMenu(!showLangMenu)}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-surface-border hover:border-accent transition-colors text-foreground-secondary hover:text-accent font-medium text-sm"
+            >
+              <Globe size={15} />
+              <span>{LOCALES.find(l => l.code === locale)?.label ?? 'IT'}</span>
+              <ChevronDown size={13} />
+            </button>
+            <AnimatePresence>
+              {showLangMenu && (
+                <>
+                  <div className="fixed inset-0 z-[-1]" onClick={() => setShowLangMenu(false)} />
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full right-0 mt-2 w-32 bg-white rounded-2xl shadow-xl border border-surface-border p-1.5 z-50"
+                  >
+                    {LOCALES.map(l => (
+                      <button
+                        key={l.code}
+                        onClick={() => handleLocaleChange(l.code)}
+                        className={`w-full flex items-center gap-2 px-3 py-2 text-sm rounded-xl transition-colors font-medium ${locale === l.code ? 'text-accent bg-accent/5' : 'text-foreground hover:bg-surface-border/30'}`}
+                      >
+                        <span>{l.flag}</span>
+                        <span>{l.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* CTA / Auth */}
@@ -111,13 +163,48 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: Language + Hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <div className="relative">
+              <button
+                onClick={() => setShowLangMenu(!showLangMenu)}
+                className="flex items-center gap-1 p-2 rounded-xl text-foreground-secondary hover:text-accent transition-colors"
+              >
+                <Globe size={20} />
+              </button>
+              <AnimatePresence>
+                {showLangMenu && (
+                  <>
+                    <div className="fixed inset-0 z-[-1]" onClick={() => setShowLangMenu(false)} />
+                    <motion.div
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full right-0 mt-2 w-32 bg-white rounded-2xl shadow-xl border border-surface-border p-1.5 z-50"
+                    >
+                      {LOCALES.map(l => (
+                        <button
+                          key={l.code}
+                          onClick={() => handleLocaleChange(l.code)}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-sm rounded-xl transition-colors font-medium ${locale === l.code ? 'text-accent bg-accent/5' : 'text-foreground hover:bg-surface-border/30'}`}
+                        >
+                          <span>{l.flag}</span>
+                          <span>{l.label}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
