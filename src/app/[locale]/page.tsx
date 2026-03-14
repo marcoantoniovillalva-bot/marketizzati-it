@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
@@ -155,6 +155,40 @@ const caseStudies = [
     },
   },
 ]
+
+function AccordionCard({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen)
+
+  return (
+    <div className="rounded-2xl border border-surface-border bg-surface overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-5 py-4 hover:bg-accent/5 transition-colors"
+      >
+        <h3 className="font-heading font-bold text-lg text-accent">{title}</h3>
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
+          <ChevronDown size={18} className="text-accent shrink-0" />
+        </motion.div>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 border-t border-surface-border pt-4">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
 function ZStartModal({ onClose }: { onClose: () => void }) {
   return (
@@ -843,47 +877,43 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                <div className="mb-8">
-                  <h3 className="font-heading font-bold text-xl mb-3 text-accent">La Mission</h3>
-                  <p className="text-foreground-secondary text-base md:text-lg leading-relaxed">
-                    Ho costruito sistemi digitali prima di venderli.
-                    lurumi.it è il primo prodotto lanciato da Marketizzati: una PWA full-stack
-                    con AI, pagamenti Stripe e più di 200 funzionalità — costruita in{' '}
-                    <strong className="text-foreground">meno di un mese</strong> usando la stessa
-                    Digital Factory che offro ai miei clienti.
-                  </p>
-                  <p className="text-foreground-secondary text-base md:text-lg leading-relaxed mt-3">
-                    La mission è semplice:{' '}
-                    <strong className="text-foreground">
-                      aiutare PMI e professionisti a costruire il proprio ecosistema digitale completo
-                    </strong>{' '}
-                    — non singoli servizi, ma un sistema integrato potenziato dall&apos;intelligenza
-                    artificiale attraverso il Metodo Z·START.
-                  </p>
-                </div>
+                <div className="space-y-4">
+                  <AccordionCard title="La Mission" defaultOpen>
+                    <p className="text-foreground-secondary text-base leading-relaxed">
+                      Ho costruito sistemi digitali prima di venderli.
+                      lurumi.it è il primo prodotto lanciato da Marketizzati: una PWA full-stack
+                      con AI, pagamenti Stripe e più di 200 funzionalità — costruita in{' '}
+                      <strong className="text-foreground">meno di un mese</strong> usando la stessa
+                      Digital Factory che offro ai miei clienti.
+                    </p>
+                    <p className="text-foreground-secondary text-base leading-relaxed mt-3">
+                      La mission è semplice:{' '}
+                      <strong className="text-foreground">
+                        aiutare PMI e professionisti a costruire il proprio ecosistema digitale completo
+                      </strong>{' '}
+                      — non singoli servizi, ma un sistema integrato potenziato dall&apos;intelligenza
+                      artificiale attraverso il Metodo Z·START.
+                    </p>
+                  </AccordionCard>
 
-                <div>
-                  <h3 className="font-heading font-bold text-xl mb-4 text-accent">I Valori</h3>
-                  <div className="space-y-4">
-                    {values.map((val, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        className="flex items-start gap-4 p-4 rounded-2xl bg-surface border border-surface-border hover:border-accent/30 transition-colors"
-                      >
-                        <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent shrink-0">
-                          {val.icon}
+                  <AccordionCard title="I Valori">
+                    <div className="space-y-3">
+                      {values.map((val, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-4 p-4 rounded-2xl bg-background border border-surface-border hover:border-accent/30 transition-colors"
+                        >
+                          <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent shrink-0">
+                            {val.icon}
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm text-foreground">{val.title}</p>
+                            <p className="text-foreground-muted text-sm mt-0.5">{val.desc}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-bold text-sm text-foreground">{val.title}</p>
-                          <p className="text-foreground-muted text-sm mt-0.5">{val.desc}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  </AccordionCard>
                 </div>
 
                 <div className="mt-8 space-y-2">
