@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { ArrowRight, Sparkles, Award, ExternalLink, Check, Target, Zap, Users, ChevronDown, Bot, Cpu, Globe, TrendingUp, Mail, Palette, BarChart2, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { ParticleBackground } from '@/components/shared/particle-background'
 import { TechLines } from '@/components/shared/tech-lines'
 import {
@@ -23,138 +24,6 @@ import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 
 const WA_LINK = 'https://wa.link/psnpym'
-
-const zstartSteps = [
-  { letter: 'Z', title: 'Punto Zero', desc: 'Dove sei davvero. Senza illusioni.' },
-  { letter: 'S', title: 'Strategia', desc: 'Il piano. Ogni decisione guidata dai dati.' },
-  { letter: 'T', title: 'Tecnologia', desc: "L'infrastruttura concreta che fa girare tutto." },
-  { letter: 'A', title: 'Attivazione', desc: 'Sul mercato. Campagne, funnel, contenuti.' },
-  { letter: 'R', title: 'Risultati', desc: 'Analizziamo. Ottimizziamo. Massimizziamo il ROI.' },
-  { letter: 'T2', title: 'Trasformazione', desc: 'Il business che scala. Non quello che sopravvive.' },
-]
-
-const services = [
-  {
-    title: 'Strategia & Posizionamento',
-    desc: 'Definiamo chi sei, a chi parli e come ti distingui nel mercato.',
-    gif: marketingGifUrl,
-    subServices: [
-      { Icon: Target, label: 'Analisi di Mercato', desc: 'Mappiamo concorrenti, opportunità e il tuo posizionamento ideale.' },
-      { Icon: Palette, label: 'Identità di Brand', desc: 'Voce, visual e messaggio: un brand che attira il cliente giusto.' },
-      { Icon: BarChart2, label: 'Roadmap Strategica', desc: 'Obiettivi misurabili e tappe concrete, senza attività inutili.' },
-    ],
-  },
-  {
-    title: 'AI & Automazione',
-    desc: "L'intelligenza artificiale che lavora per te mentre tu lavori sul tuo business.",
-    gif: aiAutomationGifUrl,
-    subServices: [
-      { Icon: Bot, label: 'Chatbot & Assistenti AI', desc: 'Rispondi ai clienti h24 e qualifica i lead automaticamente.' },
-      { Icon: Zap, label: 'Automazioni di Processo', desc: 'Email, CRM, follow-up: tutto automatico, zero tempo sprecato.' },
-      { Icon: Cpu, label: 'AI per i Contenuti', desc: 'Testo, immagini e video: produci 10x più contenuto nello stesso tempo.' },
-    ],
-  },
-  {
-    title: 'Web & Funnel',
-    desc: 'Infrastrutture digitali che portano traffico e convertono.',
-    gif: consulenzaGifUrl,
-    subServices: [
-      { Icon: Globe, label: 'Sito Web ad Alta Conversione', desc: 'Design premium ottimizzato per trasformare visitatori in clienti.' },
-      { Icon: TrendingUp, label: 'Funnel di Vendita', desc: 'Percorsi che portano da zero contatto a cliente fidelizzato.' },
-      { Icon: Mail, label: 'Email Marketing', desc: 'Sequenze che nutrono il lead automaticamente fino alla vendita.' },
-    ],
-  },
-]
-
-const zstartModalSteps = [
-  {
-    letter: 'Z', title: 'Punto Zero',
-    desc: 'Analisi e diagnosi completa: dove sei ora, dove vuoi arrivare e cosa ti sta bloccando. Niente intuizioni — dati, numeri e verità.',
-    benefit: 'Sai esattamente dove sei e cosa fare per crescere',
-  },
-  {
-    letter: 'S', title: 'Strategia',
-    desc: "Trasformiamo i dati in un piano d'azione chiaro. Definiamo CHI vuoi raggiungere, COSA ti rende unico e COME ti posizioni nel mercato.",
-    benefit: 'Un piano concreto, non ipotesi o opinioni',
-  },
-  {
-    letter: 'T', title: 'Tecnologia',
-    desc: 'La strategia diventa infrastruttura: sito web, automazioni, CRM, funnel. Tutto ciò che serve per far girare il tuo business come una macchina.',
-    benefit: 'Il tuo business lavora per te, anche quando non ci sei',
-  },
-  {
-    letter: 'A', title: 'Attivazione',
-    desc: 'Lanciamo tutto sul mercato con campagne mirate, contenuti strategici e funnel ottimizzati. Monitoriamo le performance dal primo giorno.',
-    benefit: 'Clienti reali, contatti reali — dal primo giorno',
-  },
-  {
-    letter: 'R', title: 'Risultati',
-    desc: 'Il business diventa scientifico. Analizziamo i dati, identifichiamo cosa funziona e ottimizziamo ogni elemento per massimizzare il ROI.',
-    benefit: 'Ogni euro investito ha un ritorno misurabile',
-  },
-  {
-    letter: 'T', title: 'Trasformazione',
-    desc: "La fase che distingue chi sopravvive da chi prospera. Pianifichiamo l'evoluzione strategica, nuove opportunità e la scalabilità del sistema.",
-    benefit: 'Un sistema che scala con te, non contro di te',
-  },
-]
-
-const values = [
-  {
-    icon: <Target size={20} />,
-    title: 'Risultati Prima di Tutto',
-    desc: 'Non contiamo le ore lavorate. Contiamo i risultati generati.',
-  },
-  {
-    icon: <Zap size={20} />,
-    title: 'Potenziati dall\'AI',
-    desc: "Integriamo l'intelligenza artificiale come motore reale — non come parola di moda — per costruire più velocemente e meglio.",
-  },
-  {
-    icon: <Users size={20} />,
-    title: 'Ecosistema, Non Servizi',
-    desc: 'Non siamo un fornitore. Siamo un partner nel tuo percorso di crescita.',
-  },
-]
-
-const caseStudies = [
-  {
-    id: 'chistes',
-    title: 'Chistes Malisimos',
-    tag: 'Contenuto Virale AI',
-    brief: 'Canale creato da zero con contenuto AI-ottimizzato: 140.000+ views su YouTube e 100.000+ su Facebook in meno di 30 giorni. Senza ads.',
-    detail: {
-      headline: '140.000+ Views. Zero Clienti.',
-      body: [
-        'Ho creato un canale con contenuto AI-ottimizzato. In meno di 30 giorni: 140.000+ views su YouTube (32.000+ su un solo video) e 100.000+ su Facebook. Traffico organico puro, zero ads.',
-        'Risultato? Zero clienti. Perché senza un sistema che converte il traffico, hai solo numeri su uno schermo.',
-        'Quella lezione — imparata sulla mia pelle — è il motivo per cui esiste il Metodo Z·START.',
-      ],
-      gif: youtubeCaseStudyGifUrl,
-      gifCaption: '32.000+ views su un solo video · Clicca per guardare',
-      gifLink: 'https://youtube.com/shorts/03avyCsZ8us',
-      quote: 'Il contenuto porta le persone. Il sistema le converte. Io costruisco entrambi.',
-    },
-  },
-  {
-    id: 'lurumi',
-    title: 'lurumi.it',
-    tag: 'Infrastruttura Digitale',
-    brief: 'Prima infrastruttura digitale completa lanciata da Marketizzati: PWA full-stack con AI, pagamenti Stripe e 200+ funzionalità — live in meno di 1 mese.',
-    detail: {
-      headline: 'Da zero a produzione in meno di 1 mese.',
-      body: [
-        'lurumi.it è una PWA full-stack per il mondo del crochet: AI integrata per generare pattern e immagini, pagamenti Stripe, oltre 200 funzionalità tra cui contatori, progetti, tutorial e chat AI.',
-        'Costruita interamente con la Digital Factory Marketizzati — lo stesso sistema che offro ai miei clienti. Non una demo, un prodotto reale con utenti reali.',
-        'È la prova concreta che il Metodo Z·START funziona: dall\'idea alla messa in produzione, senza mesi di tentativi.',
-      ],
-      gif: lurumiGifUrl,
-      gifCaption: 'lurumi.it — live in produzione',
-      gifLink: 'https://lurumi.it',
-      quote: 'Costruisco sistemi digitali prima di venderli.',
-    },
-  },
-]
 
 function AccordionCard({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen)
@@ -191,6 +60,47 @@ function AccordionCard({ title, children, defaultOpen = false }: { title: string
 }
 
 function ZStartModal({ onClose }: { onClose: () => void }) {
+  const t = useTranslations('landing')
+
+  const zstartModalSteps = [
+    {
+      letter: 'Z',
+      title: t('modal.step1Title'),
+      desc: t('modal.step1Desc'),
+      benefit: t('modal.step1Benefit'),
+    },
+    {
+      letter: 'S',
+      title: t('modal.step2Title'),
+      desc: t('modal.step2Desc'),
+      benefit: t('modal.step2Benefit'),
+    },
+    {
+      letter: 'T',
+      title: t('modal.step3Title'),
+      desc: t('modal.step3Desc'),
+      benefit: t('modal.step3Benefit'),
+    },
+    {
+      letter: 'A',
+      title: t('modal.step4Title'),
+      desc: t('modal.step4Desc'),
+      benefit: t('modal.step4Benefit'),
+    },
+    {
+      letter: 'R',
+      title: t('modal.step5Title'),
+      desc: t('modal.step5Desc'),
+      benefit: t('modal.step5Benefit'),
+    },
+    {
+      letter: 'T',
+      title: t('modal.step6Title'),
+      desc: t('modal.step6Desc'),
+      benefit: t('modal.step6Benefit'),
+    },
+  ]
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -209,8 +119,8 @@ function ZStartModal({ onClose }: { onClose: () => void }) {
       >
         <div className="sticky top-0 bg-white border-b border-surface-border flex items-center justify-between px-6 py-4 rounded-t-3xl z-10">
           <div>
-            <span className="text-xs font-bold text-accent tracking-wider uppercase">Metodo Z·START</span>
-            <h2 className="font-heading font-bold text-xl leading-tight">Il Sistema Operativo del Business</h2>
+            <span className="text-xs font-bold text-accent tracking-wider uppercase">{t('modal.badge')}</span>
+            <h2 className="font-heading font-bold text-xl leading-tight">{t('modal.title')}</h2>
           </div>
           <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-surface flex items-center justify-center transition-colors shrink-0 ml-4">
             <X size={18} />
@@ -243,29 +153,29 @@ function ZStartModal({ onClose }: { onClose: () => void }) {
 
         <div className="px-6 pb-6">
           <div className="rounded-2xl border border-surface-border bg-surface p-5">
-            <h3 className="font-bold text-sm mb-4 text-center">Quanto tempo ci vuole?</h3>
+            <h3 className="font-bold text-sm mb-4 text-center">{t('modal.timelineTitle')}</h3>
             <div className="grid grid-cols-3 gap-3 text-center">
               <div className="p-3">
                 <p className="text-accent font-black text-2xl">4-6</p>
-                <p className="text-[11px] text-foreground-muted mt-0.5">settimane</p>
-                <p className="text-sm font-bold mt-2">Base di Lancio</p>
-                <p className="text-[11px] text-foreground-muted mt-1">Z + S + T</p>
+                <p className="text-[11px] text-foreground-muted mt-0.5">{t('modal.timelineWeeks')}</p>
+                <p className="text-sm font-bold mt-2">{t('modal.timeline1Name')}</p>
+                <p className="text-[11px] text-foreground-muted mt-1">{t('modal.timeline1Phases')}</p>
               </div>
               <div className="p-3 border-x border-surface-border">
                 <p className="text-accent font-black text-2xl">8-12</p>
-                <p className="text-[11px] text-foreground-muted mt-0.5">settimane</p>
-                <p className="text-sm font-bold mt-2">Scala</p>
-                <p className="text-[11px] text-foreground-muted mt-1">Z + S + T + A</p>
+                <p className="text-[11px] text-foreground-muted mt-0.5">{t('modal.timelineWeeks')}</p>
+                <p className="text-sm font-bold mt-2">{t('modal.timeline2Name')}</p>
+                <p className="text-[11px] text-foreground-muted mt-1">{t('modal.timeline2Phases')}</p>
               </div>
               <div className="p-3">
                 <p className="text-accent font-black text-2xl">12-16</p>
-                <p className="text-[11px] text-foreground-muted mt-0.5">settimane</p>
-                <p className="text-sm font-bold mt-2">Domina</p>
-                <p className="text-[11px] text-foreground-muted mt-1">Tutte le 6 fasi</p>
+                <p className="text-[11px] text-foreground-muted mt-0.5">{t('modal.timelineWeeks')}</p>
+                <p className="text-sm font-bold mt-2">{t('modal.timeline3Name')}</p>
+                <p className="text-[11px] text-foreground-muted mt-1">{t('modal.timeline3Phases')}</p>
               </div>
             </div>
             <p className="mt-4 text-[11px] text-foreground-muted text-center leading-relaxed">
-              Le tempistiche si riferiscono alla costruzione del tuo ecosistema digitale. I risultati crescono progressivamente nei mesi successivi.
+              {t('modal.timelineDisclaimer')}
             </p>
           </div>
           <a
@@ -274,7 +184,7 @@ function ZStartModal({ onClose }: { onClose: () => void }) {
             rel="noopener noreferrer"
             className="ripple-btn mt-4 flex items-center justify-center gap-2 w-full py-4 bg-accent hover:bg-accent-hover text-white font-bold rounded-2xl transition-all text-sm"
           >
-            Prenota la Consulenza Gratuita
+            {t('modal.modalCta')}
             <ArrowRight size={16} />
           </a>
         </div>
@@ -283,7 +193,8 @@ function ZStartModal({ onClose }: { onClose: () => void }) {
   )
 }
 
-function ServiceCardItem({ service }: { service: typeof services[0] }) {
+function ServiceCardItem({ service }: { service: { title: string; desc: string; gif: string; subServices: { Icon: React.ElementType; label: string; desc: string }[] } }) {
+  const t = useTranslations('landing')
   const [expanded, setExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -320,7 +231,7 @@ function ServiceCardItem({ service }: { service: typeof services[0] }) {
             onClick={() => setExpanded(!expanded)}
             className="flex items-center gap-1.5 text-accent font-semibold text-sm hover:gap-2.5 transition-all group"
           >
-            {expanded ? 'Mostra meno' : 'Scopri di più'}
+            {expanded ? t('services.collapseBtn') : t('services.expandBtn')}
             <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.25 }}>
               <ChevronDown size={15} />
             </motion.div>
@@ -354,7 +265,7 @@ function ServiceCardItem({ service }: { service: typeof services[0] }) {
                   rel="noopener noreferrer"
                   className="mt-2 flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all group"
                 >
-                  Chiedi informazioni su WhatsApp
+                  {t('services.waBtn')}
                   <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                 </a>
               </div>
@@ -376,7 +287,8 @@ function WaveDivider({ flip = false, fill = '#FFFFFF' }: { flip?: boolean; fill?
   )
 }
 
-function CaseStudyCard({ study }: { study: typeof caseStudies[0] }) {
+function CaseStudyCard({ study }: { study: { id: string; title: string; tag: string; brief: string; detail: { headline: string; body: string[]; gif: string; gifCaption: string; gifLink: string; quote: string } } }) {
+  const t = useTranslations('landing')
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -396,7 +308,7 @@ function CaseStudyCard({ study }: { study: typeof caseStudies[0] }) {
           onClick={() => setExpanded(!expanded)}
           className="mt-4 flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all group"
         >
-          {expanded ? 'Mostra meno' : 'Scopri di più'}
+          {expanded ? t('casiStudio.collapseBtn') : t('casiStudio.expandBtn')}
           <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
             <ChevronDown size={16} />
           </motion.div>
@@ -455,6 +367,7 @@ function CaseStudyCard({ study }: { study: typeof caseStudies[0] }) {
 }
 
 export default function HomePage() {
+  const t = useTranslations('landing')
   const heroRef = useRef(null)
   const [certOpen, setCertOpen] = useState(false)
   const [zstartOpen, setZstartOpen] = useState(false)
@@ -467,6 +380,107 @@ export default function HomePage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 120])
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+
+  const zstartSteps = [
+    { letter: 'Z', title: t('metodo.step1Title'), desc: t('metodo.step1Desc') },
+    { letter: 'S', title: t('metodo.step2Title'), desc: t('metodo.step2Desc') },
+    { letter: 'T', title: t('metodo.step3Title'), desc: t('metodo.step3Desc') },
+    { letter: 'A', title: t('metodo.step4Title'), desc: t('metodo.step4Desc') },
+    { letter: 'R', title: t('metodo.step5Title'), desc: t('metodo.step5Desc') },
+    { letter: 'T2', title: t('metodo.step6Title'), desc: t('metodo.step6Desc') },
+  ]
+
+  const services = [
+    {
+      title: t('services.card1Title'),
+      desc: t('services.card1Desc'),
+      gif: marketingGifUrl,
+      subServices: [
+        { Icon: Target, label: t('services.card1Sub1Label'), desc: t('services.card1Sub1Desc') },
+        { Icon: Palette, label: t('services.card1Sub2Label'), desc: t('services.card1Sub2Desc') },
+        { Icon: BarChart2, label: t('services.card1Sub3Label'), desc: t('services.card1Sub3Desc') },
+      ],
+    },
+    {
+      title: t('services.card2Title'),
+      desc: t('services.card2Desc'),
+      gif: aiAutomationGifUrl,
+      subServices: [
+        { Icon: Bot, label: t('services.card2Sub1Label'), desc: t('services.card2Sub1Desc') },
+        { Icon: Zap, label: t('services.card2Sub2Label'), desc: t('services.card2Sub2Desc') },
+        { Icon: Cpu, label: t('services.card2Sub3Label'), desc: t('services.card2Sub3Desc') },
+      ],
+    },
+    {
+      title: t('services.card3Title'),
+      desc: t('services.card3Desc'),
+      gif: consulenzaGifUrl,
+      subServices: [
+        { Icon: Globe, label: t('services.card3Sub1Label'), desc: t('services.card3Sub1Desc') },
+        { Icon: TrendingUp, label: t('services.card3Sub2Label'), desc: t('services.card3Sub2Desc') },
+        { Icon: Mail, label: t('services.card3Sub3Label'), desc: t('services.card3Sub3Desc') },
+      ],
+    },
+  ]
+
+  const values = [
+    {
+      icon: <Target size={20} />,
+      title: t('chiSono.val1Title'),
+      desc: t('chiSono.val1Desc'),
+    },
+    {
+      icon: <Zap size={20} />,
+      title: t('chiSono.val2Title'),
+      desc: t('chiSono.val2Desc'),
+    },
+    {
+      icon: <Users size={20} />,
+      title: t('chiSono.val3Title'),
+      desc: t('chiSono.val3Desc'),
+    },
+  ]
+
+  const caseStudies = [
+    {
+      id: 'chistes',
+      title: t('casiStudio.study1Title'),
+      tag: t('casiStudio.study1Tag'),
+      brief: t('casiStudio.study1Brief'),
+      detail: {
+        headline: t('casiStudio.study1Headline'),
+        body: [
+          t('casiStudio.study1Body1'),
+          t('casiStudio.study1Body2'),
+          t('casiStudio.study1Body3'),
+        ],
+        gif: youtubeCaseStudyGifUrl,
+        gifCaption: t('casiStudio.study1GifCaption'),
+        gifLink: 'https://youtube.com/shorts/03avyCsZ8us',
+        quote: t('casiStudio.study1Quote'),
+      },
+    },
+    {
+      id: 'lurumi',
+      title: t('casiStudio.study2Title'),
+      tag: t('casiStudio.study2Tag'),
+      brief: t('casiStudio.study2Brief'),
+      detail: {
+        headline: t('casiStudio.study2Headline'),
+        body: [
+          t('casiStudio.study2Body1'),
+          t('casiStudio.study2Body2'),
+          t('casiStudio.study2Body3'),
+        ],
+        gif: lurumiGifUrl,
+        gifCaption: t('casiStudio.study2GifCaption'),
+        gifLink: 'https://lurumi.it',
+        quote: t('casiStudio.study2Quote'),
+      },
+    },
+  ]
+
+  const heroLines = [t('hero.line1'), t('hero.line2'), t('hero.line3')]
 
   return (
     <>
@@ -509,7 +523,7 @@ export default function HomePage() {
             >
               <Sparkles className="w-4 h-4 text-accent" />
               <span className="text-sm font-semibold text-accent tracking-wide">
-                Digital Factory Marketizzati
+                {t('hero.badge')}
               </span>
             </motion.div>
 
@@ -517,7 +531,7 @@ export default function HomePage() {
               style={{ fontSize: 'clamp(2.6rem, 7.5vw, 7rem)', lineHeight: 1.05 }}
               className="font-heading font-black mb-4"
             >
-              {['Mentre Tu Ci Pensi,', 'i Tuoi Competitor', 'Stanno Costruendo.'].map((line, i) => (
+              {heroLines.map((line, i) => (
                 <motion.span
                   key={i}
                   className="block"
@@ -534,7 +548,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
               >
-                Con l&apos;IA.
+                {t('hero.accent')}
               </motion.span>
             </h1>
 
@@ -544,8 +558,7 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.65 }}
               className="mt-6 text-lg md:text-xl text-foreground-secondary max-w-2xl mx-auto"
             >
-              Il Metodo Z·START in 6 fasi trasforma la tua visione in un business digitale
-              che genera clienti — con precisione industriale e l&apos;AI che fa il lavoro pesante.
+              {t('hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -560,13 +573,13 @@ export default function HomePage() {
                 rel="noopener noreferrer"
                 className="ripple-btn px-8 py-4 bg-accent hover:bg-accent-hover text-white font-bold rounded-xl transition-all text-base md:text-lg hover:shadow-[0_0_30px_rgba(254,51,20,0.4)] hover:scale-[1.03] active:scale-[0.98]"
               >
-                Prenota la Mia Consulenza Gratuita
+                {t('hero.cta1')}
               </a>
               <button
                 onClick={() => document.getElementById('metodo')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 border-2 border-foreground/20 hover:border-accent text-foreground hover:text-accent font-semibold rounded-xl transition-all text-base md:text-lg flex items-center gap-2 group"
               >
-                Risparmia Mesi. Porta Clienti.
+                {t('hero.cta2')}
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </motion.div>
@@ -577,7 +590,7 @@ export default function HomePage() {
               transition={{ delay: 1 }}
               className="mt-4 text-sm text-foreground-muted"
             >
-              30 minuti · Senza impegno · + Risorse digitali incluse gratis
+              {t('hero.microcopy')}
             </motion.p>
           </motion.div>
 
@@ -605,15 +618,15 @@ export default function HomePage() {
               viewport={{ once: true }}
               className="text-white font-heading font-black text-2xl md:text-3xl text-center mb-8"
             >
-              Risultati
+              {t('risultati.title')}
             </motion.h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 text-center">
               {[
-                { value: 140, suffix: 'k+', label: 'Views YouTube organiche' },
-                { value: 100, suffix: 'k+', label: 'Views Facebook organiche' },
-                { value: null, raw: '< 1 mese', label: 'Per lanciare lurumi.it' },
-                { value: 6, suffix: '', label: 'Fasi Metodo Z·START' },
-                { value: null, raw: '🎓', label: 'Traffic Master Certified', cert: true },
+                { value: 140, suffix: 'k+', label: t('risultati.stat1Label') },
+                { value: 100, suffix: 'k+', label: t('risultati.stat2Label') },
+                { value: null, raw: '< 1 mese', label: t('risultati.stat3Label') },
+                { value: 6, suffix: '', label: t('risultati.stat4Label') },
+                { value: null, raw: '🎓', label: t('risultati.stat5Label'), cert: true },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -634,7 +647,7 @@ export default function HomePage() {
                     {item.cert && (
                       <>
                         <span className="block text-white/60 mt-0.5 text-[10px]">
-                          Florida Global University
+                          {t('risultati.stat5Sub')}
                         </span>
                         <div className="mt-2 mx-auto w-16 h-10 rounded-lg overflow-hidden border border-white/20 opacity-70 hover:opacity-100 transition-opacity">
                           <img
@@ -644,7 +657,7 @@ export default function HomePage() {
                           />
                         </div>
                         <span className="block text-accent/80 mt-1 text-[10px]">
-                          Clicca per vedere
+                          {t('risultati.stat5Cta')}
                         </span>
                       </>
                     )}
@@ -669,10 +682,10 @@ export default function HomePage() {
                 className="font-heading font-bold mb-4"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
               >
-                Servizi
+                {t('services.title')}
               </h2>
               <p className="text-foreground-secondary text-lg max-w-xl mx-auto">
-                Nella Digital Factory ogni elemento è progettato per lavorare in sinergia.
+                {t('services.subtitle')}
               </p>
             </motion.div>
 
@@ -705,7 +718,7 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full mb-6"
                 >
                   <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                    Metodo Z·START
+                    {t('metodo.badge')}
                   </span>
                 </motion.div>
 
@@ -717,7 +730,7 @@ export default function HomePage() {
                   className="font-heading font-bold mb-4"
                   style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', lineHeight: 1.1 }}
                 >
-                  Il Sistema Operativo<br />del Tuo Business Digitale
+                  {t('metodo.title1')}<br />{t('metodo.title2')}
                 </motion.h2>
 
                 <motion.p
@@ -727,9 +740,7 @@ export default function HomePage() {
                   transition={{ delay: 0.2 }}
                   className="text-foreground-secondary mb-10 text-base md:text-lg"
                 >
-                  Non consulenza generica. Un framework in 6 fasi che costruisce il tuo
-                  ecosistema digitale come una macchina industriale — e ti porta clienti
-                  risparmiando mesi di tentativi.
+                  {t('metodo.subtitle')}
                 </motion.p>
 
                 <div className="space-y-3">
@@ -765,7 +776,7 @@ export default function HomePage() {
                     onClick={() => setZstartOpen(true)}
                     className="inline-flex items-center gap-2 text-accent font-bold hover:gap-3 transition-all group"
                   >
-                    Scopri il Metodo Completo
+                    {t('metodo.cta')}
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </motion.div>
@@ -802,8 +813,8 @@ export default function HomePage() {
                   <img src={lurumiGifUrl} alt="lurumi.it" className="w-full h-auto" />
                   <div className="bg-foreground px-4 py-2.5 flex items-center justify-between">
                     <div>
-                      <p className="text-white text-xs font-bold">lurumi.it — Il Metodo in Azione</p>
-                      <p className="text-white/40 text-[10px]">Primo progetto Marketizzati · Live in &lt;1 mese</p>
+                      <p className="text-white text-xs font-bold">{t('metodo.lurumiLabel')}</p>
+                      <p className="text-white/40 text-[10px]">{t('metodo.lurumiSub')}</p>
                     </div>
                     <ExternalLink size={12} className="text-white/40 shrink-0" />
                   </div>
@@ -827,10 +838,10 @@ export default function HomePage() {
                 className="font-heading font-bold mb-4"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
               >
-                Chi c&apos;è Dietro Marketizzati
+                {t('chiSono.title')}
               </h2>
               <p className="text-foreground-secondary text-lg max-w-2xl mx-auto">
-                Non un&apos;agenzia. Una Digital Factory fondata su risultati reali.
+                {t('chiSono.subtitle')}
               </p>
             </motion.div>
 
@@ -864,8 +875,8 @@ export default function HomePage() {
                 >
                   <Award size={20} className="text-accent shrink-0" />
                   <div className="text-left">
-                    <p className="text-xs font-bold text-foreground">Traffic Master Certified</p>
-                    <p className="text-[11px] text-foreground-muted">Florida Global University · 2025</p>
+                    <p className="text-xs font-bold text-foreground">{t('chiSono.certLabel')}</p>
+                    <p className="text-[11px] text-foreground-muted">{t('chiSono.certSub')}</p>
                   </div>
                   <ExternalLink size={14} className="text-foreground-muted group-hover:text-accent transition-colors ml-auto" />
                 </motion.button>
@@ -878,25 +889,22 @@ export default function HomePage() {
                 transition={{ duration: 0.7 }}
               >
                 <div className="space-y-4">
-                  <AccordionCard title="La Mission" defaultOpen>
+                  <AccordionCard title={t('chiSono.missionTitle')} defaultOpen>
                     <p className="text-foreground-secondary text-base leading-relaxed">
-                      Ho costruito sistemi digitali prima di venderli.
-                      lurumi.it è il primo prodotto lanciato da Marketizzati: una PWA full-stack
-                      con AI, pagamenti Stripe e più di 200 funzionalità — costruita in{' '}
-                      <strong className="text-foreground">meno di un mese</strong> usando la stessa
-                      Digital Factory che offro ai miei clienti.
+                      {t('chiSono.missionP1').split('{bold}')[0]}
+                      <strong className="text-foreground">{t('chiSono.missionP1Bold')}</strong>
+                      {t('chiSono.missionP1').split('{bold}')[1] ?? ''}
                     </p>
                     <p className="text-foreground-secondary text-base leading-relaxed mt-3">
-                      La mission è semplice:{' '}
+                      {t('chiSono.missionP2').split('{bold}')[0]}
                       <strong className="text-foreground">
-                        aiutare PMI e professionisti a costruire il proprio ecosistema digitale completo
-                      </strong>{' '}
-                      — non singoli servizi, ma un sistema integrato potenziato dall&apos;intelligenza
-                      artificiale attraverso il Metodo Z·START.
+                        {t('chiSono.missionP2Bold')}
+                      </strong>
+                      {t('chiSono.missionP2').split('{bold}')[1] ?? ''}
                     </p>
                   </AccordionCard>
 
-                  <AccordionCard title="I Valori">
+                  <AccordionCard title={t('chiSono.valoriTitle')}>
                     <div className="space-y-3">
                       {values.map((val, i) => (
                         <div
@@ -918,9 +926,9 @@ export default function HomePage() {
 
                 <div className="mt-8 space-y-2">
                   {[
-                    'Traffic Master Certified · Florida Global University 2025',
-                    'lurumi.it — Digital Product live in meno di 1 mese',
-                    'Intelligenza artificiale applicata a contenuto, automazione e prodotto',
+                    t('chiSono.check1'),
+                    t('chiSono.check2'),
+                    t('chiSono.check3'),
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
@@ -949,10 +957,10 @@ export default function HomePage() {
                 className="font-heading font-bold mb-4"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
               >
-                Casi Studio
+                {t('casiStudio.title')}
               </h2>
               <p className="text-foreground-secondary text-lg max-w-xl mx-auto">
-                Risultati reali. Sistemi reali. Costruiti con il Metodo Z·START.
+                {t('casiStudio.subtitle')}
               </p>
             </motion.div>
 
@@ -991,13 +999,13 @@ export default function HomePage() {
                 className="font-heading font-black text-white mb-6"
                 style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)', lineHeight: 1.05 }}
               >
-                30 Minuti.<br />
-                Una Conversazione.<br />
-                Tutto Cambia.
+                {t('ctaFinale.title1')}<br />
+                {t('ctaFinale.title2')}<br />
+                {t('ctaFinale.title3')}
               </h2>
 
               <p className="text-white/80 text-lg md:text-xl mb-10 max-w-xl mx-auto">
-                Scopri esattamente cosa blocca la tua crescita e i 3 passi concreti da fare subito.
+                {t('ctaFinale.subtitle')}
               </p>
 
               <motion.a
@@ -1008,18 +1016,18 @@ export default function HomePage() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-3 px-10 py-5 bg-white text-accent font-black text-lg rounded-2xl hover:shadow-[0_8px_40px_rgba(0,0,0,0.25)] transition-all"
               >
-                Scrivimi su WhatsApp
+                {t('ctaFinale.cta')}
                 <ArrowRight size={22} />
               </motion.a>
 
               <p className="mt-5 text-white/50 text-sm">
-                Zero spam · Zero impegno · Rispondo entro poche ore
+                {t('ctaFinale.micro1')}
               </p>
               <p className="mt-2 text-white/80 text-xs font-medium">
-                Tutti i partecipanti ricevono accesso gratuito alle risorse digitali Marketizzati — indipendentemente dall&apos;esito.
+                {t('ctaFinale.micro2')}
               </p>
               <p className="mt-1.5 text-white/40 text-xs">
-                Accettiamo un numero limitato di consulenze a settimana per garantire qualità
+                {t('ctaFinale.micro3')}
               </p>
             </motion.div>
           </div>
