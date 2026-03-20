@@ -118,18 +118,27 @@ const defaultAutomations = [
     automation_type: 'weekly_review',
     status: 'active',
     summary: 'Riassume avanzamento, colli di bottiglia e prossima azione consigliata.',
+    metadata: {
+      cadence_days: 7,
+    },
   },
   {
     title: 'Promemoria materiali mancanti',
     automation_type: 'asset_reminder',
     status: 'queued',
     summary: 'Ti ricorda cosa manca per far avanzare la fase Technology senza rallentamenti.',
+    metadata: {
+      cadence_days: 3,
+    },
   },
   {
     title: 'Follow-up operativo post call',
     automation_type: 'post_call_followup',
     status: 'paused',
     summary: 'Invia automaticamente task e note dopo i checkpoint strategici.',
+    metadata: {
+      cadence_days: 2,
+    },
   },
 ]
 
@@ -315,6 +324,13 @@ export type AdminSnapshot = {
   totalAutomations: number
   completedTasks: number
   totalTasks: number
+  automationHealth: {
+    active: number
+    queued: number
+    paused: number
+    dueNow: number
+    recentRuns: Array<AutomationRun & { client_name: string | null }>
+  }
   prospectbot: {
     configured: boolean
     totalProspects: number
@@ -347,6 +363,13 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
       totalAutomations: 0,
       completedTasks: 0,
       totalTasks: 0,
+      automationHealth: {
+        active: 0,
+        queued: 0,
+        paused: 0,
+        dueNow: 0,
+        recentRuns: [],
+      },
       prospectbot: {
         configured: false,
         totalProspects: 0,
@@ -368,6 +391,7 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     { count: totalAutomations },
     { count: totalTasks },
     { count: completedTasks },
+    { data: automationRuns },
   ] = await Promise.all([
     service.from('profiles').select('*').order('created_at', { ascending: false }),
     service.from('client_workspaces').select('*'),
@@ -377,6 +401,7 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     service.from('automation_runs').select('id', { count: 'exact', head: true }),
     service.from('client_tasks').select('id', { count: 'exact', head: true }),
     service.from('client_tasks').select('id', { count: 'exact', head: true }).eq('completed', true),
+    service.from('automation_runs').select('*').order('updated_at', { ascending: false }).limit(12),
   ])
 
   const workspaceMap = new Map((workspaces ?? []).map((workspace) => [workspace.user_id, workspace]))
@@ -385,6 +410,21 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     ...profile,
     workspace: (workspaceMap.get(profile.id) as ClientWorkspace | null) ?? null,
   }))
+
+  const profileMap = new Map(clients.map((profile) => [profile.id, profile]))
+  const typedAutomations = (automationRuns as AutomationRun[]) ?? []
+  const now = Date.now()
+
+  const automationHealth = {
+    active: typedAutomations.filter((automation) => automation.status === 'active').length,
+    queued: typedAutomations.filter((automation) => automation.status === 'queued').length,
+    paused: typedAutomations.filter((automation) => automation.status === 'paused').length,
+    dueNow: typedAutomations.filter((automation) => !automation.next_run_at || new Date(automation.next_run_at).getTime() <= now).length,
+    recentRuns: typedAutomations.map((automation) => ({
+      ...automation,
+      client_name: profileMap.get(automation.user_id)?.full_name || null,
+    })),
+  }
 
   const prospectbotConfigured = Boolean(
     process.env.PROSPECTBOT_SUPABASE_URL && process.env.PROSPECTBOT_SERVICE_ROLE_KEY
@@ -469,6 +509,7 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     totalAutomations: totalAutomations ?? 0,
     completedTasks: completedTasks ?? 0,
     totalTasks: totalTasks ?? 0,
+    automationHealth,
     prospectbot,
   }
 }

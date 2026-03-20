@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
-import { convertProspectToClient, resolveClientRequest } from '@/actions/admin'
-import { ArrowRight, Bot, BriefcaseBusiness, LifeBuoy, SearchCode, Users } from 'lucide-react'
+import { convertProspectToClient, resolveClientRequest, runAllAutomationsNow, runAutomationAsAdmin } from '@/actions/admin'
+import { ArrowRight, Bot, BriefcaseBusiness, LifeBuoy, SearchCode, Users, Zap } from 'lucide-react'
 
 type AdminOverviewProps = {
   snapshot: AdminSnapshot
@@ -20,6 +20,7 @@ function MetricCard({ label, value, helper }: { label: string; value: string | n
 
 export function AdminOverview({ snapshot }: AdminOverviewProps) {
   const appUrl = process.env.PROSPECTBOT_APP_URL || 'http://localhost:3001'
+  const showProspectbotLink = !appUrl.includes('localhost')
 
   return (
     <div className="space-y-8">
@@ -105,13 +106,63 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
           </div>
 
           <div className="mt-6">
-            <Link href={appUrl} target="_blank" rel="noreferrer">
-              <Button rightIcon={<ArrowRight size={16} />}>Apri ProspectBot</Button>
-            </Link>
+            {showProspectbotLink ? (
+              <Link href={appUrl} target="_blank" rel="noreferrer">
+                <Button rightIcon={<ArrowRight size={16} />}>Apri ProspectBot</Button>
+              </Link>
+            ) : (
+              <p className="text-sm text-foreground-secondary">
+                Configura un URL pubblico per ProspectBot se vuoi aprirlo direttamente da qui.
+              </p>
+            )}
           </div>
         </div>
 
         <div className="space-y-6">
+          <div className="rounded-[30px] border border-surface-border bg-white p-6">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Zap size={18} className="text-accent" />
+                <h3 className="font-heading text-2xl text-foreground">Automazioni vere</h3>
+              </div>
+              <form action={runAllAutomationsNow}>
+                <Button size="sm">Esegui tutto adesso</Button>
+              </form>
+            </div>
+
+            <div className="mt-5 grid gap-4 md:grid-cols-4">
+              <MetricCard label="Attive" value={snapshot.automationHealth.active} helper="Workflow in esecuzione" />
+              <MetricCard label="In coda" value={snapshot.automationHealth.queued} helper="Pronte ma non ancora partite" />
+              <MetricCard label="In pausa" value={snapshot.automationHealth.paused} helper="Richiedono un evento trigger" />
+              <MetricCard label="Da eseguire" value={snapshot.automationHealth.dueNow} helper="Gia scadute o senza pianificazione" />
+            </div>
+
+            <div className="mt-5 space-y-3">
+              {snapshot.automationHealth.recentRuns.slice(0, 6).map((automation) => (
+                <div key={automation.id} className="rounded-2xl bg-background p-4">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <p className="font-medium text-foreground">{automation.title}</p>
+                      <p className="text-sm text-foreground-secondary">
+                        {automation.client_name || 'Cliente non identificato'} · {automation.status}
+                      </p>
+                      {automation.summary && (
+                        <p className="mt-2 text-sm text-foreground-secondary">{automation.summary}</p>
+                      )}
+                      <p className="mt-2 text-xs text-foreground-muted">
+                        Ultima esecuzione: {automation.last_run_at ? new Date(automation.last_run_at).toLocaleString('it-IT') : 'mai'} · Prossima: {automation.next_run_at ? new Date(automation.next_run_at).toLocaleString('it-IT') : 'da pianificare'}
+                      </p>
+                    </div>
+                    <form action={runAutomationAsAdmin}>
+                      <input type="hidden" name="automation_id" value={automation.id} />
+                      <Button size="sm" variant="secondary">Esegui</Button>
+                    </form>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="rounded-[30px] border border-surface-border bg-white p-6">
             <div className="flex items-center gap-3">
               <Users size={18} className="text-accent" />

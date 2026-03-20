@@ -15,21 +15,25 @@ export function OAuthButtons() {
     setLoading(true)
     setError(null)
 
-    const supabase = createClient()
-    const redirectTo = `${window.location.origin}/auth/callback?next=/${locale}/dashboard`
+    try {
+      const supabase = createClient()
+      const redirectTo = `${window.location.origin}/auth/callback?next=/${locale}/dashboard`
 
-    const { error: authError } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo,
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
-      },
-    })
+      })
 
-    if (authError) {
+      if (authError) {
+        throw authError
+      }
+    } catch {
       setError(t('error'))
       setLoading(false)
     }

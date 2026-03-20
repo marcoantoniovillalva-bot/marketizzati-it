@@ -1,7 +1,8 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { executeAutomationById } from '@/features/portal/lib/automation-engine'
 
 async function getAuthenticatedUser() {
   const supabase = await createClient()
@@ -108,23 +109,19 @@ export async function createClientRequest(formData: FormData) {
 
 export async function triggerAutomationRun(automationId: string) {
   const { supabase, user } = await getAuthenticatedUser()
-  const now = new Date()
-
-  const { error } = await supabase
+  const { data: automation, error } = await supabase
     .from('automation_runs')
-    .update({
-      status: 'active',
-      last_run_at: now.toISOString(),
-      next_run_at: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      summary: 'Eseguita manualmente dal portale cliente. Il prossimo check e gia stato pianificato.',
-      updated_at: now.toISOString(),
-    })
+    .select('id')
     .eq('id', automationId)
     .eq('user_id', user.id)
+    .maybeSingle()
 
-  if (error) {
-    return { error: error.message }
+  if (error || !automation) {
+    return { error: error?.message || 'Automazione non trovata' }
   }
+
+  const service = createServiceClient()
+  await executeAutomationById(service, automationId, 'manual')
 
   revalidatePath('/', 'layout')
   return { success: true }

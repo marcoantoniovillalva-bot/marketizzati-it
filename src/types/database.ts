@@ -107,6 +107,7 @@ export interface AutomationRun {
   summary: string | null
   last_run_at: string | null
   next_run_at: string | null
+  metadata: Record<string, unknown>
   created_at: string
   updated_at: string
 }

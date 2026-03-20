@@ -1,7 +1,8 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createServiceClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { executeAutomationById, executeDueAutomations } from '@/features/portal/lib/automation-engine'
 import { provisionPortalForUser } from '@/features/portal/lib/portal-data'
 
 type ProspectRecord = {
@@ -33,7 +34,29 @@ function buildWorkspaceNotes(prospect: ProspectRecord) {
   return lines.filter(Boolean).join('\n')
 }
 
+async function ensureAdmin() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('Non autenticato')
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .maybeSingle()
+
+  if (profile?.role !== 'admin') {
+    throw new Error('Operazione riservata agli admin')
+  }
+}
+
 export async function convertProspectToClient(formData: FormData) {
+  await ensureAdmin()
   const prospectId = formData.get('prospect_id') as string
 
   if (!prospectId) {
@@ -197,6 +220,7 @@ export async function convertProspectToClient(formData: FormData) {
 }
 
 export async function resolveClientRequest(formData: FormData) {
+  await ensureAdmin()
   const service = createServiceClient()
   const requestId = formData.get('request_id') as string
   const adminNote = (formData.get('admin_note') as string) || null
@@ -218,6 +242,7 @@ export async function resolveClientRequest(formData: FormData) {
 }
 
 export async function createOrUpdateResource(formData: FormData) {
+  await ensureAdmin()
   const service = createServiceClient()
 
   const resourceId = (formData.get('resource_id') as string) || null
@@ -247,6 +272,7 @@ export async function createOrUpdateResource(formData: FormData) {
 }
 
 export async function assignResourceToEmail(formData: FormData) {
+  await ensureAdmin()
   const service = createServiceClient()
   const email = (formData.get('email') as string)?.trim().toLowerCase()
   const resourceId = formData.get('resource_id') as string
@@ -280,5 +306,25 @@ export async function assignResourceToEmail(formData: FormData) {
     throw new Error(error.message)
   }
 
+  revalidatePath('/', 'layout')
+}
+
+export async function runAllAutomationsNow() {
+  await ensureAdmin()
+  const service = createServiceClient()
+  await executeDueAutomations(service, { source: 'admin', force: true })
+  revalidatePath('/', 'layout')
+}
+
+export async function runAutomationAsAdmin(formData: FormData) {
+  await ensureAdmin()
+  const automationId = formData.get('automation_id') as string
+
+  if (!automationId) {
+    throw new Error('Automazione non valida')
+  }
+
+  const service = createServiceClient()
+  await executeAutomationById(service, automationId, 'admin')
   revalidatePath('/', 'layout')
 }
