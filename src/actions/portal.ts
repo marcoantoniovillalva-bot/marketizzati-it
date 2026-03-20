@@ -240,7 +240,7 @@ export async function triggerAutomationRun(automationId: string) {
     const result = await executeAutomationById(service, automationId, 'manual')
 
     revalidatePath('/', 'layout')
-    return { success: true, message: result.summary }
+    return { success: true, message: result.summary, effects: result.effects }
   } catch (error) {
     return { error: error instanceof Error ? error.message : 'Impossibile eseguire l’automazione.' }
   }

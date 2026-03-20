@@ -46,15 +46,21 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <MetricCard label="Lead totali" value={snapshot.prospectbot.totalProspects} helper="Archivio prospect" />
             <MetricCard label="In lavorazione" value={snapshot.prospectbot.workingProspects} helper="Lead da trasformare" />
-            <MetricCard label="Venduti" value={snapshot.prospectbot.soldProspects} helper="Potenziali clienti chiusi" />
+            <MetricCard label="Venduti" value={snapshot.prospectbot.soldProspects} helper="Lead gia chiusi o convertiti" />
           </div>
 
           <div className="mt-6 rounded-[24px] bg-background p-5">
             {snapshot.prospectbot.configured ? (
               <>
                 <p className="text-sm text-foreground-secondary">
-                  Il bridge e attivo: stai leggendo i dati ProspectBot direttamente nell’admin di Marketizzati.
+                  Il bridge e attivo: i lead ProspectBot vengono letti dentro l&apos;admin di Marketizzati.
                 </p>
+                <div className="mt-4 rounded-2xl bg-white px-4 py-4 text-sm text-foreground-secondary">
+                  <p className="font-medium text-foreground">Come leggere gli stati</p>
+                  <p className="mt-2">
+                    `Nuovo` = lead appena trovato. `In lavorazione` = stai raccogliendo dati o materiali. `Sito generato` = c&apos;e gia una demo utile. `Venduto` = lead gia chiuso o convertito.
+                  </p>
+                </div>
                 <div className="mt-4 space-y-3">
                   {snapshot.prospectbot.recentProspects.map((prospect) => (
                     <div key={prospect.id} className="rounded-2xl bg-white px-4 py-4">
@@ -79,6 +85,11 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
                       </div>
 
                       <div className="mt-4 flex flex-wrap items-center gap-3">
+                        {showProspectbotLink && (
+                          <a href={`${appUrl}/prospect/${prospect.id}`} target="_blank" rel="noreferrer">
+                            <Button size="sm" variant="outline">Apri in ProspectBot</Button>
+                          </a>
+                        )}
                         {prospect.imported ? (
                           <span className="rounded-full bg-success/10 px-3 py-1 text-xs font-medium text-success">
                             Gia convertito in cliente
@@ -112,7 +123,7 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
               </Link>
             ) : (
               <p className="text-sm text-foreground-secondary">
-                Configura un URL pubblico per ProspectBot se vuoi aprirlo direttamente da qui.
+                ProspectBot non ha ancora un URL pubblico configurato. Appena e online qui comparira il link diretto.
               </p>
             )}
           </div>
@@ -262,8 +273,7 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
               <h3 className="font-heading text-2xl text-foreground">Direzione consigliata</h3>
             </div>
             <p className="mt-4 text-sm text-foreground-secondary">
-              L’admin non deve usare il portale come il cliente. Deve usarlo per leggere stato per utente, sbloccare risorse,
-              chiudere richieste, convertire lead e attivare automazioni quando serve.
+              L&apos;admin non deve usare il portale come il cliente. Deve usarlo per leggere stato per utente, sbloccare risorse, chiudere richieste, convertire lead e attivare automazioni quando serve.
             </p>
           </div>
         </div>

@@ -1,12 +1,12 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import type { Resource } from '@/types/database'
+import type { PortalResource } from '../lib/portal-data'
 import { ResourceCard } from './resource-card'
 import { ResourceViewer } from './resource-viewer'
 
 type ResourcesLibraryProps = {
-  resources: Resource[]
+  resources: PortalResource[]
 }
 
 export function ResourcesLibrary({ resources }: ResourcesLibraryProps) {
@@ -22,9 +22,12 @@ export function ResourcesLibrary({ resources }: ResourcesLibraryProps) {
           description={resource.description || ''}
           type={resource.type}
           premium={resource.is_premium}
+          unlocked={resource.unlocked}
+          unlockedBy={resource.unlockedBy}
           unlockStepCode={resource.unlock_step_code}
           fileUrl={resource.file_url}
-          onView={resource.embed_url ? () => setViewingId(resource.id) : undefined}
+          shareUrl={resource.unlocked ? resource.shareUrl : null}
+          onView={resource.unlocked && resource.embed_url ? () => setViewingId(resource.id) : undefined}
         />
       ))}
 

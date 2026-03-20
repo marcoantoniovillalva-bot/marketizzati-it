@@ -1,4 +1,5 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getResourceShareUrl } from './resource-sharing'
 import type {
   AutomationRun,
   ClientRequest,
@@ -9,6 +10,12 @@ import type {
   Profile,
   Resource,
 } from '@/types/database'
+
+export type PortalResource = Resource & {
+  unlocked: boolean
+  unlockedBy: 'step' | 'manual' | 'always-on' | null
+  shareUrl: string
+}
 
 type PortalSeed = {
   workspace?: Partial<ClientWorkspace>
@@ -149,7 +156,7 @@ export type PortalSnapshot = {
   tasks: ClientTask[]
   automations: AutomationRun[]
   requests: ClientRequest[]
-  resources: Resource[]
+  resources: PortalResource[]
   assets: ClientAsset[]
 }
 
@@ -290,6 +297,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     { data: requests },
     { data: resources },
     { data: assets },
+    { data: assignments },
   ] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', userId).maybeSingle(),
     supabase.from('client_workspaces').select('*').eq('user_id', userId).maybeSingle(),
@@ -299,7 +307,47 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     supabase.from('client_requests').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
     supabase.from('resources').select('*').eq('is_active', true).order('sort_order'),
     supabase.from('client_assets').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+    supabase.from('resource_assignments').select('resource_id').eq('user_id', userId),
   ])
+
+  const stepMap = new Map(((steps as ClientStep[]) ?? []).map((step) => [step.code, step]))
+  const assignmentSet = new Set((assignments ?? []).map((assignment) => assignment.resource_id))
+
+  const decoratedResources: PortalResource[] = ((resources as Resource[]) ?? []).map((resource) => {
+    if (!resource.is_premium) {
+      return {
+        ...resource,
+        unlocked: true,
+        unlockedBy: 'always-on',
+        shareUrl: getResourceShareUrl(resource.id),
+      }
+    }
+
+    if (assignmentSet.has(resource.id)) {
+      return {
+        ...resource,
+        unlocked: true,
+        unlockedBy: 'manual',
+        shareUrl: getResourceShareUrl(resource.id),
+      }
+    }
+
+    if (resource.unlock_step_code && stepMap.get(resource.unlock_step_code)?.status === 'completed') {
+      return {
+        ...resource,
+        unlocked: true,
+        unlockedBy: 'step',
+        shareUrl: getResourceShareUrl(resource.id),
+      }
+    }
+
+    return {
+      ...resource,
+      unlocked: false,
+      unlockedBy: null,
+      shareUrl: getResourceShareUrl(resource.id),
+    }
+  })
 
   return {
     profile: (profile as Profile | null) ?? null,
@@ -308,7 +356,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     tasks: (tasks as ClientTask[]) ?? [],
     automations: (automations as AutomationRun[]) ?? [],
     requests: (requests as ClientRequest[]) ?? [],
-    resources: (resources as Resource[]) ?? [],
+    resources: decoratedResources,
     assets: (assets as ClientAsset[]) ?? [],
   }
 }
@@ -328,7 +376,7 @@ export type AdminSnapshot = {
     }
   >
   openRequests: ClientRequest[]
-  resources: Resource[]
+  resources: Array<Resource & { shareUrl: string }>
   resourceAssignments: Array<{
     resource_id: string
     user_id: string
@@ -371,12 +419,7 @@ export type AdminClientSnapshot = {
   requests: ClientRequest[]
   assets: ClientAsset[]
   automations: AutomationRun[]
-  resources: Array<
-    Resource & {
-      unlocked: boolean
-      unlockedBy: 'step' | 'manual' | 'always-on' | null
-    }
-  >
+  resources: PortalResource[]
   timeline: Array<{
     id: string
     timestamp: string
@@ -585,7 +628,11 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   return {
     clients,
     openRequests: (requests as ClientRequest[]) ?? [],
-    resources: (resources as Resource[]) ?? [],
+    resources:
+      ((resources as Resource[]) ?? []).map((resource) => ({
+        ...resource,
+        shareUrl: getResourceShareUrl(resource.id),
+      })),
     resourceAssignments: (resourceAssignments as Array<{ resource_id: string; user_id: string }>) ?? [],
     totalAutomations: totalAutomations ?? 0,
     completedTasks: completedTasks ?? 0,
@@ -638,6 +685,7 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
         ...resource,
         unlocked: true,
         unlockedBy: 'always-on' as const,
+        shareUrl: getResourceShareUrl(resource.id),
       }
     }
 
@@ -646,6 +694,7 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
         ...resource,
         unlocked: true,
         unlockedBy: 'manual' as const,
+        shareUrl: getResourceShareUrl(resource.id),
       }
     }
 
@@ -654,6 +703,7 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
         ...resource,
         unlocked: true,
         unlockedBy: 'step' as const,
+        shareUrl: getResourceShareUrl(resource.id),
       }
     }
 
@@ -661,6 +711,7 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
       ...resource,
       unlocked: false,
       unlockedBy: null,
+      shareUrl: getResourceShareUrl(resource.id),
     }
   })
 

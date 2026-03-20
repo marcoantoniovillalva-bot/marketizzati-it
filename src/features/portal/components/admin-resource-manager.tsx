@@ -11,10 +11,21 @@ type AdminResourceManagerProps = {
 
 export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
   const [editingId, setEditingId] = useState<string>('new')
+  const [copiedId, setCopiedId] = useState<string | null>(null)
   const editingResource = useMemo(
     () => snapshot.resources.find((resource) => resource.id === editingId) || null,
     [editingId, snapshot.resources]
   )
+
+  async function copyShareLink(shareUrl: string, resourceId: string) {
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      setCopiedId(resourceId)
+      window.setTimeout(() => setCopiedId(null), 1800)
+    } catch {
+      window.prompt('Copia il link della risorsa', shareUrl)
+    }
+  }
 
   return (
     <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
@@ -140,6 +151,14 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                       <p>{resource.is_premium ? 'Premium' : 'Free'}</p>
                       <p>{assignmentCount} assegnazioni manuali</p>
                     </div>
+                  </div>
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <Button type="button" size="sm" variant="outline" onClick={() => copyShareLink(resource.shareUrl, resource.id)}>
+                      Copia link condivisibile
+                    </Button>
+                    {copiedId === resource.id && (
+                      <span className="text-xs font-medium text-accent">Link copiato</span>
+                    )}
                   </div>
                 </div>
               )
