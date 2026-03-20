@@ -6,6 +6,7 @@ import {
   resolveClientRequest,
   runAutomationAsAdmin,
   toggleClientTaskAdmin,
+  updateClientStepAdmin,
   updateClientWorkspaceState,
 } from '@/actions/admin'
 import { getAdminClientSnapshot } from '@/features/portal/lib/portal-data'
@@ -78,6 +79,7 @@ export default async function AdminClientPage({ params }: AdminClientPageProps) 
     notFound()
   }
 
+  const clientProfile = snapshot.profile
   const completedTasks = snapshot.tasks.filter((task) => task.completed).length
   const completedSteps = snapshot.steps.filter((step) => step.status === 'completed').length
   const openRequests = snapshot.requests.filter((request) => request.status !== 'resolved').length
@@ -87,7 +89,7 @@ export default async function AdminClientPage({ params }: AdminClientPageProps) 
       <div className="rounded-[32px] border border-surface-border bg-white p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Cliente</p>
         <h1 className="mt-4 font-heading text-display-sm text-foreground">
-          {snapshot.profile.full_name || 'Cliente senza nome'}
+          {clientProfile.full_name || 'Cliente senza nome'}
         </h1>
         <p className="mt-3 text-body-md text-foreground-secondary">
           Vista operativa cliente per cliente: stato workspace, percorso, task, richieste, risorse e automazioni.
@@ -95,8 +97,8 @@ export default async function AdminClientPage({ params }: AdminClientPageProps) 
         <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-foreground-secondary">
           <span>{snapshot.workspace?.business_name || 'Business non definito'}</span>
           <span>{snapshot.workspace?.primary_channel || 'Canale non definito'}</span>
-          <span>{snapshot.profile.phone || 'Telefono assente'}</span>
-          <span>{snapshot.profile.id}</span>
+          <span>{clientProfile.phone || 'Telefono assente'}</span>
+          <span>{clientProfile.id}</span>
         </div>
       </div>
 
@@ -127,7 +129,7 @@ export default async function AdminClientPage({ params }: AdminClientPageProps) 
         <div className="rounded-[30px] border border-surface-border bg-white p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground-muted">Controllo workspace</p>
           <form action={updateClientWorkspaceState} className="mt-5 space-y-4">
-            <input type="hidden" name="user_id" value={snapshot.profile.id} />
+            <input type="hidden" name="user_id" value={clientProfile.id} />
             <div className="grid gap-4 md:grid-cols-2">
               <label className="space-y-2">
                 <span className="text-xs uppercase tracking-[0.18em] text-foreground-muted">Fase attuale</span>
@@ -202,6 +204,36 @@ export default async function AdminClientPage({ params }: AdminClientPageProps) 
                 </div>
                 <p className="mt-2 text-sm text-foreground-secondary">{step.next_action || 'Nessuna azione assegnata'}</p>
                 <p className="mt-2 text-xs text-foreground-muted">Stato: {step.status}</p>
+                <form action={updateClientStepAdmin} className="mt-4 space-y-3">
+                  <input type="hidden" name="step_id" value={step.id} />
+                  <input type="hidden" name="user_id" value={clientProfile.id} />
+                  <div className="grid gap-3 md:grid-cols-[140px_120px_1fr]">
+                    <select
+                      name="status"
+                      defaultValue={step.status}
+                      className="rounded-2xl border border-surface-border bg-white px-4 py-3 text-sm text-foreground"
+                    >
+                      <option value="not_started">Non iniziata</option>
+                      <option value="in_progress">In corso</option>
+                      <option value="completed">Completata</option>
+                      <option value="blocked">Bloccata</option>
+                    </select>
+                    <input
+                      name="progress"
+                      type="number"
+                      min="0"
+                      max="100"
+                      defaultValue={step.progress}
+                      className="rounded-2xl border border-surface-border bg-white px-4 py-3 text-sm text-foreground"
+                    />
+                    <input
+                      name="next_action"
+                      defaultValue={step.next_action || ''}
+                      className="rounded-2xl border border-surface-border bg-white px-4 py-3 text-sm text-foreground"
+                    />
+                  </div>
+                  <Button size="sm" variant="outline">Aggiorna fase</Button>
+                </form>
               </div>
             ))}
           </div>
@@ -299,7 +331,7 @@ export default async function AdminClientPage({ params }: AdminClientPageProps) 
           <div className="rounded-[30px] border border-surface-border bg-white p-6">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground-muted">Risorse</p>
             <form action={assignResourceToUser} className="mt-5 rounded-2xl bg-background p-4">
-              <input type="hidden" name="user_id" value={snapshot.profile.id} />
+              <input type="hidden" name="user_id" value={clientProfile.id} />
               <label className="space-y-2">
                 <span className="text-xs uppercase tracking-[0.18em] text-foreground-muted">Sblocca risorsa manualmente</span>
                 <select

@@ -386,6 +386,70 @@ export async function toggleClientTaskAdmin(formData: FormData) {
   revalidatePath('/', 'layout')
 }
 
+export async function updateClientStepAdmin(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const stepId = formData.get('step_id') as string
+  const status = formData.get('status') as string
+  const progress = Number(formData.get('progress') || 0)
+  const nextAction = (formData.get('next_action') as string) || null
+  const userId = formData.get('user_id') as string
+
+  if (!stepId || !userId) {
+    throw new Error('Step non valido')
+  }
+
+  const clampedProgress = Math.max(0, Math.min(100, progress))
+
+  const { data: step, error: stepFetchError } = await service
+    .from('client_steps')
+    .select('title,status')
+    .eq('id', stepId)
+    .maybeSingle()
+
+  if (stepFetchError || !step) {
+    throw new Error(stepFetchError?.message || 'Step non trovato')
+  }
+
+  const { error } = await service
+    .from('client_steps')
+    .update({
+      status,
+      progress: clampedProgress,
+      next_action: nextAction,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', stepId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  const { data: activeSteps } = await service
+    .from('client_steps')
+    .select('title,sort_order,status')
+    .eq('user_id', userId)
+    .order('sort_order')
+
+  const currentStep =
+    activeSteps?.find((entry) => entry.status === 'in_progress') ||
+    activeSteps?.find((entry) => entry.status === 'blocked') ||
+    activeSteps?.find((entry) => entry.status === 'completed') ||
+    null
+
+  if (currentStep) {
+    await service
+      .from('client_workspaces')
+      .update({
+        current_stage: currentStep.title,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('user_id', userId)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
 export async function runAllAutomationsNow() {
   await ensureAdmin()
   const service = createServiceClient()
