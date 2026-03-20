@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
 import { convertProspectToClient, resolveClientRequest, runAllAutomationsNow, runAutomationAsAdmin } from '@/actions/admin'
@@ -209,6 +209,12 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
                       <span>
                         Ultima attivita: {client.lastActivity ? new Date(client.lastActivity).toLocaleString('it-IT') : 'n/d'}
                       </span>
+                    </div>
+
+                    <div>
+                      <Link href={`/admin/clienti/${client.id}`}>
+                        <Button size="sm" variant="secondary">Apri scheda cliente</Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

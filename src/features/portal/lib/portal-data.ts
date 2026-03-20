@@ -363,6 +363,22 @@ export type AdminSnapshot = {
   }
 }
 
+export type AdminClientSnapshot = {
+  profile: Profile | null
+  workspace: ClientWorkspace | null
+  steps: ClientStep[]
+  tasks: ClientTask[]
+  requests: ClientRequest[]
+  assets: ClientAsset[]
+  automations: AutomationRun[]
+  resources: Array<
+    Resource & {
+      unlocked: boolean
+      unlockedBy: 'step' | 'manual' | 'always-on' | null
+    }
+  >
+}
+
 export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   const hasServiceRole = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY)
 
@@ -569,5 +585,86 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     totalTasks: totalTasks ?? 0,
     automationHealth,
     prospectbot,
+  }
+}
+
+export async function getAdminClientSnapshot(userId: string): Promise<AdminClientSnapshot | null> {
+  const hasServiceRole = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY)
+
+  if (!hasServiceRole) {
+    return null
+  }
+
+  const service = createServiceClient()
+  const [
+    { data: profile },
+    { data: workspace },
+    { data: steps },
+    { data: tasks },
+    { data: requests },
+    { data: assets },
+    { data: automations },
+    { data: resources },
+    { data: assignments },
+  ] = await Promise.all([
+    service.from('profiles').select('*').eq('id', userId).maybeSingle(),
+    service.from('client_workspaces').select('*').eq('user_id', userId).maybeSingle(),
+    service.from('client_steps').select('*').eq('user_id', userId).order('sort_order'),
+    service.from('client_tasks').select('*').eq('user_id', userId).order('sort_order'),
+    service.from('client_requests').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+    service.from('client_assets').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+    service.from('automation_runs').select('*').eq('user_id', userId).order('updated_at', { ascending: false }),
+    service.from('resources').select('*').order('sort_order'),
+    service.from('resource_assignments').select('resource_id').eq('user_id', userId),
+  ])
+
+  if (!profile) {
+    return null
+  }
+
+  const stepMap = new Map(((steps as ClientStep[]) ?? []).map((step) => [step.code, step]))
+  const assignmentSet = new Set((assignments ?? []).map((assignment) => assignment.resource_id))
+
+  const decoratedResources = ((resources as Resource[]) ?? []).map((resource) => {
+    if (!resource.is_premium) {
+      return {
+        ...resource,
+        unlocked: true,
+        unlockedBy: 'always-on' as const,
+      }
+    }
+
+    if (assignmentSet.has(resource.id)) {
+      return {
+        ...resource,
+        unlocked: true,
+        unlockedBy: 'manual' as const,
+      }
+    }
+
+    if (resource.unlock_step_code && stepMap.get(resource.unlock_step_code)?.status === 'completed') {
+      return {
+        ...resource,
+        unlocked: true,
+        unlockedBy: 'step' as const,
+      }
+    }
+
+    return {
+      ...resource,
+      unlocked: false,
+      unlockedBy: null,
+    }
+  })
+
+  return {
+    profile: profile as Profile,
+    workspace: (workspace as ClientWorkspace | null) ?? null,
+    steps: (steps as ClientStep[]) ?? [],
+    tasks: (tasks as ClientTask[]) ?? [],
+    requests: (requests as ClientRequest[]) ?? [],
+    assets: (assets as ClientAsset[]) ?? [],
+    automations: (automations as AutomationRun[]) ?? [],
+    resources: decoratedResources,
   }
 }
