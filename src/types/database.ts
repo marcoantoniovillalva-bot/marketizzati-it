@@ -44,7 +44,10 @@ export interface Resource {
   description: string | null
   type: 'pdf' | 'template' | 'guide' | 'video'
   file_url: string | null
+  embed_url: string | null
   is_premium: boolean
+  unlock_step_code: string | null
+  is_active: boolean
   sort_order: number
   created_at: string
 }

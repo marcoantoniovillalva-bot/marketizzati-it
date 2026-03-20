@@ -1,16 +1,18 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { FileText, Presentation, Eye } from 'lucide-react'
+import { Eye, Lock, Presentation, Sparkles } from 'lucide-react'
 
 interface ResourceCardProps {
   title: string
   description: string
   type: string
+  premium?: boolean
+  unlockStepCode?: string | null
   onView?: () => void
 }
 
-export function ResourceCard({ title, description, type, onView }: ResourceCardProps) {
+export function ResourceCard({ title, description, type, premium = false, unlockStepCode, onView }: ResourceCardProps) {
   const t = useTranslations('portal.resources')
 
   return (
@@ -26,11 +28,19 @@ export function ResourceCard({ title, description, type, onView }: ResourceCardP
         <p className="text-sm text-foreground-secondary mt-1">{description}</p>
         <div className="flex items-center gap-3 mt-3">
           <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded-full">{type}</span>
-          <span className="text-xs text-foreground-muted">{t('free')}</span>
+          <span className={`text-xs px-2 py-1 rounded-full ${premium ? 'bg-foreground text-white' : 'text-foreground-muted bg-background'}`}>
+            {premium ? 'Sbloccata' : t('free')}
+          </span>
+          {unlockStepCode && (
+            <span className="inline-flex items-center gap-1 text-xs text-foreground-muted">
+              <Sparkles size={12} />
+              step {unlockStepCode}
+            </span>
+          )}
         </div>
       </div>
       <div className="shrink-0 p-2 rounded-lg group-hover:bg-accent/10 transition-colors text-foreground-muted group-hover:text-accent">
-        <Eye size={20} />
+        {onView ? <Eye size={20} /> : <Lock size={20} />}
       </div>
     </div>
   )

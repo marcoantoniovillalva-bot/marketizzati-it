@@ -6,6 +6,7 @@ import type {
   ClientTask,
   ClientWorkspace,
   Profile,
+  Resource,
 } from '@/types/database'
 
 type PortalSeed = {
@@ -138,6 +139,7 @@ export type PortalSnapshot = {
   tasks: ClientTask[]
   automations: AutomationRun[]
   requests: ClientRequest[]
+  resources: Resource[]
 }
 
 export async function provisionPortalForUser(supabase: Awaited<ReturnType<typeof createClient>> | ReturnType<typeof createServiceClient>, userId: string, seed?: PortalSeed) {
@@ -275,6 +277,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     { data: tasks },
     { data: automations },
     { data: requests },
+    { data: resources },
   ] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', userId).maybeSingle(),
     supabase.from('client_workspaces').select('*').eq('user_id', userId).maybeSingle(),
@@ -282,6 +285,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     supabase.from('client_tasks').select('*').eq('user_id', userId).order('sort_order'),
     supabase.from('automation_runs').select('*').eq('user_id', userId).order('created_at'),
     supabase.from('client_requests').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
+    supabase.from('resources').select('*').eq('is_active', true).order('sort_order'),
   ])
 
   return {
@@ -291,12 +295,18 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     tasks: (tasks as ClientTask[]) ?? [],
     automations: (automations as AutomationRun[]) ?? [],
     requests: (requests as ClientRequest[]) ?? [],
+    resources: (resources as Resource[]) ?? [],
   }
 }
 
 export type AdminSnapshot = {
   clients: Array<Profile & { workspace: ClientWorkspace | null }>
   openRequests: ClientRequest[]
+  resources: Resource[]
+  resourceAssignments: Array<{
+    resource_id: string
+    user_id: string
+  }>
   totalAutomations: number
   completedTasks: number
   totalTasks: number
@@ -327,6 +337,8 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     return {
       clients: [],
       openRequests: [],
+      resources: [],
+      resourceAssignments: [],
       totalAutomations: 0,
       completedTasks: 0,
       totalTasks: 0,
@@ -346,6 +358,8 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     { data: profiles },
     { data: workspaces },
     { data: requests },
+    { data: resources },
+    { data: resourceAssignments },
     { count: totalAutomations },
     { count: totalTasks },
     { count: completedTasks },
@@ -353,6 +367,8 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     service.from('profiles').select('*').order('created_at', { ascending: false }),
     service.from('client_workspaces').select('*'),
     service.from('client_requests').select('*').neq('status', 'resolved').order('created_at', { ascending: false }),
+    service.from('resources').select('*').order('sort_order'),
+    service.from('resource_assignments').select('resource_id,user_id'),
     service.from('automation_runs').select('id', { count: 'exact', head: true }),
     service.from('client_tasks').select('id', { count: 'exact', head: true }),
     service.from('client_tasks').select('id', { count: 'exact', head: true }).eq('completed', true),
@@ -443,6 +459,8 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   return {
     clients,
     openRequests: (requests as ClientRequest[]) ?? [],
+    resources: (resources as Resource[]) ?? [],
+    resourceAssignments: (resourceAssignments as Array<{ resource_id: string; user_id: string }>) ?? [],
     totalAutomations: totalAutomations ?? 0,
     completedTasks: completedTasks ?? 0,
     totalTasks: totalTasks ?? 0,

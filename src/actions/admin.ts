@@ -145,3 +145,69 @@ export async function convertProspectToClient(formData: FormData) {
 
   revalidatePath('/', 'layout')
 }
+
+export async function createOrUpdateResource(formData: FormData) {
+  const service = createServiceClient()
+
+  const resourceId = (formData.get('resource_id') as string) || null
+  const payload = {
+    title: formData.get('title') as string,
+    description: (formData.get('description') as string) || null,
+    type: (formData.get('type') as string) || 'guide',
+    embed_url: (formData.get('embed_url') as string) || null,
+    file_url: (formData.get('file_url') as string) || null,
+    is_premium: formData.get('is_premium') === 'on',
+    unlock_step_code: (formData.get('unlock_step_code') as string) || null,
+    is_active: formData.get('is_active') !== 'off',
+    sort_order: Number(formData.get('sort_order') || 0),
+  }
+
+  const query = resourceId
+    ? service.from('resources').update(payload).eq('id', resourceId)
+    : service.from('resources').insert(payload)
+
+  const { error } = await query
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
+export async function assignResourceToEmail(formData: FormData) {
+  const service = createServiceClient()
+  const email = (formData.get('email') as string)?.trim().toLowerCase()
+  const resourceId = formData.get('resource_id') as string
+
+  if (!email || !resourceId) {
+    throw new Error('Email o risorsa mancanti')
+  }
+
+  const {
+    data: { users },
+    error: authError,
+  } = await service.auth.admin.listUsers()
+
+  if (authError) {
+    throw new Error(authError.message)
+  }
+
+  const user = users.find((entry) => entry.email?.toLowerCase() === email)
+
+  if (!user) {
+    throw new Error('Nessun utente con questa email')
+  }
+
+  const { error } = await service.from('resource_assignments').upsert({
+    user_id: user.id,
+    resource_id: resourceId,
+    unlocked_by: 'admin-email',
+  })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}

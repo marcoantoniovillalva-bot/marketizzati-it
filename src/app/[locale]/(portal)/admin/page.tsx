@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { AdminOverview } from '@/features/portal/components'
+import { AdminOverview, AdminResourceManager } from '@/features/portal/components'
 import { getAdminSnapshot } from '@/features/portal/lib/portal-data'
 
 export default async function AdminPage() {
@@ -36,6 +36,7 @@ export default async function AdminPage() {
       </div>
 
       <AdminOverview snapshot={snapshot} />
+      <AdminResourceManager snapshot={snapshot} />
     </div>
   )
 }
