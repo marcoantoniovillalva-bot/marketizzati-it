@@ -16,6 +16,9 @@ type ProspectRecord = {
   qualita_sito_score: number | null
   google_rating: number | null
   status: string | null
+  dati_social?: Record<string, unknown> | null
+  immagini_media?: Array<{ url?: string; nota?: string; fonte?: string; sezione?: string }> | null
+  recensioni?: Array<{ testo?: string; autore?: string; rating?: number }> | null
 }
 
 function buildWorkspaceNotes(prospect: ProspectRecord) {
@@ -50,7 +53,7 @@ export async function convertProspectToClient(formData: FormData) {
 
   const { data: prospect, error: prospectError } = await external
     .from('prospects')
-    .select('id,nome,professione,indirizzo,citta,telefono,email,sito_web_attuale,qualita_sito_score,google_rating,status')
+    .select('id,nome,professione,indirizzo,citta,telefono,email,sito_web_attuale,qualita_sito_score,google_rating,status,dati_social,immagini_media,recensioni')
     .eq('id', prospectId)
     .maybeSingle()
 
@@ -138,10 +141,78 @@ export async function convertProspectToClient(formData: FormData) {
     ],
   })
 
+  const typedProspect = prospect as ProspectRecord
+
+  const socialAssetPayload =
+    typedProspect.immagini_media?.slice(0, 12).map((asset, index) => ({
+      user_id: targetUser.id,
+      source: asset.fonte || 'prospectbot',
+      asset_type: asset.sezione || 'reference',
+      title: `${typedProspect.nome || 'Lead'} asset ${index + 1}`,
+      url: asset.url || null,
+      metadata: {
+        note: asset.nota || null,
+      },
+    })) ?? []
+
+  const reviewPayload =
+    typedProspect.recensioni?.slice(0, 5).map((review, index) => ({
+      user_id: targetUser.id,
+      source: 'prospectbot',
+      asset_type: 'review',
+      title: `Recensione ${index + 1}`,
+      url: null,
+      metadata: {
+        text: review.testo || null,
+        author: review.autore || null,
+        rating: review.rating || null,
+      },
+    })) ?? []
+
+  const sitePayload = {
+    user_id: targetUser.id,
+    source: 'prospectbot',
+    asset_type: 'site-audit',
+    title: 'Audit sito attuale',
+    url: typedProspect.sito_web_attuale || null,
+    metadata: {
+      quality_score: typedProspect.qualita_sito_score,
+      google_rating: typedProspect.google_rating,
+      social_data: typedProspect.dati_social || {},
+    },
+  }
+
+  const assetRows = [...socialAssetPayload, ...reviewPayload, sitePayload].filter((entry) => entry.url || entry.asset_type !== 'site-audit' || entry.metadata)
+
+  if (assetRows.length > 0) {
+    await service.from('client_assets').insert(assetRows)
+  }
+
   await external
     .from('prospects')
     .update({ status: 'venduto' })
     .eq('id', prospect.id)
+
+  revalidatePath('/', 'layout')
+}
+
+export async function resolveClientRequest(formData: FormData) {
+  const service = createServiceClient()
+  const requestId = formData.get('request_id') as string
+  const adminNote = (formData.get('admin_note') as string) || null
+
+  const { error } = await service
+    .from('client_requests')
+    .update({
+      status: 'resolved',
+      admin_note: adminNote,
+      resolved_at: new Date().toISOString(),
+    })
+    .eq('id', requestId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
 
   revalidatePath('/', 'layout')
 }

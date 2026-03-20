@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
-import { convertProspectToClient } from '@/actions/admin'
+import { convertProspectToClient, resolveClientRequest } from '@/actions/admin'
 import { ArrowRight, Bot, BriefcaseBusiness, LifeBuoy, SearchCode, Users } from 'lucide-react'
 
 type AdminOverviewProps = {
@@ -150,6 +150,16 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
                   </div>
                   <p className="mt-2 font-medium text-foreground">{request.title}</p>
                   {request.description && <p className="mt-2 text-sm text-foreground-secondary">{request.description}</p>}
+                  <form action={resolveClientRequest} className="mt-4 space-y-3">
+                    <input type="hidden" name="request_id" value={request.id} />
+                    <textarea
+                      name="admin_note"
+                      rows={3}
+                      placeholder="Nota admin / esito della richiesta"
+                      className="w-full rounded-2xl border border-surface-border bg-white px-4 py-3 text-sm"
+                    />
+                    <Button size="sm" variant="secondary">Segna come risolta</Button>
+                  </form>
                 </div>
               ))}
               {snapshot.openRequests.length === 0 && (

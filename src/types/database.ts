@@ -118,6 +118,19 @@ export interface ClientRequest {
   title: string
   description: string | null
   status: ClientRequestStatus
+  admin_note: string | null
+  resolved_at: string | null
   created_at: string
   updated_at: string
+}
+
+export interface ClientAsset {
+  id: string
+  user_id: string
+  source: string
+  asset_type: string
+  title: string | null
+  url: string | null
+  metadata: Record<string, unknown>
+  created_at: string
 }

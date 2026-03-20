@@ -5,6 +5,7 @@ import type {
   ClientStep,
   ClientTask,
   ClientWorkspace,
+  ClientAsset,
   Profile,
   Resource,
 } from '@/types/database'
@@ -140,6 +141,7 @@ export type PortalSnapshot = {
   automations: AutomationRun[]
   requests: ClientRequest[]
   resources: Resource[]
+  assets: ClientAsset[]
 }
 
 export async function provisionPortalForUser(supabase: Awaited<ReturnType<typeof createClient>> | ReturnType<typeof createServiceClient>, userId: string, seed?: PortalSeed) {
@@ -278,6 +280,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     { data: automations },
     { data: requests },
     { data: resources },
+    { data: assets },
   ] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', userId).maybeSingle(),
     supabase.from('client_workspaces').select('*').eq('user_id', userId).maybeSingle(),
@@ -286,6 +289,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     supabase.from('automation_runs').select('*').eq('user_id', userId).order('created_at'),
     supabase.from('client_requests').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
     supabase.from('resources').select('*').eq('is_active', true).order('sort_order'),
+    supabase.from('client_assets').select('*').eq('user_id', userId).order('created_at', { ascending: false }),
   ])
 
   return {
@@ -296,6 +300,7 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
     automations: (automations as AutomationRun[]) ?? [],
     requests: (requests as ClientRequest[]) ?? [],
     resources: (resources as Resource[]) ?? [],
+    assets: (assets as ClientAsset[]) ?? [],
   }
 }
 
