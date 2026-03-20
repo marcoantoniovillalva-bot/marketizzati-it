@@ -314,7 +314,19 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
 }
 
 export type AdminSnapshot = {
-  clients: Array<Profile & { workspace: ClientWorkspace | null }>
+  clients: Array<
+    Profile & {
+      workspace: ClientWorkspace | null
+      completedSteps: number
+      totalSteps: number
+      completedTasks: number
+      totalTasks: number
+      openRequests: number
+      activeStepTitle: string | null
+      automations: number
+      lastActivity: string | null
+    }
+  >
   openRequests: ClientRequest[]
   resources: Resource[]
   resourceAssignments: Array<{
@@ -392,6 +404,9 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     { count: totalTasks },
     { count: completedTasks },
     { data: automationRuns },
+    { data: allSteps },
+    { data: allTasks },
+    { data: allRequests },
   ] = await Promise.all([
     service.from('profiles').select('*').order('created_at', { ascending: false }),
     service.from('client_workspaces').select('*'),
@@ -402,17 +417,60 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     service.from('client_tasks').select('id', { count: 'exact', head: true }),
     service.from('client_tasks').select('id', { count: 'exact', head: true }).eq('completed', true),
     service.from('automation_runs').select('*').order('updated_at', { ascending: false }).limit(12),
+    service.from('client_steps').select('*').order('sort_order'),
+    service.from('client_tasks').select('*'),
+    service.from('client_requests').select('*'),
   ])
 
   const workspaceMap = new Map((workspaces ?? []).map((workspace) => [workspace.user_id, workspace]))
+  const stepsByUser = new Map<string, ClientStep[]>()
+  const tasksByUser = new Map<string, ClientTask[]>()
+  const requestsByUser = new Map<string, ClientRequest[]>()
 
+  ;((allSteps as ClientStep[]) ?? []).forEach((step) => {
+    const collection = stepsByUser.get(step.user_id) || []
+    collection.push(step)
+    stepsByUser.set(step.user_id, collection)
+  })
+
+  ;((allTasks as ClientTask[]) ?? []).forEach((task) => {
+    const collection = tasksByUser.get(task.user_id) || []
+    collection.push(task)
+    tasksByUser.set(task.user_id, collection)
+  })
+
+  ;((allRequests as ClientRequest[]) ?? []).forEach((request) => {
+    const collection = requestsByUser.get(request.user_id) || []
+    collection.push(request)
+    requestsByUser.set(request.user_id, collection)
+  })
+
+  const typedAutomations = (automationRuns as AutomationRun[]) ?? []
   const clients = ((profiles ?? []) as Profile[]).map((profile) => ({
     ...profile,
     workspace: (workspaceMap.get(profile.id) as ClientWorkspace | null) ?? null,
+    completedSteps: (stepsByUser.get(profile.id) || []).filter((step) => step.status === 'completed').length,
+    totalSteps: (stepsByUser.get(profile.id) || []).length,
+    completedTasks: (tasksByUser.get(profile.id) || []).filter((task) => task.completed).length,
+    totalTasks: (tasksByUser.get(profile.id) || []).length,
+    openRequests: (requestsByUser.get(profile.id) || []).filter((request) => request.status !== 'resolved').length,
+    activeStepTitle:
+      (stepsByUser.get(profile.id) || []).find((step) => step.status === 'in_progress')?.title || null,
+    automations: typedAutomations.filter((automation) => automation.user_id === profile.id).length,
+    lastActivity:
+      [
+        profile.updated_at,
+        (workspaceMap.get(profile.id) as ClientWorkspace | null)?.updated_at || null,
+        ...(stepsByUser.get(profile.id) || []).map((step) => step.updated_at),
+        ...(tasksByUser.get(profile.id) || []).map((task) => task.updated_at),
+        ...(requestsByUser.get(profile.id) || []).map((request) => request.updated_at),
+      ]
+        .filter(Boolean)
+        .sort()
+        .at(-1) || null,
   }))
 
   const profileMap = new Map(clients.map((profile) => [profile.id, profile]))
-  const typedAutomations = (automationRuns as AutomationRun[]) ?? []
   const now = Date.now()
 
   const automationHealth = {

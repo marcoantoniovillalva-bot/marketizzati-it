@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import { Link, usePathname } from '@/i18n/navigation'
-import { BookOpen, Bot, BriefcaseBusiness, LayoutDashboard, LifeBuoy, Menu, Settings2, Shield, Sparkles, User, X } from 'lucide-react'
+import { signout } from '@/actions/auth'
+import { BookOpen, Bot, BriefcaseBusiness, LayoutDashboard, LifeBuoy, LogOut, Menu, Settings2, Shield, Sparkles, User, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 type PortalMobileNavProps = {
   role?: 'client' | 'admin'
@@ -77,6 +79,12 @@ export function PortalMobileNav({ role = 'client' }: PortalMobileNavProps) {
                 </div>
               </Link>
             )}
+            <form action={signout} className="col-span-2">
+              <Button type="submit" variant="outline" className="w-full justify-center">
+                <LogOut size={16} />
+                Esci
+              </Button>
+            </form>
           </div>
         </div>
       )}

@@ -4,7 +4,7 @@ import type { AutomationRun } from '@/types/database'
 import { triggerAutomationRun } from '@/actions/portal'
 import { Bot, CalendarClock, PauseCircle, PlayCircle, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 
 type AutomationPanelProps = {
   automations: AutomationRun[]
@@ -12,6 +12,8 @@ type AutomationPanelProps = {
 
 export function AutomationPanel({ automations }: AutomationPanelProps) {
   const [isPending, startTransition] = useTransition()
+  const [feedback, setFeedback] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   return (
     <div className="grid gap-4">
@@ -47,7 +49,14 @@ export function AutomationPanel({ automations }: AutomationPanelProps) {
                   isLoading={isPending}
                   onClick={() =>
                     startTransition(async () => {
-                      await triggerAutomationRun(automation.id)
+                      setFeedback(null)
+                      setError(null)
+                      const result = await triggerAutomationRun(automation.id)
+                      if (result?.error) {
+                        setError(result.error)
+                      } else {
+                        setFeedback(result?.message || 'Automazione eseguita.')
+                      }
                     })
                   }
                 >
@@ -68,6 +77,8 @@ export function AutomationPanel({ automations }: AutomationPanelProps) {
           <p className="mt-2">Quando configuriamo i tuoi workflow, li vedrai qui con stato e prossima esecuzione.</p>
         </div>
       )}
+      {feedback && <p className="text-sm text-success">{feedback}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   )
 }

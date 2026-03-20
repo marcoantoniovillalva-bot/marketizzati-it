@@ -2,6 +2,7 @@
 
 import { usePathname } from '@/i18n/navigation'
 import { Link } from '@/i18n/navigation'
+import { signout } from '@/actions/auth'
 import {
   Bot,
   BriefcaseBusiness,
@@ -14,7 +15,9 @@ import {
   BookOpen,
   User,
   Wrench,
+  LogOut,
 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 type PortalSidebarProps = {
   role?: 'client' | 'admin'
@@ -95,6 +98,15 @@ export function PortalSidebar({ role = 'client' }: PortalSidebarProps) {
           </Link>
         </div>
       )}
+
+      <div className="px-4 pb-4">
+        <form action={signout}>
+          <Button type="submit" variant="outline" className="w-full justify-start">
+            <LogOut size={18} />
+            Esci
+          </Button>
+        </form>
+      </div>
 
       <div className="border-t border-surface-border px-6 py-5">
         <div className="flex items-start gap-3 text-sm text-foreground-secondary">

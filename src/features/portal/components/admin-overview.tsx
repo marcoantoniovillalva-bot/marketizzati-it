@@ -166,21 +166,50 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
           <div className="rounded-[30px] border border-surface-border bg-white p-6">
             <div className="flex items-center gap-3">
               <Users size={18} className="text-accent" />
-              <h3 className="font-heading text-2xl text-foreground">Clienti recenti</h3>
+              <h3 className="font-heading text-2xl text-foreground">Clienti e stato operativo</h3>
             </div>
             <div className="mt-5 space-y-3">
-              {snapshot.clients.slice(0, 6).map((client) => (
+              {snapshot.clients.slice(0, 8).map((client) => (
                 <div key={client.id} className="rounded-2xl bg-background p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="font-medium text-foreground">{client.full_name || 'Cliente senza nome'}</p>
-                      <p className="text-sm text-foreground-secondary">
-                        {client.workspace?.business_name || 'Business non definito'}
-                      </p>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="font-medium text-foreground">{client.full_name || 'Cliente senza nome'}</p>
+                        <p className="text-sm text-foreground-secondary">
+                          {client.workspace?.business_name || 'Business non definito'}
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+                        {client.role}
+                      </span>
                     </div>
-                    <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-                      {client.role}
-                    </span>
+
+                    <div className="grid gap-3 md:grid-cols-4">
+                      <div className="rounded-2xl bg-white px-3 py-3">
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-foreground-muted">Fase attiva</p>
+                        <p className="mt-1 text-sm font-medium text-foreground">{client.activeStepTitle || 'Non avviata'}</p>
+                      </div>
+                      <div className="rounded-2xl bg-white px-3 py-3">
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-foreground-muted">Task</p>
+                        <p className="mt-1 text-sm font-medium text-foreground">{client.completedTasks}/{client.totalTasks || 0}</p>
+                      </div>
+                      <div className="rounded-2xl bg-white px-3 py-3">
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-foreground-muted">Fasi chiuse</p>
+                        <p className="mt-1 text-sm font-medium text-foreground">{client.completedSteps}/{client.totalSteps || 0}</p>
+                      </div>
+                      <div className="rounded-2xl bg-white px-3 py-3">
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-foreground-muted">Richieste aperte</p>
+                        <p className="mt-1 text-sm font-medium text-foreground">{client.openRequests}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-4 text-xs text-foreground-muted">
+                      <span>Canale: {client.workspace?.primary_channel || 'Non definito'}</span>
+                      <span>Automazioni: {client.automations}</span>
+                      <span>
+                        Ultima attivita: {client.lastActivity ? new Date(client.lastActivity).toLocaleString('it-IT') : 'n/d'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -227,8 +256,8 @@ export function AdminOverview({ snapshot }: AdminOverviewProps) {
               <h3 className="font-heading text-2xl text-foreground">Direzione consigliata</h3>
             </div>
             <p className="mt-4 text-sm text-foreground-secondary">
-              Usa ProspectBot per trovare e preparare i lead. Usa Marketizzati per trasformarli in clienti gestiti,
-              accompagnati e automatizzati nel percorso Z-START.
+              L’admin non deve usare il portale come il cliente. Deve usarlo per leggere stato per utente, sbloccare risorse,
+              chiudere richieste, convertire lead e attivare automazioni quando serve.
             </p>
           </div>
         </div>

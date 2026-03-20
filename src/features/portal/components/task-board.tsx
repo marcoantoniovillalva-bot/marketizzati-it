@@ -1,9 +1,11 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { toggleTask } from '@/actions/portal'
+import { Link } from '@/i18n/navigation'
 import type { ClientTask } from '@/types/database'
-import { CheckCircle2, Circle, Cpu, TimerReset } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ArrowRight, CheckCircle2, Circle, Cpu, TimerReset } from 'lucide-react'
 
 type TaskBoardProps = {
   tasks: ClientTask[]
@@ -11,18 +13,30 @@ type TaskBoardProps = {
 
 export function TaskBoard({ tasks }: TaskBoardProps) {
   const [isPending, startTransition] = useTransition()
+  const [feedback, setFeedback] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  function getTaskHref(stepCode: string | null) {
+    switch (stepCode) {
+      case 'zero-point':
+      case 'strategy':
+        return '/workspace'
+      case 'technology':
+        return '/workspace'
+      case 'activation':
+      case 'results':
+      case 'transformation':
+        return '/percorso'
+      default:
+        return '/dashboard'
+    }
+  }
 
   return (
     <div className="space-y-3">
       {tasks.map((task) => (
-        <button
+        <div
           key={task.id}
-          type="button"
-          onClick={() =>
-            startTransition(async () => {
-              await toggleTask(task.id, !task.completed)
-            })
-          }
           className={`w-full rounded-[24px] border p-5 text-left transition-all ${
             task.completed ? 'border-success/30 bg-success/5' : 'border-surface-border bg-white hover:border-accent/30'
           }`}
@@ -52,11 +66,42 @@ export function TaskBoard({ tasks }: TaskBoardProps) {
                   {task.due_label}
                 </div>
               )}
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <Link
+                  href={getTaskHref(task.step_code)}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-accent"
+                >
+                  Vai al punto operativo
+                  <ArrowRight size={14} />
+                </Link>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={task.completed ? 'outline' : 'secondary'}
+                  isLoading={isPending}
+                  onClick={() =>
+                    startTransition(async () => {
+                      setFeedback(null)
+                      setError(null)
+                      const result = await toggleTask(task.id, !task.completed)
+                      if (result?.error) {
+                        setError(result.error)
+                      } else {
+                        setFeedback(result?.message || 'Task aggiornato.')
+                      }
+                    })
+                  }
+                >
+                  {task.completed ? 'Riapri task' : 'Segna completato'}
+                </Button>
+              </div>
             </div>
           </div>
-        </button>
+        </div>
       ))}
       {isPending && <p className="text-sm text-foreground-muted">Aggiornamento in corso...</p>}
+      {feedback && <p className="text-sm text-success">{feedback}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   )
 }

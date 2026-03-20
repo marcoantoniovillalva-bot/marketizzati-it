@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { updateStepProgress } from '@/actions/portal'
+import { moveStepProgress } from '@/actions/portal'
 import type { ClientStep } from '@/types/database'
 import { Button } from '@/components/ui/button'
-import { CheckCircle2, CircleDot, Lock, TrendingUp } from 'lucide-react'
+import { ArrowLeft, CheckCircle2, CircleDot, Lock, TrendingDown, TrendingUp } from 'lucide-react'
 
 type StepRoadmapProps = {
   steps: ClientStep[]
@@ -13,12 +13,19 @@ type StepRoadmapProps = {
 
 export function StepRoadmap({ steps, interactive = false }: StepRoadmapProps) {
   const [pendingId, setPendingId] = useState<string | null>(null)
+  const [feedback, setFeedback] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  async function handleAdvance(step: ClientStep) {
-    const nextProgress = step.progress >= 100 ? 100 : Math.min(step.progress + 20, 100)
-    const nextStatus = nextProgress >= 100 ? 'completed' : 'in_progress'
+  async function handleMove(step: ClientStep, direction: 'forward' | 'backward') {
     setPendingId(step.id)
-    await updateStepProgress(step.id, nextProgress, nextStatus)
+    setFeedback(null)
+    setError(null)
+    const result = await moveStepProgress(step.id, direction)
+    if (result?.error) {
+      setError(result.error)
+    } else {
+      setFeedback(result?.message || 'Fase aggiornata.')
+    }
     setPendingId(null)
   }
 
@@ -75,20 +82,35 @@ export function StepRoadmap({ steps, interactive = false }: StepRoadmapProps) {
               </div>
 
               {interactive && (
-                <Button
-                  variant={complete ? 'secondary' : 'primary'}
-                  size="sm"
-                  isLoading={pendingId === step.id}
-                  leftIcon={<TrendingUp size={16} />}
-                  onClick={() => handleAdvance(step)}
-                >
-                  {complete ? 'Gia completato' : 'Avanza fase'}
-                </Button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    isLoading={pendingId === step.id}
+                    leftIcon={<ArrowLeft size={16} />}
+                    onClick={() => handleMove(step, 'backward')}
+                    disabled={step.progress === 0}
+                  >
+                    Torna indietro
+                  </Button>
+                  <Button
+                    variant={complete ? 'secondary' : 'primary'}
+                    size="sm"
+                    isLoading={pendingId === step.id}
+                    leftIcon={complete ? <TrendingDown size={16} /> : <TrendingUp size={16} />}
+                    onClick={() => handleMove(step, 'forward')}
+                    disabled={step.progress >= 100}
+                  >
+                    {complete ? 'Fase completa' : 'Avanza fase'}
+                  </Button>
+                </div>
               )}
             </div>
           </div>
         )
       })}
+      {feedback && <p className="text-sm text-success">{feedback}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   )
 }
