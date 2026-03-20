@@ -27,5 +27,5 @@ export function isValidResourceShareToken(resourceId: string, token: string) {
 export function getResourceShareUrl(resourceId: string) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://marketizzati.it'
   const token = createResourceShareToken(resourceId)
-  return `${siteUrl}/condividi/risorsa/${resourceId}/${token}`
+  return `${siteUrl}/it/condividi/risorsa/${resourceId}/${token}`
 }

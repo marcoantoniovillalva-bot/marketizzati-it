@@ -271,6 +271,36 @@ export async function createOrUpdateResource(formData: FormData) {
   revalidatePath('/', 'layout')
 }
 
+export async function deleteResource(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const resourceId = formData.get('resource_id') as string
+
+  if (!resourceId) {
+    throw new Error('Risorsa non valida')
+  }
+
+  const { error: assignmentError } = await service
+    .from('resource_assignments')
+    .delete()
+    .eq('resource_id', resourceId)
+
+  if (assignmentError) {
+    throw new Error(assignmentError.message)
+  }
+
+  const { error } = await service
+    .from('resources')
+    .delete()
+    .eq('id', resourceId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
 export async function assignResourceToEmail(formData: FormData) {
   await ensureAdmin()
   const service = createServiceClient()

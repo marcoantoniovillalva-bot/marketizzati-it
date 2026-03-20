@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { assignResourceToEmail, createOrUpdateResource } from '@/actions/admin'
+import { assignResourceToEmail, createOrUpdateResource, deleteResource } from '@/actions/admin'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
 
@@ -153,9 +153,18 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                     </div>
                   </div>
                   <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <Button type="button" size="sm" variant="secondary" onClick={() => setEditingId(resource.id)}>
+                      Modifica
+                    </Button>
                     <Button type="button" size="sm" variant="outline" onClick={() => copyShareLink(resource.shareUrl, resource.id)}>
                       Copia link condivisibile
                     </Button>
+                    <form action={deleteResource}>
+                      <input type="hidden" name="resource_id" value={resource.id} />
+                      <Button type="submit" size="sm" variant="danger">
+                        Elimina
+                      </Button>
+                    </form>
                     {copiedId === resource.id && (
                       <span className="text-xs font-medium text-accent">Link copiato</span>
                     )}
