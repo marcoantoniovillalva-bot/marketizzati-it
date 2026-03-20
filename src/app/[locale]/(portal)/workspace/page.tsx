@@ -1,4 +1,4 @@
-import { WorkspaceForm } from '@/features/portal/components'
+import { WorkspaceAssets, WorkspaceForm } from '@/features/portal/components'
 import { getPortalSnapshot } from '@/features/portal/lib/portal-data'
 
 export default async function WorkspacePage() {
@@ -40,6 +40,8 @@ export default async function WorkspacePage() {
           </div>
         </div>
       </div>
+
+      <WorkspaceAssets assets={snapshot.assets} />
     </div>
   )
 }

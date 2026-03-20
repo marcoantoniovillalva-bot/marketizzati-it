@@ -105,3 +105,27 @@ export async function createClientRequest(formData: FormData) {
   revalidatePath('/', 'layout')
   return { success: true }
 }
+
+export async function triggerAutomationRun(automationId: string) {
+  const { supabase, user } = await getAuthenticatedUser()
+  const now = new Date()
+
+  const { error } = await supabase
+    .from('automation_runs')
+    .update({
+      status: 'active',
+      last_run_at: now.toISOString(),
+      next_run_at: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      summary: 'Eseguita manualmente dal portale cliente. Il prossimo check e gia stato pianificato.',
+      updated_at: now.toISOString(),
+    })
+    .eq('id', automationId)
+    .eq('user_id', user.id)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/', 'layout')
+  return { success: true }
+}

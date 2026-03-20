@@ -1,11 +1,18 @@
+'use client'
+
 import type { AutomationRun } from '@/types/database'
+import { triggerAutomationRun } from '@/actions/portal'
 import { Bot, CalendarClock, PauseCircle, PlayCircle, Sparkles } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useTransition } from 'react'
 
 type AutomationPanelProps = {
   automations: AutomationRun[]
 }
 
 export function AutomationPanel({ automations }: AutomationPanelProps) {
+  const [isPending, startTransition] = useTransition()
+
   return (
     <div className="grid gap-4">
       {automations.map((automation) => (
@@ -33,6 +40,20 @@ export function AutomationPanel({ automations }: AutomationPanelProps) {
               <p className="mt-2 font-medium text-foreground">
                 {automation.next_run_at ? new Date(automation.next_run_at).toLocaleString('it-IT') : 'Da schedulare'}
               </p>
+              <div className="mt-4">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  isLoading={isPending}
+                  onClick={() =>
+                    startTransition(async () => {
+                      await triggerAutomationRun(automation.id)
+                    })
+                  }
+                >
+                  Esegui ora
+                </Button>
+              </div>
             </div>
           </div>
         </div>

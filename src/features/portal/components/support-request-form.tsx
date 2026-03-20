@@ -79,7 +79,7 @@ export function SupportRequestForm({ requests }: SupportRequestFormProps) {
 
       <div className="rounded-[28px] border border-surface-border bg-white p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground-muted">Inbox operativa</p>
-        <h3 className="mt-3 font-heading text-2xl text-foreground">Richieste aperte</h3>
+        <h3 className="mt-3 font-heading text-2xl text-foreground">Storico richieste</h3>
         <div className="mt-5 space-y-3">
           {requests.length > 0 ? (
             requests.map((request) => (
@@ -91,6 +91,12 @@ export function SupportRequestForm({ requests }: SupportRequestFormProps) {
                   </span>
                 </div>
                 {request.description && <p className="mt-2 text-sm text-foreground-secondary">{request.description}</p>}
+                {request.admin_note && (
+                  <div className="mt-3 rounded-2xl border border-accent/20 bg-white px-4 py-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Risposta admin</p>
+                    <p className="mt-2 text-sm text-foreground-secondary">{request.admin_note}</p>
+                  </div>
+                )}
               </div>
             ))
           ) : (
