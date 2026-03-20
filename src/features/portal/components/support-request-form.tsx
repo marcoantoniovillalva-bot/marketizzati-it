@@ -12,20 +12,26 @@ type SupportRequestFormProps = {
 export function SupportRequestForm({ requests }: SupportRequestFormProps) {
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   async function handleSubmit(formData: FormData) {
     setLoading(true)
     setSaved(false)
+    setError(null)
     const result = await createClientRequest(formData)
-    if (!result?.error) {
+    if (result?.error) {
+      setError(result.error)
+    } else {
       setSaved(true)
+      const form = document.getElementById('support-request-form') as HTMLFormElement | null
+      form?.reset()
     }
     setLoading(false)
   }
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <form action={handleSubmit} className="rounded-[28px] border border-surface-border bg-white p-6">
+      <form id="support-request-form" action={handleSubmit} className="rounded-[28px] border border-surface-border bg-white p-6">
         <div className="grid gap-5">
           <div>
             <label htmlFor="type" className="mb-1.5 block text-sm font-medium text-foreground">
@@ -74,6 +80,7 @@ export function SupportRequestForm({ requests }: SupportRequestFormProps) {
             </Button>
             {saved && <span className="text-sm text-success">Richiesta inviata.</span>}
           </div>
+          {error && <p className="text-sm text-red-500">{error}</p>}
         </div>
       </form>
 
@@ -96,6 +103,11 @@ export function SupportRequestForm({ requests }: SupportRequestFormProps) {
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Risposta admin</p>
                     <p className="mt-2 text-sm text-foreground-secondary">{request.admin_note}</p>
                   </div>
+                )}
+                {request.resolved_at && (
+                  <p className="mt-3 text-xs text-foreground-muted">
+                    Chiuso il {new Date(request.resolved_at).toLocaleString('it-IT')}
+                  </p>
                 )}
               </div>
             ))

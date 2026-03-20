@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Link, usePathname } from '@/i18n/navigation'
-import { Bot, BriefcaseBusiness, LayoutDashboard, LifeBuoy, Menu, Shield, Sparkles, X } from 'lucide-react'
+import { BookOpen, Bot, BriefcaseBusiness, LayoutDashboard, LifeBuoy, Menu, Settings2, Shield, Sparkles, User, X } from 'lucide-react'
 
 type PortalMobileNavProps = {
   role?: 'client' | 'admin'
@@ -12,8 +12,11 @@ const items = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/percorso', label: 'Percorso', icon: Sparkles },
   { href: '/workspace', label: 'Workspace', icon: BriefcaseBusiness },
+  { href: '/task', label: 'Task', icon: Settings2 },
+  { href: '/risorse', label: 'Risorse', icon: BookOpen },
   { href: '/automazioni', label: 'Auto', icon: Bot },
   { href: '/supporto', label: 'Supporto', icon: LifeBuoy },
+  { href: '/profilo', label: 'Profilo', icon: User },
 ] as const
 
 export function PortalMobileNav({ role = 'client' }: PortalMobileNavProps) {

@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo, useState } from 'react'
 import { assignResourceToEmail, createOrUpdateResource } from '@/actions/admin'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
@@ -9,33 +10,97 @@ type AdminResourceManagerProps = {
 }
 
 export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
+  const [editingId, setEditingId] = useState<string>('new')
+  const editingResource = useMemo(
+    () => snapshot.resources.find((resource) => resource.id === editingId) || null,
+    [editingId, snapshot.resources]
+  )
+
   return (
     <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
       <div className="rounded-[30px] border border-surface-border bg-white p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground-muted">Nuova risorsa</p>
-        <h3 className="mt-3 font-heading text-2xl text-foreground">Aggiungi o espandi la libreria</h3>
+        <h3 className="mt-3 font-heading text-2xl text-foreground">
+          {editingResource ? `Modifica ${editingResource.title}` : 'Aggiungi o espandi la libreria'}
+        </h3>
         <form action={createOrUpdateResource} className="mt-5 space-y-4">
-          <input name="title" required placeholder="Titolo" className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3" />
-          <textarea name="description" placeholder="Descrizione" rows={4} className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3" />
+          <input type="hidden" name="resource_id" value={editingResource?.id || ''} />
+          <div className="grid gap-4 md:grid-cols-[1fr_auto]">
+            <select
+              value={editingId}
+              onChange={(event) => setEditingId(event.target.value)}
+              className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+            >
+              <option value="new">Nuova risorsa</option>
+              {snapshot.resources.map((resource) => (
+                <option key={resource.id} value={resource.id}>
+                  {resource.title}
+                </option>
+              ))}
+            </select>
+            {editingResource && (
+              <Button type="button" variant="ghost" onClick={() => setEditingId('new')}>
+                Reset
+              </Button>
+            )}
+          </div>
+          <input
+            name="title"
+            required
+            defaultValue={editingResource?.title || ''}
+            placeholder="Titolo"
+            className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+          />
+          <textarea
+            name="description"
+            defaultValue={editingResource?.description || ''}
+            placeholder="Descrizione"
+            rows={4}
+            className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+          />
           <div className="grid gap-4 md:grid-cols-2">
-            <select name="type" defaultValue="guide" className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3">
+            <select name="type" defaultValue={editingResource?.type || 'guide'} className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3">
               <option value="guide">Guide</option>
               <option value="template">Template</option>
               <option value="video">Video</option>
               <option value="pdf">PDF</option>
             </select>
-            <input name="sort_order" type="number" defaultValue={snapshot.resources.length + 1} className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3" />
+            <input
+              name="sort_order"
+              type="number"
+              defaultValue={editingResource?.sort_order || snapshot.resources.length + 1}
+              className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+            />
           </div>
-          <input name="embed_url" placeholder="Embed URL (Gamma, Loom, ecc.)" className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3" />
-          <input name="file_url" placeholder="File URL opzionale" className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3" />
+          <input
+            name="embed_url"
+            defaultValue={editingResource?.embed_url || ''}
+            placeholder="Embed URL (Gamma, Loom, ecc.)"
+            className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+          />
+          <input
+            name="file_url"
+            defaultValue={editingResource?.file_url || ''}
+            placeholder="File URL opzionale"
+            className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+          />
           <div className="grid gap-4 md:grid-cols-2">
-            <input name="unlock_step_code" placeholder="unlock step code es. strategy" className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3" />
+            <input
+              name="unlock_step_code"
+              defaultValue={editingResource?.unlock_step_code || ''}
+              placeholder="unlock step code es. strategy"
+              className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+            />
             <label className="flex items-center gap-3 rounded-2xl border border-surface-border bg-surface px-4 py-3 text-sm">
-              <input type="checkbox" name="is_premium" />
+              <input type="checkbox" name="is_premium" defaultChecked={editingResource?.is_premium || false} />
               Risorsa premium / sbloccabile
             </label>
           </div>
-          <Button type="submit">Salva risorsa</Button>
+          <label className="flex items-center gap-3 rounded-2xl border border-surface-border bg-surface px-4 py-3 text-sm">
+            <input type="checkbox" name="is_active" defaultChecked={editingResource ? editingResource.is_active : true} />
+            Risorsa attiva
+          </label>
+          <Button type="submit">{editingResource ? 'Aggiorna risorsa' : 'Salva risorsa'}</Button>
         </form>
       </div>
 

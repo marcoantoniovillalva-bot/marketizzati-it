@@ -10,15 +10,23 @@ interface ResourceCardProps {
   premium?: boolean
   unlockStepCode?: string | null
   onView?: () => void
+  fileUrl?: string | null
 }
 
-export function ResourceCard({ title, description, type, premium = false, unlockStepCode, onView }: ResourceCardProps) {
+export function ResourceCard({ title, description, type, premium = false, unlockStepCode, onView, fileUrl }: ResourceCardProps) {
   const t = useTranslations('portal.resources')
+  const clickable = Boolean(onView || fileUrl)
 
   return (
     <div
-      className="bg-surface-elevated border border-surface-border rounded-xl p-6 flex items-start gap-4 hover:border-accent/30 transition-all cursor-pointer group"
-      onClick={onView}
+      className={`bg-surface-elevated border border-surface-border rounded-xl p-6 flex items-start gap-4 transition-all group ${clickable ? 'cursor-pointer hover:border-accent/30' : ''}`}
+      onClick={() => {
+        if (onView) {
+          onView()
+        } else if (fileUrl) {
+          window.open(fileUrl, '_blank', 'noopener,noreferrer')
+        }
+      }}
     >
       <div className="shrink-0 w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
         <Presentation size={24} className="text-accent" />
@@ -39,8 +47,8 @@ export function ResourceCard({ title, description, type, premium = false, unlock
           )}
         </div>
       </div>
-      <div className="shrink-0 p-2 rounded-lg group-hover:bg-accent/10 transition-colors text-foreground-muted group-hover:text-accent">
-        {onView ? <Eye size={20} /> : <Lock size={20} />}
+      <div className="shrink-0 p-2 rounded-lg transition-colors text-foreground-muted group-hover:bg-accent/10 group-hover:text-accent">
+        {clickable ? <Eye size={20} /> : <Lock size={20} />}
       </div>
     </div>
   )

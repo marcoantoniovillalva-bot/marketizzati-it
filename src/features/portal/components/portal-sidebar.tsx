@@ -11,6 +11,7 @@ import {
   Settings2,
   Shield,
   Sparkles,
+  BookOpen,
   User,
   Wrench,
 } from 'lucide-react'
@@ -24,6 +25,7 @@ const clientNavItems = [
   { href: '/percorso', label: 'Percorso Z-START', icon: Sparkles },
   { href: '/workspace', label: 'Workspace', icon: BriefcaseBusiness },
   { href: '/task', label: 'Task & deliverable', icon: Settings2 },
+  { href: '/risorse', label: 'Risorse', icon: BookOpen },
   { href: '/automazioni', label: 'Automazioni', icon: Bot },
   { href: '/supporto', label: 'Supporto', icon: LifeBuoy },
   { href: '/profilo', label: 'Profilo', icon: User },

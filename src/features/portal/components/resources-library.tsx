@@ -23,6 +23,7 @@ export function ResourcesLibrary({ resources }: ResourcesLibraryProps) {
           type={resource.type}
           premium={resource.is_premium}
           unlockStepCode={resource.unlock_step_code}
+          fileUrl={resource.file_url}
           onView={resource.embed_url ? () => setViewingId(resource.id) : undefined}
         />
       ))}

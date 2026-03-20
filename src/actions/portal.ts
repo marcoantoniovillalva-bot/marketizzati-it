@@ -107,6 +107,48 @@ export async function createClientRequest(formData: FormData) {
   return { success: true }
 }
 
+export async function createWorkspaceAsset(formData: FormData) {
+  const { supabase, user } = await getAuthenticatedUser()
+
+  const payload = {
+    user_id: user.id,
+    source: 'manual',
+    asset_type: (formData.get('asset_type') as string) || 'reference',
+    title: (formData.get('title') as string) || null,
+    url: (formData.get('url') as string) || null,
+    metadata: {
+      note: (formData.get('note') as string) || null,
+    },
+  }
+
+  const { error } = await supabase.from('client_assets').insert(payload)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/', 'layout')
+  return { success: true }
+}
+
+export async function removeWorkspaceAsset(assetId: string) {
+  const { supabase, user } = await getAuthenticatedUser()
+
+  const { error } = await supabase
+    .from('client_assets')
+    .delete()
+    .eq('id', assetId)
+    .eq('user_id', user.id)
+    .eq('source', 'manual')
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/', 'layout')
+  return { success: true }
+}
+
 export async function triggerAutomationRun(automationId: string) {
   const { supabase, user } = await getAuthenticatedUser()
   const { data: automation, error } = await supabase
