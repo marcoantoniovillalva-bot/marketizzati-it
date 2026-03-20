@@ -377,6 +377,13 @@ export type AdminClientSnapshot = {
       unlockedBy: 'step' | 'manual' | 'always-on' | null
     }
   >
+  timeline: Array<{
+    id: string
+    timestamp: string
+    type: 'workspace' | 'step' | 'task' | 'request' | 'automation' | 'asset' | 'resource'
+    title: string
+    detail: string
+  }>
 }
 
 export async function getAdminSnapshot(): Promise<AdminSnapshot> {
@@ -657,6 +664,72 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
     }
   })
 
+  const timeline = [
+    workspace
+      ? {
+          id: `workspace-${workspace.id}`,
+          timestamp: workspace.updated_at,
+          type: 'workspace' as const,
+          title: 'Workspace aggiornato',
+          detail: workspace.current_stage || workspace.main_goal || 'Aggiornamento generale del profilo cliente',
+        }
+      : null,
+    ...(((steps as ClientStep[]) ?? []).map((step) => ({
+      id: `step-${step.id}`,
+      timestamp: step.updated_at,
+      type: 'step' as const,
+      title: `${step.title}: ${step.status}`,
+      detail: `${step.progress}% completato`,
+    })) ?? []),
+    ...(((tasks as ClientTask[]) ?? []).map((task) => ({
+      id: `task-${task.id}`,
+      timestamp: task.updated_at,
+      type: 'task' as const,
+      title: task.completed ? `Task completata: ${task.title}` : `Task aperta: ${task.title}`,
+      detail: task.due_label || task.step_code || 'Task operativa',
+    })) ?? []),
+    ...(((requests as ClientRequest[]) ?? []).map((request) => ({
+      id: `request-${request.id}`,
+      timestamp: request.updated_at,
+      type: 'request' as const,
+      title: `Richiesta ${request.status}: ${request.title}`,
+      detail: request.admin_note || request.description || 'Richiesta cliente',
+    })) ?? []),
+    ...(((automations as AutomationRun[]) ?? []).map((automation) => ({
+      id: `automation-${automation.id}`,
+      timestamp: automation.updated_at,
+      type: 'automation' as const,
+      title: `${automation.title} (${automation.status})`,
+      detail: automation.last_run_at
+        ? `Ultima esecuzione ${new Date(automation.last_run_at).toLocaleString('it-IT')}`
+        : 'Mai eseguita',
+    })) ?? []),
+    ...(((assets as ClientAsset[]) ?? []).map((asset) => ({
+      id: `asset-${asset.id}`,
+      timestamp: asset.created_at,
+      type: 'asset' as const,
+      title: `Asset aggiunto: ${asset.title || asset.asset_type}`,
+      detail: asset.source || asset.asset_type,
+    })) ?? []),
+    ...decoratedResources
+      .filter((resource) => resource.unlocked)
+      .map((resource) => ({
+        id: `resource-${resource.id}`,
+        timestamp: resource.created_at,
+        type: 'resource' as const,
+        title: `Risorsa disponibile: ${resource.title}`,
+        detail:
+          resource.unlockedBy === 'manual'
+            ? 'Sbloccata manualmente da admin'
+            : resource.unlockedBy === 'step'
+              ? 'Sbloccata dal completamento di una fase'
+              : 'Disponibile di default',
+      })),
+  ]
+    .filter((event): event is NonNullable<typeof event> => Boolean(event?.timestamp))
+    .sort((left, right) => new Date(right.timestamp).getTime() - new Date(left.timestamp).getTime())
+    .slice(0, 24)
+
   return {
     profile: profile as Profile,
     workspace: (workspace as ClientWorkspace | null) ?? null,
@@ -666,5 +739,6 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
     assets: (assets as ClientAsset[]) ?? [],
     automations: (automations as AutomationRun[]) ?? [],
     resources: decoratedResources,
+    timeline,
   }
 }

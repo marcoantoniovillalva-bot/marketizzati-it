@@ -309,6 +309,83 @@ export async function assignResourceToEmail(formData: FormData) {
   revalidatePath('/', 'layout')
 }
 
+export async function assignResourceToUser(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const userId = formData.get('user_id') as string
+  const resourceId = formData.get('resource_id') as string
+
+  if (!userId || !resourceId) {
+    throw new Error('Utente o risorsa mancanti')
+  }
+
+  const { error } = await service.from('resource_assignments').upsert({
+    user_id: userId,
+    resource_id: resourceId,
+    unlocked_by: 'admin-user',
+  })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
+export async function updateClientWorkspaceState(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const userId = formData.get('user_id') as string
+
+  if (!userId) {
+    throw new Error('Cliente non valido')
+  }
+
+  const payload = {
+    current_stage: (formData.get('current_stage') as string) || null,
+    primary_channel: (formData.get('primary_channel') as string) || null,
+    automation_focus: (formData.get('automation_focus') as string) || null,
+    workspace_health: Number(formData.get('workspace_health') || 0),
+    updated_at: new Date().toISOString(),
+  }
+
+  const { error } = await service
+    .from('client_workspaces')
+    .update(payload)
+    .eq('user_id', userId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
+export async function toggleClientTaskAdmin(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const taskId = formData.get('task_id') as string
+  const completed = formData.get('completed') === 'true'
+
+  if (!taskId) {
+    throw new Error('Task non valido')
+  }
+
+  const { error } = await service
+    .from('client_tasks')
+    .update({
+      completed,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', taskId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
 export async function runAllAutomationsNow() {
   await ensureAdmin()
   const service = createServiceClient()
