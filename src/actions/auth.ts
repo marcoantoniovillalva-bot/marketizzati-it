@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
+  const locale = (formData.get('locale') as string) || 'it'
 
   const { error } = await supabase.auth.signInWithPassword({
     email: formData.get('email') as string,
@@ -18,18 +19,28 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  redirect(`/${locale}/dashboard`)
 }
 
 export async function signup(formData: FormData) {
   const supabase = await createClient()
 
+  const fullName = formData.get('full_name') as string
   const email = formData.get('email') as string
   const password = formData.get('password') as string
+  const locale = (formData.get('locale') as string) || 'it'
   const consentMarketing = formData.get('consent_marketing') === 'on'
   const consentNewsletter = formData.get('consent_newsletter') === 'on'
 
-  const { data, error } = await supabase.auth.signUp({ email, password })
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: fullName,
+      },
+    },
+  })
 
   if (error) {
     return { error: error.message }
@@ -52,14 +63,18 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/check-email')
+  redirect(`/${locale}/check-email`)
 }
 
 export async function signout() {
   const supabase = await createClient()
+  const headersList = await headers()
+  const referer = headersList.get('referer') || ''
+  const localeMatch = referer.match(/\/(it|en|es)\//)
+  const locale = localeMatch?.[1] || 'it'
   await supabase.auth.signOut()
   revalidatePath('/', 'layout')
-  redirect('/login')
+  redirect(`/${locale}/login`)
 }
 
 export async function resetPassword(formData: FormData) {
@@ -80,6 +95,7 @@ export async function resetPassword(formData: FormData) {
 export async function updatePassword(formData: FormData) {
   const supabase = await createClient()
   const password = formData.get('password') as string
+  const locale = (formData.get('locale') as string) || 'it'
 
   const { error } = await supabase.auth.updateUser({ password })
 
@@ -88,7 +104,7 @@ export async function updatePassword(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  redirect(`/${locale}/dashboard`)
 }
 
 export async function updateProfile(formData: FormData) {

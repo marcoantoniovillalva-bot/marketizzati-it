@@ -11,7 +11,7 @@ type CookieToSet = {
 
 const intlMiddleware = createIntlMiddleware(routing)
 
-const protectedPaths = ['/dashboard', '/corso', '/risorse', '/profilo']
+const protectedPaths = ['/dashboard', '/corso', '/percorso', '/workspace', '/task', '/automazioni', '/risorse', '/profilo', '/supporto', '/admin']
 const authPaths = ['/login', '/signup']
 
 function getLocaleFromPath(pathname: string): string {
@@ -25,15 +25,15 @@ function getPathWithoutLocale(pathname: string): string {
 
 function isProtectedRoute(pathname: string): boolean {
   const clean = getPathWithoutLocale(pathname)
-  return protectedPaths.some(p => clean.startsWith(p))
+  return protectedPaths.some((path) => clean.startsWith(path))
 }
 
 function isAuthRoute(pathname: string): boolean {
   const clean = getPathWithoutLocale(pathname)
-  return authPaths.some(p => clean.startsWith(p))
+  return authPaths.some((path) => clean.startsWith(path))
 }
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const intlResponse = intlMiddleware(request)
 
   if (intlResponse.headers.get('location')) {
@@ -51,32 +51,32 @@ export default async function middleware(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet: CookieToSet[]) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          )
+          cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options))
         },
       },
     }
   )
 
-  await supabase.auth.getUser()
-
   const pathname = request.nextUrl.pathname
   const locale = getLocaleFromPath(pathname)
 
   if (isProtectedRoute(pathname)) {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
     if (!user) {
-      const loginUrl = new URL(`/${locale}/login`, request.url)
-      return NextResponse.redirect(loginUrl)
+      return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
     }
   }
 
   if (isAuthRoute(pathname)) {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
     if (user) {
-      const dashboardUrl = new URL(`/${locale}/dashboard`, request.url)
-      return NextResponse.redirect(dashboardUrl)
+      return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url))
     }
   }
 

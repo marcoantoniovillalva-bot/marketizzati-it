@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { signup } from '@/actions/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,6 +12,7 @@ import { ConsentCheckboxes } from './ConsentCheckboxes'
 export function SignupForm() {
   const t = useTranslations('auth.signup')
   const tAuth = useTranslations('auth')
+  const locale = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -29,6 +31,17 @@ export function SignupForm() {
 
   return (
     <form action={handleSubmit} className="space-y-5">
+      <input type="hidden" name="locale" value={locale} />
+
+      <Input
+        id="full_name"
+        name="full_name"
+        type="text"
+        label={t('name')}
+        placeholder="Mario Rossi"
+        required
+      />
+
       <Input
         id="email"
         name="email"

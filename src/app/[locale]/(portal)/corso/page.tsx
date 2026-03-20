@@ -1,5 +1,5 @@
-import { CourseProgress } from '@/features/portal/components'
+import { redirect } from 'next/navigation'
 
 export default function CorsoPage() {
-  return <CourseProgress completedDays={[]} />
+  redirect('/percorso')
 }
