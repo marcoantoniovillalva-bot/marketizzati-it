@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { createServiceClient } from '@/lib/supabase/server'
-import { isValidResourceShareToken } from '@/features/portal/lib/resource-sharing'
 import { notFound } from 'next/navigation'
 
 type PublicResourcePageProps = {
@@ -9,10 +8,6 @@ type PublicResourcePageProps = {
 }
 
 export async function PublicResourcePage({ id, token }: PublicResourcePageProps) {
-  if (!isValidResourceShareToken(id, token)) {
-    notFound()
-  }
-
   const service = createServiceClient()
   const { data: resource } = await service
     .from('resources')
