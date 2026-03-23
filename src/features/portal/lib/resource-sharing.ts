@@ -1,7 +1,11 @@
 import { createHmac, timingSafeEqual } from 'crypto'
 
+function normalizeSecret(value: string) {
+  return value.trim().replace(/^['"]+|['"]+$/g, '')
+}
+
 function getShareSecret() {
-  return (
+  return normalizeSecret(
     process.env.RESOURCE_SHARE_SECRET ||
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
