@@ -56,6 +56,7 @@ export async function PublicResourcePage({ id, token }: PublicResourcePageProps)
               src={resource.embed_url}
               className="min-h-[75vh] w-full"
               allow="fullscreen; autoplay"
+              allowFullScreen
             />
           </section>
         ) : primaryUrl ? (

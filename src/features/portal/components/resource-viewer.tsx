@@ -1,15 +1,16 @@
 'use client'
 
-import { X, Maximize, Minimize } from 'lucide-react'
+import { X, Maximize, Minimize, ExternalLink } from 'lucide-react'
 import { useEffect, useRef, useState, useCallback } from 'react'
 
 interface ResourceViewerProps {
   title: string
   embedUrl: string
+  directUrl?: string | null
   onClose: () => void
 }
 
-export function ResourceViewer({ title, embedUrl, onClose }: ResourceViewerProps) {
+export function ResourceViewer({ title, embedUrl, directUrl, onClose }: ResourceViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isFullscreen, setIsFullscreen] = useState(false)
 
@@ -75,6 +76,18 @@ export function ResourceViewer({ title, embedUrl, onClose }: ResourceViewerProps
         <div className="flex items-center justify-between px-6 py-3 border-b border-surface-border bg-surface shrink-0">
           <h2 className="font-semibold text-foreground text-lg truncate mr-4">{title}</h2>
           <div className="flex items-center gap-1">
+            {directUrl && (
+              <a
+                href={directUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm text-foreground-muted transition-colors hover:bg-surface-elevated hover:text-accent"
+                title="Apri in una nuova scheda"
+              >
+                <ExternalLink size={16} />
+                <span className="hidden sm:inline">Apri diretto</span>
+              </a>
+            )}
             <button
               onClick={toggleFullscreen}
               className="p-2 rounded-lg hover:bg-surface-elevated text-foreground-muted hover:text-accent transition-colors"
@@ -99,6 +112,7 @@ export function ResourceViewer({ title, embedUrl, onClose }: ResourceViewerProps
             className="w-full h-full"
             style={{ minHeight: isFullscreen ? 'calc(100vh - 56px)' : '80vh' }}
             allow="fullscreen"
+            allowFullScreen
             title={title}
           />
         </div>

@@ -35,6 +35,7 @@ export function ResourcesLibrary({ resources }: ResourcesLibraryProps) {
         <ResourceViewer
           title={viewing.title}
           embedUrl={viewing.embed_url}
+          directUrl={viewing.file_url || viewing.embed_url}
           onClose={() => setViewingId(null)}
         />
       )}
