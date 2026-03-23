@@ -551,6 +551,12 @@ export async function createOrUpdateResource(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
+
+  return {
+    ok: true,
+    id: resourceId,
+    message: existingResource ? 'Risorsa aggiornata correttamente.' : 'Risorsa creata correttamente.',
+  }
 }
 
 export async function deleteResource(formData: FormData) {
@@ -645,6 +651,12 @@ export async function duplicateResource(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
+
+  return {
+    ok: true,
+    id: duplicateId,
+    message: `Copia creata: ${duplicateTitle}`,
+  }
 }
 
 export async function translateResource(formData: FormData) {
@@ -692,6 +704,12 @@ export async function translateResource(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
+
+  return {
+    ok: true,
+    id: translatedId,
+    message: `Versione tradotta creata: ${stripResourceLanguage(resource.title)} · ${targetLanguage.toUpperCase()}`,
+  }
 }
 
 export async function assignResourceToEmail(formData: FormData) {

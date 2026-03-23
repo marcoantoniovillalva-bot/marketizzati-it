@@ -1,18 +1,22 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useTransition } from 'react'
 import { assignResourceToEmail, createOrUpdateResource, deleteResource, duplicateResource, translateResource } from '@/actions/admin'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
 import { getResourceLanguage, getResourceLanguageLabel, getResourceVisibility, isStorageResourceUrl } from '../lib/resource-url'
+import { useRouter } from 'next/navigation'
 
 type AdminResourceManagerProps = {
   snapshot: AdminSnapshot
 }
 
 export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
+  const router = useRouter()
   const [editingId, setEditingId] = useState<string>('new')
   const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [isPending, startTransition] = useTransition()
   const editingResource = useMemo(
     () => snapshot.resources.find((resource) => resource.id === editingId) || null,
     [editingId, snapshot.resources]
@@ -28,6 +32,31 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
     }
   }
 
+  function runAction<T extends { id?: string; message?: string }>(
+    action: () => Promise<T>,
+    onSuccess?: (result: T) => void
+  ) {
+    setFeedback(null)
+    startTransition(() => {
+      void (async () => {
+        try {
+          const result = await action()
+          onSuccess?.(result)
+          setFeedback({
+            type: 'success',
+            message: result.message || 'Operazione completata.',
+          })
+          router.refresh()
+        } catch (error) {
+          setFeedback({
+            type: 'error',
+            message: error instanceof Error ? error.message : 'Si e verificato un errore inatteso.',
+          })
+        }
+      })()
+    })
+  }
+
   return (
     <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
       <div className="rounded-[30px] border border-surface-border bg-white p-6">
@@ -35,7 +64,30 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
         <h3 className="mt-3 font-heading text-2xl text-foreground">
           {editingResource ? `Modifica ${editingResource.title}` : 'Aggiungi o espandi la libreria'}
         </h3>
-        <form key={editingId} action={createOrUpdateResource} className="mt-5 space-y-4">
+        {feedback && (
+          <div
+            className={`mt-4 rounded-2xl px-4 py-3 text-sm ${
+              feedback.type === 'success'
+                ? 'bg-emerald-50 text-emerald-700'
+                : 'bg-red-50 text-red-700'
+            }`}
+          >
+            {feedback.message}
+          </div>
+        )}
+        <form
+          key={editingId}
+          className="mt-5 space-y-4"
+          onSubmit={(event) => {
+            event.preventDefault()
+            const formData = new FormData(event.currentTarget)
+            runAction(() => createOrUpdateResource(formData), (result) => {
+              if (result.id) {
+                setEditingId(result.id)
+              }
+            })
+          }}
+        >
           <input type="hidden" name="resource_id" value={editingResource?.id || ''} />
           <div className="grid gap-4 md:grid-cols-[1fr_auto]">
             <select
@@ -132,7 +184,9 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
             <input type="checkbox" name="is_active" defaultChecked={editingResource ? editingResource.is_active : true} />
             Risorsa attiva
           </label>
-          <Button type="submit">{editingResource ? 'Aggiorna risorsa' : 'Salva risorsa'}</Button>
+          <Button type="submit" isLoading={isPending}>
+            {editingResource ? 'Aggiorna risorsa' : 'Salva risorsa'}
+          </Button>
         </form>
       </div>
 
@@ -190,13 +244,34 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                     <Button type="button" size="sm" variant="secondary" onClick={() => setEditingId(resource.id)}>
                       Modifica
                     </Button>
-                    <form action={duplicateResource}>
+                    <form
+                      onSubmit={(event) => {
+                        event.preventDefault()
+                        const formData = new FormData(event.currentTarget)
+                        runAction(() => duplicateResource(formData), (result) => {
+                          if (result.id) {
+                            setEditingId(result.id)
+                          }
+                        })
+                      }}
+                    >
                       <input type="hidden" name="resource_id" value={resource.id} />
-                      <Button type="submit" size="sm" variant="secondary">
+                      <Button type="submit" size="sm" variant="secondary" isLoading={isPending}>
                         Duplica
                       </Button>
                     </form>
-                    <form action={translateResource} className="flex items-center gap-2">
+                    <form
+                      className="flex items-center gap-2"
+                      onSubmit={(event) => {
+                        event.preventDefault()
+                        const formData = new FormData(event.currentTarget)
+                        runAction(() => translateResource(formData), (result) => {
+                          if (result.id) {
+                            setEditingId(result.id)
+                          }
+                        })
+                      }}
+                    >
                       <input type="hidden" name="resource_id" value={resource.id} />
                       <select
                         name="target_language"
@@ -207,7 +282,7 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                         <option value="es">ES</option>
                         <option value="en">EN</option>
                       </select>
-                      <Button type="submit" size="sm" variant="outline">
+                      <Button type="submit" size="sm" variant="outline" isLoading={isPending}>
                         Traduci
                       </Button>
                     </form>
