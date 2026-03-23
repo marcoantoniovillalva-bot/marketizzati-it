@@ -5,6 +5,11 @@ import { revalidatePath } from 'next/cache'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { executeAutomationById, executeDueAutomations } from '@/features/portal/lib/automation-engine'
 import { provisionPortalForUser } from '@/features/portal/lib/portal-data'
+import {
+  parseStorageResourceUrl,
+  type ResourceLanguage,
+  stripResourceLanguage,
+} from '@/features/portal/lib/resource-url'
 
 type ProspectRecord = {
   id: string
@@ -85,6 +90,205 @@ async function ensureResourcesBucket(service: ReturnType<typeof createServiceCli
   if (createError && !createError.message.toLowerCase().includes('already')) {
     throw new Error(createError.message)
   }
+}
+
+type ResourceRecord = {
+  id: string
+  title: string
+  description: string | null
+  type: 'pdf' | 'template' | 'guide' | 'video'
+  file_url: string | null
+  embed_url: string | null
+  is_premium: boolean
+  unlock_step_code: string | null
+  is_active: boolean
+  sort_order: number
+}
+
+async function getResourceById(service: ReturnType<typeof createServiceClient>, resourceId: string) {
+  const { data: resource, error } = await service
+    .from('resources')
+    .select('id,title,description,type,file_url,embed_url,is_premium,unlock_step_code,is_active,sort_order')
+    .eq('id', resourceId)
+    .maybeSingle<ResourceRecord>()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  if (!resource) {
+    throw new Error('Risorsa non trovata')
+  }
+
+  return resource
+}
+
+async function getNextResourceSortOrder(service: ReturnType<typeof createServiceClient>) {
+  const { data, error } = await service
+    .from('resources')
+    .select('sort_order')
+    .order('sort_order', { ascending: false })
+    .limit(1)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return (data?.[0]?.sort_order || 0) + 1
+}
+
+async function cloneStorageFile(
+  service: ReturnType<typeof createServiceClient>,
+  sourceUrl: string,
+  targetResourceId: string,
+  fileName: string
+) {
+  const target = parseStorageResourceUrl(sourceUrl)
+
+  if (!target) {
+    return null
+  }
+
+  const { data, error } = await service.storage.from(target.bucket).download(target.path)
+
+  if (error || !data) {
+    throw new Error(error?.message || 'Impossibile duplicare il file della risorsa')
+  }
+
+  const storagePath = `${targetResourceId}/${Date.now()}-${slugifyFileName(fileName)}`
+  const buffer = Buffer.from(await data.arrayBuffer())
+
+  const { error: uploadError } = await service.storage.from(target.bucket).upload(storagePath, buffer, {
+    contentType: data.type || 'text/html',
+    upsert: true,
+  })
+
+  if (uploadError) {
+    throw new Error(uploadError.message)
+  }
+
+  return `storage://${target.bucket}/${storagePath}`
+}
+
+function isHtmlResource(fileName: string, contentType?: string | null) {
+  const normalizedName = fileName.toLowerCase()
+  const normalizedType = (contentType || '').toLowerCase()
+
+  return normalizedName.endsWith('.html') || normalizedName.endsWith('.htm') || normalizedType.includes('text/html')
+}
+
+async function readResourceHtml(service: ReturnType<typeof createServiceClient>, resource: ResourceRecord) {
+  const sourceUrl = resource.file_url || resource.embed_url
+
+  if (!sourceUrl) {
+    throw new Error('La risorsa non contiene un file da tradurre')
+  }
+
+  const storageTarget = parseStorageResourceUrl(sourceUrl)
+
+  if (storageTarget) {
+    const { data, error } = await service.storage.from(storageTarget.bucket).download(storageTarget.path)
+
+    if (error || !data) {
+      throw new Error(error?.message || 'Impossibile leggere il file della risorsa')
+    }
+
+    const fileName = storageTarget.path.split('/').pop() || 'resource.html'
+    if (!isHtmlResource(fileName, data.type)) {
+      throw new Error('La traduzione automatica e disponibile solo per risorse HTML')
+    }
+
+    return {
+      html: await data.text(),
+      fileName,
+    }
+  }
+
+  const response = await fetch(sourceUrl, { cache: 'no-store' })
+
+  if (!response.ok) {
+    throw new Error('Impossibile scaricare la risorsa da tradurre')
+  }
+
+  const contentType = response.headers.get('content-type') || ''
+  const fileName = sourceUrl.split('/').pop() || 'resource.html'
+
+  if (!isHtmlResource(fileName, contentType)) {
+    throw new Error('La traduzione automatica e disponibile solo per risorse HTML')
+  }
+
+  return {
+    html: await response.text(),
+    fileName,
+  }
+}
+
+async function translateHtmlDocument(html: string, targetLanguage: ResourceLanguage) {
+  const apiKey = process.env.OPENAI_API_KEY
+
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY non configurata')
+  }
+
+  const languageLabel =
+    targetLanguage === 'it' ? 'Italian' : targetLanguage === 'es' ? 'Spanish' : 'English'
+
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      temperature: 0.2,
+      messages: [
+        {
+          role: 'system',
+          content:
+            `Translate only the human-readable text inside the provided HTML into ${languageLabel}. Preserve HTML structure, CSS, JS, ids, classes, inline styles, URLs, numbers, tracking codes, and formatting exactly. Return only valid HTML with no markdown fences.`,
+        },
+        {
+          role: 'user',
+          content: html,
+        },
+      ],
+    }),
+  })
+
+  if (!response.ok) {
+    throw new Error('La traduzione automatica non e andata a buon fine')
+  }
+
+  const payload = await response.json()
+  const translated = payload.choices?.[0]?.message?.content
+
+  if (!translated || typeof translated !== 'string') {
+    throw new Error('Nessun contenuto tradotto restituito dal modello')
+  }
+
+  return translated.trim()
+}
+
+async function saveTranslatedHtml(
+  service: ReturnType<typeof createServiceClient>,
+  resourceId: string,
+  fileName: string,
+  html: string
+) {
+  await ensureResourcesBucket(service)
+  const storagePath = `${resourceId}/${Date.now()}-${slugifyFileName(fileName || 'resource.html')}`
+
+  const { error } = await service.storage.from('resources').upload(storagePath, Buffer.from(html, 'utf8'), {
+    contentType: 'text/html',
+    upsert: true,
+  })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return `storage://resources/${storagePath}`
 }
 
 export async function convertProspectToClient(formData: FormData) {
@@ -389,6 +593,99 @@ export async function deleteResource(formData: FormData) {
     .from('resources')
     .delete()
     .eq('id', resourceId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
+export async function duplicateResource(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const sourceId = formData.get('resource_id') as string
+
+  if (!sourceId) {
+    throw new Error('Risorsa non valida')
+  }
+
+  const resource = await getResourceById(service, sourceId)
+  const duplicateId = randomUUID()
+  const duplicateTitle = `${stripResourceLanguage(resource.title)} (Copia)`
+  const sortOrder = await getNextResourceSortOrder(service)
+
+  const storageSourceUrl =
+    resource.file_url?.startsWith('storage://') ? resource.file_url : resource.embed_url?.startsWith('storage://') ? resource.embed_url : null
+  const sourceFileName =
+    (storageSourceUrl ? parseStorageResourceUrl(storageSourceUrl)?.path.split('/').pop() : null) ||
+    `${slugifyFileName(duplicateTitle)}.${resource.type === 'pdf' ? 'pdf' : resource.type === 'video' ? 'mp4' : 'html'}`
+
+  const duplicatedStorageUrl = storageSourceUrl
+    ? await cloneStorageFile(service, storageSourceUrl, duplicateId, sourceFileName)
+    : null
+
+  const payload = {
+    id: duplicateId,
+    title: duplicateTitle,
+    description: resource.description,
+    type: resource.type,
+    embed_url: duplicatedStorageUrl || resource.embed_url,
+    file_url: duplicatedStorageUrl || resource.file_url,
+    is_premium: resource.is_premium,
+    unlock_step_code: resource.unlock_step_code,
+    is_active: resource.is_active,
+    sort_order: sortOrder,
+  }
+
+  const { error } = await service.from('resources').insert(payload)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/', 'layout')
+}
+
+export async function translateResource(formData: FormData) {
+  await ensureAdmin()
+  const service = createServiceClient()
+  const sourceId = formData.get('resource_id') as string
+  const targetLanguage = formData.get('target_language') as ResourceLanguage
+
+  if (!sourceId || !targetLanguage) {
+    throw new Error('Risorsa o lingua mancanti')
+  }
+
+  if (!['it', 'es', 'en'].includes(targetLanguage)) {
+    throw new Error('Lingua non supportata')
+  }
+
+  const resource = await getResourceById(service, sourceId)
+  const { html, fileName } = await readResourceHtml(service, resource)
+  const translatedHtml = await translateHtmlDocument(html, targetLanguage)
+  const translatedId = randomUUID()
+  const translatedFileUrl = await saveTranslatedHtml(
+    service,
+    translatedId,
+    `${stripResourceLanguage(fileName)}-${targetLanguage}.html`,
+    translatedHtml
+  )
+
+  const payload = {
+    id: translatedId,
+    title: `${stripResourceLanguage(resource.title)} · ${targetLanguage.toUpperCase()}`,
+    description: resource.description,
+    type: resource.type,
+    embed_url: translatedFileUrl,
+    file_url: translatedFileUrl,
+    is_premium: resource.is_premium,
+    unlock_step_code: resource.unlock_step_code,
+    is_active: resource.is_active,
+    sort_order: await getNextResourceSortOrder(service),
+  }
+
+  const { error } = await service.from('resources').insert(payload)
 
   if (error) {
     throw new Error(error.message)

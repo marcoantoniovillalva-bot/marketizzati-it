@@ -1,10 +1,10 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { assignResourceToEmail, createOrUpdateResource, deleteResource } from '@/actions/admin'
+import { assignResourceToEmail, createOrUpdateResource, deleteResource, duplicateResource, translateResource } from '@/actions/admin'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
-import { getResourceVisibility, isStorageResourceUrl } from '../lib/resource-url'
+import { getResourceLanguage, getResourceLanguageLabel, getResourceVisibility, isStorageResourceUrl } from '../lib/resource-url'
 
 type AdminResourceManagerProps = {
   snapshot: AdminSnapshot
@@ -182,6 +182,7 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                             ? 'Solo link'
                             : 'Riservata'}
                       </p>
+                      <p>{getResourceLanguageLabel(getResourceLanguage(resource))}</p>
                       <p>{assignmentCount} assegnazioni manuali</p>
                     </div>
                   </div>
@@ -189,6 +190,27 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                     <Button type="button" size="sm" variant="secondary" onClick={() => setEditingId(resource.id)}>
                       Modifica
                     </Button>
+                    <form action={duplicateResource}>
+                      <input type="hidden" name="resource_id" value={resource.id} />
+                      <Button type="submit" size="sm" variant="secondary">
+                        Duplica
+                      </Button>
+                    </form>
+                    <form action={translateResource} className="flex items-center gap-2">
+                      <input type="hidden" name="resource_id" value={resource.id} />
+                      <select
+                        name="target_language"
+                        defaultValue="it"
+                        className="rounded-xl border border-surface-border bg-white px-3 py-2 text-sm"
+                      >
+                        <option value="it">IT</option>
+                        <option value="es">ES</option>
+                        <option value="en">EN</option>
+                      </select>
+                      <Button type="submit" size="sm" variant="outline">
+                        Traduci
+                      </Button>
+                    </form>
                     <Button type="button" size="sm" variant="outline" onClick={() => copyShareLink(resource.shareUrl, resource.id)}>
                       Copia link condivisibile
                     </Button>

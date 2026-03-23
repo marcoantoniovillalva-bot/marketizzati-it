@@ -1,4 +1,10 @@
 const STORAGE_PREFIX = 'storage://'
+export type ResourceLanguage = 'it' | 'es' | 'en'
+const LANGUAGE_LABELS: Record<ResourceLanguage, string> = {
+  it: 'Italiano',
+  es: 'Español',
+  en: 'English',
+}
 
 function getSiteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || 'https://marketizzati.it').replace(/\/$/, '')
@@ -52,4 +58,27 @@ export function getResourceVisibility(resource: { is_premium: boolean; unlock_st
   }
 
   return 'public' as const
+}
+
+export function getResourceLanguage(resource: { title: string }) {
+  const match = resource.title.match(/(?:·|\(|\[)\s*(IT|ES|EN)\s*(?:\)|\])?$/i)
+  const code = match?.[1]?.toLowerCase()
+
+  if (code === 'it' || code === 'es' || code === 'en') {
+    return code
+  }
+
+  return null
+}
+
+export function getResourceLanguageLabel(language: ResourceLanguage | null) {
+  if (!language) {
+    return 'Lingua non indicata'
+  }
+
+  return LANGUAGE_LABELS[language]
+}
+
+export function stripResourceLanguage(title: string) {
+  return title.replace(/\s*(?:·|\(|\[)\s*(IT|ES|EN)\s*(?:\)|\])?\s*$/i, '').trim()
 }
