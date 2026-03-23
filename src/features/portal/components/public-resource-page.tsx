@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { createServiceClient } from '@/lib/supabase/server'
+import { resolveResourceUrl } from '@/features/portal/lib/resource-url'
 import { notFound } from 'next/navigation'
 
 type PublicResourcePageProps = {
@@ -20,7 +21,9 @@ export async function PublicResourcePage({ id, token }: PublicResourcePageProps)
     notFound()
   }
 
-  const primaryUrl = resource.embed_url || resource.file_url
+  const resolvedEmbedUrl = resolveResourceUrl(resource.id, resource.embed_url || resource.file_url)
+  const resolvedFileUrl = resolveResourceUrl(resource.id, resource.file_url || resource.embed_url)
+  const primaryUrl = resolvedEmbedUrl || resolvedFileUrl
 
   return (
     <main className="min-h-dvh bg-background px-4 py-8 md:px-8">
@@ -33,22 +36,22 @@ export async function PublicResourcePage({ id, token }: PublicResourcePageProps)
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-foreground-secondary">
             <span className="rounded-full bg-accent/10 px-3 py-1 text-accent">{resource.type}</span>
-            <span>{resource.file_url ? 'Disponibile anche come link diretto' : 'Visualizzazione incorporata'}</span>
+            <span>{resolvedFileUrl ? 'Disponibile anche come link diretto' : 'Visualizzazione incorporata'}</span>
           </div>
-          {resource.file_url && (
+          {resolvedFileUrl && (
             <div className="mt-5">
-              <a href={resource.file_url} target="_blank" rel="noreferrer">
+              <a href={resolvedFileUrl} target="_blank" rel="noreferrer">
                 <Button>Apri risorsa</Button>
               </a>
             </div>
           )}
         </section>
 
-        {resource.embed_url ? (
+        {resolvedEmbedUrl ? (
           <section className="overflow-hidden rounded-[32px] border border-surface-border bg-white">
             <iframe
               title={resource.title}
-              src={resource.embed_url}
+              src={resolvedEmbedUrl}
               className="min-h-[75vh] w-full"
               allow="fullscreen; autoplay"
               allowFullScreen

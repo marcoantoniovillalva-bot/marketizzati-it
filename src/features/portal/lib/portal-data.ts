@@ -1,5 +1,6 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { getResourceShareUrl } from './resource-sharing'
+import { getResourceVisibility, resolveResourceUrl } from './resource-url'
 import type {
   AutomationRun,
   ClientRequest,
@@ -15,6 +16,7 @@ export type PortalResource = Resource & {
   unlocked: boolean
   unlockedBy: 'step' | 'manual' | 'always-on' | null
   shareUrl: string
+  visibility: 'public' | 'restricted' | 'share_only'
 }
 
 type PortalSeed = {
@@ -314,40 +316,66 @@ export async function getPortalSnapshot(): Promise<PortalSnapshot | null> {
   const assignmentSet = new Set((assignments ?? []).map((assignment) => assignment.resource_id))
 
   const decoratedResources: PortalResource[] = ((resources as Resource[]) ?? []).map((resource) => {
-    if (!resource.is_premium) {
+    const visibility = getResourceVisibility(resource)
+
+    if (visibility === 'share_only') {
       return {
         ...resource,
-        unlocked: true,
-        unlockedBy: 'always-on',
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
+        unlocked: false,
+        unlockedBy: null,
         shareUrl: getResourceShareUrl(resource.id),
+        visibility,
+      }
+    }
+
+    if (visibility === 'public') {
+      return {
+        ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url),
+        unlocked: true,
+        unlockedBy: 'always-on' as const,
+        shareUrl: getResourceShareUrl(resource.id),
+        visibility,
       }
     }
 
     if (assignmentSet.has(resource.id)) {
       return {
         ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
         unlocked: true,
-        unlockedBy: 'manual',
+        unlockedBy: 'manual' as const,
         shareUrl: getResourceShareUrl(resource.id),
+        visibility,
       }
     }
 
     if (resource.unlock_step_code && stepMap.get(resource.unlock_step_code)?.status === 'completed') {
       return {
         ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
         unlocked: true,
-        unlockedBy: 'step',
+        unlockedBy: 'step' as const,
         shareUrl: getResourceShareUrl(resource.id),
+        visibility,
       }
     }
 
     return {
       ...resource,
+      embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+      file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
       unlocked: false,
       unlockedBy: null,
       shareUrl: getResourceShareUrl(resource.id),
+      visibility,
     }
-  })
+  }).filter((resource) => resource.visibility !== 'share_only')
 
   return {
     profile: (profile as Profile | null) ?? null,
@@ -631,7 +659,10 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     resources:
       ((resources as Resource[]) ?? []).map((resource) => ({
         ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
         shareUrl: getResourceShareUrl(resource.id),
+        visibility: getResourceVisibility(resource),
       })),
     resourceAssignments: (resourceAssignments as Array<{ resource_id: string; user_id: string }>) ?? [],
     totalAutomations: totalAutomations ?? 0,
@@ -680,38 +711,52 @@ export async function getAdminClientSnapshot(userId: string): Promise<AdminClien
   const assignmentSet = new Set((assignments ?? []).map((assignment) => assignment.resource_id))
 
   const decoratedResources = ((resources as Resource[]) ?? []).map((resource) => {
-    if (!resource.is_premium) {
+    const visibility = getResourceVisibility(resource)
+
+    if (visibility === 'public') {
       return {
         ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
         unlocked: true,
         unlockedBy: 'always-on' as const,
         shareUrl: getResourceShareUrl(resource.id),
+        visibility,
       }
     }
 
     if (assignmentSet.has(resource.id)) {
       return {
         ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
         unlocked: true,
         unlockedBy: 'manual' as const,
         shareUrl: getResourceShareUrl(resource.id),
+        visibility,
       }
     }
 
     if (resource.unlock_step_code && stepMap.get(resource.unlock_step_code)?.status === 'completed') {
       return {
         ...resource,
+        embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+        file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
         unlocked: true,
         unlockedBy: 'step' as const,
         shareUrl: getResourceShareUrl(resource.id),
+        visibility,
       }
     }
 
     return {
       ...resource,
+      embed_url: resolveResourceUrl(resource.id, resource.embed_url || resource.file_url),
+      file_url: resolveResourceUrl(resource.id, resource.file_url || resource.embed_url),
       unlocked: false,
       unlockedBy: null,
       shareUrl: getResourceShareUrl(resource.id),
+      visibility,
     }
   })
 

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { assignResourceToEmail, createOrUpdateResource, deleteResource } from '@/actions/admin'
 import type { AdminSnapshot } from '../lib/portal-data'
 import { Button } from '@/components/ui/button'
+import { getResourceVisibility, isStorageResourceUrl } from '../lib/resource-url'
 
 type AdminResourceManagerProps = {
   snapshot: AdminSnapshot
@@ -34,7 +35,7 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
         <h3 className="mt-3 font-heading text-2xl text-foreground">
           {editingResource ? `Modifica ${editingResource.title}` : 'Aggiungi o espandi la libreria'}
         </h3>
-        <form action={createOrUpdateResource} className="mt-5 space-y-4">
+        <form key={editingId} action={createOrUpdateResource} className="mt-5 space-y-4">
           <input type="hidden" name="resource_id" value={editingResource?.id || ''} />
           <div className="grid gap-4 md:grid-cols-[1fr_auto]">
             <select
@@ -96,16 +97,36 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
             className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
           />
           <div className="grid gap-4 md:grid-cols-2">
+            <select
+              name="access_scope"
+              defaultValue={editingResource ? getResourceVisibility(editingResource) : 'public'}
+              className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
+            >
+              <option value="public">Visibile a tutti gli utenti</option>
+              <option value="restricted">Visibile solo se sbloccata / assegnata</option>
+              <option value="share_only">Solo link condiviso</option>
+            </select>
             <input
               name="unlock_step_code"
-              defaultValue={editingResource?.unlock_step_code || ''}
-              placeholder="unlock step code es. strategy"
+              defaultValue={editingResource?.unlock_step_code === 'share-only' ? '' : editingResource?.unlock_step_code || ''}
+              placeholder="Step unlock opzionale, es. strategy"
               className="w-full rounded-2xl border border-surface-border bg-surface px-4 py-3"
             />
-            <label className="flex items-center gap-3 rounded-2xl border border-surface-border bg-surface px-4 py-3 text-sm">
-              <input type="checkbox" name="is_premium" defaultChecked={editingResource?.is_premium || false} />
-              Risorsa premium / sbloccabile
-            </label>
+          </div>
+          <div className="rounded-2xl border border-dashed border-surface-border bg-surface px-4 py-4">
+            <label className="block text-sm font-medium text-foreground">Allega file HTML, PDF o video</label>
+            <input
+              name="resource_file"
+              type="file"
+              accept=".html,.htm,.pdf,.mp4,text/html,application/pdf,video/mp4"
+              className="mt-3 block w-full text-sm text-foreground-secondary file:mr-4 file:rounded-xl file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium file:text-white"
+            />
+            <p className="mt-2 text-xs text-foreground-muted">
+              Se alleghi un file, Marketizzati lo salva e lo apre da un link sotto il dominio del sito.
+            </p>
+            {editingResource && isStorageResourceUrl(editingResource.file_url || editingResource.embed_url) && (
+              <p className="mt-2 text-xs text-accent">Questa risorsa usa gia un file caricato da admin.</p>
+            )}
           </div>
           <label className="flex items-center gap-3 rounded-2xl border border-surface-border bg-surface px-4 py-3 text-sm">
             <input type="checkbox" name="is_active" defaultChecked={editingResource ? editingResource.is_active : true} />
@@ -144,11 +165,23 @@ export function AdminResourceManager({ snapshot }: AdminResourceManagerProps) {
                     <div>
                       <p className="font-medium text-foreground">{resource.title}</p>
                       <p className="mt-1 text-sm text-foreground-secondary">
-                        {resource.unlock_step_code ? `Si sblocca su: ${resource.unlock_step_code}` : 'Sempre disponibile'}
+                        {getResourceVisibility(resource) === 'share_only'
+                          ? 'Disponibile solo tramite link condiviso'
+                          : getResourceVisibility(resource) === 'restricted'
+                            ? resource.unlock_step_code
+                              ? `Si sblocca su: ${resource.unlock_step_code}`
+                              : 'Accesso solo se assegnata da admin'
+                            : 'Disponibile in libreria per tutti gli utenti'}
                       </p>
                     </div>
                     <div className="text-right text-sm text-foreground-secondary">
-                      <p>{resource.is_premium ? 'Premium' : 'Free'}</p>
+                      <p>
+                        {getResourceVisibility(resource) === 'public'
+                          ? 'Pubblica'
+                          : getResourceVisibility(resource) === 'share_only'
+                            ? 'Solo link'
+                            : 'Riservata'}
+                      </p>
                       <p>{assignmentCount} assegnazioni manuali</p>
                     </div>
                   </div>

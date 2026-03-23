@@ -1,5 +1,6 @@
 'use server'
 
+import { randomUUID } from 'node:crypto'
 import { revalidatePath } from 'next/cache'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { executeAutomationById, executeDueAutomations } from '@/features/portal/lib/automation-engine'
@@ -52,6 +53,37 @@ async function ensureAdmin() {
 
   if (profile?.role !== 'admin') {
     throw new Error('Operazione riservata agli admin')
+  }
+}
+
+function slugifyFileName(fileName: string) {
+  return fileName
+    .normalize('NFKD')
+    .replace(/[^\w.\-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .toLowerCase()
+}
+
+async function ensureResourcesBucket(service: ReturnType<typeof createServiceClient>) {
+  const { data: buckets, error } = await service.storage.listBuckets()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  if (buckets.some((bucket) => bucket.name === 'resources')) {
+    return
+  }
+
+  const { error: createError } = await service.storage.createBucket('resources', {
+    public: false,
+    fileSizeLimit: 20971520,
+    allowedMimeTypes: ['text/html', 'application/pdf', 'video/mp4', 'text/plain'],
+  })
+
+  if (createError && !createError.message.toLowerCase().includes('already')) {
+    throw new Error(createError.message)
   }
 }
 
@@ -245,24 +277,70 @@ export async function createOrUpdateResource(formData: FormData) {
   await ensureAdmin()
   const service = createServiceClient()
 
-  const resourceId = (formData.get('resource_id') as string) || null
+  const resourceId = (formData.get('resource_id') as string) || randomUUID()
+  const accessScope = (formData.get('access_scope') as string) || 'public'
+  const unlockStepCodeInput = ((formData.get('unlock_step_code') as string) || '').trim()
+  const uploadedFile = formData.get('resource_file')
+  const isUploadedFile = uploadedFile instanceof File && uploadedFile.size > 0
+  const { data: existingResource } = await service
+    .from('resources')
+    .select('file_url,embed_url')
+    .eq('id', resourceId)
+    .maybeSingle()
+
+  let fileUrl = ((formData.get('file_url') as string) || '').trim() || null
+  let embedUrl = ((formData.get('embed_url') as string) || '').trim() || null
+
+  if (isUploadedFile) {
+    await ensureResourcesBucket(service)
+    const file = uploadedFile
+    const safeName = slugifyFileName(file.name || 'resource.html') || 'resource.html'
+    const storagePath = `${resourceId}/${Date.now()}-${safeName}`
+    const fileBuffer = Buffer.from(await file.arrayBuffer())
+
+    const { error: uploadError } = await service.storage
+      .from('resources')
+      .upload(storagePath, fileBuffer, {
+        contentType: file.type || 'text/html',
+        upsert: true,
+      })
+
+    if (uploadError) {
+      throw new Error(uploadError.message)
+    }
+
+    const storageUrl = `storage://resources/${storagePath}`
+    fileUrl = storageUrl
+    embedUrl = storageUrl
+
+    const previousStorageUrl =
+      existingResource?.file_url?.startsWith('storage://') ? existingResource.file_url : existingResource?.embed_url?.startsWith('storage://') ? existingResource.embed_url : null
+
+    if (previousStorageUrl && previousStorageUrl !== storageUrl) {
+      const previousPath = previousStorageUrl.replace('storage://resources/', '')
+      await service.storage.from('resources').remove([previousPath])
+    }
+  }
+
   const payload = {
+    id: resourceId,
     title: formData.get('title') as string,
     description: (formData.get('description') as string) || null,
     type: (formData.get('type') as string) || 'guide',
-    embed_url: (formData.get('embed_url') as string) || null,
-    file_url: (formData.get('file_url') as string) || null,
-    is_premium: formData.get('is_premium') === 'on',
-    unlock_step_code: (formData.get('unlock_step_code') as string) || null,
+    embed_url: embedUrl,
+    file_url: fileUrl,
+    is_premium: accessScope !== 'public',
+    unlock_step_code:
+      accessScope === 'share_only'
+        ? 'share-only'
+        : accessScope === 'restricted'
+          ? unlockStepCodeInput || null
+          : null,
     is_active: formData.get('is_active') !== 'off',
     sort_order: Number(formData.get('sort_order') || 0),
   }
 
-  const query = resourceId
-    ? service.from('resources').update(payload).eq('id', resourceId)
-    : service.from('resources').insert(payload)
-
-  const { error } = await query
+  const { error } = await service.from('resources').upsert(payload)
 
   if (error) {
     throw new Error(error.message)
@@ -278,6 +356,24 @@ export async function deleteResource(formData: FormData) {
 
   if (!resourceId) {
     throw new Error('Risorsa non valida')
+  }
+
+  const { data: existingResource } = await service
+    .from('resources')
+    .select('file_url,embed_url')
+    .eq('id', resourceId)
+    .maybeSingle()
+
+  const storageUrl =
+    existingResource?.file_url?.startsWith('storage://')
+      ? existingResource.file_url
+      : existingResource?.embed_url?.startsWith('storage://')
+        ? existingResource.embed_url
+        : null
+
+  if (storageUrl) {
+    const storagePath = storageUrl.replace('storage://resources/', '')
+    await service.storage.from('resources').remove([storagePath])
   }
 
   const { error: assignmentError } = await service
