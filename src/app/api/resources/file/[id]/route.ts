@@ -10,7 +10,34 @@ type Params = {
 
 export const runtime = 'nodejs'
 
-function inferContentType(type: string | null) {
+function inferContentType(type: string | null, filename: string, fallbackType?: string | null) {
+  const normalizedName = filename.toLowerCase()
+  const normalizedFallback = (fallbackType || '').toLowerCase()
+
+  if (normalizedName.endsWith('.html') || normalizedName.endsWith('.htm')) {
+    return 'text/html; charset=utf-8'
+  }
+
+  if (normalizedName.endsWith('.pdf')) {
+    return 'application/pdf'
+  }
+
+  if (normalizedName.endsWith('.mp4')) {
+    return 'video/mp4'
+  }
+
+  if (normalizedFallback.includes('text/html')) {
+    return 'text/html; charset=utf-8'
+  }
+
+  if (normalizedFallback.includes('application/pdf')) {
+    return 'application/pdf'
+  }
+
+  if (normalizedFallback.includes('video/mp4')) {
+    return 'video/mp4'
+  }
+
   switch (type) {
     case 'pdf':
       return 'application/pdf'
@@ -59,7 +86,7 @@ export async function GET(_request: Request, { params }: Params) {
 
   return new NextResponse(await data.arrayBuffer(), {
     headers: {
-      'Content-Type': data.type || inferContentType(resource.type),
+      'Content-Type': inferContentType(resource.type, filename, data.type),
       'Content-Disposition': `inline; filename="${filename.replace(/"/g, '')}"`,
       'Cache-Control': 'public, max-age=3600',
     },
