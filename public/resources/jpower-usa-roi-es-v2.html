@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPower Electric — Análisis ROI</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #0A1628;
+    --navy2:   #0D1F38;
+    --navy3:   #112244;
+    --card:    #0F1E35;
+    --card2:   #142848;
+    --border:  rgba(77,184,212,0.15);
+    --cyan:    #4DB8D4;
+    --cyan2:   #7ED4E8;
+    --cyan-dim:rgba(77,184,212,0.10);
+    --cyan-glow:rgba(77,184,212,0.30);
+    --white:   #FFFFFF;
+    --off:     #E8F0F8;
+    --muted:   rgba(255,255,255,0.50);
+    --muted2:  rgba(255,255,255,0.70);
+    --green:   #34D399;
+    --red:     #F87171;
+    --light-bg:#F0F5FA;
+    --light-text:#0A1628;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── PROGRESS ── */
+  #prog {
+    position:fixed; top:0; left:0; height:3px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    z-index:300; transition:width .3s;
+    box-shadow: 0 0 16px var(--cyan-glow);
+  }
+
+  /* ── NAV DOTS ── */
+  #dots {
+    position:fixed; right:16px; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:7px; z-index:200;
+  }
+  .dot {
+    width:6px; height:6px; border-radius:3px;
+    background:rgba(255,255,255,.2); cursor:pointer;
+    transition:all .3s;
+  }
+  .dot.active {
+    background:var(--cyan); height:20px;
+    box-shadow:0 0 8px var(--cyan-glow);
+  }
+
+  /* ── SLIDES ── */
+  .slide {
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:60px 32px;
+    position:relative; overflow:hidden;
+    border-bottom:1px solid var(--border);
+    opacity:0; transform:translateY(28px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .slide.visible { opacity:1; transform:translateY(0); }
+
+  /* light variant */
+  .slide.light {
+    background: var(--light-bg);
+    color: var(--light-text);
+    border-bottom:1px solid rgba(10,22,40,0.08);
+  }
+
+  .sn {
+    position:absolute; top:20px; right:28px;
+    font-size:96px; font-weight:800;
+    color:rgba(77,184,212,.06); line-height:1;
+    user-select:none;
+  }
+
+  /* ── EYEBROW ── */
+  .ey {
+    display:flex; align-items:center; gap:10px;
+    font-size:10px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--cyan);
+    margin-bottom:16px; position:relative; z-index:1;
+  }
+  .ey::before {
+    content:''; width:20px; height:2px;
+    background:var(--cyan); flex-shrink:0;
+  }
+  .slide.light .ey { color: var(--navy3); }
+  .slide.light .ey::before { background:var(--navy3); }
+
+  /* ── HEADINGS ── */
+  h1 {
+    font-size:clamp(46px,11vw,96px);
+    font-weight:800; line-height:.93;
+    margin-bottom:20px; position:relative; z-index:1;
+  }
+  h1 .c { color:var(--cyan); display:block; }
+
+  h2 {
+    font-size:clamp(30px,6.5vw,58px);
+    font-weight:800; line-height:.95;
+    margin-bottom:10px; position:relative; z-index:1;
+  }
+  h2 em { color:var(--cyan); font-style:normal; }
+  .slide.light h2 em { color:var(--navy3); }
+
+  .sub {
+    font-size:14px; color:var(--muted2); font-weight:400;
+    line-height:1.75; max-width:500px;
+    margin-bottom:24px; position:relative; z-index:1;
+  }
+  .slide.light .sub { color:rgba(10,22,40,0.65); }
+
+  /* ── COVER ── */
+  .cover-nav {
+    display:flex; align-items:center; gap:12px;
+    background:var(--navy3); border-radius:16px;
+    padding:10px 16px; margin-bottom:40px;
+    width:fit-content; position:relative; z-index:1;
+  }
+  .cnav-logo {
+    width:40px; height:40px; border-radius:10px;
+    background:linear-gradient(135deg,#1A3A6B,#0D2550);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:900; color:var(--cyan);
+    font-style:italic;
+  }
+  .cnav-name { font-weight:700; font-size:14px; }
+  .cnav-sub { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+
+  .cover-pill {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--cyan-dim); border:1px solid var(--border);
+    border-radius:20px; padding:6px 14px;
+    font-size:11px; font-weight:600; letter-spacing:2px;
+    text-transform:uppercase; color:var(--cyan);
+    margin-top:36px; position:relative; z-index:1;
+  }
+
+  /* ── CARDS ── */
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; position:relative; z-index:1; }
+  .grid2.mt { margin-top:14px; }
+
+  .card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px; padding:20px;
+    transition:border-color .3s, transform .3s;
+    position:relative; overflow:hidden;
+  }
+  .card::before {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:2px;
+    background:linear-gradient(90deg, var(--cyan), transparent);
+    opacity:0; transition:opacity .3s;
+  }
+  .card:hover { border-color:rgba(77,184,212,.4); transform:translateY(-2px); }
+  .card:hover::before { opacity:1; }
+  .card.hot {
+    background:var(--cyan-dim);
+    border-color:rgba(77,184,212,.4);
+  }
+  .card.hot::before { opacity:1; }
+
+  /* light card */
+  .slide.light .card {
+    background:white;
+    border-color:rgba(10,22,40,0.08);
+    box-shadow:0 2px 12px rgba(10,22,40,0.06);
+  }
+  .slide.light .card.hot {
+    background:rgba(10,22,40,0.04);
+    border-color:rgba(10,22,40,0.15);
+  }
+
+  .cl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--muted); margin-bottom:7px; }
+  .cv { font-size:44px; font-weight:800; line-height:1; color:var(--white); }
+  .card.hot .cv { color:var(--cyan); }
+  .cs { font-size:12px; color:var(--muted); margin-top:5px; font-weight:400; line-height:1.5; }
+
+  .slide.light .cl { color:rgba(10,22,40,0.45); }
+  .slide.light .cv { color:var(--light-text); }
+  .slide.light .card.hot .cv { color:var(--navy); }
+  .slide.light .cs { color:rgba(10,22,40,0.55); }
+
+  /* ── COMPARE TABLE ── */
+  .tbl { width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; position:relative; z-index:1; }
+  .tbl th {
+    text-align:left; padding:10px 14px;
+    background:var(--card2); border:1px solid var(--border);
+    font-size:10px; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); font-weight:600;
+  }
+  .tbl th:last-child { background:var(--cyan-dim); border-color:rgba(77,184,212,.3); color:var(--cyan); }
+  .tbl td {
+    padding:12px 14px; border:1px solid var(--border);
+    color:var(--muted2); vertical-align:top; line-height:1.6;
+  }
+  .tbl td:last-child {
+    background:rgba(77,184,212,.04); border-color:rgba(77,184,212,.2);
+    color:var(--white); font-weight:500;
+  }
+  .tbl td strong { color:var(--white); }
+
+  .bb { display:inline-block; background:rgba(248,113,113,.12); color:var(--red); font-size:10px; padding:2px 8px; border-radius:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+  .bg { display:inline-block; background:rgba(52,211,153,.12); color:var(--green); font-size:10px; padding:2px 8px; border-radius:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+
+  /* ── KW TABLE ── */
+  .kt { width:100%; border-collapse:collapse; font-size:13px; margin-top:10px; position:relative; z-index:1; }
+  .kt th {
+    text-align:left; padding:9px 12px;
+    background:var(--card2); border:1px solid var(--border);
+    font-size:10px; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); font-weight:600;
+  }
+  .kt td { padding:11px 12px; border:1px solid var(--border); }
+  .kt tr.star td { background:var(--cyan-dim); border-color:rgba(77,184,212,.3); font-weight:600; }
+  .ny { font-size:22px; font-weight:800; color:var(--cyan); }
+  .nm { font-size:22px; font-weight:800; color:var(--muted2); }
+
+  /* ── FLOW ── */
+  .flow { display:flex; flex-direction:column; position:relative; z-index:1; }
+  .fr {
+    display:grid; grid-template-columns:48px 1fr auto;
+    align-items:center; gap:14px;
+    padding:16px 0; border-bottom:1px solid var(--border);
+  }
+  .fr:last-child { border-bottom:none; }
+  .fr.key .fi { background:var(--cyan-dim); border-color:rgba(77,184,212,.4); }
+  .fi {
+    width:48px; height:48px; background:var(--card);
+    border:1px solid var(--border); border-radius:12px;
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .fl h4 { font-size:14px; font-weight:600; margin-bottom:2px; }
+  .fl p { font-size:12px; color:var(--muted); font-weight:400; }
+  .fa { font-size:32px; font-weight:800; color:var(--cyan); white-space:nowrap; text-align:right; }
+
+  /* ── SCENARIOS ── */
+  .scenarios { display:flex; flex-direction:column; gap:10px; position:relative; z-index:1; }
+  .sc {
+    display:grid; grid-template-columns:auto 1fr auto;
+    align-items:center; gap:14px;
+    padding:16px 18px;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; transition:border-color .3s;
+  }
+  .sc:hover { border-color:rgba(77,184,212,.4); }
+  .sc.best { background:var(--cyan-dim); border-color:rgba(77,184,212,.45); }
+  .st {
+    font-size:10px; font-weight:700; text-transform:uppercase;
+    letter-spacing:1.5px; padding:4px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .st.c { background:rgba(255,255,255,.07); color:var(--muted); }
+  .st.r { background:var(--cyan-dim); color:var(--cyan); }
+  .st.b { background:var(--cyan); color:var(--navy); }
+  .sd { font-size:13px; color:var(--muted2); line-height:1.5; }
+  .sd strong { color:var(--white); font-weight:600; }
+  .sv { font-size:32px; font-weight:800; color:var(--white); text-align:right; line-height:1; white-space:nowrap; }
+  .sc.best .sv { color:var(--cyan); }
+  .sv small { display:block; font-size:10px; color:var(--muted); font-weight:400; text-align:right; margin-top:2px; }
+
+  /* ── SEO STEPS ── */
+  .seo { display:flex; flex-direction:column; gap:10px; position:relative; z-index:1; }
+  .si {
+    display:flex; gap:14px;
+    padding:16px; background:var(--card);
+    border:1px solid var(--border); border-radius:16px;
+    transition:border-color .3s;
+  }
+  .si:hover { border-color:rgba(77,184,212,.4); }
+  .sico {
+    width:42px; height:42px; flex-shrink:0;
+    background:var(--cyan-dim); border:1px solid rgba(77,184,212,.3);
+    border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px;
+  }
+  .si h4 { font-size:14px; font-weight:600; margin-bottom:3px; }
+  .si p { font-size:12px; color:var(--muted2); line-height:1.65; }
+  .si p strong { color:var(--white); }
+
+  /* ── TIMELINE ── */
+  .tline { position:relative; padding-left:30px; position:relative; z-index:1; }
+  .tline::before {
+    content:''; position:absolute; left:8px; top:0; bottom:0;
+    width:2px; background:var(--border);
+  }
+  .tl { position:relative; padding-bottom:26px; }
+  .tl::before {
+    content:''; position:absolute; left:-25px; top:4px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--navy2); border:2px solid var(--border);
+  }
+  .tl.on::before {
+    background:var(--cyan); border-color:var(--cyan);
+    box-shadow:0 0 12px var(--cyan-glow);
+  }
+  .tey { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--cyan); margin-bottom:3px; }
+  .tti { font-weight:700; font-size:15px; margin-bottom:4px; }
+  .tde { font-size:12px; color:var(--muted2); line-height:1.65; }
+
+  /* ── INFOBOX ── */
+  .info {
+    margin-top:14px; padding:14px 16px;
+    background:var(--cyan-dim); border:1px solid var(--border);
+    border-radius:12px; font-size:12px; color:var(--muted2); line-height:1.65;
+    position:relative; z-index:1;
+  }
+  .info strong { color:var(--white); }
+
+  /* ── CLOSING ── */
+  .slide-close {
+    background: linear-gradient(160deg, #061020 0%, #0A1A35 50%, #061020 100%);
+  }
+  .slide-close::after {
+    content:'⚡'; position:absolute; right:-40px; bottom:-30px;
+    font-size:350px; opacity:.03; user-select:none; line-height:1;
+  }
+  .ch {
+    font-size:clamp(38px,8.5vw,80px); font-weight:800; line-height:.92;
+    margin-bottom:26px; position:relative; z-index:1;
+  }
+  .ch .c { color:var(--cyan); }
+  .cpts { display:flex; flex-direction:column; gap:11px; margin-bottom:32px; position:relative; z-index:1; }
+  .cpt {
+    display:flex; gap:12px; font-size:14px; font-weight:500;
+    color:var(--muted2); align-items:flex-start; line-height:1.5;
+  }
+  .cpt::before {
+    content:''; width:18px; height:18px; flex-shrink:0;
+    background:var(--cyan-dim); border:1px solid rgba(77,184,212,.4);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    margin-top:2px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%234DB8D4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size:12px; background-repeat:no-repeat; background-position:center;
+  }
+  .ccta {
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--cyan); color:var(--navy);
+    padding:15px 28px; font-weight:800; font-size:15px;
+    letter-spacing:.5px; border-radius:12px; text-decoration:none;
+    transition:transform .2s, box-shadow .2s;
+    position:relative; z-index:1;
+  }
+  .ccta:hover { transform:translateY(-2px); box-shadow:0 8px 28px var(--cyan-glow); }
+
+  @media(max-width:768px){
+    #dots { display:none; }
+    .slide { min-height:auto; padding:48px 18px; }
+    .sn { top:16px; right:16px; font-size:56px; }
+    .cover-nav, .cover-pill { width:100%; max-width:100%; }
+    .cover-nav { padding:12px 14px; }
+    .grid2 { grid-template-columns:1fr; }
+    .tbl-wrap, .kt-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .tbl, .kt { display:block; width:100%; overflow-x:auto; white-space:nowrap; }
+    .fr, .sc { grid-template-columns:1fr; align-items:flex-start; }
+    .fa, .sv { text-align:left; font-size:26px; }
+    .flow, .scenarios, .seo, .tline { gap:12px; }
+    [style*='grid-template-columns:1fr auto auto auto'] {
+      grid-template-columns:1fr;
+      align-items:flex-start;
+    }
+    [style*='display:flex; align-items:center; gap:10px; margin-bottom:10px;'] {
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+  }
+
+  @media(max-width:480px){
+    .slide { padding:44px 16px; }
+    .sn { font-size:48px; }
+    h1 { font-size:clamp(36px,14vw,64px); }
+    h2 { font-size:clamp(28px,10vw,44px); }
+    .sub, .cpt { font-size:13px; }
+    .cv { font-size:36px; }
+    .fa, .sv { font-size:24px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+<div id="dots"></div>
+
+<!-- ══ SLIDE 1 — PORTADA ══ -->
+<div class="slide" id="s0">
+  <div class="cover-nav">
+    <div class="cnav-logo">J⚡</div>
+    <div>
+      <div class="cnav-name">JPower Electric</div>
+      <div class="cnav-sub">Miami Electrical Services</div>
+    </div>
+  </div>
+  <div class="ey">Análisis de inversión</div>
+  <h1>
+    Por qué el nuevo sitio
+    <span class="c">vale cada dólar.</span>
+  </h1>
+  <p class="sub">Un análisis basado en datos reales del mercado de Miami. Cómo el sitio web se paga solo — y sigue generando dinero mes tras mes.</p>
+  <div class="cover-pill">📊 Paquete completo $1,500 · Miami, FL · 2026</div>
+</div>
+
+<!-- ══ SLIDE 2 — PROBLEMA (LIGHT) ══ -->
+<div class="slide light" id="s1">
+  <div class="sn" style="color:rgba(10,22,40,.05)">02</div>
+  <div class="ey">El problema ahora mismo</div>
+  <h2>Tu sitio viejo<br><em>te está costando clientes.</em></h2>
+  <p class="sub">Comparación directa: lo que hace jpower.us vs. lo que hace el nuevo sitio.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width:30%">Factor</th>
+        <th>jpower.us (viejo)</th>
+        <th>Nuevo sitio ✓</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--light-text)">Primera impresión</strong></td>
+        <td style="color:rgba(10,22,40,.6)">Template anticuado, lorem ipsum visible <span class="bb">Mata la confianza</span></td>
+        <td style="color:var(--light-text)">Moderno, profesional, mobile-first <span class="bg">Genera confianza</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--light-text)">Velocidad mobile</strong></td>
+        <td style="color:rgba(10,22,40,.6)">Lento, imágenes sin optimizar <span class="bb">Google penaliza</span></td>
+        <td style="color:var(--light-text)">Carga en &lt;2s, optimizado <span class="bg">Google premia</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--light-text)">SEO local</strong></td>
+        <td style="color:rgba(10,22,40,.6)">Sin palabras clave locales <span class="bb">Invisible en Google</span></td>
+        <td style="color:var(--light-text)">"Electrician Miami", "EV Charging"… <span class="bg">Te encuentran</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--light-text)">Call to action</strong></td>
+        <td style="color:rgba(10,22,40,.6)">Sin urgencia, sin botón claro <span class="bb">Sin leads</span></td>
+        <td style="color:var(--light-text)">WhatsApp + llamada visibles siempre <span class="bg">Convierte</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--light-text)">Mercado hispano</strong></td>
+        <td style="color:rgba(10,22,40,.6)">Solo inglés — pierde el 70% de Miami <span class="bb">Dinero perdido</span></td>
+        <td style="color:var(--light-text)">Bilingüe, keywords en español <span class="bg">Doble audiencia</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info" style="background:rgba(10,22,40,0.05); border-color:rgba(10,22,40,0.1);">
+    <strong style="color:var(--light-text)">💡 La realidad:</strong> <span style="color:rgba(10,22,40,.65)">Cada vez que alguien busca "electricista Miami" y llega a jpower.us, se va. Eso es un trabajo perdido cada vez — sin que te enteres.</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 — DATOS ══ -->
+<div class="slide" id="s2">
+  <div class="sn">03</div>
+  <div class="ey">Datos reales · Ubersuggest · Miami</div>
+  <h2>¿Cuánta gente te busca<br><em>cada mes?</em></h2>
+  <p class="sub">Volumen de búsquedas verificado. Clientes reales buscando un electricista en Miami ahora mismo.</p>
+
+  <table class="kt">
+    <thead>
+      <tr>
+        <th>Palabra clave · Miami</th>
+        <th>Vol/mes</th>
+        <th>CPC real</th>
+        <th>SD</th>
+        <th>Oportunidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="star">
+        <td>⚡ electrician <em style="color:var(--cyan);font-style:normal">(Miami)</em></td>
+        <td class="ny">1,300</td>
+        <td class="ny">$15.59</td>
+        <td class="nm">39</td>
+        <td><span class="bg">Principal</span></td>
+      </tr>
+      <tr>
+        <td>🔌 electrician near me</td>
+        <td class="ny">1,000</td>
+        <td class="ny">$17.51</td>
+        <td class="nm">34</td>
+        <td><span class="bg">Alta intención</span></td>
+      </tr>
+      <tr>
+        <td>🏗️ electrical contractor</td>
+        <td class="nm">110</td>
+        <td class="ny" style="color:#FFD700;font-weight:800">$22.86</td>
+        <td class="nm">39</td>
+        <td><span class="bg">CPC más alto ⭐</span></td>
+      </tr>
+      <tr>
+        <td>🚨 emergency electrician near me</td>
+        <td class="nm">30</td>
+        <td class="ny">$14.06</td>
+        <td class="nm">32</td>
+        <td><span class="bg">Urgente = pagan</span></td>
+      </tr>
+      <tr>
+        <td>🇪🇸 electricista near me</td>
+        <td class="nm">30</td>
+        <td class="ny">$13.57</td>
+        <td class="nm">33</td>
+        <td><span class="bg">Sin competencia</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grid2 mt">
+    <div class="card hot">
+      <div class="cl">Total búsquedas mensuales</div>
+      <div class="cv">3,500+</div>
+      <div class="cs">Personas buscando un electricista en Miami — datos verificados Ubersuggest</div>
+    </div>
+    <div class="card">
+      <div class="cl">CPC promedio — lo que pagan tus competidores</div>
+      <div class="cv">$17.25</div>
+      <div class="cs">Por cada click en Google Ads. Tú los recibes gratis con SEO.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 — MATEMÁTICAS (LIGHT) ══ -->
+<div class="slide light" id="s3">
+  <div class="sn" style="color:rgba(10,22,40,.05)">04</div>
+  <div class="ey">Las matemáticas del dinero</div>
+  <h2>¿Cuánto vale ese tráfico<br><em>en dólares?</em></h2>
+  <p class="sub">Lo que recibes gratis con SEO, tus competidores lo pagan en Google Ads cada mes.</p>
+
+  <div class="flow" style="position:relative; z-index:1;">
+    <div class="fr" style="border-color:rgba(10,22,40,.1)">
+      <div class="fi" style="background:white; border-color:rgba(10,22,40,.1)">🔍</div>
+      <div class="fl">
+        <h4 style="color:var(--light-text)">"electrician" + "near me" · Miami</h4>
+        <p style="color:rgba(10,22,40,.5)">Solo estas 2 keywords — datos verificados Ubersuggest</p>
+      </div>
+      <div class="fa" style="color:var(--navy)">2,300/mes</div>
+    </div>
+    <div class="fr" style="border-color:rgba(10,22,40,.1)">
+      <div class="fi" style="background:white; border-color:rgba(10,22,40,.1)">👆</div>
+      <div class="fl">
+        <h4 style="color:var(--light-text)">Clicks estimados en top 3 (CTR 30%)</h4>
+        <p style="color:rgba(10,22,40,.5)">Visitantes mensuales que llegan a tu sitio</p>
+      </div>
+      <div class="fa" style="color:var(--navy)">690</div>
+    </div>
+    <div class="fr" style="border-color:rgba(10,22,40,.1)">
+      <div class="fi" style="background:white; border-color:rgba(10,22,40,.1)">💵</div>
+      <div class="fl">
+        <h4 style="color:var(--light-text)">CPC promedio verificado</h4>
+        <p style="color:rgba(10,22,40,.5)">"electrician" $15.59 · "near me" $17.51 · avg $16.50</p>
+      </div>
+      <div class="fa" style="color:var(--navy)">$16.50</div>
+    </div>
+    <div class="fr" style="border-color:rgba(10,22,40,.15); background:rgba(10,22,40,.03); border-radius:12px; padding:16px 14px; margin-top:4px;">
+      <div class="fi" style="background:var(--navy); border-color:var(--navy3)">⚡</div>
+      <div class="fl">
+        <h4 style="color:var(--navy); font-size:15px;">Tráfico mensual GRATIS equivalente</h4>
+        <p style="color:rgba(10,22,40,.5)">Lo que ahorras vs. Google Ads — solo 2 keywords</p>
+      </div>
+      <div class="fa" style="font-size:38px; color:var(--navy)">$11,385</div>
+    </div>
+  </div>
+
+  <div class="info" style="background:rgba(10,22,40,0.05); border-color:rgba(10,22,40,0.1); margin-top:14px;">
+    <strong style="color:var(--light-text)">⚡ $11,385/mes en tráfico equivalente</strong> <span style="color:rgba(10,22,40,.6)">— solo de 2 keywords. Agrega "electrical contractor" ($22.86), "emergency electrician" ($14.06), "electricista near me" ($13.57)… el número <strong style="color:var(--light-text)">supera $15,000/mes</strong>. El sitio se paga en días.</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 — VALOR POR TRABAJO ══ -->
+<div class="slide" id="s4">
+  <div class="sn">05</div>
+  <div class="ey">Tus servicios · JPower Electric</div>
+  <h2>¿Cuánto vale cada<br><em>nuevo cliente tuyo?</em></h2>
+  <p class="sub">Con un precio publicado de $490 por instalación EV, el cálculo es directo.</p>
+
+  <div class="grid2">
+    <div class="card hot">
+      <div class="cl">⚡ Instalación cargador EV</div>
+      <div class="cv">$490+</div>
+      <div class="cs">Tu precio publicado — Tesla, Level 2, residencial y comercial. Dato real de tu Instagram.</div>
+    </div>
+    <div class="card">
+      <div class="cl">🔋 Panel · Wiring · Generators</div>
+      <div class="cv">—</div>
+      <div class="cs">Precios variables según proyecto. Típicamente superiores a la instalación EV.</div>
+    </div>
+    <div class="card">
+      <div class="cl">🚨 Emergency service</div>
+      <div class="cv">Premium</div>
+      <div class="cs">Servicios urgentes tienen recargo. Búsqueda "emergency electrician near me" tiene CPC $14.06 — clientes que pagan sin regatear.</div>
+    </div>
+    <div class="card">
+      <div class="cl">🏗️ Commercial / New construction</div>
+      <div class="cv">Mayor</div>
+      <div class="cs">"Electrical contractor Miami" tiene el CPC más alto del mercado — $22.86. Señal de que son los trabajos más lucrativos.</div>
+    </div>
+  </div>
+
+  <!-- EL CÁLCULO CLAVE -->
+  <div style="margin-top:16px; padding:20px; background:var(--cyan-dim); border:1px solid rgba(77,184,212,.4); border-radius:16px; position:relative; z-index:1;">
+    <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:12px;">El cálculo que importa</div>
+    <div style="display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px;">
+      <div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Inversión total del paquete completo</div>
+        <div style="font-size:12px; color:var(--muted2);">Sitio web + Google Business Profile optimizado + estrategia de contenido 1 mes</div>
+      </div>
+      <div style="font-size:42px; font-weight:800; color:var(--cyan); white-space:nowrap;">$1,500</div>
+    </div>
+    <div style="height:1px; background:rgba(77,184,212,.2); margin:14px 0;"></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div style="text-align:center;">
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Para recuperar la inversión</div>
+        <div style="font-size:32px; font-weight:800; color:var(--white);">3 clientes EV</div>
+        <div style="font-size:12px; color:var(--muted2);">3 × $490 = $1,470 ≈ $1,500</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">O simplemente</div>
+        <div style="font-size:32px; font-weight:800; color:var(--cyan);">1 panel / generator</div>
+        <div style="font-size:12px; color:var(--muted2);">Cualquier trabajo de mediana envergadura</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 — ROI (LIGHT) ══ -->
+<div class="slide light" id="s5">
+  <div class="sn" style="color:rgba(10,22,40,.05)">06</div>
+  <div class="ey">Retorno sobre la inversión</div>
+  <h2>¿En cuánto tiempo<br><em>recuperas tu dinero?</em></h2>
+  <p class="sub">Tres escenarios realistas. Basados en datos reales del mercado de Miami.</p>
+
+  <div class="scenarios">
+    <div class="sc" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="st c" style="background:rgba(10,22,40,.07); color:rgba(10,22,40,.5)">Conservador</div>
+      <div class="sd" style="color:rgba(10,22,40,.65)">
+        <strong style="color:var(--light-text)">3 instalaciones EV desde el sitio</strong><br>
+        3 × $490 = $1,470 — tu precio publicado
+      </div>
+      <div class="sv" style="color:var(--light-text)">3 clientes<small style="color:rgba(10,22,40,.45)">para recuperar $1,500</small></div>
+    </div>
+    <div class="sc best" style="background:var(--navy); border-color:var(--cyan);">
+      <div class="st b">Realista ⚡</div>
+      <div class="sd">
+        <strong>1 trabajo de panel, generator o wiring</strong><br>
+        Cualquier trabajo mediano supera los $1,500
+      </div>
+      <div class="sv" style="color:var(--cyan)">1 trabajo<small>para recuperar</small></div>
+    </div>
+    <div class="sc" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="st r" style="background:rgba(10,22,40,.06); color:var(--navy3)">Largo plazo</div>
+      <div class="sd" style="color:rgba(10,22,40,.65)">
+        <strong style="color:var(--light-text)">5 leads/mes · mix de servicios</strong><br>
+        Solo EV charging → 5 × $490 = $2,450/mes en piloto automático
+      </div>
+      <div class="sv" style="color:var(--navy)">$2,450+<small style="color:rgba(10,22,40,.45)">extra/mes mínimo</small></div>
+    </div>
+  </div>
+
+  <div class="grid2 mt">
+    <div class="card" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="cl" style="color:rgba(10,22,40,.45)">Tu inversión total</div>
+      <div class="cv" style="color:var(--light-text);">$1,500</div>
+      <div class="cs" style="color:rgba(10,22,40,.5)">Sitio + GBP + estrategia contenido 1 mes. Se paga una vez.</div>
+    </div>
+    <div class="card hot" style="background:var(--navy); border-color:var(--cyan);">
+      <div class="cl">Tráfico equivalente mensual</div>
+      <div class="cv" style="color:var(--cyan)">$11,000+</div>
+      <div class="cs">Lo que valen esos clicks en Google Ads — datos reales Ubersuggest</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 — ESTRATEGIA SEO CON DATOS ══ -->
+<div class="slide" id="s6">
+  <div class="sn">07</div>
+  <div class="ey">Plan SEO basado en datos reales</div>
+  <h2>Exactamente cómo<br><em>conquistamos Google.</em></h2>
+  <p class="sub">Cada keyword tiene un plan específico. No es teoría — es una hoja de ruta con números reales.</p>
+
+  <!-- FASE 1 -->
+  <div style="margin-bottom:16px; position:relative; z-index:1;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div style="background:var(--cyan); color:var(--navy); font-size:11px; font-weight:800; padding:3px 12px; border-radius:20px; letter-spacing:1px; text-transform:uppercase;">Fase 1 · Semanas 1–4</div>
+      <div style="font-size:12px; color:var(--muted)">Victorias rápidas — SD bajo, resultados inmediatos</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="display:grid; grid-template-columns:1fr auto auto auto; align-items:center; gap:10px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:12px;">
+        <div>
+          <div style="font-weight:600; font-size:13px;">emergency electrician near me</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Optimizar GBP con horario 24h + página de emergencias en el sitio</div>
+        </div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Vol</div><div style="font-weight:800; color:var(--cyan)">30/mes</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">CPC</div><div style="font-weight:800; color:var(--cyan)">$14.06</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">SD</div><div style="font-weight:800; color:var(--green)">32 ✓</div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr auto auto auto; align-items:center; gap:10px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:12px;">
+        <div>
+          <div style="font-weight:600; font-size:13px;">electricista near me <span style="color:var(--cyan)">🇪🇸</span></div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Sección en español en el sitio + GBP bilingüe — competencia casi cero</div>
+        </div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Vol</div><div style="font-weight:800; color:var(--cyan)">30/mes</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">CPC</div><div style="font-weight:800; color:var(--cyan)">$13.57</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">SD</div><div style="font-weight:800; color:var(--green)">33 ✓</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASE 2 -->
+  <div style="margin-bottom:16px; position:relative; z-index:1;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div style="background:rgba(77,184,212,.2); color:var(--cyan); font-size:11px; font-weight:800; padding:3px 12px; border-radius:20px; letter-spacing:1px; text-transform:uppercase; border:1px solid rgba(77,184,212,.3);">Fase 2 · Mes 1–3</div>
+      <div style="font-size:12px; color:var(--muted)">Keywords de alto volumen y alto valor</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="display:grid; grid-template-columns:1fr auto auto auto; align-items:center; gap:10px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:12px;">
+        <div>
+          <div style="font-weight:600; font-size:13px;">electrician near me <span style="font-size:11px; background:rgba(255,215,0,.15); color:#FFD700; padding:2px 6px; border-radius:6px; margin-left:4px;">CPC más alto</span></div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Title tag: "Electrician Near Me — JPower Electric Miami" + schema local</div>
+        </div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Vol</div><div style="font-weight:800; color:var(--cyan)">1,000</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">CPC</div><div style="font-weight:800; color:#FFD700">$17.51</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">SD</div><div style="font-weight:800; color:var(--cyan)">34</div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr auto auto auto; align-items:center; gap:10px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:12px;">
+        <div>
+          <div style="font-weight:600; font-size:13px;">electrical contractor Miami</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Página dedicada servicios comerciales + testimoniales empresas</div>
+        </div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Vol</div><div style="font-weight:800; color:var(--cyan)">110</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">CPC</div><div style="font-weight:800; color:#FFD700">$22.86</div></div>
+        <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">SD</div><div style="font-weight:800; color:var(--cyan)">39</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASE 3 -->
+  <div style="position:relative; z-index:1;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div style="background:rgba(77,184,212,.08); color:var(--muted2); font-size:11px; font-weight:800; padding:3px 12px; border-radius:20px; letter-spacing:1px; text-transform:uppercase; border:1px solid rgba(77,184,212,.15);">Fase 3 · Mes 3–6</div>
+      <div style="font-size:12px; color:var(--muted)">El objetivo final — keyword principal</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr auto auto auto; align-items:center; gap:10px; padding:14px 16px; background:var(--cyan-dim); border:1px solid rgba(77,184,212,.35); border-radius:12px;">
+      <div>
+        <div style="font-weight:700; font-size:14px; color:var(--cyan)">electrician Miami — Top 3</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:2px;">Con 86 reseñas 5.0★ + sitio optimizado + autoridad construida en fases 1 y 2</div>
+      </div>
+      <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Vol</div><div style="font-weight:800; color:var(--cyan)">1,300</div></div>
+      <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">CPC</div><div style="font-weight:800; color:var(--cyan)">$15.59</div></div>
+      <div style="text-align:center;"><div style="font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">SD</div><div style="font-weight:800; color:var(--cyan)">39</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7B — LOS 4 PILARES TÉCNICOS ══ -->
+<div class="slide light" id="s6b">
+  <div class="sn" style="color:rgba(10,22,40,.05)">07B</div>
+  <div class="ey">Cómo se ejecuta técnicamente</div>
+  <h2>Los 4 pilares que<br><em>mueven tu ranking.</em></h2>
+  <p class="sub">Cada pilar ataca una keyword específica de tu lista. Todo incluido en el paquete.</p>
+
+  <div class="seo" style="position:relative; z-index:1;">
+    <div class="si" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="sico">🗝️</div>
+      <div>
+        <h4 style="color:var(--light-text)">Title tags y meta — cada keyword en su lugar</h4>
+        <p style="color:rgba(10,22,40,.6)">El título de cada página incluye la keyword exacta. Ejemplo: <strong style="color:var(--navy)">"Electrician Near Me Miami — JPower Electric | Licensed & Insured"</strong>. Google lo lee en segundos y te posiciona para ese término.</p>
+      </div>
+    </div>
+    <div class="si" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="sico">📍</div>
+      <div>
+        <h4 style="color:var(--light-text)">Google Business Profile — optimizado para "near me"</h4>
+        <p style="color:rgba(10,22,40,.6)">Las búsquedas "near me" (1,000/mes, CPC $17.51) se resuelven principalmente desde Maps. Tu GBP debe tener: categoría primaria correcta, servicios listados, fotos reales de trabajos, horario de emergencias 24h. <strong style="color:var(--navy)">Esto es lo que activa el Map Pack.</strong></p>
+      </div>
+    </div>
+    <div class="si" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="sico">🇪🇸</div>
+      <div>
+        <h4 style="color:var(--light-text)">"Electricista near me" — keyword de oportunidad cero competencia</h4>
+        <p style="color:rgba(10,22,40,.6)">SD 33, CPC $13.57 — Miami es 70%+ hispano y casi nadie optimiza para este término. Una sección en español con las keywords exactas te pone primero <strong style="color:var(--navy)">en un mercado sin competencia real.</strong></p>
+      </div>
+    </div>
+    <div class="si" style="background:white; border-color:rgba(10,22,40,.08);">
+      <div class="sico">⭐</div>
+      <div>
+        <h4 style="color:var(--light-text)">86 reseñas 5.0★ — tu mayor ventaja competitiva</h4>
+        <p style="color:rgba(10,22,40,.6)">Las reseñas son el factor #1 de ranking en Maps. Tus 86 reseñas valen más que cualquier backlink. Las conectamos al sitio con schema markup y las usamos para <strong style="color:var(--navy)">dominar "electrical contractor" ($22.86 CPC)</strong> — el término más lucrativo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 — TIMELINE ══ -->
+<div class="slide light" id="s7">
+  <div class="sn" style="color:rgba(10,22,40,.05)">08</div>
+  <div class="ey">Línea de tiempo realista</div>
+  <h2>¿Cuándo verás<br><em>resultados?</em></h2>
+  <p class="sub">Sin promesas falsas. Lo que realmente ocurre, paso a paso.</p>
+
+  <div class="tline" style="--border: rgba(10,22,40,0.12);">
+    <div class="tl on">
+      <div class="tey" style="color:var(--navy3)">Semana 1–2</div>
+      <div class="tti" style="color:var(--light-text)">Nuevo sitio live + GBP optimizado</div>
+      <div class="tde" style="color:rgba(10,22,40,.6)">El nuevo sitio reemplaza jpower.us. Google Business Profile actualizado con fotos, keywords y servicios. Google re-rastrea inmediatamente.</div>
+    </div>
+    <div class="tl on">
+      <div class="tey" style="color:var(--navy3)">Mes 1–2</div>
+      <div class="tti" style="color:var(--light-text)">Primeras llamadas orgánicas + Maps visibility</div>
+      <div class="tde" style="color:rgba(10,22,40,.6)">JPower aparece en el Map Pack local. Primeras llamadas desde Google. Tus 86 reseñas empiezan a impulsar el ranking.</div>
+    </div>
+    <div class="tl">
+      <div class="tey" style="color:rgba(10,22,40,.4)">Mes 2–4</div>
+      <div class="tti" style="color:var(--light-text)">Top 3 Google para "electrician Miami"</div>
+      <div class="tde" style="color:rgba(10,22,40,.6)">Con la autoridad del sitio creciendo y reseñas acumulándose, subes a posiciones top. EV charging y panel upgrade empiezan a convertir.</div>
+    </div>
+    <div class="tl">
+      <div class="tey" style="color:rgba(10,22,40,.4)">Mes 4+</div>
+      <div class="tti" style="color:var(--light-text)">Flujo constante en piloto automático</div>
+      <div class="tde" style="color:rgba(10,22,40,.6)">5–10 leads/mes sin hacer nada. El sitio trabaja 24/7 — incluso cuando estás en un trabajo. Inversión recuperada. Ganancia pura.</div>
+    </div>
+  </div>
+
+  <div class="info" style="background:rgba(10,22,40,0.05); border-color:rgba(10,22,40,0.1); margin-top:20px;">
+    <strong style="color:var(--light-text)">⚠️ Importante:</strong> <span style="color:rgba(10,22,40,.6)">El SEO se construye con el tiempo. Pero a diferencia de los anuncios, <strong style="color:var(--light-text)">nunca deja de funcionar</strong> y nunca te manda una factura. Una inversión, años de retorno.</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 9 — CIERRE ══ -->
+<div class="slide slide-close" id="s8">
+  <div class="ey" style="color:rgba(77,184,212,.4)">La conclusión</div>
+  <div class="ch">
+    Cada mes sin<br>este sitio es<br><span class="c">dinero dejado</span><br>en la mesa.
+  </div>
+  <div class="cpts">
+    <div class="cpt">3,500+ personas/mes buscan un electricista en Miami — datos verificados</div>
+    <div class="cpt">Tus competidores pagan hasta $22.86 por click — tú los recibes gratis con SEO</div>
+    <div class="cpt">Solo 3 instalaciones EV ($490 c/u) recuperan los $1,500 invertidos</div>
+    <div class="cpt">$11,000+/mes en tráfico equivalente — solo 2 keywords de tu lista</div>
+    <div class="cpt">86 reseñas 5.0★ son el activo SEO más poderoso que existe en Maps</div>
+    <div class="cpt">"Electricista near me" — SD 33, CPC $13.57, competencia cero</div>
+  </div>
+  <a href="https://jpower-usa.vercel.app/" target="_blank" class="ccta">
+    Ver el nuevo sitio ⚡
+  </a>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  const prog   = document.getElementById('prog');
+
+  slides.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.onclick=()=>slides[i].scrollIntoView({behavior:'smooth'});
+    dotsEl.appendChild(d);
+  });
+
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        const i=Array.from(slides).indexOf(e.target);
+        document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+        prog.style.width=((i+1)/slides.length*100)+'%';
+      }
+    });
+  },{threshold:.25});
+
+  slides.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { login } from '@/actions/auth'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,7 @@ import { Eye, EyeOff } from 'lucide-react'
 
 export function LoginForm() {
   const t = useTranslations('auth.login')
+  const locale = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -28,6 +30,8 @@ export function LoginForm() {
 
   return (
     <form action={handleSubmit} className="space-y-5">
+      <input type="hidden" name="locale" value={locale} />
+
       <Input
         id="email"
         name="email"

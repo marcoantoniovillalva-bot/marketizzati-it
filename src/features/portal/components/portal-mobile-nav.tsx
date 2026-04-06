@@ -1,69 +1,92 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
 import { Link, usePathname } from '@/i18n/navigation'
 import { signout } from '@/actions/auth'
-import { LayoutDashboard, BookOpen, FolderOpen, User, LogOut, Menu, X } from 'lucide-react'
+import { BookOpen, Bot, BriefcaseBusiness, LayoutDashboard, LifeBuoy, LogOut, Menu, Settings2, Shield, Sparkles, User, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
-const navItems = [
-  { href: '/dashboard', icon: LayoutDashboard, key: 'dashboard' },
-  { href: '/corso', icon: BookOpen, key: 'course' },
-  { href: '/risorse', icon: FolderOpen, key: 'resources' },
-  { href: '/profilo', icon: User, key: 'profile' },
+type PortalMobileNavProps = {
+  role?: 'client' | 'admin'
+}
+
+const items = [
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/percorso', label: 'Percorso', icon: Sparkles },
+  { href: '/workspace', label: 'Workspace', icon: BriefcaseBusiness },
+  { href: '/task', label: 'Task', icon: Settings2 },
+  { href: '/risorse', label: 'Risorse', icon: BookOpen },
+  { href: '/automazioni', label: 'Auto', icon: Bot },
+  { href: '/supporto', label: 'Supporto', icon: LifeBuoy },
+  { href: '/profilo', label: 'Profilo', icon: User },
 ] as const
 
-export function PortalMobileNav() {
-  const t = useTranslations('portal.sidebar')
+export function PortalMobileNav({ role = 'client' }: PortalMobileNavProps) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
   return (
     <div className="lg:hidden">
-      {/* Top bar */}
-      <div className="flex items-center justify-between p-4 bg-surface border-b border-surface-border">
-        <Link href="/dashboard" className="text-lg font-bold tracking-tight text-foreground">
-          MARKET<span className="text-accent">IZZATI</span>
+      <div className="sticky top-0 z-40 flex items-center justify-between border-b border-surface-border bg-white/95 px-4 py-4 backdrop-blur">
+        <Link href="/dashboard" className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-red text-white shadow-glow-red">
+            <LayoutDashboard size={18} />
+          </div>
+          <div>
+            <p className="font-heading text-base font-semibold leading-none">Marketizzati</p>
+            <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-foreground-muted">Client OS</p>
+          </div>
         </Link>
-        <button onClick={() => setOpen(!open)} className="text-foreground p-2">
-          {open ? <X size={24} /> : <Menu size={24} />}
+        <button onClick={() => setOpen((value) => !value)} className="rounded-xl border border-surface-border p-2">
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Dropdown menu */}
       {open && (
-        <nav className="bg-surface border-b border-surface-border p-4 space-y-1">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
-            const Icon = item.icon
-            return (
+        <div className="border-b border-surface-border bg-white px-4 py-4">
+          <div className="grid grid-cols-2 gap-2">
+            {items.map((item) => {
+              const Icon = item.icon
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`)
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-2xl border px-4 py-3 text-sm font-medium transition-all ${
+                    active
+                      ? 'border-accent bg-accent text-white'
+                      : 'border-surface-border bg-surface text-foreground-secondary'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Icon size={16} />
+                    {item.label}
+                  </div>
+                </Link>
+              )
+            })}
+            {role === 'admin' && (
               <Link
-                key={item.key}
-                href={item.href}
+                href="/admin"
                 onClick={() => setOpen(false)}
-                className={`
-                  flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all
-                  ${isActive
-                    ? 'bg-accent/10 text-accent'
-                    : 'text-foreground-secondary hover:text-foreground hover:bg-surface-elevated'
-                  }
-                `}
+                className="col-span-2 rounded-2xl border border-foreground bg-foreground px-4 py-3 text-sm font-medium text-white"
               >
-                <Icon size={20} />
-                {t(item.key)}
+                <div className="flex items-center gap-2">
+                  <Shield size={16} />
+                  Admin & ProspectBot
+                </div>
               </Link>
-            )
-          })}
-          <form action={signout}>
-            <button
-              type="submit"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-foreground-secondary hover:text-red-400 hover:bg-red-500/10 transition-all w-full"
-            >
-              <LogOut size={20} />
-              Logout
-            </button>
-          </form>
-        </nav>
+            )}
+            <form action={signout} className="col-span-2">
+              <Button type="submit" variant="outline" className="w-full justify-center">
+                <LogOut size={16} />
+                Esci
+              </Button>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   )
