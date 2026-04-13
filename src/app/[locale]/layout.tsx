@@ -6,7 +6,6 @@ import { Inter, DM_Sans } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '@/components/seo/JsonLd'
-import Script from 'next/script'
 import '../globals.css'
 
 const inter = Inter({
@@ -124,18 +123,18 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://djatdyhqliotgnsljdja.supabase.co" />
         <JsonLd />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18067362849"
-          strategy="afterInteractive"
+        {/* Google Ads Tag — native script for reliable detection */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18067362849" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18067362849');
+            `,
+          }}
         />
-        <Script id="google-ads-tag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18067362849');
-          `}
-        </Script>
       </head>
       <body className="font-sans bg-background text-foreground antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
