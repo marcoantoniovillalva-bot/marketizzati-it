@@ -1,13 +1,13 @@
 'use server'
 
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import type { BlogPostRow, BlogSection } from '../types'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const OPENAI_KEY = process.env.OPENAI_API_KEY!
 
-// ── Image upload (service role — bypasses RLS) ────────────────────────────────
+// ── Image upload (direct REST — bypasses SDK abort issues) ───────────────────
 
 export async function uploadBlogImage(formData: FormData): Promise<string> {
   const file = formData.get('file') as File
@@ -15,20 +15,31 @@ export async function uploadBlogImage(formData: FormData): Promise<string> {
   if (!file || !file.size) throw new Error('File mancante')
 
   const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
-  const path = `${folder}/${Date.now()}.${ext}`
+  const storagePath = `${folder}/${Date.now()}.${ext}`
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
-  const supabase = createServiceClient()
   const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
 
-  const { data, error } = await supabase.storage
-    .from('blog-images')
-    .upload(path, buffer, { contentType: file.type || 'image/jpeg', upsert: true })
+  const res = await fetch(
+    `${SUPABASE_URL}/storage/v1/object/blog-images/${storagePath}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${serviceKey}`,
+        apikey: serviceKey,
+        'Content-Type': file.type || 'image/jpeg',
+        'x-upsert': 'true',
+      },
+      body: bytes,
+    }
+  )
 
-  if (error) throw new Error(error.message)
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Storage error ${res.status}: ${body}`)
+  }
 
-  const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(data.path)
-  return urlData.publicUrl
+  return `${SUPABASE_URL}/storage/v1/object/public/blog-images/${storagePath}`
 }
 
 // ── Public: fetch published posts ─────────────────────────────────────────────
