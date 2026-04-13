@@ -10,14 +10,18 @@ interface Props {
 
 export async function generateStaticParams() {
   const locales = ['it', 'en', 'es']
-  return locales.flatMap((locale) =>
-    getAllPosts(locale).map((post) => ({ locale, slug: post.slug }))
+  const params = await Promise.all(
+    locales.map(async (locale) => {
+      const posts = await getAllPosts(locale)
+      return posts.map((post) => ({ locale, slug: post.slug }))
+    })
   )
+  return params.flat()
 }
 
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params
-  const post = getPostBySlug(locale, slug)
+  const post = await getPostBySlug(locale, slug)
   if (!post) return {}
 
   const baseUrl = 'https://www.marketizzati.it'
@@ -86,6 +90,41 @@ function renderSection(section: BlogSection, index: number, locale: string) {
           <p className="text-body-md leading-relaxed">{section.content}</p>
         </div>
       )
+    case 'paragraph':
+      return (
+        <p key={index} className="text-body-md text-foreground-secondary leading-relaxed mt-4">
+          {section.content}
+        </p>
+      )
+    case 'image':
+      return (
+        <figure key={index} className="mt-8">
+          <img
+            src={section.url}
+            alt={section.alt}
+            className="w-full rounded-2xl object-cover"
+          />
+          {section.caption && (
+            <figcaption className="mt-2 text-center text-xs text-foreground-muted">{section.caption}</figcaption>
+          )}
+        </figure>
+      )
+    case 'video':
+      return (
+        <figure key={index} className="mt-8">
+          <div className="aspect-video rounded-2xl overflow-hidden">
+            <iframe
+              src={`https://www.youtube.com/embed/${section.youtubeId}`}
+              className="w-full h-full"
+              allowFullScreen
+              title={section.caption ?? 'Video'}
+            />
+          </div>
+          {section.caption && (
+            <figcaption className="mt-2 text-center text-xs text-foreground-muted">{section.caption}</figcaption>
+          )}
+        </figure>
+      )
     case 'cta':
       return (
         <div
@@ -107,11 +146,11 @@ function renderSection(section: BlogSection, index: number, locale: string) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params
-  const post = getPostBySlug(locale, slug)
+  const post = await getPostBySlug(locale, slug)
 
   if (!post) notFound()
 
-  const allPosts = getAllPosts(locale)
+  const allPosts = await getAllPosts(locale)
   const currentIndex = allPosts.findIndex((p) => p.slug === slug)
   const prevPost = allPosts[currentIndex + 1]
   const nextPost = allPosts[currentIndex - 1]

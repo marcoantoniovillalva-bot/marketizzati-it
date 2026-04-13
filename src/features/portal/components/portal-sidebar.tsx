@@ -88,13 +88,20 @@ export function PortalSidebar({ role = 'client' }: PortalSidebarProps) {
       </nav>
 
       {role === 'admin' && (
-        <div className="px-4 pb-4">
+        <div className="px-4 pb-4 space-y-2">
           <Link
             href="/admin"
             className="flex items-center gap-3 rounded-2xl border border-foreground/10 bg-foreground px-4 py-3 text-sm font-medium text-white transition hover:bg-black"
           >
             <Shield size={18} />
             Admin & ProspectBot
+          </Link>
+          <Link
+            href="/admin/blog"
+            className="flex items-center gap-3 rounded-2xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm font-medium text-accent transition hover:bg-accent/10"
+          >
+            <BookOpen size={18} />
+            Blog CMS
           </Link>
         </div>
       )}

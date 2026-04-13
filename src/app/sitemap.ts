@@ -17,7 +17,7 @@ const pages = [
 
 const locales = ['it', 'en', 'es']
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticEntries = pages.flatMap((page) =>
     locales.map((locale) => ({
@@ -34,7 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   )
 
   // Blog posts (Italian only for now)
-  const blogEntries = getAllPosts('it').map((post) => ({
+  const itPosts = await getAllPosts('it')
+  const blogEntries = itPosts.map((post) => ({
     url: `${baseUrl}/it/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
