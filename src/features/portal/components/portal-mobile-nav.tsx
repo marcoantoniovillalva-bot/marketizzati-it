@@ -68,16 +68,28 @@ export function PortalMobileNav({ role = 'client' }: PortalMobileNavProps) {
               )
             })}
             {role === 'admin' && (
-              <Link
-                href="/admin"
-                onClick={() => setOpen(false)}
-                className="col-span-2 rounded-2xl border border-foreground bg-foreground px-4 py-3 text-sm font-medium text-white"
-              >
-                <div className="flex items-center gap-2">
-                  <Shield size={16} />
-                  Admin & ProspectBot
-                </div>
-              </Link>
+              <>
+                <Link
+                  href="/admin"
+                  onClick={() => setOpen(false)}
+                  className="col-span-1 rounded-2xl border border-foreground bg-foreground px-4 py-3 text-sm font-medium text-white"
+                >
+                  <div className="flex items-center gap-2">
+                    <Shield size={16} />
+                    Admin
+                  </div>
+                </Link>
+                <Link
+                  href="/admin/blog"
+                  onClick={() => setOpen(false)}
+                  className="col-span-1 rounded-2xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm font-medium text-accent"
+                >
+                  <div className="flex items-center gap-2">
+                    <BookOpen size={16} />
+                    Blog CMS
+                  </div>
+                </Link>
+              </>
             )}
             <form action={signout} className="col-span-2">
               <Button type="submit" variant="outline" className="w-full justify-center">

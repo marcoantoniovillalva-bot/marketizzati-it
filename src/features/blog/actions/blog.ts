@@ -1,11 +1,35 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import type { BlogPostRow, BlogSection } from '../types'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const OPENAI_KEY = process.env.OPENAI_API_KEY!
+
+// ── Image upload (service role — bypasses RLS) ────────────────────────────────
+
+export async function uploadBlogImage(formData: FormData): Promise<string> {
+  const file = formData.get('file') as File
+  const folder = (formData.get('folder') as string) || 'covers'
+  if (!file || !file.size) throw new Error('File mancante')
+
+  const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+  const path = `${folder}/${Date.now()}.${ext}`
+
+  const supabase = createServiceClient()
+  const bytes = await file.arrayBuffer()
+  const buffer = Buffer.from(bytes)
+
+  const { data, error } = await supabase.storage
+    .from('blog-images')
+    .upload(path, buffer, { contentType: file.type || 'image/jpeg', upsert: true })
+
+  if (error) throw new Error(error.message)
+
+  const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(data.path)
+  return urlData.publicUrl
+}
 
 // ── Public: fetch published posts ─────────────────────────────────────────────
 

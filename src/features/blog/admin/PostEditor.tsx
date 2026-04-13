@@ -2,10 +2,9 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import {
   createPost, updatePost, deletePost, togglePublish,
-  generateArticleAI, getItalyTrends
+  generateArticleAI, getItalyTrends, uploadBlogImage
 } from '../actions/blog'
 import type { BlogSection, BlogPostRow } from '../types'
 import {
@@ -74,8 +73,6 @@ export function PostEditor({ post, locale = 'it' }: Props) {
   const [saveError, setSaveError] = useState('')
   const [showAiPanel, setShowAiPanel] = useState(false)
 
-  const supabase = createClient()
-
   // ── Slug auto-generate ───────────────────────────────────────────────────
   function autoSlug(t: string) {
     return t.toLowerCase()
@@ -85,40 +82,16 @@ export function PostEditor({ post, locale = 'it' }: Props) {
       .replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 80)
   }
 
-  // ── Raw fetch upload (bypasses SDK abort issues) ─────────────────────────
-  async function uploadToStorage(file: File, folder: string): Promise<string> {
-    const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
-    const filename = `${folder}/${Date.now()}.${ext}`
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-    const { data: { session } } = await supabase.auth.getSession()
-    const token = session?.access_token ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-    const res = await fetch(
-      `${supabaseUrl}/storage/v1/object/blog-images/${filename}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': file.type || 'image/jpeg',
-          'x-upsert': 'true',
-        },
-        body: file,
-      }
-    )
-    if (!res.ok) {
-      const msg = await res.text()
-      throw new Error(msg)
-    }
-    return `${supabaseUrl}/storage/v1/object/public/blog-images/${filename}`
-  }
-
-  // ── Cover image upload ───────────────────────────────────────────────────
+  // ── Cover image upload (via server action — service role, bypasses auth issues)
   async function uploadCoverImage(file: File) {
     setCoverUploading(true)
     setCoverError('')
     setCoverSuccess(false)
     try {
-      const url = await uploadToStorage(file, 'covers')
+      const fd = new FormData()
+      fd.append('file', file)
+      fd.append('folder', 'covers')
+      const url = await uploadBlogImage(fd)
       setImage(url)
       setImageAlt(file.name.replace(/\.[^.]+$/, ''))
       setCoverSuccess(true)
@@ -133,7 +106,10 @@ export function PostEditor({ post, locale = 'it' }: Props) {
   async function uploadSectionImage(idx: number, file: File) {
     setUploadingIdx(idx)
     try {
-      const url = await uploadToStorage(file, 'sections')
+      const fd = new FormData()
+      fd.append('file', file)
+      fd.append('folder', 'sections')
+      const url = await uploadBlogImage(fd)
       updateSection(idx, { url, alt: file.name.replace(/\.[^.]+$/, '') })
     } catch {
       // silently fail for section images — user can retry
