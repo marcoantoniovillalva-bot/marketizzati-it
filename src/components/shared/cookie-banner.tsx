@@ -18,12 +18,30 @@ export function CookieBanner() {
   function handleAcceptAll() {
     localStorage.setItem('cookie-consent', 'all')
     document.cookie = 'cookie-consent=all; max-age=31536000; path=/'
+    // Google Consent Mode v2 — grant all
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
+      })
+    }
     setIsVisible(false)
   }
 
   function handleRejectAll() {
     localStorage.setItem('cookie-consent', 'necessary')
     document.cookie = 'cookie-consent=necessary; max-age=31536000; path=/'
+    // Google Consent Mode v2 — keep denied
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      })
+    }
     setIsVisible(false)
   }
 

@@ -123,13 +123,42 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://djatdyhqliotgnsljdja.supabase.co" />
         <JsonLd />
-        {/* Google Ads Tag — native script for reliable detection */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18067362849" />
+        {/* Google Consent Mode v2 — must be BEFORE gtag loads */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+
+              // Default: all denied until user consents
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                analytics_storage: 'denied',
+                wait_for_update: 500
+              });
+
+              // Restore consent immediately if user already accepted
+              (function() {
+                var c = localStorage.getItem('cookie-consent');
+                if (c === 'all') {
+                  gtag('consent', 'update', {
+                    ad_storage: 'granted',
+                    ad_user_data: 'granted',
+                    ad_personalization: 'granted',
+                    analytics_storage: 'granted'
+                  });
+                }
+              })();
+            `,
+          }}
+        />
+        {/* Google Ads Tag */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18067362849" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
               gtag('js', new Date());
               gtag('config', 'AW-18067362849');
             `,
