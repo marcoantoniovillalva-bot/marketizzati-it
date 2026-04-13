@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { Link } from '@/i18n/navigation'
+import NextLink from 'next/link'
 import { getAllPosts } from '@/features/blog/posts'
 import { Clock, ArrowRight } from 'lucide-react'
 
@@ -32,30 +32,45 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
         ) : (
           <div className="flex flex-col gap-8">
             {posts.map((post) => (
-              <Link
+              <NextLink
                 key={post.slug}
-                href={`/blog/${post.slug}` as '/blog'}
-                className="group block bg-surface-elevated border border-surface-border rounded-2xl p-8 hover:border-accent/40 transition-colors"
+                href={`/${locale}/blog/${post.slug}`}
+                className="group block bg-surface-elevated border border-surface-border rounded-2xl overflow-hidden hover:border-accent/40 transition-colors"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent/10 text-accent">
-                    {post.category}
-                  </span>
-                  <span className="flex items-center gap-1 text-xs text-foreground-muted">
-                    <Clock size={12} />
-                    {post.readTime} min di lettura
+                {/* Cover image */}
+                <div className="w-full h-52 overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.imageAlt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="p-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent/10 text-accent">
+                      {post.category}
+                    </span>
+                    <span className="flex items-center gap-1 text-xs text-foreground-muted">
+                      <Clock size={12} />
+                      {post.readTime} min di lettura
+                    </span>
+                    <span className="text-xs text-foreground-muted">
+                      {new Date(post.date).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    </span>
+                  </div>
+                  <h2 className="font-heading text-display-sm group-hover:text-accent transition-colors mb-3">
+                    {post.title}
+                  </h2>
+                  <p className="text-body-md text-foreground-secondary line-clamp-2 mb-6">
+                    {post.description}
+                  </p>
+                  <span className="flex items-center gap-2 text-sm font-medium text-accent">
+                    Leggi l&apos;articolo <ArrowRight size={16} />
                   </span>
                 </div>
-                <h2 className="font-heading text-display-sm group-hover:text-accent transition-colors mb-3">
-                  {post.title}
-                </h2>
-                <p className="text-body-md text-foreground-secondary line-clamp-2 mb-6">
-                  {post.description}
-                </p>
-                <span className="flex items-center gap-2 text-sm font-medium text-accent">
-                  Leggi l&apos;articolo <ArrowRight size={16} />
-                </span>
-              </Link>
+              </NextLink>
             ))}
           </div>
         )}

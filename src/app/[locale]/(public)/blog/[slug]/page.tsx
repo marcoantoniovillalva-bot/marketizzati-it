@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { Link } from '@/i18n/navigation'
+import NextLink from 'next/link'
 import { getAllPosts, getPostBySlug } from '@/features/blog/posts'
 import type { BlogSection } from '@/features/blog/types'
 import { Clock, ArrowLeft, ArrowRight } from 'lucide-react'
@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: Props) {
       url,
       type: 'article',
       publishedTime: post.date,
+      images: [{ url: `${baseUrl}${post.image}`, width: 1792, height: 1024, alt: post.imageAlt }],
     },
   }
 }
@@ -93,12 +94,13 @@ function renderSection(section: BlogSection, index: number) {
         >
           <h3 className="font-heading text-display-xs mb-3">{section.heading}</h3>
           <p className="text-body-md text-foreground-secondary mb-6">{section.content}</p>
-          <Link
-            href="/consulenza"
+          <NextLink
+            href="#"
+            onClick={(e) => { e.preventDefault(); window.location.href = window.location.pathname.replace(/\/blog.*/, '/consulenza') }}
             className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-colors"
           >
             Prenota la consulenza gratuita <ArrowRight size={16} />
-          </Link>
+          </NextLink>
         </div>
       )
   }
@@ -115,13 +117,13 @@ export default async function BlogPostPage({ params }: Props) {
   const prevPost = allPosts[currentIndex + 1]
   const nextPost = allPosts[currentIndex - 1]
 
-  // Article JSON-LD schema
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    image: `https://www.marketizzati.it${post.image}`,
     author: {
       '@type': 'Person',
       name: 'Marco Antonio Villalva',
@@ -146,21 +148,24 @@ export default async function BlogPostPage({ params }: Props) {
       <article className="pt-32 pb-32 px-6">
         <div className="max-w-2xl mx-auto">
           {/* Back */}
-          <Link
-            href="/blog"
+          <NextLink
+            href={`/${locale}/blog`}
             className="inline-flex items-center gap-2 text-sm text-foreground-muted hover:text-foreground transition-colors mb-10"
           >
             <ArrowLeft size={16} /> Tutti gli articoli
-          </Link>
+          </NextLink>
 
           {/* Header */}
-          <header className="mb-10">
+          <header className="mb-8">
             <div className="flex items-center gap-3 mb-5">
               <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent/10 text-accent">
                 {post.category}
               </span>
               <span className="flex items-center gap-1 text-xs text-foreground-muted">
                 <Clock size={12} /> {post.readTime} min di lettura
+              </span>
+              <span className="text-xs text-foreground-muted">
+                {new Date(post.date).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
               </span>
             </div>
             <h1 className="font-heading text-display-md md:text-display-lg leading-tight">
@@ -169,8 +174,17 @@ export default async function BlogPostPage({ params }: Props) {
             <p className="mt-4 text-body-lg text-foreground-secondary">{post.description}</p>
           </header>
 
+          {/* Hero image */}
+          <div className="w-full rounded-2xl overflow-hidden mb-10">
+            <img
+              src={post.image}
+              alt={post.imageAlt}
+              className="w-full h-64 md:h-80 object-cover"
+            />
+          </div>
+
           {/* Content */}
-          <div className="prose-custom">
+          <div>
             {post.sections.map((section, i) => renderSection(section, i))}
           </div>
 
@@ -178,30 +192,30 @@ export default async function BlogPostPage({ params }: Props) {
           {(prevPost || nextPost) && (
             <nav className="mt-16 pt-8 border-t border-surface-border grid grid-cols-1 sm:grid-cols-2 gap-4">
               {prevPost && (
-                <Link
-                  href={`/blog/${prevPost.slug}` as '/blog'}
+                <NextLink
+                  href={`/${locale}/blog/${prevPost.slug}`}
                   className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors"
                 >
                   <span className="text-xs text-foreground-muted flex items-center gap-1 mb-2">
                     <ArrowLeft size={12} /> Articolo precedente
                   </span>
-                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2">
+                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2 block">
                     {prevPost.title}
                   </span>
-                </Link>
+                </NextLink>
               )}
               {nextPost && (
-                <Link
-                  href={`/blog/${nextPost.slug}` as '/blog'}
-                  className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors sm:text-right"
+                <NextLink
+                  href={`/${locale}/blog/${nextPost.slug}`}
+                  className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors sm:text-right sm:col-start-2"
                 >
                   <span className="text-xs text-foreground-muted flex items-center gap-1 mb-2 sm:justify-end">
                     Articolo successivo <ArrowRight size={12} />
                   </span>
-                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2">
+                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2 block">
                     {nextPost.title}
                   </span>
-                </Link>
+                </NextLink>
               )}
             </nav>
           )}

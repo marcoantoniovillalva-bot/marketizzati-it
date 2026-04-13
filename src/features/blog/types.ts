@@ -6,6 +6,8 @@ export interface BlogPost {
   readTime: number
   category: string
   keywords: string[]
+  image: string
+  imageAlt: string
   sections: BlogSection[]
 }
 

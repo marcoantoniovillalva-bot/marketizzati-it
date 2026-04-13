@@ -5,9 +5,11 @@ export const sceglierAgenziaSocialMedia: BlogPost = {
   title: 'Come Scegliere un\'Agenzia di Social Media Marketing nel 2025',
   description:
     'Guida per PMI su come scegliere la giusta agenzia di social media marketing: domande da fare, segnali di qualità, red flag da evitare e prezzi realistici.',
-  date: '2025-05-29',
+  date: '2026-04-13',
   readTime: 9,
   category: 'Social Media',
+  image: '/images/blog/blog-agenzia-social-media.jpg',
+  imageAlt: 'Team di marketing che lavora su strategie di social media',
   keywords: [
     'agenzia di social media marketing',
     'agenzia social media',

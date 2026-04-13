@@ -5,9 +5,11 @@ export const facebookAdsLeadGeneration: BlogPost = {
   title: 'Come Fare Facebook Ads per Generare Lead Qualificati nel 2025',
   description:
     'Guida pratica alle Facebook Ads per la generazione di lead: struttura delle campagne, targeting, budget, lead form vs landing page e gli errori più comuni da evitare.',
-  date: '2025-05-22',
+  date: '2026-04-06',
   readTime: 10,
   category: 'Advertising',
+  image: '/images/blog/blog-facebook-ads-lead.jpg',
+  imageAlt: 'Dashboard Facebook Ads con metriche di lead generation',
   keywords: [
     'facebook ads lead',
     'facebook ads leads',

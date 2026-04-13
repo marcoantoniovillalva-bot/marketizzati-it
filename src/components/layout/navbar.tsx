@@ -32,6 +32,7 @@ export function Navbar() {
   const publicNavLinks = [
     { name: t('nav.services'), href: '/#servizi' },
     { name: t('nav.about'), href: '/#chi-sono' },
+    { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.consultation'), href: '/#contatti' },
   ]
 

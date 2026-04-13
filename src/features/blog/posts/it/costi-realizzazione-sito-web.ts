@@ -5,9 +5,11 @@ export const costiRealizzazioneSitoWeb: BlogPost = {
   title: 'Quanto Costa Realizzare un Sito Web Professionale nel 2025',
   description:
     'Scopri i costi reali di realizzazione di un sito web professionale nel 2025: dalle fasce di prezzo per ogni tipologia ai fattori che influenzano il preventivo. Guida completa.',
-  date: '2025-05-15',
+  date: '2026-04-10',
   readTime: 8,
   category: 'Web & Tecnologia',
+  image: '/images/blog/blog-costi-sito-web.jpg',
+  imageAlt: 'Laptop con sito web professionale e analisi costi',
   keywords: [
     'costi realizzazione sito web',
     'prezzo realizzazione sito web',
