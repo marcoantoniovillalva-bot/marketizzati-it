@@ -55,8 +55,12 @@ export async function generateMetadata({
       googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
     },
     icons: {
-      icon: '/images/icon-dark.png',
-      apple: '/images/icon-dark.png',
+      icon: [
+        { url: '/favicon.png', type: 'image/png' },
+        { url: '/images/icon-dark.png', type: 'image/png' },
+      ],
+      apple: '/favicon.png',
+      shortcut: '/favicon.png',
     },
     alternates: {
       canonical: canonicalUrl,
