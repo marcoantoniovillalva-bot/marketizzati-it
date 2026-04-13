@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
-function renderSection(section: BlogSection, index: number) {
+function renderSection(section: BlogSection, index: number, locale: string) {
   switch (section.type) {
     case 'intro':
       return (
@@ -95,8 +95,7 @@ function renderSection(section: BlogSection, index: number) {
           <h3 className="font-heading text-display-xs mb-3">{section.heading}</h3>
           <p className="text-body-md text-foreground-secondary mb-6">{section.content}</p>
           <NextLink
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.location.href = window.location.pathname.replace(/\/blog.*/, '/consulenza') }}
+            href={`/${locale}/consulenza`}
             className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-colors"
           >
             Prenota la consulenza gratuita <ArrowRight size={16} />
@@ -185,7 +184,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Content */}
           <div>
-            {post.sections.map((section, i) => renderSection(section, i))}
+            {post.sections.map((section, i) => renderSection(section, i, locale))}
           </div>
 
           {/* Prev / Next */}
