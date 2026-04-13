@@ -69,6 +69,8 @@ export function PostEditor({ post, locale = 'it' }: Props) {
   const [aiLoading, setAiLoading] = useState(false)
   const [uploadingIdx, setUploadingIdx] = useState<number | null>(null)
   const [coverUploading, setCoverUploading] = useState(false)
+  const [coverError, setCoverError] = useState('')
+  const [coverSuccess, setCoverSuccess] = useState(false)
   const [saveError, setSaveError] = useState('')
   const [showAiPanel, setShowAiPanel] = useState(false)
 
@@ -86,15 +88,25 @@ export function PostEditor({ post, locale = 'it' }: Props) {
   // ── Cover image upload ───────────────────────────────────────────────────
   async function uploadCoverImage(file: File) {
     setCoverUploading(true)
-    const ext = file.name.split('.').pop()
-    const path = `covers/${Date.now()}.${ext}`
-    const { data, error } = await supabase.storage
-      .from('blog-images')
-      .upload(path, file, { upsert: true })
-    if (!error && data) {
-      const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(data.path)
-      setImage(urlData.publicUrl)
-      setImageAlt(file.name.replace(/\.[^.]+$/, ''))
+    setCoverError('')
+    setCoverSuccess(false)
+    try {
+      const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+      const path = `covers/${Date.now()}.${ext}`
+      const { data, error } = await supabase.storage
+        .from('blog-images')
+        .upload(path, file, { upsert: true, contentType: file.type || 'image/jpeg' })
+      if (error) {
+        setCoverError(`Errore upload: ${error.message}`)
+      } else if (data) {
+        const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(data.path)
+        setImage(urlData.publicUrl)
+        setImageAlt(file.name.replace(/\.[^.]+$/, ''))
+        setCoverSuccess(true)
+        setTimeout(() => setCoverSuccess(false), 3000)
+      }
+    } catch (e) {
+      setCoverError(e instanceof Error ? e.message : 'Errore sconosciuto')
     }
     setCoverUploading(false)
   }
@@ -573,18 +585,22 @@ export function PostEditor({ post, locale = 'it' }: Props) {
         {/* Cover image */}
         <div className="border border-surface-border rounded-2xl p-6 space-y-3">
           <h2 className="font-semibold text-sm uppercase tracking-wide text-foreground-muted">Immagine di copertina</h2>
-          <label className="flex flex-col items-center gap-3 p-6 border-2 border-dashed border-surface-border rounded-xl cursor-pointer hover:border-accent transition-colors">
-            {image ? (
+          <label className="relative flex flex-col items-center gap-3 p-6 border-2 border-dashed border-surface-border rounded-xl cursor-pointer hover:border-accent transition-colors">
+            {image && !coverUploading && (
               <img src={image} alt={imageAlt} className="w-full max-h-64 object-cover rounded-lg" />
-            ) : (
+            )}
+            {coverUploading ? (
+              <div className="flex flex-col items-center gap-2 py-4">
+                <Loader2 size={32} className="animate-spin text-accent" />
+                <span className="text-sm text-accent font-medium">Caricamento in corso...</span>
+              </div>
+            ) : !image ? (
               <>
-                {coverUploading ? (
-                  <Loader2 size={28} className="animate-spin text-accent" />
-                ) : (
-                  <Upload size={28} className="text-foreground-muted" />
-                )}
+                <Upload size={28} className="text-foreground-muted" />
                 <span className="text-sm text-foreground-muted">Clicca per caricare immagine copertina</span>
               </>
+            ) : (
+              <span className="text-xs text-foreground-muted mt-1">Clicca per sostituire l&apos;immagine</span>
             )}
             <input
               type="file"
@@ -593,7 +609,17 @@ export function PostEditor({ post, locale = 'it' }: Props) {
               onChange={e => { const f = e.target.files?.[0]; if (f) uploadCoverImage(f) }}
             />
           </label>
-          {image && (
+          {coverError && (
+            <p className="text-xs text-red-500 flex items-center gap-1">
+              <span>⚠️</span> {coverError}
+            </p>
+          )}
+          {coverSuccess && (
+            <p className="text-xs text-green-600 flex items-center gap-1">
+              <span>✓</span> Immagine caricata con successo
+            </p>
+          )}
+          {image && !coverUploading && (
             <div className="flex gap-2">
               <input
                 value={imageAlt}
@@ -601,7 +627,7 @@ export function PostEditor({ post, locale = 'it' }: Props) {
                 placeholder="Alt text immagine (SEO)"
                 className="flex-1 px-3 py-2 border border-surface-border rounded-xl text-sm bg-white focus:outline-none focus:border-accent"
               />
-              <button onClick={() => { setImage(''); setImageAlt('') }} className="px-3 py-2 text-sm text-red-500 border border-red-200 rounded-xl hover:bg-red-50 transition-colors">
+              <button onClick={() => { setImage(''); setImageAlt(''); setCoverError('') }} className="px-3 py-2 text-sm text-red-500 border border-red-200 rounded-xl hover:bg-red-50 transition-colors">
                 Rimuovi
               </button>
             </div>
