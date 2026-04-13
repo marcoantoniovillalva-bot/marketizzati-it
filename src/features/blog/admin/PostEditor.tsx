@@ -85,28 +85,46 @@ export function PostEditor({ post, locale = 'it' }: Props) {
       .replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 80)
   }
 
+  // ── Raw fetch upload (bypasses SDK abort issues) ─────────────────────────
+  async function uploadToStorage(file: File, folder: string): Promise<string> {
+    const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+    const filename = `${folder}/${Date.now()}.${ext}`
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+    const { data: { session } } = await supabase.auth.getSession()
+    const token = session?.access_token ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+    const res = await fetch(
+      `${supabaseUrl}/storage/v1/object/blog-images/${filename}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': file.type || 'image/jpeg',
+          'x-upsert': 'true',
+        },
+        body: file,
+      }
+    )
+    if (!res.ok) {
+      const msg = await res.text()
+      throw new Error(msg)
+    }
+    return `${supabaseUrl}/storage/v1/object/public/blog-images/${filename}`
+  }
+
   // ── Cover image upload ───────────────────────────────────────────────────
   async function uploadCoverImage(file: File) {
     setCoverUploading(true)
     setCoverError('')
     setCoverSuccess(false)
     try {
-      const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
-      const path = `covers/${Date.now()}.${ext}`
-      const { data, error } = await supabase.storage
-        .from('blog-images')
-        .upload(path, file, { upsert: true, contentType: file.type || 'image/jpeg' })
-      if (error) {
-        setCoverError(`Errore upload: ${error.message}`)
-      } else if (data) {
-        const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(data.path)
-        setImage(urlData.publicUrl)
-        setImageAlt(file.name.replace(/\.[^.]+$/, ''))
-        setCoverSuccess(true)
-        setTimeout(() => setCoverSuccess(false), 3000)
-      }
+      const url = await uploadToStorage(file, 'covers')
+      setImage(url)
+      setImageAlt(file.name.replace(/\.[^.]+$/, ''))
+      setCoverSuccess(true)
+      setTimeout(() => setCoverSuccess(false), 3000)
     } catch (e) {
-      setCoverError(e instanceof Error ? e.message : 'Errore sconosciuto')
+      setCoverError(`Errore upload: ${e instanceof Error ? e.message : 'Errore sconosciuto'}`)
     }
     setCoverUploading(false)
   }
@@ -114,14 +132,11 @@ export function PostEditor({ post, locale = 'it' }: Props) {
   // ── Section image upload ─────────────────────────────────────────────────
   async function uploadSectionImage(idx: number, file: File) {
     setUploadingIdx(idx)
-    const ext = file.name.split('.').pop()
-    const path = `sections/${Date.now()}.${ext}`
-    const { data, error } = await supabase.storage
-      .from('blog-images')
-      .upload(path, file, { upsert: true })
-    if (!error && data) {
-      const { data: urlData } = supabase.storage.from('blog-images').getPublicUrl(data.path)
-      updateSection(idx, { url: urlData.publicUrl, alt: file.name.replace(/\.[^.]+$/, '') })
+    try {
+      const url = await uploadToStorage(file, 'sections')
+      updateSection(idx, { url, alt: file.name.replace(/\.[^.]+$/, '') })
+    } catch {
+      // silently fail for section images — user can retry
     }
     setUploadingIdx(null)
   }

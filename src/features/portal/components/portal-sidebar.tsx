@@ -32,7 +32,11 @@ const clientNavItems = [
   { href: '/automazioni', label: 'Automazioni', icon: Bot },
   { href: '/supporto', label: 'Supporto', icon: LifeBuoy },
   { href: '/profilo', label: 'Profilo', icon: User },
-] as const
+]
+
+const adminNavItems = [
+  { href: '/admin/blog', label: 'Blog CMS', icon: BookOpen },
+]
 
 export function PortalSidebar({ role = 'client' }: PortalSidebarProps) {
   const pathname = usePathname()
@@ -85,6 +89,30 @@ export function PortalSidebar({ role = 'client' }: PortalSidebarProps) {
             </Link>
           )
         })}
+
+        {role === 'admin' && (
+          <>
+            <div className="my-2 border-t border-surface-border" />
+            {adminNavItems.map((item) => {
+              const Icon = item.icon
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`)
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all ${
+                    active
+                      ? 'bg-accent text-white shadow-glow-red'
+                      : 'text-accent/80 hover:bg-accent/10 hover:text-accent'
+                  }`}
+                >
+                  <Icon size={18} />
+                  {item.label}
+                </Link>
+              )
+            })}
+          </>
+        )}
       </nav>
 
       {role === 'admin' && (
