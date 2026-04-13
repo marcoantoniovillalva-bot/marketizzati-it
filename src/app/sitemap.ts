@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://marketizzati.com'
+const baseUrl = 'https://www.marketizzati.it'
 
 const pages = [
   '',
@@ -19,13 +19,13 @@ const locales = ['it', 'en', 'es']
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries = pages.flatMap((page) =>
     locales.map((locale) => ({
-      url: `${baseUrl}${locale === 'it' ? '' : `/${locale}`}${page}`,
+      url: `${baseUrl}/${locale}${page}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: page === '' ? 1.0 : 0.8,
       alternates: {
         languages: Object.fromEntries(
-          locales.map((l) => [l, `${baseUrl}${l === 'it' ? '' : `/${l}`}${page}`])
+          locales.map((l) => [l, `${baseUrl}/${l}${page}`])
         ),
       },
     }))

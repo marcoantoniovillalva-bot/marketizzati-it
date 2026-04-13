@@ -24,7 +24,7 @@ const dmSans = DM_Sans({
 const BASE_URL = 'https://www.marketizzati.it'
 
 const keywordsByLocale: Record<string, string> = {
-  it: 'digital marketing PMI, consulenza digitale, metodo z start, marketing automation Italia, digital factory, strategia digitale piccole imprese, AI marketing, funnel marketing, web design alta conversione, Vigevano, Traffic Master Certified',
+  it: 'agenzia marketing digitale, consulenza marketing digitale, realizzazione sito web, agenzia di social media marketing, facebook ads, creazione sito web, costi realizzazione sito web, agenzia social media, metodo z start, marketing automation Italia, digital factory, AI marketing, funnel marketing, Vigevano',
   en: 'digital marketing SMB, digital consulting Italy, z start method, marketing automation, digital factory, AI marketing strategy, funnel marketing, high conversion web design',
   es: 'marketing digital PYME, consultoría digital Italia, método z start, automatización marketing, digital factory, estrategia digital IA, funnel marketing',
 }

@@ -226,6 +226,30 @@ export function JsonLd() {
               text: 'Marketizzati non è un\'agenzia: è una Digital Factory. La differenza è che invece di vendere servizi isolati (solo social media, solo un sito, solo ads), costruiamo l\'intero ecosistema digitale del cliente con un metodo proprietario in 6 fasi potenziato dall\'AI. Ogni componente è progettato per lavorare in sinergia con gli altri, producendo risultati misurabili e scalabili.',
             },
           },
+          {
+            '@type': 'Question',
+            name: 'Quanto costa la realizzazione di un sito web professionale?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'I costi di realizzazione di un sito web professionale variano in base alla complessità e agli obiettivi. Marketizzati offre siti web ad alta conversione inclusi nei pacchetti Z·START a partire dal piano Base. Per ricevere un preventivo personalizzato, prenota una consulenza gratuita di 30 minuti e riceverai un piano con costi dettagliati.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Offrite servizi di gestione Facebook Ads e social media marketing?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Sì. Marketizzati gestisce campagne Facebook Ads e social media marketing strategico per PMI e professionisti. Dalla strategia alla produzione contenuti fino all\'ottimizzazione delle campagne per la generazione di lead qualificati. Il tutto integrato nel Metodo Z·START.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Come funziona la consulenza marketing digitale di Marketizzati?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'La consulenza marketing digitale inizia con una sessione diagnostica gratuita di 30 minuti in cui analizziamo il tuo business, identifichiamo i gap digitali e definiamo le priorità. Al termine ricevi un piano d\'azione concreto con obiettivi misurabili e stima dei costi, senza impegno.',
+            },
+          },
         ],
       },
     ],
