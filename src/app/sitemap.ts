@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { getAllPosts } from '@/features/blog/posts'
 
 const baseUrl = 'https://www.marketizzati.it'
 
@@ -17,7 +18,8 @@ const pages = [
 const locales = ['it', 'en', 'es']
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entries = pages.flatMap((page) =>
+  // Static pages
+  const staticEntries = pages.flatMap((page) =>
     locales.map((locale) => ({
       url: `${baseUrl}/${locale}${page}`,
       lastModified: new Date(),
@@ -31,5 +33,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   )
 
-  return entries
+  // Blog posts (Italian only for now)
+  const blogEntries = getAllPosts('it').map((post) => ({
+    url: `${baseUrl}/it/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...staticEntries, ...blogEntries]
 }

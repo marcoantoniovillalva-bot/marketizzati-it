@@ -1,0 +1,212 @@
+import { notFound } from 'next/navigation'
+import { Link } from '@/i18n/navigation'
+import { getAllPosts, getPostBySlug } from '@/features/blog/posts'
+import type { BlogSection } from '@/features/blog/types'
+import { Clock, ArrowLeft, ArrowRight } from 'lucide-react'
+
+interface Props {
+  params: Promise<{ locale: string; slug: string }>
+}
+
+export async function generateStaticParams() {
+  const locales = ['it', 'en', 'es']
+  return locales.flatMap((locale) =>
+    getAllPosts(locale).map((post) => ({ locale, slug: post.slug }))
+  )
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { locale, slug } = await params
+  const post = getPostBySlug(locale, slug)
+  if (!post) return {}
+
+  const baseUrl = 'https://www.marketizzati.it'
+  const url = `${baseUrl}/${locale}/blog/${post.slug}`
+
+  return {
+    title: `${post.title} | Marketizzati`,
+    description: post.description,
+    keywords: post.keywords.join(', '),
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url,
+      type: 'article',
+      publishedTime: post.date,
+    },
+  }
+}
+
+function renderSection(section: BlogSection, index: number) {
+  switch (section.type) {
+    case 'intro':
+      return (
+        <p key={index} className="text-body-lg text-foreground-secondary leading-relaxed">
+          {section.content}
+        </p>
+      )
+    case 'h2':
+      return (
+        <div key={index} className="mt-10">
+          <h2 className="font-heading text-display-sm mb-4">{section.heading}</h2>
+          <p className="text-body-md text-foreground-secondary leading-relaxed">{section.content}</p>
+        </div>
+      )
+    case 'h3':
+      return (
+        <div key={index} className="mt-6">
+          <h3 className="font-heading text-body-xl font-semibold mb-3">{section.heading}</h3>
+          <p className="text-body-md text-foreground-secondary leading-relaxed">{section.content}</p>
+        </div>
+      )
+    case 'list':
+      return (
+        <div key={index} className="mt-6">
+          {section.heading && (
+            <p className="font-medium mb-3">{section.heading}</p>
+          )}
+          <ul className="space-y-3">
+            {section.items.map((item, i) => (
+              <li key={i} className="flex gap-3 text-body-md text-foreground-secondary">
+                <span className="text-accent font-bold mt-0.5 shrink-0">→</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    case 'callout':
+      return (
+        <div
+          key={index}
+          className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-2xl"
+        >
+          <p className="text-body-md leading-relaxed">{section.content}</p>
+        </div>
+      )
+    case 'cta':
+      return (
+        <div
+          key={index}
+          className="mt-12 p-8 bg-surface-elevated border border-surface-border rounded-2xl text-center"
+        >
+          <h3 className="font-heading text-display-xs mb-3">{section.heading}</h3>
+          <p className="text-body-md text-foreground-secondary mb-6">{section.content}</p>
+          <Link
+            href="/consulenza"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-colors"
+          >
+            Prenota la consulenza gratuita <ArrowRight size={16} />
+          </Link>
+        </div>
+      )
+  }
+}
+
+export default async function BlogPostPage({ params }: Props) {
+  const { locale, slug } = await params
+  const post = getPostBySlug(locale, slug)
+
+  if (!post) notFound()
+
+  const allPosts = getAllPosts(locale)
+  const currentIndex = allPosts.findIndex((p) => p.slug === slug)
+  const prevPost = allPosts[currentIndex + 1]
+  const nextPost = allPosts[currentIndex - 1]
+
+  // Article JSON-LD schema
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Marco Antonio Villalva',
+      url: 'https://www.marketizzati.it',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Marketizzati',
+      url: 'https://www.marketizzati.it',
+      logo: { '@type': 'ImageObject', url: 'https://www.marketizzati.it/favicon.png' },
+    },
+    keywords: post.keywords.join(', '),
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
+      <article className="pt-32 pb-32 px-6">
+        <div className="max-w-2xl mx-auto">
+          {/* Back */}
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm text-foreground-muted hover:text-foreground transition-colors mb-10"
+          >
+            <ArrowLeft size={16} /> Tutti gli articoli
+          </Link>
+
+          {/* Header */}
+          <header className="mb-10">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent/10 text-accent">
+                {post.category}
+              </span>
+              <span className="flex items-center gap-1 text-xs text-foreground-muted">
+                <Clock size={12} /> {post.readTime} min di lettura
+              </span>
+            </div>
+            <h1 className="font-heading text-display-md md:text-display-lg leading-tight">
+              {post.title}
+            </h1>
+            <p className="mt-4 text-body-lg text-foreground-secondary">{post.description}</p>
+          </header>
+
+          {/* Content */}
+          <div className="prose-custom">
+            {post.sections.map((section, i) => renderSection(section, i))}
+          </div>
+
+          {/* Prev / Next */}
+          {(prevPost || nextPost) && (
+            <nav className="mt-16 pt-8 border-t border-surface-border grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {prevPost && (
+                <Link
+                  href={`/blog/${prevPost.slug}` as '/blog'}
+                  className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors"
+                >
+                  <span className="text-xs text-foreground-muted flex items-center gap-1 mb-2">
+                    <ArrowLeft size={12} /> Articolo precedente
+                  </span>
+                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2">
+                    {prevPost.title}
+                  </span>
+                </Link>
+              )}
+              {nextPost && (
+                <Link
+                  href={`/blog/${nextPost.slug}` as '/blog'}
+                  className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors sm:text-right"
+                >
+                  <span className="text-xs text-foreground-muted flex items-center gap-1 mb-2 sm:justify-end">
+                    Articolo successivo <ArrowRight size={12} />
+                  </span>
+                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2">
+                    {nextPost.title}
+                  </span>
+                </Link>
+              )}
+            </nav>
+          )}
+        </div>
+      </article>
+    </>
+  )
+}
