@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { useTranslations, useLocale } from 'next-intl'
-import { Menu, X, User, LogOut, ChevronDown, Globe } from 'lucide-react'
+import { Menu, X, User, LogOut, ChevronDown, Globe, Shield, BookOpen } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { createClient } from '@/lib/supabase/client'
 
@@ -19,10 +19,18 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const { user, loading } = useAuth()
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
+
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); return }
+    const supabase = createClient()
+    supabase.from('profiles').select('role').eq('id', user.id).maybeSingle()
+      .then(({ data }) => setIsAdmin(data?.role === 'admin'))
+  }, [user])
 
   const handleLocaleChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale })
@@ -142,6 +150,28 @@ export function Navbar() {
                         >
                           {t('nav.method')}
                         </Link>
+                        {isAdmin && (
+                          <>
+                            <div className="my-1 border-t border-surface-border" />
+                            <Link
+                              href="/admin"
+                              onClick={() => setShowUserMenu(false)}
+                              className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-foreground hover:bg-surface-border/30 rounded-xl transition-colors font-medium"
+                            >
+                              <Shield size={15} />
+                              Admin
+                            </Link>
+                            <Link
+                              href="/admin/blog"
+                              onClick={() => setShowUserMenu(false)}
+                              className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-accent hover:bg-accent/5 rounded-xl transition-colors font-medium"
+                            >
+                              <BookOpen size={15} />
+                              Blog CMS
+                            </Link>
+                            <div className="my-1 border-t border-surface-border" />
+                          </>
+                        )}
                         <button
                           onClick={handleLogout}
                           className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-red-500 hover:bg-red-50 rounded-xl transition-colors font-medium"
@@ -239,13 +269,37 @@ export function Navbar() {
             )}
             {!loading && (
               user ? (
-                <button
-                  onClick={() => { handleLogout(); setIsMenuOpen(false) }}
-                  className="flex items-center gap-2 text-red-500 font-medium py-2"
-                >
-                  <LogOut size={16} />
-                  Esci
-                </button>
+                <>
+                  {isAdmin && (
+                    <>
+                      <div className="border-t border-surface-border pt-2 space-y-1">
+                        <Link
+                          href="/admin"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex items-center gap-2 text-foreground font-medium py-2"
+                        >
+                          <Shield size={16} />
+                          Admin
+                        </Link>
+                        <Link
+                          href="/admin/blog"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex items-center gap-2 text-accent font-medium py-2"
+                        >
+                          <BookOpen size={16} />
+                          Blog CMS
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                  <button
+                    onClick={() => { handleLogout(); setIsMenuOpen(false) }}
+                    className="flex items-center gap-2 text-red-500 font-medium py-2"
+                  >
+                    <LogOut size={16} />
+                    Esci
+                  </button>
+                </>
               ) : (
                 <a
                   href="/#contatti"
