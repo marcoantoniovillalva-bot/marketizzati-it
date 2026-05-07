@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 
 export function OAuthButtons() {
@@ -16,23 +15,7 @@ export function OAuthButtons() {
     setError(null)
 
     try {
-      const supabase = createClient()
-      const redirectTo = `${window.location.origin}/auth/callback?next=/${locale}/dashboard`
-
-      const { error: authError } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo,
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          },
-        },
-      })
-
-      if (authError) {
-        throw authError
-      }
+      window.location.href = `/api/auth/google?next=/${locale}/dashboard`
     } catch {
       setError(t('error'))
       setLoading(false)
