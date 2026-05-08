@@ -504,7 +504,15 @@ export default function HomePage() {
           className="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 overflow-hidden"
         >
           <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0">
-            <Image src={heroGifUrl} alt="" fill className="object-cover" unoptimized priority />
+            <video
+              src={heroGifUrl}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95" />
           </motion.div>
 
@@ -810,7 +818,16 @@ export default function HomePage() {
                   whileHover={{ scale: 1.02 }}
                   className="block rounded-2xl overflow-hidden border border-surface-border shadow-md"
                 >
-                  <img src={lurumiGifUrl} alt="lurumi.it" className="w-full h-auto" />
+                  <video
+                    src={lurumiGifUrl}
+                    aria-label="lurumi.it"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto"
+                  />
                   <div className="bg-foreground px-4 py-2.5 flex items-center justify-between">
                     <div>
                       <p className="text-white text-xs font-bold">{t('metodo.lurumiLabel')}</p>

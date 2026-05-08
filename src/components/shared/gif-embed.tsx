@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 
 interface GifEmbedProps {
   src: string
@@ -18,22 +17,24 @@ export function GifEmbed({ src, alt, className = '' }: GifEmbedProps) {
       transition={{ duration: 0.6 }}
       className={`relative w-full overflow-hidden rounded-2xl ${className}`}
     >
-      <Image
+      <video
         src={src}
-        alt={alt}
-        width={800}
-        height={450}
+        aria-label={alt}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
         className="w-full h-auto object-cover"
-        unoptimized
       />
     </motion.div>
   )
 }
 
-export const heroGifUrl = '/images/Chi sono.jpg'
-export const aiAutomationGifUrl = '/images/blog/blog-costi-sito-web.jpg'
-export const marketingGifUrl = '/images/blog/blog-facebook-ads-lead.jpg'
-export const consulenzaGifUrl = '/images/blog/blog-agenzia-social-media.jpg'
-export const formazioneGifUrl = '/images/Certificato Florida University.PNG'
-export const youtubeCaseStudyGifUrl = '/images/blog/blog-facebook-ads-lead.jpg'
-export const lurumiGifUrl = '/images/blog/blog-costi-sito-web.jpg'
+export const heroGifUrl = '/media/videos/gif-hero.mp4'
+export const aiAutomationGifUrl = '/media/videos/gif-ai-automation.mp4'
+export const marketingGifUrl = '/media/videos/gif-digital-marketing.mp4'
+export const consulenzaGifUrl = '/media/videos/gif-consulenza.mp4'
+export const formazioneGifUrl = '/media/videos/gif-formazione.mp4'
+export const youtubeCaseStudyGifUrl = '/media/videos/gif-youtube-casestudy.mp4'
+export const lurumiGifUrl = '/media/videos/gif-lurumi.mp4'
