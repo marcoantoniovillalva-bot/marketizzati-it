@@ -1,4 +1,3 @@
-import crypto from 'node:crypto'
 import { NextRequest, NextResponse } from 'next/server'
 
 function getRequestOrigin(request: NextRequest) {
@@ -11,55 +10,23 @@ function getRequestOrigin(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  const clientId = (
-    process.env.GOOGLE_CLIENT_ID ||
-    process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
-    ''
-  ).trim()
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
 
-  if (!clientId) {
+  if (!supabaseUrl) {
     return NextResponse.json(
-      { error: 'Google OAuth non configurato correttamente.' },
+      { error: 'Supabase Auth non configurato correttamente.' },
       { status: 500 }
     )
   }
 
   const origin = getRequestOrigin(request)
-  const redirectUri = `${origin}/api/auth/google/callback`
   const next = request.nextUrl.searchParams.get('next') || '/it/dashboard'
-  const state = crypto.randomBytes(16).toString('hex')
+  const callbackUrl = new URL('/auth/callback', origin)
+  callbackUrl.searchParams.set('next', next)
 
-  const params = new URLSearchParams({
-    client_id: clientId,
-    redirect_uri: redirectUri,
-    response_type: 'code',
-    scope: 'openid email profile',
-    access_type: 'offline',
-    state,
-    prompt: 'select_account',
-  })
+  const authorizeUrl = new URL('/auth/v1/authorize', supabaseUrl)
+  authorizeUrl.searchParams.set('provider', 'google')
+  authorizeUrl.searchParams.set('redirect_to', callbackUrl.toString())
 
-  const response = NextResponse.redirect(
-    `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`
-  )
-
-  response.cookies.set('g_oauth_state', state, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 600,
-    path: '/',
-    sameSite: 'lax',
-    ...(process.env.NODE_ENV === 'production' ? { domain: '.marketizzati.it' } : {}),
-  })
-
-  response.cookies.set('g_oauth_next', next, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 600,
-    path: '/',
-    sameSite: 'lax',
-    ...(process.env.NODE_ENV === 'production' ? { domain: '.marketizzati.it' } : {}),
-  })
-
-  return response
+  return NextResponse.redirect(authorizeUrl)
 }
