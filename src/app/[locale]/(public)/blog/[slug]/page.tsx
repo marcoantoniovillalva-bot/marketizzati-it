@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import NextLink from 'next/link'
 import { getAllPosts, getPostBySlug } from '@/features/blog/posts'
 import type { BlogSection } from '@/features/blog/types'
+import { toAbsoluteSiteUrl } from '@/lib/media-url'
 import { Clock, ArrowLeft, ArrowRight } from 'lucide-react'
 
 interface Props {
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props) {
       url,
       type: 'article',
       publishedTime: post.date,
-      images: [{ url: `${baseUrl}${post.image}`, width: 1792, height: 1024, alt: post.imageAlt }],
+      images: [{ url: toAbsoluteSiteUrl(post.image, baseUrl), width: 1792, height: 1024, alt: post.imageAlt }],
     },
   }
 }
@@ -161,7 +162,7 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    image: `https://www.marketizzati.it${post.image}`,
+    image: toAbsoluteSiteUrl(post.image),
     author: {
       '@type': 'Person',
       name: 'Marco Antonio Villalva',

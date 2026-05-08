@@ -51,8 +51,11 @@ export function rowToPost(row: BlogPostRow): BlogPost {
     readTime: row.read_time,
     category: row.category,
     keywords: row.keywords ?? [],
-    image: row.image ?? '',
+    image: toPublicMediaUrl(row.image),
     imageAlt: row.image_alt ?? '',
-    sections: (row.sections as BlogSection[]) ?? [],
+    sections: ((row.sections as BlogSection[]) ?? []).map((section) =>
+      section.type === 'image' ? { ...section, url: toPublicMediaUrl(section.url) } : section
+    ),
   }
 }
+import { toPublicMediaUrl } from '@/lib/media-url'

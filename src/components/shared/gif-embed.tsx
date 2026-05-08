@@ -30,12 +30,10 @@ export function GifEmbed({ src, alt, className = '' }: GifEmbedProps) {
   )
 }
 
-const SUPABASE_URL = 'https://luhfsvgbpnaxdeydxtrn.supabase.co/storage/v1/object/public/gifd'
-
-export const heroGifUrl = `${SUPABASE_URL}/gif-hero.gif`
-export const aiAutomationGifUrl = `${SUPABASE_URL}/gif-ai-automation.gif`
-export const marketingGifUrl = `${SUPABASE_URL}/gif-digital-marketing.gif`
-export const consulenzaGifUrl = `${SUPABASE_URL}/gif-consulenza.gif`
-export const formazioneGifUrl = `${SUPABASE_URL}/gif-formazione.gif`
-export const youtubeCaseStudyGifUrl = `${SUPABASE_URL}/gif-youtube-casestudy.gif`
-export const lurumiGifUrl = `${SUPABASE_URL}/gif-lurumi.gif`
+export const heroGifUrl = '/images/Chi sono.jpg'
+export const aiAutomationGifUrl = '/images/blog/blog-costi-sito-web.jpg'
+export const marketingGifUrl = '/images/blog/blog-facebook-ads-lead.jpg'
+export const consulenzaGifUrl = '/images/blog/blog-agenzia-social-media.jpg'
+export const formazioneGifUrl = '/images/Certificato Florida University.PNG'
+export const youtubeCaseStudyGifUrl = '/images/blog/blog-facebook-ads-lead.jpg'
+export const lurumiGifUrl = '/images/blog/blog-costi-sito-web.jpg'

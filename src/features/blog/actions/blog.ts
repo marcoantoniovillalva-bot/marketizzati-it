@@ -7,6 +7,12 @@ import type { BlogPostRow, BlogSection } from '../types'
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const OPENAI_KEY = process.env.OPENAI_API_KEY!
 
+function publicBlogImageUrl(storagePath: string) {
+  return `/api/media/supabase?src=${encodeURIComponent(
+    `${SUPABASE_URL}/storage/v1/object/public/blog-images/${storagePath}`
+  )}`
+}
+
 // ── Image upload (direct REST — bypasses SDK abort issues) ───────────────────
 
 export async function uploadBlogImage(formData: FormData): Promise<string> {
@@ -39,7 +45,7 @@ export async function uploadBlogImage(formData: FormData): Promise<string> {
     throw new Error(`Storage error ${res.status}: ${body}`)
   }
 
-  return `${SUPABASE_URL}/storage/v1/object/public/blog-images/${storagePath}`
+  return publicBlogImageUrl(storagePath)
 }
 
 // ── Public: fetch published posts ─────────────────────────────────────────────
@@ -151,7 +157,7 @@ export async function togglePublish(id: string, published: boolean): Promise<voi
 
 export async function getUploadUrl(postId: string, filename: string): Promise<string> {
   // Returns the public URL pattern — actual upload done client-side
-  return `${SUPABASE_URL}/storage/v1/object/public/blog-images/${postId}/${filename}`
+  return publicBlogImageUrl(`${postId}/${filename}`)
 }
 
 // ── AI: generate article from keyword ────────────────────────────────────────
