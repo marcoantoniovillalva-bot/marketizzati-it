@@ -1,14 +1,12 @@
 import type { BlogPost } from '../types'
 import { rowToPost } from '../types'
-import { costiRealizzazioneSitoWeb } from './it/costi-realizzazione-sito-web'
-import { facebookAdsLeadGeneration } from './it/facebook-ads-lead-generation'
-import { sceglierAgenziaSocialMedia } from './it/scegliere-agenzia-social-media'
+import { risorsePosts } from './it/risorse'
+import { guidePosts } from './it/guide'
 
 const staticPosts: Record<string, BlogPost[]> = {
   it: [
-    sceglierAgenziaSocialMedia,
-    facebookAdsLeadGeneration,
-    costiRealizzazioneSitoWeb,
+    ...risorsePosts,
+    ...guidePosts,
   ],
   en: [],
   es: [],
@@ -22,16 +20,17 @@ export function getStaticPostBySlug(locale: string, slug: string): BlogPost | un
   return getStaticPosts(locale).find((p) => p.slug === slug)
 }
 
-// Merge DB posts (take priority) with static fallbacks
+// DB posts (written in the portal editor) win over static ones with the same slug; both are listed
 export async function getAllPosts(locale: string): Promise<BlogPost[]> {
+  const fallback = getStaticPosts(locale)
   try {
     const { getPublicPosts } = await import('../actions/blog')
-    const rows = await getPublicPosts(locale)
-    if (rows.length > 0) return rows.map(rowToPost)
+    const rows = (await getPublicPosts(locale)).map(rowToPost)
+    const slugs = new Set(rows.map((p) => p.slug))
+    return [...rows, ...fallback.filter((p) => !slugs.has(p.slug))]
   } catch {
-    // DB not ready yet — use static
+    return fallback // DB not configured (local dev)
   }
-  return getStaticPosts(locale)
 }
 
 export async function getPostBySlug(locale: string, slug: string): Promise<BlogPost | undefined> {

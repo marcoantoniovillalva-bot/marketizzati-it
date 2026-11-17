@@ -2,10 +2,9 @@ import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
-import { Inter, DM_Sans } from 'next/font/google'
+import { Inter, DM_Sans, Instrument_Serif } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
-import { JsonLd } from '@/components/seo/JsonLd'
 import '../globals.css'
 
 const inter = Inter({
@@ -21,10 +20,18 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  variable: '--font-instrument-serif',
+  weight: '400',
+  style: ['normal', 'italic'],
+  display: 'swap',
+})
+
 const BASE_URL = 'https://www.marketizzati.it'
 
 const keywordsByLocale: Record<string, string> = {
-  it: 'agenzia marketing digitale, consulenza marketing digitale, realizzazione sito web, agenzia di social media marketing, facebook ads, creazione sito web, costi realizzazione sito web, agenzia social media, metodo z start, marketing automation Italia, digital factory, AI marketing, funnel marketing, Vigevano',
+  it: 'realizzazione siti web, quanto costa un sito web, sito web per artigiani, web agency Milano, web agency Pavia, scheda Google Business Profile, Google Ads, ChatGPT Ads, agenti AI WhatsApp',
   en: 'digital marketing SMB, digital consulting Italy, z start method, marketing automation, digital factory, AI marketing strategy, funnel marketing, high conversion web design',
   es: 'marketing digital PYME, consultoría digital Italia, método z start, automatización marketing, digital factory, estrategia digital IA, funnel marketing',
 }
@@ -83,7 +90,7 @@ export async function generateMetadata({
           url: `${BASE_URL}/images/og-image.png`,
           width: 1200,
           height: 630,
-          alt: 'Marketizzati — Digital Factory per PMI | Metodo Z·START',
+          alt: 'Marketizzati — siti web, pubblicità e agenti AI per artigiani e piccole imprese',
         },
       ],
     },
@@ -97,7 +104,7 @@ export async function generateMetadata({
       google: '',
     },
     other: {
-      'theme-color': '#FE3314',
+      'theme-color': '#F2541B',
       'msapplication-TileColor': '#090909',
     },
   }
@@ -123,10 +130,9 @@ export default async function LocaleLayout({
   const messages = (await import(`@/i18n/messages/${locale}.json`)).default
 
   return (
-    <html lang={locale} className={`${inter.variable} ${dmSans.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${dmSans.variable} ${instrumentSerif.variable}`}>
       <head>
         <link rel="preconnect" href="https://djatdyhqliotgnsljdja.supabase.co" />
-        <JsonLd />
         {/* Google Consent Mode v2 — must be BEFORE gtag loads */}
         <script
           dangerouslySetInnerHTML={{

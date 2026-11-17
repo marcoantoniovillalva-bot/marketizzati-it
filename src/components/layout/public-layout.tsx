@@ -1,15 +1,8 @@
 import type { ReactNode } from 'react'
-import { Navbar } from './navbar'
-import { Footer } from './footer'
-import { WhatsAppButton } from '@/components/shared/whatsapp-button'
+import { getLocale } from 'next-intl/server'
+import { SiteShell } from '@/features/site/components/site-shell'
 
-export function PublicLayout({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <Navbar />
-      <WhatsAppButton />
-      <main>{children}</main>
-      <Footer />
-    </>
-  )
+export async function PublicLayout({ children }: { children: ReactNode }) {
+  const locale = await getLocale()
+  return <SiteShell locale={locale}>{children}</SiteShell>
 }

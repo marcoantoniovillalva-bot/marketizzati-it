@@ -6,6 +6,8 @@ export type BlogSection =
   | { type: 'h3'; heading: string; content: string }
   | { type: 'list'; heading?: string; items: string[] }
   | { type: 'callout'; content: string }
+  | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
+  | { type: 'code'; label?: string; content: string }
   | { type: 'cta'; heading: string; content: string }
   | { type: 'image'; url: string; alt: string; caption?: string }
   | { type: 'video'; youtubeId: string; caption?: string }
@@ -20,6 +22,8 @@ export interface BlogPost {
   keywords: string[]
   image: string
   imageAlt: string
+  /** Optional 4:5 cover for phones (free guides from the video covers). */
+  imageTall?: string
   sections: BlogSection[]
 }
 
