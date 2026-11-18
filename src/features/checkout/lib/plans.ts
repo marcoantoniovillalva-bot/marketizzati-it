@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { ADS, OFFER } from '@/features/site/lib/offer'
+import { ADS, AUTOMATION, OFFER } from '@/features/site/lib/offer'
 
 /** Bump when the terms of sale (/condizioni-sito-web) change: stored with every order. */
 export const TERMS_VERSION = '2026-11-17'
@@ -7,17 +7,18 @@ export const TERMS_VERSION = '2026-11-17'
 /** Invoices above this amount carry a 2 € stamp duty (regime forfettario). */
 const STAMP_THRESHOLD = 77.47
 
+export const PLANS = ['site_oneoff', 'site_monthly', 'ads_only', 'automation_quarterly', 'automation_monthly'] as const
+export type PlanKey = (typeof PLANS)[number]
+
+/**
+ * What the site sends to start a payment: only the plan. Name, email, address, phone, tax code and
+ * SDI/PEC are collected by Stripe's own embedded checkout (custom fields), so the buyer fills one form.
+ */
 export const checkoutSchema = z.object({
-  plan: z.enum(['site_oneoff', 'site_monthly', 'ads_only']),
+  plan: z.enum(PLANS),
+  /** 3 months of ads management at the launch price, only together with a website plan. */
   adsLaunch: z.boolean().default(false),
-  fullName: z.string().trim().min(2).max(120),
-  businessName: z.string().trim().min(2).max(160),
-  taxCode: z.string().trim().min(11).max(16),
-  invoiceChannel: z.string().trim().min(6).max(160),
-  email: z.string().trim().email().max(200),
-  phone: z.string().trim().min(6).max(30),
   locale: z.enum(['it', 'es', 'en']).default('it'),
-  acceptTerms: z.literal(true),
 })
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>
@@ -38,11 +39,19 @@ export interface PlanLines {
   dropAdsAfterLaunch: boolean
 }
 
-export function planLines({ plan, adsLaunch }: Pick<CheckoutInput, 'plan' | 'adsLaunch'>): PlanLines {
+export function planLines({ plan, adsLaunch: addAds }: Pick<CheckoutInput, 'plan' | 'adsLaunch'>): PlanLines {
+  const adsLaunch = addAds && plan.startsWith('site')
   const site = 'Sito web Marketizzati'
   const ads = (amount: number): Line => ({ name: 'Gestione pubblicità Google Ads + ChatGPT Ads', amount, recurring: true })
   const stamp = (recurring: boolean): Line => ({ name: 'Marca da bollo', amount: OFFER.stampDuty, recurring })
 
+  if (plan === 'automation_quarterly') {
+    // 3 monthly invoices, then the subscription ends on its own; the client renews if needed
+    return { mode: 'subscription', lines: [{ name: `Automazioni Marketizzati (abbonamento trimestrale)`, amount: AUTOMATION.quarterly, recurring: true }, stamp(true)], months: AUTOMATION.commitMonths, dropAdsAfterLaunch: false }
+  }
+  if (plan === 'automation_monthly') {
+    return { mode: 'subscription', lines: [{ name: 'Automazioni Marketizzati (abbonamento mensile)', amount: AUTOMATION.monthly, recurring: true }, stamp(true)], months: null, dropAdsAfterLaunch: false }
+  }
   if (plan === 'ads_only') {
     return { mode: 'subscription', lines: [ads(ADS.monthly), stamp(ADS.monthly > STAMP_THRESHOLD)], months: null, dropAdsAfterLaunch: false }
   }

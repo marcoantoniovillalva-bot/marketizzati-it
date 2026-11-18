@@ -1,6 +1,6 @@
-import { CoverImage } from '@/features/blog/components/cover-image'
+import { BlogCard } from '@/features/blog/components/blog-card'
 import type { Metadata } from 'next'
-import { getAllPosts } from '@/features/blog/posts'
+import { getAllPosts, sortPosts } from '@/features/blog/posts'
 import { Heading, Section } from '@/features/site/components/section'
 import { pageMetadata } from '@/features/site/lib/metadata'
 import { isLocale, pageHref, type Locale } from '@/features/site/lib/routes'
@@ -33,7 +33,7 @@ export default async function BlogPage({ params, searchParams }: Props) {
   const c = COPY[l]
   // Spanish and English show the Italian articles until they are translated
   const own = await getAllPosts(l)
-  const posts = (own.length ? own : await getAllPosts('it')).slice().sort((a, b) => b.date.localeCompare(a.date))
+  const posts = sortPosts(own.length ? own : await getAllPosts('it'))
   const active = CATEGORIES.find((cat) => slugify(cat) === categoria)
   const shown = active ? posts.filter((p) => p.category === active) : posts
   const base = pageHref('blog', l)
@@ -42,7 +42,7 @@ export default async function BlogPage({ params, searchParams }: Props) {
   return (
     <Section tint="white" className="pt-24 md:pt-32">
       <Heading as="h1" label={c.label} title={c.title} italic={c.italic} intro={c.intro} />
-      <nav className="mt-6 md:mt-10 flex flex-wrap gap-2" aria-label="Categorie">
+      <nav className="-mx-4 mt-6 flex gap-2 overflow-x-auto whitespace-nowrap px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 md:mt-10" aria-label="Categorie">
         {[{ name: c.all, href: base, on: !active }, ...CATEGORIES.map((cat) => ({ name: cat, href: `${base}?categoria=${slugify(cat)}`, on: cat === active }))].map((item) => (
           <a key={item.name} href={item.href} className={`rounded-full px-4 py-2 text-sm font-semibold transition ${item.on ? 'bg-ink text-white' : 'bg-brand-cream text-ink-soft hover:bg-brand-peach'}`}>
             {item.name}
@@ -52,22 +52,9 @@ export default async function BlogPage({ params, searchParams }: Props) {
       {shown.length === 0 ? (
         <p className="mt-8 md:mt-12 text-ink-muted">{c.empty}</p>
       ) : (
-        <div className="mt-8 md:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-6 md:mt-12 lg:grid-cols-3">
           {shown.map((post) => (
-            <a key={post.slug} href={`/${postLocale}/blog/${post.slug}`} className="group flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-xl">
-              <CoverImage post={post} />
-              <div className="flex flex-1 flex-col p-6">
-                <p className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand">
-                  {post.category}
-                  {post.freeGuide && <span className="rounded-full bg-[#e9f8ee] px-2 py-0.5 text-[10px] tracking-normal text-[#1c8a43]">{FREE[l]}</span>}
-                </p>
-                <h2 className="mt-2 text-lg font-bold leading-snug">{post.title}</h2>
-                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft">{post.description}</p>
-                <p className="mt-auto pt-4 text-xs text-ink-muted">
-                  {post.readTime} {c.read}
-                </p>
-              </div>
-            </a>
+            <BlogCard key={post.slug} post={post} href={`/${postLocale}/blog/${post.slug}`} locale={l} />
           ))}
         </div>
       )}

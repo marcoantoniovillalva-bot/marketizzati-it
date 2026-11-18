@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "claude-duet-agenti-ia-sempre-attivi",
-  "title": "Guida pratica: Claude Duet e gli agenti IA sempre attivi",
+  "title": "Claude Duet e gli agenti IA sempre attivi",
   "description": "La tabella comparativa promessa nel video: Claude Duet di Anthropic, OpenAI dots, Meta Muse, xAI Grok Bot e le alternative open source OpenClaw e…",
   "date": "2026-10-22",
   "readTime": 13,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/claude-duet-agenti-ia-sempre-attivi-wide.webp",
   "imageTall": "/images/blog/covers/claude-duet-agenti-ia-sempre-attivi-tall.webp",
+  "videoPreview": "/videos/preview/claude-duet-agenti-ia-sempre-attivi.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7699927330872970529",
   "imageAlt": "Cosa fanno i nuovi agenti IA che lavorano anche quando tu non ci sei, quanto costano, cosa puoi usare oggi dall'Italia e quale scegliere per la tua attività",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/01-slide-01.webp", "alt": "Cosa fanno i nuovi agenti IA che lavorano anche quando tu non ci sei, quanto costano, cosa puoi usare oggi dall'Italia e quale scegliere per la tua attività" },

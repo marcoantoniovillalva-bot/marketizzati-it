@@ -4,6 +4,11 @@ import { getHomeCopy } from '../content/home'
 import { ADS, euro, OFFER } from '../lib/offer'
 import { pageHref, type Locale } from '../lib/routes'
 import type { ServicePageKey } from '../content/service-pages'
+import { getAutomationCopy } from '../content/automation'
+import { AutomationPricing } from './automation-pricing'
+import { PlanCards } from './plan-cards'
+import { RelatedPosts } from '@/features/blog/components/related-posts'
+import { adsPlans, sitePlans, socialPlans } from '../content/plans'
 import { Explainer, SERVICE_EXPLAINERS } from './explainer'
 import { IconTile, iconFor } from './icons'
 import { BrowserBuild, PhoneChat } from './mockups'
@@ -18,9 +23,21 @@ const CTA_COPY: Record<Locale, { buy: string; ads: string; quote: string; talk: 
 
 const TINTS: Tint[] = ['peach', 'cream', 'white', 'orange']
 
+const PLANS_LABEL: Record<Locale, string> = { it: 'Vedi piani e prezzi', es: 'Ver planes y precios', en: 'See plans and prices' }
+
+const PLANS_HEADING: Record<Locale, { label: string; title: string; italic: string }> = {
+  it: { label: 'Prezzi', title: 'Il prezzo è scritto,', italic: 'paghi qui.' },
+  es: { label: 'Precios', title: 'El precio está aquí,', italic: 'pagas aquí.' },
+  en: { label: 'Prices', title: 'The price is right here,', italic: 'pay here.' },
+}
+
 /** Template of the service, guide and local pages: answer first, blocks, FAQ, then the right call to action. */
 export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; locale: Locale; pageKey: ServicePageKey }) {
   const visuals = SERVICE_EXPLAINERS[pageKey]
+  const automation = getAutomationCopy(locale)
+  const showPlans = pageKey === 'sistemi' || pageKey === 'agenti'
+  const planCards =
+    pageKey === 'googleAds' || pageKey === 'chatgptAds' ? adsPlans(locale) : pageKey === 'social' || pageKey === 'video' ? socialPlans(locale) : copy.cta === 'buy' ? sitePlans(locale) : null
   const hasHeroVisual = copy.visual !== 'none' || Boolean(visuals.hero)
   const c = CTA_COPY[locale]
   const home = getHomeCopy(locale)
@@ -42,6 +59,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
             <div className="mt-7 flex flex-wrap gap-3">
               {primary}
               {copy.cta !== 'quote' && <WhatsAppButton label={c.talk} />}
+              {showPlans && <Button href={pageHref('sistemi', locale, '#piani')} variant="ghost">{PLANS_LABEL[locale]}</Button>}
             </div>
           </div>
           {copy.visual === 'browser' && <BrowserBuild {...home.hero.browser} />}
@@ -75,7 +93,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
               </div>
             )}
           {b.cards && (
-            <div className="mt-6 md:mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rail mt-6 grid gap-4 md:mt-10 md:grid-cols-2 lg:grid-cols-3">
               {b.cards.map((card) => (
                 <div key={card.title} className="rounded-3xl bg-white/85 p-6 ring-1 ring-ink/5">
                   <IconTile icon={iconFor(`${card.title} ${card.text}`)} />
@@ -90,6 +108,24 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
           </Section>
         )
       })}
+
+      {pageKey === 'sistemi' || pageKey === 'agenti' ? (
+        <Section tint="peach" id="piani">
+          <Heading label={automation.label} title={automation.title} italic={automation.italic} intro={automation.intro} />
+          <div className="mt-6 md:mt-10">
+            <AutomationPricing copy={automation} locale={locale} />
+          </div>
+        </Section>
+      ) : (
+        planCards && (
+          <Section tint="peach" id="piani">
+            <Heading label={PLANS_HEADING[locale].label} title={PLANS_HEADING[locale].title} italic={PLANS_HEADING[locale].italic} />
+            <div className="mt-6 md:mt-10">
+              <PlanCards plans={planCards} locale={locale} />
+            </div>
+          </Section>
+        )
+      )}
 
       <Section tint="cream">
         <Heading title={c.faq} />
@@ -108,6 +144,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
             </ul>
           </div>
         )}
+        <RelatedPosts pageKey={pageKey} locale={locale} />
       </Section>
 
       <Section tint="orange">

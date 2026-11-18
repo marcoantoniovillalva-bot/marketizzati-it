@@ -86,7 +86,7 @@ export interface Stat {
 /** Four facts of the offer; the first card is filled with the brand colour. */
 export function StatCards({ stats }: { stats: Stat[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+    <div className="rail rail-sm grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
       {stats.map((s, i) => (
         <div key={s.label} className={`rounded-3xl p-5 md:p-7 ${i === 0 ? 'bg-brand text-white' : 'bg-white/80 text-ink ring-1 ring-ink/5'}`}>
           <p className="text-3xl font-bold tracking-tight md:text-4xl">{s.value}</p>

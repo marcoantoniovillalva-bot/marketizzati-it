@@ -43,9 +43,9 @@ export function SiteHeader({ locale, copy }: { locale: Locale; copy: LayoutCopy 
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between gap-4 2xl:max-w-7xl rounded-full px-4 py-2.5 transition sm:px-6 ${scrolled || open ? 'bg-white/90 shadow-[0_10px_40px_-20px_rgba(22,18,15,0.4)] backdrop-blur-md' : 'bg-white/60 backdrop-blur'}`}
       >
-        <a href={pageHref('home', locale)} className="shrink-0" aria-label="Marketizzati">
-          <Image src="/images/icon-light.png" alt="Marketizzati" width={36} height={36} priority className="h-9 w-9 sm:h-8 sm:w-8" />
-          <Image src="/images/logo-light.png" alt="Marketizzati" width={164} height={24} priority className="hidden h-[22px] w-auto sm:block" />
+        <a href={pageHref('home', locale)} className="flex shrink-0 items-center gap-2" aria-label="Marketizzati">
+          <Image src="/images/icon-light.png" alt="Marketizzati" width={36} height={36} priority className="h-9 w-9 sm:h-7 sm:w-7" />
+          <Image src="/images/logo-light.png" alt="Marketizzati" width={164} height={24} priority className="hidden h-[17px] w-auto sm:block" />
         </a>
         <nav className="hidden items-center gap-5 text-sm font-medium text-ink-soft xl:flex">
           {copy.nav.map((item) => (

@@ -30,8 +30,23 @@ export async function scheduleSubscription(subscriptionId: string, plan: Plan, a
 }
 
 /** Creates (or finds) the client account, opens the portal with the onboarding tasks, stores the order. */
-export async function fulfilCheckout(session: Stripe.Checkout.Session): Promise<void> {
+/** Buyer details from the embedded checkout (billing name, phone, custom fields) plus our metadata. */
+function details(session: Stripe.Checkout.Session): Record<string, string> {
+  const field = (key: string): string => session.custom_fields?.find((f) => f.key === key)?.text?.value ?? ''
   const md = session.metadata ?? {}
+  const name = session.customer_details?.name ?? ''
+  return {
+    ...md,
+    full_name: md.full_name || name,
+    business_name: md.business_name || field('business_name') || name,
+    tax_code: md.tax_code || field('tax_code'),
+    invoice_channel: md.invoice_channel || field('invoice_channel'),
+    phone: md.phone || session.customer_details?.phone || '',
+  }
+}
+
+export async function fulfilCheckout(session: Stripe.Checkout.Session): Promise<void> {
+  const md = details(session)
   const email = (session.customer_details?.email ?? session.customer_email ?? '').toLowerCase()
   if (!email) throw new Error('checkout without email')
   const plan = md.plan as Plan
@@ -54,17 +69,23 @@ export async function fulfilCheckout(session: Stripe.Checkout.Session): Promise<
   }
 
   await service.from('profiles').upsert({ id: user.id, full_name: md.full_name, phone: md.phone, role: 'client', language: md.locale || 'it', updated_at: new Date().toISOString() })
-  const site = plan !== 'ads_only'
+  const automation = plan === 'automation_quarterly' || plan === 'automation_monthly'
+  const site = plan !== 'ads_only' && !automation
   await provisionPortalForUser(service, user.id, {
     workspace: {
       business_name: md.business_name,
-      offer_name: site ? 'Sito web Marketizzati' : 'Gestione pubblicità Google + ChatGPT',
+      offer_name: automation ? 'Automazioni Marketizzati' : site ? 'Sito web Marketizzati' : 'Gestione pubblicità Google + ChatGPT',
       current_stage: 'Pagamento ricevuto: onboarding',
-      primary_channel: site ? 'Sito web + scheda Google' : 'Google Ads + ChatGPT Ads',
+      primary_channel: automation ? 'Automazioni e agenti AI' : site ? 'Sito web + scheda Google' : 'Google Ads + ChatGPT Ads',
       notes: `Ordine dal sito (${plan}${adsLaunch ? ' + avvio pubblicità' : ''}). Fatturazione: ${md.tax_code} · ${md.invoice_channel}.`,
       workspace_health: 30,
     },
-    tasks: site
+    tasks: automation
+      ? [
+          { step_code: 'zero-point', title: 'Prenota la call di avvio', description: 'Scegli un orario su cal.com/marketizzati/30min: decidiamo insieme le priorità del primo mese.', due_label: 'Subito' },
+          { step_code: 'zero-point', title: 'Descrivi il processo da automatizzare', description: 'Cosa fai oggi a mano, quali programmi usi, dove si perde tempo. Va bene anche un vocale o un file.', due_label: 'Prima della call' },
+        ]
+      : site
       ? [
           { step_code: 'zero-point', title: 'Carica logo e foto dei tuoi lavori', description: 'Se hai già un logo caricalo; se no lo creiamo noi. Servono anche 5–10 foto dei lavori e una tua foto.', due_label: 'Subito' },
           { step_code: 'zero-point', title: 'Scrivi servizi, zone e orari', description: 'I servizi che fai, le città dove lavori e gli orari: diventano i testi del sito e della scheda Google.', due_label: 'Subito' },

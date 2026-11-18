@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-wide.webp",
   "imageTall": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-tall.webp",
+  "videoPreview": "/videos/preview/voucher-cloud-cybersecurity-checklist.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7704624206952107297",
   "imageAlt": "Voucher Cloud & Cybersecurity — la checklist dei requisiti da girare al commercialista",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/01-slide-01.webp", "alt": "Voucher Cloud & Cybersecurity — la checklist dei requisiti da girare al commercialista" },

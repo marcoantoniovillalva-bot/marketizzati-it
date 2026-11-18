@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.site_orders (
   tax_code TEXT,              -- P.IVA or codice fiscale
   invoice_channel TEXT,       -- SDI code or PEC
   phone TEXT,
-  plan TEXT NOT NULL CHECK (plan IN ('site_oneoff', 'site_monthly', 'ads_only')),
+  plan TEXT NOT NULL CHECK (plan IN ('site_oneoff', 'site_monthly', 'ads_only', 'automation_quarterly', 'automation_monthly')),
   ads_launch BOOLEAN NOT NULL DEFAULT false,
   status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'suspended', 'completed', 'canceled')),
   stripe_session_id TEXT UNIQUE,

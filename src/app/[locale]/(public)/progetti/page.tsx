@@ -51,21 +51,21 @@ export default async function ProjectsPage({ params }: Props) {
                 </div>
                 <LiveFrame
                   url={p.video ? undefined : p.url}
-                  video={p.video ? p.desk.replace('.webp', '.mp4') : undefined}
+                  scrollImage={p.video ? p.desk.replace('.webp', '-full.webp') : undefined}
                   poster={p.desk}
                   title={`${p.name}, desktop`}
                   virtualWidth={1280}
                   className="aspect-[16/10]"
                 />
               </div>
-              {!p.video && <p className="mt-3 text-sm text-ink-muted">{c.hint}</p>}
+              <p className="mt-3 text-sm text-ink-muted">{c.hint}</p>
             </div>
             <div className="self-end">
               <p className="mb-3 text-sm font-semibold text-ink-muted">{c.phone}</p>
               <div className="mx-auto w-[240px] rounded-[2.4rem] bg-ink p-2.5 shadow-2xl">
                 <LiveFrame
                   url={p.video ? undefined : p.url}
-                  video={p.video ? p.phone.replace('.webp', '.mp4') : undefined}
+                  scrollImage={p.video ? p.phone.replace('.webp', '-full.webp') : undefined}
                   poster={p.phone}
                   title={`${p.name}, mobile`}
                   virtualWidth={390}

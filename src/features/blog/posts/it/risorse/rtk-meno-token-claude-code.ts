@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/rtk-meno-token-claude-code-wide.webp",
   "imageTall": "/images/blog/covers/rtk-meno-token-claude-code-tall.webp",
+  "videoPreview": "/videos/preview/rtk-meno-token-claude-code.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7706859214056017185",
   "imageAlt": "RTK: meno token sprecati con Claude Code — guida gratuita TOKEN",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/rtk-meno-token-claude-code/01-slide-01.webp", "alt": "RTK: meno token sprecati con Claude Code — guida gratuita TOKEN" },

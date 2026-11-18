@@ -164,7 +164,7 @@ export default async function AboutPage({ params }: Props) {
 
       <Section tint="cream">
         <Heading label={c.pathLabel} title={c.pathTitle} italic={c.pathItalic} />
-        <ol className="relative mt-8 grid gap-4 md:mt-10 md:grid-cols-4">
+        <ol className="rail relative mt-8 grid gap-4 md:mt-10 md:grid-cols-4">
           {c.path.map((step, i) => (
             <li key={step.what} className="relative rounded-3xl bg-white p-5 ring-1 ring-ink/5">
               <span className="flex items-center gap-2">
@@ -180,7 +180,7 @@ export default async function AboutPage({ params }: Props) {
 
       <Section tint="white">
         <Heading label={c.teamLabel} title={c.teamTitle} italic={c.teamItalic} />
-        <div className="mt-6 md:mt-10 grid gap-6 md:grid-cols-2">
+        <div className="rail mt-6 grid gap-6 md:mt-10 md:grid-cols-2">
           {c.people.map((p) => (
             <article key={p.name} className="flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/5 sm:flex-row md:flex-col lg:flex-row">
               <div className="relative aspect-[4/3] w-full shrink-0 sm:aspect-[4/5] sm:w-48 md:aspect-[4/3] md:w-full lg:aspect-[4/5] lg:w-52">

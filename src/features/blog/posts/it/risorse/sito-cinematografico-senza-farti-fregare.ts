@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "sito-cinematografico-senza-farti-fregare",
-  "title": "Guida pratica: il tuo sito cinematografico senza farti fregare",
+  "title": "Il tuo sito cinematografico senza farti fregare",
   "description": "Template cinematografici, strumenti dei web designer e le domande da fare prima di pagare un sito. Per imprenditori e piccole aziende.",
   "date": "2026-10-20",
   "readTime": 11,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/sito-cinematografico-senza-farti-fregare-wide.webp",
   "imageTall": "/images/blog/covers/sito-cinematografico-senza-farti-fregare-tall.webp",
+  "videoPreview": "/videos/preview/sito-cinematografico-senza-farti-fregare.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7699099470268501280",
   "imageAlt": "Manuale operativo per scegliere, far realizzare o costruire da solo un sito cinematografico, sapendo esattamente cosa stai pagando",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/01-slide-01.webp", "alt": "Manuale operativo per scegliere, far realizzare o costruire da solo un sito cinematografico, sapendo esattamente cosa stai pagando" },

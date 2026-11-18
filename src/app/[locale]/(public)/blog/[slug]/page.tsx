@@ -1,4 +1,5 @@
 import { CoverImage } from '@/features/blog/components/cover-image'
+import { TikTokVideo } from '@/features/blog/components/tiktok-video'
 import { notFound } from 'next/navigation'
 import NextLink from 'next/link'
 import { getAllPosts, getPostBySlug } from '@/features/blog/posts'
@@ -9,9 +10,9 @@ import { WA_LINK } from '@/features/site/lib/links'
 import { isLocale, pageHref } from '@/features/site/lib/routes'
 
 const CTA = {
-  it: { prices: 'Vedi prezzi e acquista', wa: 'Scrivimi su WhatsApp' },
-  es: { prices: 'Ver precios y comprar', wa: 'Escríbeme por WhatsApp' },
-  en: { prices: 'See pricing and buy', wa: 'Message me on WhatsApp' },
+  it: { prices: 'Vedi prezzi e acquista', plans: 'Vedi i piani automazioni', wa: 'Scrivimi su WhatsApp' },
+  es: { prices: 'Ver precios y comprar', plans: 'Ver los planes de automatización', wa: 'Escríbeme por WhatsApp' },
+  en: { prices: 'See pricing and buy', plans: 'See the automation plans', wa: 'Message me on WhatsApp' },
 } as const
 
 interface Props {
@@ -64,7 +65,14 @@ function renderInline(text: string, links = true) {
   })
 }
 
-function renderSection(section: BlogSection, index: number, locale: string) {
+const VIDEO_LABELS = {
+  it: { play: 'Guarda il video', note: 'Il video si apre con il player di TikTok.', open: 'Non parte? Guardalo su TikTok →' },
+  es: { play: 'Ver el vídeo', note: 'El vídeo se abre con el reproductor de TikTok.', open: '¿No arranca? Míralo en TikTok →' },
+  en: { play: 'Watch the video', note: 'The video opens in the TikTok player.', open: 'Not playing? Watch it on TikTok →' },
+}
+
+/** `automation`: AI and automation articles point their call to action at the automation plans. */
+function renderSection(section: BlogSection, index: number, locale: string, automation = false) {
   switch (section.type) {
     case 'intro':
       return (
@@ -177,10 +185,10 @@ function renderSection(section: BlogSection, index: number, locale: string) {
           <p className="text-body-md text-foreground-secondary mb-6">{renderInline(section.content)}</p>
           <div className="flex flex-wrap justify-center gap-3">
             <NextLink
-              href={pageHref('prezzi', locale)}
+              href={automation ? pageHref('sistemi', locale, '#piani') : pageHref('prezzi', locale)}
               className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-dark"
             >
-              {CTA[isLocale(locale) ? locale : 'it'].prices} <ArrowRight size={16} />
+              {CTA[isLocale(locale) ? locale : 'it'][automation ? 'plans' : 'prices']} <ArrowRight size={16} />
             </NextLink>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 font-semibold">
               {CTA[isLocale(locale) ? locale : 'it'].wa}
@@ -231,7 +239,8 @@ export default async function BlogPostPage({ params }: Props) {
       />
 
       <article className="bg-white px-4 pb-32 pt-32 sm:px-6" data-tinta="#FFFFFF">
-        <div className="max-w-2xl mx-auto">
+        <div className={post.tiktok ? 'mx-auto max-w-6xl lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-14' : 'mx-auto max-w-2xl'}>
+        <div className="mx-auto w-full max-w-2xl min-w-0">
           {/* Back */}
           <NextLink
             href={`/${locale}/blog`}
@@ -260,11 +269,17 @@ export default async function BlogPostPage({ params }: Props) {
           </header>
 
           {/* Hero image */}
-          <CoverImage post={post} priority className="mb-10 w-full rounded-2xl" />
+          {post.tiktok ? (
+            <div className="lg:hidden">
+              <TikTokVideo video={post.tiktok} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+            </div>
+          ) : (
+            <CoverImage post={post} priority className="mb-10 w-full rounded-2xl" />
+          )}
 
           {/* Content */}
           <div>
-            {post.sections.map((section, i) => renderSection(section, i, locale))}
+            {post.sections.map((section, i) => renderSection(section, i, locale, post.category === 'AI e automazioni'))}
           </div>
 
           {/* Prev / Next */}
@@ -298,6 +313,12 @@ export default async function BlogPostPage({ params }: Props) {
               )}
             </nav>
           )}
+        </div>
+        {post.tiktok && (
+          <aside className="sticky top-28 hidden lg:block">
+            <TikTokVideo video={post.tiktok} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+          </aside>
+        )}
         </div>
       </article>
     </>

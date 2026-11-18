@@ -19,7 +19,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
               </div>
               <LiveFrame
                 url={project.video ? undefined : project.url}
-                video={project.video ? project.desk.replace('.webp', '.mp4') : undefined}
+                scrollImage={project.video ? project.desk.replace('.webp', '-full.webp') : undefined}
                 poster={project.desk}
                 title={`${project.name}, desktop`}
                 virtualWidth={1280}

@@ -7,6 +7,8 @@ interface Props {
   url?: string
   /** Recorded scroll of the site, for sites that refuse to be embedded. */
   video?: string
+  /** Full-page screenshot scrolled inside the frame, for sites that refuse to be embedded. */
+  scrollImage?: string
   /** Screenshot shown until the live site is ready. */
   poster: string
   title: string
@@ -20,7 +22,7 @@ interface Props {
  * (or phone) width and scaled to the frame, so the site's own layout and animations play as on the
  * real domain. It loads only when the frame comes near the screen.
  */
-export function LiveFrame({ url, video, poster, title, virtualWidth, className = '' }: Props) {
+export function LiveFrame({ url, video, scrollImage, poster, title, virtualWidth, className = '' }: Props) {
   const box = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(0)
   const [near, setNear] = useState(false)
@@ -40,6 +42,14 @@ export function LiveFrame({ url, video, poster, title, virtualWidth, className =
   }, [virtualWidth])
 
   const height = scale ? (box.current?.clientHeight ?? 0) / scale : 0
+  if (scrollImage) {
+    return (
+      <div className={`relative overflow-y-auto overscroll-contain bg-white [scrollbar-width:thin] ${className}`} tabIndex={0} aria-label={title}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={scrollImage} alt={title} loading="lazy" className="block h-auto w-full" />
+      </div>
+    )
+  }
   return (
     <div ref={box} className={`relative overflow-hidden bg-white ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}

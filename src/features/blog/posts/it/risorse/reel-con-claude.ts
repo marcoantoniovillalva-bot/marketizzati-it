@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "reel-con-claude",
-  "title": "Guida pratica Reel con Claude",
+  "title": "Reel con Claude: montare i reel con Claude Code",
   "description": "Il flusso reale di Marco e il percorso semplificato per un imprenditore",
   "date": "2026-10-31",
   "readTime": 10,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/reel-con-claude-wide.webp",
   "imageTall": "/images/blog/covers/reel-con-claude-tall.webp",
+  "videoPreview": "/videos/preview/reel-con-claude.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7702845855186832673",
   "imageAlt": "Reel con Claude — il passo a passo per partire e cosa automatizzare dopo",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/reel-con-claude/01-slide-01.webp", "alt": "Reel con Claude — il passo a passo per partire e cosa automatizzare dopo" },

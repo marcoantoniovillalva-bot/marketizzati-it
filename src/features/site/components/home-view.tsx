@@ -104,7 +104,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
         <div className="mx-auto mt-8 md:mt-12 max-w-3xl">
           <StepsRail labels={v.steps} />
         </div>
-        <ol className="mt-6 md:mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="rail mt-6 grid gap-4 md:mt-10 md:grid-cols-2 lg:grid-cols-4">
           {steps.items.map((s, i) => (
             <li key={s.title} className="rounded-3xl bg-brand-cream p-5">
               <StepScene step={i} />
@@ -121,9 +121,9 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
       <Section tint="navy">
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
-          <div>
+          <div className="min-w-0">
             <Heading dark label={services.label} title={services.title} italic={services.italic} />
-            <div className="mt-6 md:mt-10 grid gap-4 sm:grid-cols-2">
+            <div className="rail mt-6 grid gap-4 md:mt-10 md:grid-cols-2">
               {services.items.map((s) => (
                 <a key={s.key} href={pageHref(s.key, locale)} className="group flex gap-4 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-brand/60 sm:p-6">
                   <IconTile icon={iconFor(`${s.title} ${s.tag}`)} dark />
@@ -146,7 +146,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
       <Section tint="white">
         <Heading label={projects.label} title={projects.title} italic={projects.italic} intro={projects.intro} />
-        <div className="mt-8 md:mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="rail mt-8 grid gap-6 md:mt-12 md:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.slice(0, 3).map((p) => (
             <ProjectCard key={p.id} project={p} locale={locale} />
           ))}

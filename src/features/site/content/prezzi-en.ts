@@ -27,19 +27,6 @@ export const prezziEn: PricesCopy = {
     points: ['Google Ads and ChatGPT Ads managed together.', `Ad budget from ${ADS.minBudgetMonthly} € a month, paid directly to Google and OpenAI.`, 'The advertising accounts are in your name.', 'No promised numbers: I show you what happens each month.'],
   },
   buy: { label: '04 · Buy', title: 'Choose how to pay,', italic: 'and we can start.', intro: 'Pay securely with Stripe. You then get access to the client area, where you upload your logo, photos and information.' },
-  checkout: {
-    planTitle: 'What would you like to buy',
-    plans: {
-      site_oneoff: { title: 'Website · pay upfront', note: `One payment, save ${OFFER.monthly * OFFER.months - OFFER.oneOff} €` },
-      site_monthly: { title: 'Website · instalments', note: `${OFFER.months} monthly instalments, then the website is yours` },
-      ads_only: { title: 'Advertising only', note: 'Google + ChatGPT management, cancel whenever you want' },
-    },
-    adsLaunch: `Add Google and ChatGPT advertising: ${ADS.launchMonths} months of management at ${ADS.launchMonthly} € a month, then it stops automatically. You pay the ad budget separately, directly to the platforms.`,
-    fields: { fullName: 'Full name', businessName: 'Registered business name or trading name', taxCode: 'Italian VAT number or tax code', invoiceChannel: 'SDI code or certified email (PEC)', email: 'Email', phone: 'Phone' },
-    accept: `I have read and accept the {link} and privacy notice. If I pay in instalments, I understand that if payments stop, the website is suspended until I resume paying.`,
-    termsLabel: 'terms of sale', submit: 'Continue to secure payment', loading: 'Taking you to payment…', error: 'Payment could not be started. Try again shortly or message me on WhatsApp.', talk: 'Want to talk first? Message me on WhatsApp',
-    secure: `Payment with Stripe. Italian flat-rate tax scheme, no VAT: each invoice includes ${OFFER.stampDuty} € stamp duty.`,
-  },
   faq: {
     label: '05 · Questions', title: 'Questions about the price,', italic: 'clear answers.',
     items: [

@@ -26,6 +26,10 @@ export interface BlogPost {
   imageTall?: string
   /** Free downloadable guide from one of the videos (shown as a badge). */
   freeGuide?: boolean
+  /** 5-second muted clip played on the blog card on hover (public/videos/preview). */
+  videoPreview?: string
+  /** TikTok video id or URL of the full video, shown at the top of the article. */
+  tiktok?: string
   sections: BlogSection[]
 }
 

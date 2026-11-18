@@ -7,8 +7,8 @@ export const homeEs: HomeCopy = {
     description: `Web profesional de hasta ${OFFER.maxPages} páginas, con logo y ficha de Google incluidos: ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses. La hace Marco, lista en unas 2 semanas.`,
   },
   hero: {
-    label: 'Webs para profesionales de oficios y pequeñas empresas', title: 'Tu web profesional,', italic: 'hecha por una persona de verdad.',
-    lead: `Hasta ${OFFER.maxPages} páginas, logo y ficha de Google incluidos.`,
+    label: 'Webs para profesionales de oficios y pequeñas empresas', title: 'Una web hecha para que te llamen,', italic: 'no solo para que te vean.',
+    lead: `Hasta ${OFFER.maxPages} páginas, logo y ficha de Google incluidos. Online en unas ${OFFER.deliveryWeeks} semanas desde que nos envías el material.`,
     price: `**${OFFER.oneOff} € en un pago, o ${OFFER.monthly} € al mes durante ${OFFER.months} meses.** Después es tuya.`,
     ctaPrimary: 'Ver qué incluye', ctaWhatsapp: 'Escríbeme por WhatsApp', note: 'El precio está aquí. No tienes que esperar un presupuesto.',
     browser: { url: 'idraulicorossi.it', brand: 'Idraulico Rossi', headline: 'Fontanería urgente en Pavia, en el mismo día.', cta: 'Llama ahora', services: ['Fugas y averías', 'Calderas', 'Baños nuevos'] },

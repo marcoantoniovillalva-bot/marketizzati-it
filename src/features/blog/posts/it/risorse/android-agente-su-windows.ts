@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/android-agente-su-windows-wide.webp",
   "imageTall": "/images/blog/covers/android-agente-su-windows-tall.webp",
+  "videoPreview": "/videos/preview/android-agente-su-windows.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7707718630523407649",
   "imageAlt": "ANDROID: configurare l’agente su Windows + 10 prove sicure",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/android-agente-su-windows/01-slide-01.webp", "alt": "ANDROID: configurare l’agente su Windows + 10 prove sicure" },

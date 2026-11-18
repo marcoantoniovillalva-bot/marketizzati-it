@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/montare-video-con-claude-code-wide.webp",
   "imageTall": "/images/blog/covers/montare-video-con-claude-code-tall.webp",
+  "videoPreview": "/videos/preview/montare-video-con-claude-code.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7706265157642685728",
   "imageAlt": "Montare i video con Claude Code: i 5 strumenti gratuiti, passo a passo su Windows",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/montare-video-con-claude-code/01-slide-01.webp", "alt": "Montare i video con Claude Code: i 5 strumenti gratuiti, passo a passo su Windows" },

@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/audit-sicurezza-skill-cloudflare-wide.webp",
   "imageTall": "/images/blog/covers/audit-sicurezza-skill-cloudflare-tall.webp",
+  "videoPreview": "/videos/preview/audit-sicurezza-skill-cloudflare.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7708840763861372193",
   "imageAlt": "AUDIT: la checklist per preparare l’audit di sicurezza con la skill di Cloudflare + un esempio di report",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/01-slide-01.webp", "alt": "AUDIT: la checklist per preparare l’audit di sicurezza con la skill di Cloudflare + un esempio di report" },

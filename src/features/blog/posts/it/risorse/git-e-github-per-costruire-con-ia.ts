@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "git-e-github-per-costruire-con-ia",
-  "title": "Guida pratica: Git e GitHub per costruire con l'IA in modo professionale, strutturato e delegabile",
+  "title": "Git e GitHub per costruire con l'IA in modo professionale, strutturato e delegabile",
   "description": "La guida promessa nel video: il flusso completo di Git e GitHub spiegato con la metafora della cucina (clone, main, pull, branch, add, commit, push,…",
   "date": "2026-10-23",
   "readTime": 15,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/git-e-github-per-costruire-con-ia-wide.webp",
   "imageTall": "/images/blog/covers/git-e-github-per-costruire-con-ia-tall.webp",
+  "videoPreview": "/videos/preview/git-e-github-per-costruire-con-ia.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7701096249629445408",
   "imageAlt": "Il flusso di lavoro con Git e GitHub, i comandi, i prompt per Claude Code e Codex e le regole per delegare i progetti senza caos",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/01-slide-01.webp", "alt": "Il flusso di lavoro con Git e GitHub, i comandi, i prompt per Claude Code e Codex e le regole per delegare i progetti senza caos" },

@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "pluralsight-ai-mcp",
-  "title": "Guida pratica: Pluralsight AI MCP",
+  "title": "Pluralsight AI MCP: i corsi aziendali collegati alla tua IA",
   "description": "Come collegare Pluralsight a Claude Code, Codex e agli altri strumenti IA per creare percorsi formativi da obiettivi di business e misurarne i risultati.",
   "date": "2026-10-20",
   "readTime": 9,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/pluralsight-ai-mcp-wide.webp",
   "imageTall": "/images/blog/covers/pluralsight-ai-mcp-tall.webp",
+  "videoPreview": "/videos/preview/pluralsight-ai-mcp.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7699552149348388129",
   "imageAlt": "Manuale operativo per collegare Pluralsight alla tua IA, creare percorsi formativi da un obiettivo di business e misurare se la formazione porta risultati",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/pluralsight-ai-mcp/01-slide-01.webp", "alt": "Manuale operativo per collegare Pluralsight alla tua IA, creare percorsi formativi da un obiettivo di business e misurare se la formazione porta risultati" },

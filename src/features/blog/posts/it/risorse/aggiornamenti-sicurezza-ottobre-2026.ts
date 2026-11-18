@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "aggiornamenti-sicurezza-ottobre-2026",
-  "title": "Guida pratica: aggiornamenti di sicurezza di ottobre 2026 (PHP, Node.js, Python, Go, Rust e il caso eMudhra)",
+  "title": "Aggiornamenti di sicurezza di ottobre 2026 (PHP, Node.js, Python, Go, Rust e il caso eMudhra)",
   "description": "I prompt promessi nel video per controllare con Claude Code e Codex, progetto per progetto, cosa aggiornare dopo le correzioni di sicurezza di ottobre…",
   "date": "2026-10-23",
   "readTime": 16,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/aggiornamenti-sicurezza-ottobre-2026-wide.webp",
   "imageTall": "/images/blog/covers/aggiornamenti-sicurezza-ottobre-2026-tall.webp",
+  "videoPreview": "/videos/preview/aggiornamenti-sicurezza-ottobre-2026.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7700691838247685408",
   "imageAlt": "Cosa è successo davvero a ottobre 2026, chi è a rischio, cosa aggiornare e i prompt per farlo controllare a Claude Code e Codex, progetto per progetto",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/aggiornamenti-sicurezza-ottobre-2026/01-slide-01.webp", "alt": "Cosa è successo davvero a ottobre 2026, chi è a rischio, cosa aggiornare e i prompt per farlo controllare a Claude Code e Codex, progetto per progetto" },

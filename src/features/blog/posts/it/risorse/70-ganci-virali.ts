@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "70-ganci-virali",
-  "title": "Guida pratica 70 ganci virali",
+  "title": "70 ganci virali: la skill per Claude che scrive i ganci dei tuoi video",
   "description": "Scarica, installa e usa la skill hook-virali su Claude",
   "date": "2026-11-02",
   "readTime": 5,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/70-ganci-virali-wide.webp",
   "imageTall": "/images/blog/covers/70-ganci-virali-tall.webp",
+  "videoPreview": "/videos/preview/70-ganci-virali.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7703698401770147105",
   "imageAlt": "70 ganci virali — scarica la skill, installala su Claude e scrivi i ganci dei tuoi video",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/70-ganci-virali/01-slide-01.webp", "alt": "70 ganci virali — scarica la skill, installala su Claude e scrivi i ganci dei tuoi video" },

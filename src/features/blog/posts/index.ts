@@ -43,3 +43,10 @@ export async function getPostBySlug(locale: string, slug: string): Promise<BlogP
   }
   return getStaticPostBySlug(locale, slug)
 }
+
+const hasVideo = (p: BlogPost): boolean => Boolean(p.tiktok || p.videoPreview)
+
+/** Blog order: articles with a video first (newest first), then the others (newest first). */
+export function sortPosts(posts: BlogPost[]): BlogPost[] {
+  return posts.slice().sort((a, b) => Number(hasVideo(b)) - Number(hasVideo(a)) || b.date.localeCompare(a.date))
+}

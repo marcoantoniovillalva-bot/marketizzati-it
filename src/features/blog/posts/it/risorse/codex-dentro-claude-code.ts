@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "codex-dentro-claude-code",
-  "title": "Guida pratica: Codex dentro Claude Code, due agenti IA in una sola chat",
+  "title": "Codex dentro Claude Code, due agenti IA in una sola chat",
   "description": "La guida promessa nel video: cos'è il plugin ufficiale di OpenAI che porta Codex dentro Claude Code, cosa ti serve, i 4 comandi di installazione…",
   "date": "2026-10-26",
   "readTime": 12,
@@ -18,6 +18,7 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/codex-dentro-claude-code-wide.webp",
   "imageTall": "/images/blog/covers/codex-dentro-claude-code-tall.webp",
+  "videoPreview": "/videos/preview/codex-dentro-claude-code.mp4",
   "imageAlt": "Il plugin ufficiale di OpenAI che fa lavorare Codex dentro Claude Code: installazione, comandi, prompt pronti, limiti e costi",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/codex-dentro-claude-code/01-slide-01.webp", "alt": "Il plugin ufficiale di OpenAI che fa lavorare Codex dentro Claude Code: installazione, comandi, prompt pronti, limiti e costi" },

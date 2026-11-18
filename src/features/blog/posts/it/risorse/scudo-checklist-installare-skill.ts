@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/scudo-checklist-installare-skill-wide.webp",
   "imageTall": "/images/blog/covers/scudo-checklist-installare-skill-tall.webp",
+  "videoPreview": "/videos/preview/scudo-checklist-installare-skill.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7707559772744207649",
   "imageAlt": "SCUDO: la checklist prima di installare una skill",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/scudo-checklist-installare-skill/01-slide-01.webp", "alt": "SCUDO: la checklist prima di installare una skill" },

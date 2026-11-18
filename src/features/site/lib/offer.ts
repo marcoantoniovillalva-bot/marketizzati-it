@@ -17,6 +17,13 @@ export const OFFER = {
 } as const
 
 /** Google Ads + ChatGPT Ads management, both channels together. Ad budget is paid to Google / OpenAI. */
+/** Automation subscriptions (same structure as montelli.dev): monthly price, quarterly needs 3 months. */
+export const AUTOMATION = {
+  quarterly: 2500,
+  monthly: 3000,
+  commitMonths: 3,
+} as const
+
 export const ADS = {
   /** Only when bought together with the website. */
   launchMonthly: 50,

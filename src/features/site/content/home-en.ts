@@ -7,8 +7,8 @@ export const homeEn: HomeCopy = {
     description: `A professional website with up to ${OFFER.maxPages} pages, logo and Google Business Profile included: ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months. Built by Marco, online in around 2 weeks.`,
   },
   hero: {
-    label: 'Websites for tradespeople and small businesses', title: 'Your professional website,', italic: 'built by a real person.',
-    lead: `Up to ${OFFER.maxPages} pages, logo and Google Business Profile included.`,
+    label: 'Websites for tradespeople and small businesses', title: 'A website built to make your phone ring,', italic: 'not just to be seen.',
+    lead: `Up to ${OFFER.maxPages} pages, logo and Google Business Profile included. Online in about ${OFFER.deliveryWeeks} weeks from when you send us the material.`,
     price: `**${OFFER.oneOff} € upfront, or ${OFFER.monthly} € a month for ${OFFER.months} months.** Then it is yours.`,
     ctaPrimary: 'See what is included', ctaWhatsapp: 'Message me on WhatsApp', note: 'The price is right here. No waiting for a quote.',
     browser: { url: 'idraulicorossi.it', brand: 'Idraulico Rossi', headline: 'Same-day emergency plumbing in Pavia.', cta: 'Call now', services: ['Leaks and repairs', 'Boilers', 'New bathrooms'] },

@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "claude-per-instagram",
-  "title": "Guida pratica: Claude che lavora sul tuo Instagram",
+  "title": "Claude che lavora sul tuo Instagram",
   "description": "Come collegare Instagram a Claude con Composio, i prompt pronti per pubblicare, rispondere ai commenti e leggere le statistiche, e i limiti da…",
   "date": "2026-10-22",
   "readTime": 12,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/claude-per-instagram-wide.webp",
   "imageTall": "/images/blog/covers/claude-per-instagram-tall.webp",
+  "videoPreview": "/videos/preview/claude-per-instagram.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7700323352560274721",
   "imageAlt": "Manuale operativo per far pubblicare, rispondere e analizzare il tuo profilo Instagram a Claude, senza scrivere una riga di codice e senza perdere il controllo",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/claude-per-instagram/01-slide-01.webp", "alt": "Manuale operativo per far pubblicare, rispondere e analizzare il tuo profilo Instagram a Claude, senza scrivere una riga di codice e senza perdere il controllo" },

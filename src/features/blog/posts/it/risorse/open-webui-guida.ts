@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "open-webui-guida",
-  "title": "Guida pratica Open WebUI",
+  "title": "Open WebUI: una chat come ChatGPT da installare sul tuo computer",
   "description": "Installa Open WebUI in mezz'ora: modelli, team e funzionalità",
   "date": "2026-11-03",
   "readTime": 6,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/open-webui-guida-wide.webp",
   "imageTall": "/images/blog/covers/open-webui-guida-tall.webp",
+  "videoPreview": "/videos/preview/open-webui-guida.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7703989747957402912",
   "imageAlt": "Open WebUI in mezz'ora — la chat IA della tua azienda, sul tuo computer o sul tuo server",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/open-webui-guida/01-slide-01.webp", "alt": "Open WebUI in mezz'ora — la chat IA della tua azienda, sul tuo computer o sul tuo server" },

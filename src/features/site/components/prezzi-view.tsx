@@ -1,78 +1,101 @@
-import { CheckoutForm } from '@/features/checkout/components/checkout-form'
 import type { HomeCopy } from '../content/home-types'
 import type { PricesCopy } from '../content/prezzi-it'
-import { euro, OFFER, totalInstalments } from '../lib/offer'
-import { pageHref, type Locale } from '../lib/routes'
+import { getAutomationCopy } from '../content/automation'
+import { adsPlans, sitePlans, socialPlans } from '../content/plans'
 import { getVisualCopy } from '../content/visuals'
-import { AdsFlow, AdsPriceChart } from './explainers-services'
+import { euro, OFFER } from '../lib/offer'
+import type { Locale } from '../lib/routes'
+import { AutomationPricing } from './automation-pricing'
+import { AdsPriceChart } from './explainers-services'
 import { OwnershipTimeline, PriceStack } from './explainers-site'
+import { PlanCards } from './plan-cards'
 import { Heading, Section } from './section'
 import { CheckList, Faq, Rich } from './ui'
 
-/** The price page: plain-text answer first (Google, ChatGPT), then comparison, ads add-on and checkout. */
+const MORE: Record<Locale, { label: string; title: string; italic: string; intro: string }> = {
+  it: { label: 'Social e video', title: 'Contenuti e social,', italic: 'su preventivo.', intro: 'Dipende da quanti contenuti e quanti canali: raccontami cosa ti serve e ti preparo una proposta.' },
+  es: { label: 'Redes y vídeo', title: 'Contenidos y redes,', italic: 'con presupuesto.', intro: 'Depende de cuántos contenidos y canales: cuéntame qué necesitas y te preparo una propuesta.' },
+  en: { label: 'Social and video', title: 'Content and social,', italic: 'custom quote.', intro: 'It depends on how much content and how many channels: tell me what you need and I will prepare a proposal.' },
+}
+
+/**
+ * Every price in one page: website (with pay-inside-the-page), ads management, automation plans and social.
+ * Plain-text answer first for Google and ChatGPT; cards in one swipe row on phones.
+ */
 export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: HomeCopy['offer']; locale: Locale }) {
   const v = getVisualCopy(locale)
+  const automation = getAutomationCopy(locale)
+  const more = MORE[locale]
   return (
     <>
-      <Section tint="white" className="pt-24 md:pt-32">
-        <div className="grid items-center gap-8 lg:gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+      <Section tint="white" className="pt-24 md:pt-32" id="acquista">
+        <div className="grid items-center gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
           <div>
             <Heading as="h1" label={copy.label} title={copy.title} italic={copy.italic} />
-            <p className="mt-8 max-w-3xl text-xl leading-relaxed">
+            <p className="mt-5 max-w-3xl text-base leading-relaxed sm:text-xl md:mt-8">
               <Rich text={copy.answer} />
             </p>
           </div>
-          <PriceStack v={v} locale={locale} />
-        </div>
-        <div className="mt-6 md:mt-10 grid gap-4 md:grid-cols-3">
-          <div className="rounded-3xl bg-brand-cream p-6">
-            <p className="text-sm font-semibold uppercase tracking-wider text-ink-muted">{offer.marketLabel}</p>
-            <p className="mt-1 text-3xl font-bold text-ink-muted line-through decoration-brand decoration-2">{euro(OFFER.marketValue, locale)}</p>
-            <p className="mt-1 text-sm text-ink-muted">{offer.marketDetail}</p>
-          </div>
-          <div className="rounded-3xl bg-ink p-6 text-white">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-soft">{offer.oneOff.title}</p>
-            <p className="mt-1 text-5xl font-bold">{euro(OFFER.oneOff, locale)}</p>
-            <p className="mt-1 text-white/70">{offer.oneOff.note}</p>
-          </div>
-          <div className="rounded-3xl bg-white p-6 ring-1 ring-ink/10">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand">{offer.monthly.title}</p>
-            <p className="mt-1 text-5xl font-bold">
-              {euro(OFFER.monthly, locale)}
-              <span className="text-lg text-ink-muted"> × {OFFER.months}</span>
-            </p>
-            <p className="mt-1 text-ink-soft">
-              {offer.monthly.note} · {euro(totalInstalments, locale)}
-            </p>
+          <div className="hidden lg:block">
+            <PriceStack v={v} locale={locale} />
           </div>
         </div>
-        <div className="mt-6 md:mt-10 grid gap-8 rounded-3xl bg-white/80 p-7 ring-1 ring-ink/5 md:grid-cols-2 md:p-9">
+        <div className="mt-6 md:mt-10">
+          <PlanCards plans={sitePlans(locale)} locale={locale} />
+        </div>
+        <p className="mt-2 text-xs text-ink-muted">
+          {offer.marketLabel}: {euro(OFFER.marketValue, locale)} ({offer.marketDetail}). {offer.hosting} {offer.stamp}
+        </p>
+      </Section>
+
+      <Section tint="cream">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
-            <p className="mb-5 text-lg font-bold">{offer.includedTitle}</p>
+            <p className="mb-4 text-lg font-bold">{offer.includedTitle}</p>
             <CheckList items={offer.included} />
-          </div>
-          <div className="space-y-3 self-end text-ink-soft">
-            <p className="rounded-2xl bg-brand-cream p-4 text-ink">
+            <p className="mt-5 rounded-2xl bg-white p-4 text-ink">
               <Rich text={offer.ownership} />
             </p>
-            <p className="text-sm">{offer.hosting}</p>
-            <p className="text-sm">{offer.stamp}</p>
           </div>
-        </div>
-        <div className="mt-8">
           <OwnershipTimeline v={v} locale={locale} />
+        </div>
+      </Section>
+
+      <Section tint="peach" id="pubblicita">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+          <div>
+            <Heading label={copy.ads.label} title={copy.ads.title} italic={copy.ads.italic} intro={copy.ads.text} />
+            <div className="mt-6">
+              <PlanCards plans={adsPlans(locale)} locale={locale} />
+            </div>
+          </div>
+          <AdsPriceChart v={v} locale={locale} />
+        </div>
+      </Section>
+
+      <Section tint="orange" id="automazioni">
+        <Heading label={automation.label} title={automation.title} italic={automation.italic} intro={automation.intro} />
+        <div className="mt-6 md:mt-10">
+          <AutomationPricing copy={automation} locale={locale} />
+        </div>
+      </Section>
+
+      <Section tint="cream" id="social">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <Heading label={more.label} title={more.title} italic={more.italic} intro={more.intro} />
+          <PlanCards plans={socialPlans(locale)} locale={locale} />
         </div>
       </Section>
 
       <Section tint="peach">
         <Heading label={copy.compare.label} title={copy.compare.title} italic={copy.compare.italic} />
-        <div className="mt-6 md:mt-10 overflow-x-auto rounded-3xl bg-white/90 ring-1 ring-ink/5">
-          <table className="w-full min-w-[640px] text-left">
+        <div className="mt-6 overflow-x-auto rounded-3xl bg-white/90 ring-1 ring-ink/5 md:mt-10">
+          <table className="w-full min-w-[560px] text-left">
             <thead>
               <tr className="border-b border-ink/10">
-                <th className="p-5" />
+                <th className="p-3 sm:p-5" />
                 {copy.compare.columns.map((c, i) => (
-                  <th key={c} className={`p-5 text-sm font-bold ${i === 0 ? 'text-brand' : 'text-ink-soft'}`}>
+                  <th key={c} className={`p-3 text-sm font-bold sm:p-5 ${i === 0 ? 'text-brand' : 'text-ink-soft'}`}>
                     {c}
                   </th>
                 ))}
@@ -81,10 +104,10 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
             <tbody>
               {copy.compare.rows.map((row) => (
                 <tr key={row.label} className="border-b border-ink/5 last:border-0">
-                  <th className="p-5 text-sm font-semibold">{row.label}</th>
-                  {row.values.map((v, i) => (
-                    <td key={i} className={`p-5 text-sm ${i === 0 ? 'bg-brand-cream/70 font-semibold' : 'text-ink-soft'}`}>
-                      {v}
+                  <th className="p-3 text-sm font-semibold sm:p-5">{row.label}</th>
+                  {row.values.map((val, i) => (
+                    <td key={i} className={`p-3 text-sm sm:p-5 ${i === 0 ? 'bg-brand-cream/70 font-semibold' : 'text-ink-soft'}`}>
+                      {val}
                     </td>
                   ))}
                 </tr>
@@ -93,26 +116,6 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
           </table>
         </div>
         <p className="mt-4 text-xs text-ink-muted">{copy.compare.note}</p>
-      </Section>
-
-      <Section tint="cream">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
-          <Heading label={copy.ads.label} title={copy.ads.title} italic={copy.ads.italic} intro={copy.ads.text} />
-          <div className="rounded-3xl bg-white/85 p-7 ring-1 ring-ink/5">
-            <CheckList items={copy.ads.points} />
-          </div>
-        </div>
-        <div className="mt-8 md:mt-12 grid gap-8 md:grid-cols-2 md:items-center">
-          <AdsPriceChart v={v} locale={locale} />
-          <AdsFlow v={v} />
-        </div>
-      </Section>
-
-      <Section tint="orange" id="acquista">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <Heading label={copy.buy.label} title={copy.buy.title} italic={copy.buy.italic} intro={copy.buy.intro} />
-          <CheckoutForm copy={copy.checkout} locale={locale} termsHref={pageHref('condizioni', locale)} />
-        </div>
       </Section>
 
       <Section tint="white">

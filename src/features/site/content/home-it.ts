@@ -9,9 +9,9 @@ export const homeIt: HomeCopy = {
   },
   hero: {
     label: 'Siti per artigiani e piccole imprese',
-    title: 'Il tuo sito professionale,',
-    italic: 'fatto da una persona vera.',
-    lead: `Sito fino a ${OFFER.maxPages} pagine, logo e scheda Google inclusi.`,
+    title: 'Un sito fatto per farti chiamare,',
+    italic: 'non solo per farti vedere.',
+    lead: `Sito fino a ${OFFER.maxPages} pagine, logo e scheda Google inclusi. Online in circa ${OFFER.deliveryWeeks} settimane da quando ci mandi il materiale.`,
     price: `**${OFFER.oneOff} € una volta sola, oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi.** Poi è tuo.`,
     ctaPrimary: 'Vedi cosa è incluso',
     ctaWhatsapp: 'Scrivimi su WhatsApp',

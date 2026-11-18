@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "meta-business-agent-whatsapp",
-  "title": "Guida pratica Meta Business Agent",
+  "title": "Meta Business Agent: l’agente IA che risponde ai clienti su WhatsApp",
   "description": "Attiva e configura l'agente IA di WhatsApp Business",
   "date": "2026-11-03",
   "readTime": 5,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/meta-business-agent-whatsapp-wide.webp",
   "imageTall": "/images/blog/covers/meta-business-agent-whatsapp-tall.webp",
+  "videoPreview": "/videos/preview/meta-business-agent-whatsapp.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7704246025153678625",
   "imageAlt": "Meta Business Agent — l’agente IA che risponde ai tuoi clienti su WhatsApp Business",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/meta-business-agent-whatsapp/01-slide-01.webp", "alt": "Meta Business Agent — l’agente IA che risponde ai tuoi clienti su WhatsApp Business" },

@@ -27,19 +27,6 @@ export const prezziEs: PricesCopy = {
     points: ['Gestión conjunta de Google Ads y ChatGPT Ads.', `Presupuesto de anuncios desde ${ADS.minBudgetMonthly} € al mes, pagado directamente a Google y OpenAI.`, 'Las cuentas publicitarias están a tu nombre.', 'Sin prometer cifras: cada mes te muestro qué ocurre.'],
   },
   buy: { label: '04 · Compra', title: 'Elige cómo pagar,', italic: 'y empezamos.', intro: 'Paga de forma segura con Stripe. Después recibes acceso al área de clientes para subir tu logo, fotos e información.' },
-  checkout: {
-    planTitle: 'Qué quieres comprar',
-    plans: {
-      site_oneoff: { title: 'Web · un solo pago', note: `Un pago, ahorras ${OFFER.monthly * OFFER.months - OFFER.oneOff} €` },
-      site_monthly: { title: 'Web · a plazos', note: `${OFFER.months} cuotas mensuales, después la web es tuya` },
-      ads_only: { title: 'Solo publicidad', note: 'Gestión de Google + ChatGPT, cancela cuando quieras' },
-    },
-    adsLaunch: `Añade publicidad en Google y ChatGPT: ${ADS.launchMonths} meses de gestión a ${ADS.launchMonthly} € al mes. Después se detiene automáticamente. El presupuesto de anuncios lo pagas aparte, directamente a las plataformas.`,
-    fields: { fullName: 'Nombre y apellidos', businessName: 'Razón social o nombre del negocio', taxCode: 'Número de IVA o código fiscal italiano', invoiceChannel: 'Código SDI o correo certificado (PEC)', email: 'Correo electrónico', phone: 'Teléfono' },
-    accept: `He leído y acepto las {link} y la política de privacidad. Si pago a plazos, sé que, si dejo de pagar, la web se suspende hasta que retome los pagos.`,
-    termsLabel: 'condiciones de venta', submit: 'Ir al pago seguro', loading: 'Te llevamos al pago…', error: 'No se ha podido iniciar el pago. Inténtalo en un momento o escríbeme por WhatsApp.', talk: '¿Prefieres hablarlo antes? Escríbeme por WhatsApp',
-    secure: `Pago con Stripe. Régimen fiscal italiano forfettario, sin IVA: cada factura lleva ${OFFER.stampDuty} € de impuesto de timbre.`,
-  },
   faq: {
     label: '05 · Preguntas', title: 'Preguntas sobre el precio,', italic: 'respuestas claras.',
     items: [

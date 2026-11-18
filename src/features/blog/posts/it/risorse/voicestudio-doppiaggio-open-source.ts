@@ -2,7 +2,7 @@ import type { BlogPost } from '../../../types'
 
 const post: BlogPost = {
   "slug": "voicestudio-doppiaggio-open-source",
-  "title": "Guida pratica: VoiceStudio, lo studio di doppiaggio open source sul tuo computer",
+  "title": "VoiceStudio, lo studio di doppiaggio open source sul tuo computer",
   "description": "La guida promessa nel video: link al repository ufficiale di VoiceStudio, requisiti, installazione passo passo su Windows, Mac e Linux, prima voce…",
   "date": "2026-10-27",
   "readTime": 11,
@@ -18,6 +18,8 @@ const post: BlogPost = {
   ],
   "image": "/images/blog/covers/voicestudio-doppiaggio-open-source-wide.webp",
   "imageTall": "/images/blog/covers/voicestudio-doppiaggio-open-source-tall.webp",
+  "videoPreview": "/videos/preview/voicestudio-doppiaggio-open-source.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7701699199821253920",
   "imageAlt": "VoiceStudio, l'alternativa open source e locale a ElevenLabs: link, requisiti, installazione, licenze e casi d'uso",
   "sections": [
     { "type": "image", "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/01-slide-01.webp", "alt": "VoiceStudio, l'alternativa open source e locale a ElevenLabs: link, requisiti, installazione, licenze e casi d'uso" },

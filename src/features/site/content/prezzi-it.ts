@@ -1,4 +1,3 @@
-import type { CheckoutCopy } from '@/features/checkout/components/checkout-form'
 import type { FaqItem } from '../components/ui'
 import { ADS, OFFER } from '../lib/offer'
 
@@ -11,7 +10,6 @@ export interface PricesCopy {
   compare: { label: string; title: string; italic: string; columns: string[]; rows: { label: string; values: string[] }[]; note: string }
   ads: { label: string; title: string; italic: string; text: string; points: string[] }
   buy: { label: string; title: string; italic: string; intro: string }
-  checkout: CheckoutCopy
   faq: { label: string; title: string; italic: string; items: FaqItem[] }
 }
 
@@ -56,30 +54,6 @@ export const prezziIt: PricesCopy = {
     title: 'Scegli come pagare,',
     italic: 'e partiamo.',
     intro: 'Paghi in modo sicuro con Stripe. Subito dopo ti arriva l’accesso all’area clienti, dove carichi logo, foto e informazioni.',
-  },
-  checkout: {
-    planTitle: 'Cosa vuoi acquistare',
-    plans: {
-      site_oneoff: { title: 'Sito · paghi subito', note: `Una volta sola, risparmi ${OFFER.monthly * OFFER.months - OFFER.oneOff} €` },
-      site_monthly: { title: 'Sito · a rate', note: `${OFFER.months} rate mensili, poi il sito è tuo` },
-      ads_only: { title: 'Solo pubblicità', note: 'Gestione Google + ChatGPT, disdici quando vuoi' },
-    },
-    adsLaunch: `Aggiungi la pubblicità su Google e ChatGPT: ${ADS.launchMonths} mesi di gestione a ${ADS.launchMonthly} € al mese, poi si ferma da sola. Il budget per gli annunci lo paghi a parte, direttamente alle piattaforme.`,
-    fields: {
-      fullName: 'Nome e cognome',
-      businessName: 'Ragione sociale o nome attività',
-      taxCode: 'Partita IVA o codice fiscale',
-      invoiceChannel: 'Codice SDI o PEC',
-      email: 'Email',
-      phone: 'Telefono',
-    },
-    accept: `Ho letto e accetto le {link} e l’informativa privacy. Se pago a rate, so che se le rate si interrompono il sito viene sospeso finché non riprendo a pagare.`,
-    termsLabel: 'condizioni di vendita',
-    submit: 'Vai al pagamento sicuro',
-    loading: 'Ti porto al pagamento…',
-    error: 'Il pagamento non è partito. Riprova tra poco, oppure scrivimi su WhatsApp.',
-    talk: 'Preferisci parlarne prima? Scrivimi su WhatsApp',
-    secure: `Pagamento con Stripe. Regime forfettario, niente IVA: su ogni fattura c’è una marca da bollo da ${OFFER.stampDuty} €.`,
   },
   faq: {
     label: '05 · Domande',
