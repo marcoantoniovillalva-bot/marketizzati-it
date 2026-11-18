@@ -7,8 +7,10 @@ import { isLocale, pageHref, type Locale } from '@/features/site/lib/routes'
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ categoria?: string }> }
 
-/** Blog categories: one per service, plus the free guides. Values match BlogPost.category. */
-const CATEGORIES = ['Siti web', 'Scheda Google e SEO locale', 'Pubblicità Google e ChatGPT', 'AI e automazioni', 'Contenuti e social', 'Risorse gratuite'] as const
+/** Blog categories, one per service. Values match BlogPost.category; free guides sit in their topic with a badge. */
+const CATEGORIES = ['Siti web', 'Scheda Google e SEO locale', 'Pubblicità Google e ChatGPT', 'AI e automazioni', 'Contenuti e social'] as const
+
+const FREE: Record<Locale, string> = { it: 'Guida gratuita in PDF', es: 'Guía gratis en PDF', en: 'Free PDF guide' }
 
 const slugify = (s: string): string => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
@@ -38,9 +40,9 @@ export default async function BlogPage({ params, searchParams }: Props) {
   const postLocale = own.length ? l : 'it'
 
   return (
-    <Section tint="white" className="pt-32 md:pt-40">
+    <Section tint="white" className="pt-24 md:pt-32">
       <Heading as="h1" label={c.label} title={c.title} italic={c.italic} intro={c.intro} />
-      <nav className="mt-10 flex flex-wrap gap-2" aria-label="Categorie">
+      <nav className="mt-6 md:mt-10 flex flex-wrap gap-2" aria-label="Categorie">
         {[{ name: c.all, href: base, on: !active }, ...CATEGORIES.map((cat) => ({ name: cat, href: `${base}?categoria=${slugify(cat)}`, on: cat === active }))].map((item) => (
           <a key={item.name} href={item.href} className={`rounded-full px-4 py-2 text-sm font-semibold transition ${item.on ? 'bg-ink text-white' : 'bg-brand-cream text-ink-soft hover:bg-brand-peach'}`}>
             {item.name}
@@ -48,14 +50,17 @@ export default async function BlogPage({ params, searchParams }: Props) {
         ))}
       </nav>
       {shown.length === 0 ? (
-        <p className="mt-12 text-ink-muted">{c.empty}</p>
+        <p className="mt-8 md:mt-12 text-ink-muted">{c.empty}</p>
       ) : (
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 md:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((post) => (
             <a key={post.slug} href={`/${postLocale}/blog/${post.slug}`} className="group flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-xl">
               <CoverImage post={post} />
               <div className="flex flex-1 flex-col p-6">
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand">{post.category}</p>
+                <p className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand">
+                  {post.category}
+                  {post.freeGuide && <span className="rounded-full bg-[#e9f8ee] px-2 py-0.5 text-[10px] tracking-normal text-[#1c8a43]">{FREE[l]}</span>}
+                </p>
                 <h2 className="mt-2 text-lg font-bold leading-snug">{post.title}</h2>
                 <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft">{post.description}</p>
                 <p className="mt-auto pt-4 text-xs text-ink-muted">

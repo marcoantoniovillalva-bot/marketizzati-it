@@ -1,10 +1,10 @@
 import type { ServicePageKey } from '../content/service-pages'
 import { getVisualCopy } from '../content/visuals'
 import type { Locale } from '../lib/routes'
-import { AdsFlow, AdsPriceChart, AutomationFlow, SocialCalendar, VideoEditor, VoiceCall } from './explainers-services'
+import { AdsFlow, AdsPriceChart, AutomationFlow, AutomationShowcase, SocialCalendar, VideoEditor, VoiceCall } from './explainers-services'
 import { KeywordPages, MapsCard, OwnershipTimeline, PhoneSite, PriceStack, UploadFlow } from './explainers-site'
 
-export type ExplainerKind = 'price' | 'own' | 'keywords' | 'phone' | 'upload' | 'maps' | 'adsPrice' | 'ads' | 'voice' | 'automation' | 'social' | 'video'
+export type ExplainerKind = 'price' | 'own' | 'keywords' | 'phone' | 'upload' | 'maps' | 'adsPrice' | 'ads' | 'voice' | 'automation' | 'social' | 'video' | 'showcase'
 
 /** One animated explainer by name, with labels in the page language. */
 export function Explainer({ kind, locale, city }: { kind: ExplainerKind; locale: Locale; city?: string }) {
@@ -22,6 +22,7 @@ export function Explainer({ kind, locale, city }: { kind: ExplainerKind; locale:
     case 'automation': return <AutomationFlow v={v} />
     case 'social': return <SocialCalendar v={v} />
     case 'video': return <VideoEditor v={v} />
+    case 'showcase': return <AutomationShowcase v={v} />
   }
 }
 
@@ -36,7 +37,7 @@ export const SERVICE_EXPLAINERS: Record<ServicePageKey, { hero?: ExplainerKind; 
   googleAds: { hero: 'ads', blocks: ['adsPrice', null] },
   chatgptAds: { hero: 'ads', blocks: [null, 'adsPrice', null] },
   agenti: { blocks: ['voice', null] },
-  sistemi: { hero: 'automation', blocks: [null, null] },
+  sistemi: { hero: 'automation', blocks: [null, 'showcase'] },
   social: { hero: 'social', blocks: [null] },
   video: { hero: 'video', blocks: [null] },
   milano: { blocks: local, city: CITIES.milano },

@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Guida TOKEN: installazione Windows, misure, cinque casi d'uso e quattro prompt. Controllata il 10 novembre 2026.",
   "date": "2026-11-10",
   "readTime": 9,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "RTK",
     "meno token sprecati con Claude Code",

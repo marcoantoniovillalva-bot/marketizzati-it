@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "I 5 strumenti gratuiti, passo a passo su Windows",
   "date": "2026-11-09",
   "readTime": 7,
-  "category": "Risorse gratuite",
+  "category": "Contenuti e social",
+  "freeGuide": true,
   "keywords": [
     "Montare i video con Claude Code",
     "I 5 strumenti gratuiti",

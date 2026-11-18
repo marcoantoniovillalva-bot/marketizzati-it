@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Attiva e configura l'agente IA di WhatsApp Business",
   "date": "2026-11-03",
   "readTime": 5,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica Meta Business Agent",
     "Attiva e configura l'agente IA di WhatsApp Business",

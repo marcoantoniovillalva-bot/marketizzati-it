@@ -72,3 +72,5 @@ supabase/.temp
 generate-images.js
 
 scripts/qa/.video-tmp/
+scripts/.cover-src/
+docs/preview-telefono/

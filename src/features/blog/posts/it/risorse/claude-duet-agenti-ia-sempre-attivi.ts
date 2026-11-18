@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "La tabella comparativa promessa nel video: Claude Duet di Anthropic, OpenAI dots, Meta Muse, xAI Grok Bot e le alternative open source OpenClaw e…",
   "date": "2026-10-22",
   "readTime": 13,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "Claude Duet e gli agenti IA sempre attivi",

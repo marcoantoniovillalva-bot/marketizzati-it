@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "La guida promessa nel video: il flusso completo di Git e GitHub spiegato con la metafora della cucina (clone, main, pull, branch, add, commit, push,…",
   "date": "2026-10-23",
   "readTime": 15,
-  "category": "Risorse gratuite",
+  "category": "Siti web",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "Git e GitHub per costruire con l'IA in modo professionale",

@@ -25,6 +25,10 @@ interface AboutCopy {
   italic: string
   text: string
   follow: string
+  pathLabel: string
+  pathTitle: string
+  pathItalic: string
+  path: { when: string; what: string; text: string }[]
   teamLabel: string
   teamTitle: string
   teamItalic: string
@@ -48,7 +52,16 @@ const COPY: Record<Locale, AboutCopy> = {
     label: 'Chi sono',
     title: 'Ciao, sono Marco.',
     italic: 'E lavoro con Gabriela.',
-    text: 'Ho iniziato da ragazzo con i siti WordPress, poi ho imparato a programmare da solo, soprattutto JavaScript. Oggi mi occupo della parte che non si vede: logica, database, API, accessi, integrazioni e automazioni. Ho studiato l’AI applicata allo sviluppo e ai processi aziendali, e la strategia digitale. Con Marketizzati faccio siti web, pubblicità, agenti AI e sistemi automatizzati per artigiani e piccole imprese.',
+    text: 'Sono uno sviluppatore full-stack specializzato in AI: costruisco siti, piattaforme, agenti che rispondono su WhatsApp e al telefono, e automazioni che tolgono lavoro ripetitivo. Vengo da nove anni di collaudo e messa in servizio di impianti industriali, dove ho imparato a far funzionare le cose nel mondo reale. E faccio video sull’AI, quindi so spiegare la tecnologia senza gergo. Parlo italiano, spagnolo e inglese.',
+    pathLabel: 'Il mio percorso',
+    pathTitle: 'Dall’industria',
+    pathItalic: 'all’AI per le imprese.',
+    path: [
+      { when: '2016 – 2025', what: 'Tecnico industriale', text: 'Collaudo, diagnostica e messa in servizio di impianti per Atom, Comi Packaging ed EOS Engineering: problemi veri, da risolvere sul posto.' },
+      { when: '2025', what: 'Nasce Marketizzati', text: 'Siti web, automazioni e contenuti video sull’AI per artigiani e piccole imprese, da Vigevano.' },
+      { when: '2026', what: 'AIGENT', text: 'Piattaforma AI per agenzie immobiliari: segreteria, immobili, documenti, marketing, voce e WhatsApp, con l’approvazione di una persona dove serve.' },
+      { when: 'Oggi', what: 'Sistemi miei', text: 'Marketizzati Flow per i contenuti, ProspectBot per i contatti e una pipeline che monta i miei video in automatico.' },
+    ],
     follow: 'Seguimi sui social: lì mostro come lavoro.',
     teamLabel: 'Il team',
     teamTitle: 'Chi lavora',
@@ -69,7 +82,16 @@ const COPY: Record<Locale, AboutCopy> = {
     label: 'Sobre mí',
     title: 'Hola, soy Marco.',
     italic: 'Y trabajo con Gabriela.',
-    text: 'Empecé de joven con webs en WordPress y luego aprendí a programar por mi cuenta, sobre todo JavaScript. Hoy me ocupo de la parte que no se ve: lógica, bases de datos, API, accesos, integraciones y automatizaciones. Estudié IA aplicada al desarrollo y a los procesos de empresa, y estrategia digital. Con Marketizzati hago webs, publicidad, agentes de IA y sistemas automatizados para artesanos y pequeñas empresas.',
+    text: 'Soy desarrollador full-stack especializado en IA: construyo webs, plataformas, agentes que responden por WhatsApp y por teléfono, y automatizaciones que quitan trabajo repetitivo. Vengo de nueve años de pruebas y puesta en marcha de instalaciones industriales, donde aprendí a hacer que las cosas funcionen en el mundo real. Y hago vídeos sobre IA, así que sé explicar la tecnología sin jerga. Hablo italiano, español e inglés.',
+    pathLabel: 'Mi recorrido',
+    pathTitle: 'De la industria',
+    pathItalic: 'a la IA para empresas.',
+    path: [
+      { when: '2016 – 2025', what: 'Técnico industrial', text: 'Pruebas, diagnóstico y puesta en marcha de instalaciones para Atom, Comi Packaging y EOS Engineering: problemas reales, resueltos in situ.' },
+      { when: '2025', what: 'Nace Marketizzati', text: 'Webs, automatizaciones y vídeos sobre IA para artesanos y pequeñas empresas, desde Vigevano.' },
+      { when: '2026', what: 'AIGENT', text: 'Plataforma de IA para inmobiliarias: secretaría, inmuebles, documentos, marketing, voz y WhatsApp, con aprobación de una persona donde hace falta.' },
+      { when: 'Hoy', what: 'Sistemas propios', text: 'Marketizzati Flow para los contenidos, ProspectBot para los contactos y una pipeline que monta mis vídeos automáticamente.' },
+    ],
     follow: 'Sígueme en redes: ahí enseño cómo trabajo.',
     teamLabel: 'El equipo',
     teamTitle: 'Quién trabaja',
@@ -90,7 +112,16 @@ const COPY: Record<Locale, AboutCopy> = {
     label: 'About',
     title: 'Hi, I’m Marco.',
     italic: 'And I work with Gabriela.',
-    text: 'I started out building WordPress sites as a teenager, then taught myself to code, mostly JavaScript. Today I handle the part you do not see: logic, databases, APIs, logins, integrations and automations. I studied AI applied to software development and business processes, and digital strategy. With Marketizzati I build websites, ads, AI agents and automated systems for tradespeople and small businesses.',
+    text: 'I am a full-stack developer specialised in AI: I build websites, platforms, agents that answer on WhatsApp and on the phone, and automations that take repetitive work off your plate. I come from nine years of testing and commissioning industrial plants, where I learned to make things work in the real world. I also make videos about AI, so I can explain technology without jargon. I speak Italian, Spanish and English.',
+    pathLabel: 'My path',
+    pathTitle: 'From industry',
+    pathItalic: 'to AI for businesses.',
+    path: [
+      { when: '2016 – 2025', what: 'Industrial technician', text: 'Testing, diagnostics and commissioning of plants for Atom, Comi Packaging and EOS Engineering: real problems, solved on site.' },
+      { when: '2025', what: 'Marketizzati starts', text: 'Websites, automations and AI videos for tradespeople and small businesses, from Vigevano.' },
+      { when: '2026', what: 'AIGENT', text: 'An AI platform for estate agencies: front desk, listings, documents, marketing, voice and WhatsApp, with a person approving where it matters.' },
+      { when: 'Today', what: 'My own systems', text: 'Marketizzati Flow for content, ProspectBot for leads and a pipeline that edits my videos automatically.' },
+    ],
     follow: 'Follow me on social media: that is where I show how I work.',
     teamLabel: 'The team',
     teamTitle: 'Who works',
@@ -118,9 +149,9 @@ export default async function AboutPage({ params }: Props) {
   const c = COPY[isLocale(locale) ? locale : 'it']
   return (
     <>
-      <Section tint="navy" className="pt-32 md:pt-40">
-        <div className="grid items-center gap-12 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2rem] bg-navy-soft">
+      <Section tint="navy" className="pt-24 md:pt-32">
+        <div className="grid items-center gap-8 lg:gap-12 md:grid-cols-[0.8fr_1.2fr]">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-[2rem] bg-navy-soft sm:max-w-sm">
             <Image src="/images/marco-villalva.png" alt="Marco Antonio Villalva" fill priority sizes="(min-width: 768px) 384px, 90vw" className="object-cover" />
           </div>
           <div>
@@ -132,12 +163,28 @@ export default async function AboutPage({ params }: Props) {
       </Section>
 
       <Section tint="cream">
+        <Heading label={c.pathLabel} title={c.pathTitle} italic={c.pathItalic} />
+        <ol className="relative mt-8 grid gap-4 md:mt-10 md:grid-cols-4">
+          {c.path.map((step, i) => (
+            <li key={step.what} className="relative rounded-3xl bg-white p-5 ring-1 ring-ink/5">
+              <span className="flex items-center gap-2">
+                <span className={`flex h-8 w-8 items-center justify-center rounded-full font-serif text-lg italic text-white ${i === c.path.length - 1 ? 'bg-brand' : 'bg-ink'}`}>{i + 1}</span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-brand">{step.when}</span>
+              </span>
+              <p className="mt-3 text-lg font-bold">{step.what}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section tint="white">
         <Heading label={c.teamLabel} title={c.teamTitle} italic={c.teamItalic} />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 md:mt-10 grid gap-6 md:grid-cols-2">
           {c.people.map((p) => (
             <article key={p.name} className="flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/5 sm:flex-row md:flex-col lg:flex-row">
-              <div className="relative aspect-[4/5] w-full shrink-0 sm:w-48 md:w-full lg:w-52">
-                <Image src={p.photo} alt={p.name} fill sizes="(min-width: 1024px) 208px, (min-width: 640px) 192px, 90vw" className="object-cover" />
+              <div className="relative aspect-[4/3] w-full shrink-0 sm:aspect-[4/5] sm:w-48 md:aspect-[4/3] md:w-full lg:aspect-[4/5] lg:w-52">
+                <Image src={p.photo} alt={p.name} fill sizes="(min-width: 1024px) 208px, (min-width: 640px) 192px, 90vw" className="object-cover object-[50%_20%]" />
               </div>
               <div className="flex flex-col gap-3 p-6">
                 <p className="text-xs font-semibold uppercase tracking-wider text-brand">{p.role}</p>
@@ -164,7 +211,7 @@ export default async function AboutPage({ params }: Props) {
         </div>
       </Section>
 
-      <Section tint="white">
+      <Section tint="peach">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <Heading title={c.how} />

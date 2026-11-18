@@ -24,6 +24,8 @@ export interface BlogPost {
   imageAlt: string
   /** Optional 4:5 cover for phones (free guides from the video covers). */
   imageTall?: string
+  /** Free downloadable guide from one of the videos (shown as a badge). */
+  freeGuide?: boolean
   sections: BlogSection[]
 }
 

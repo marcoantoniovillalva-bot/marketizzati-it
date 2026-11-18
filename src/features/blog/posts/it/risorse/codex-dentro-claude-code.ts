@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "La guida promessa nel video: cos'è il plugin ufficiale di OpenAI che porta Codex dentro Claude Code, cosa ti serve, i 4 comandi di installazione…",
   "date": "2026-10-26",
   "readTime": 12,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "Codex dentro Claude Code",

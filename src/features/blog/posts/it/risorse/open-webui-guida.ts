@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Installa Open WebUI in mezz'ora: modelli, team e funzionalità",
   "date": "2026-11-03",
   "readTime": 6,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica Open WebUI",
     "Installa Open WebUI in mezz'ora",

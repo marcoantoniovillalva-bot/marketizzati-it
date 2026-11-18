@@ -1,0 +1,33 @@
+// One entry per blog cover: where it goes, the title (two lines, uppercase) and the source video cover
+// (scripts/.cover-src/<src>.jpg, copied from "G:/Il mio Drive/video reel"). `icons` = guides without
+// their own video: the model swaps the original badges for these two.  = narrower title (wide) where badges sit further left.
+export const COVERS = [
+  { slug: 'pluralsight-ai-mcp', dir: 'covers', src: 'pluralsight-ai-mcp', title: ['PLURALSIGHT', 'NELLA TUA IA!'] },
+  { slug: 'sito-cinematografico-senza-farti-fregare', dir: 'covers', src: 'sito-cinematografico-senza-farti-fregare', title: ['WEB DESIGNER', 'TI FREGANO?'] },
+  { slug: 'claude-per-instagram', dir: 'covers', src: 'claude-per-instagram', title: ['CLAUDE PUBBLICA', 'SU INSTAGRAM!'] },
+  { slug: 'claude-duet-agenti-ia-sempre-attivi', dir: 'covers', src: 'claude-duet-agenti-ia-sempre-attivi', title: ['LAVORA MENTRE', 'TU DORMI!'] },
+  { slug: 'aggiornamenti-sicurezza-ottobre-2026', dir: 'covers', src: 'aggiornamenti-sicurezza-ottobre-2026', title: ['PHP E NODE.JS', 'HACKERATI?'] },
+  { slug: 'git-e-github-per-costruire-con-ia', dir: 'covers', src: 'git-e-github-per-costruire-con-ia', title: ['GIT E GITHUB', 'IN 1 MINUTO!'] },
+  { slug: 'codex-dentro-claude-code', dir: 'covers', src: 'codex-dentro-claude-code', title: ['DUE IA', 'UNA CHAT!'] },
+  { slug: 'voicestudio-doppiaggio-open-source', dir: 'covers', src: 'voicestudio-doppiaggio-open-source', title: ['ADDIO', 'ELEVENLABS?'] },
+  { slug: 'reel-con-claude', dir: 'covers', src: 'reel-con-claude', title: ['REEL CON', 'CLAUDE'] },
+  { slug: '70-ganci-virali', dir: 'covers', src: '70-ganci-virali', title: ['I GANCI', 'DELLA SETTIMANA'] },
+  { slug: 'open-webui-guida', dir: 'covers', src: 'open-webui-guida', title: ['CHATGPT', 'GRATIS?'], titleW: 500 },
+  { slug: 'meta-business-agent-whatsapp', dir: 'covers', src: 'meta-business-agent-whatsapp', title: ['WHATSAPP', 'RISPONDE DA SOLO!'] },
+  { slug: 'voucher-cloud-cybersecurity-checklist', dir: 'covers', src: 'voucher-cloud-cybersecurity-checklist', title: ['SOFTWARE', 'A METÀ PREZZO!'], titleW: 540 },
+  { slug: 'montare-video-con-claude-code', dir: 'covers', src: 'montare-video-con-claude-code', title: ['MONTATO', 'DA CLAUDE!'], titleW: 540 },
+  { slug: 'rtk-meno-token-claude-code', dir: 'covers', src: 'rtk-meno-token-claude-code', title: ['TOKEN', 'SPRECATI!'] },
+  { slug: 'scudo-checklist-installare-skill', dir: 'covers', src: 'scudo-checklist-installare-skill', title: ['SKILL', 'PERICOLOSE!'], titleW: 560 },
+  { slug: 'android-agente-su-windows', dir: 'covers', src: 'android-agente-su-windows', title: ['IL TELEFONO', 'VA DA SOLO!'] },
+  { slug: 'audit-sicurezza-skill-cloudflare', dir: 'covers', src: 'audit-sicurezza-skill-cloudflare', title: ['LA TUA APP', 'È SICURA?'], titleW: 580 },
+  { slug: 'agente-ai-whatsapp-piccola-impresa', dir: 'guide', src: 'rtk-meno-token-claude-code', title: ['AGENTE AI', 'SU WHATSAPP!'], icons: 'a green WhatsApp logo and a small cute robot head' },
+  { slug: 'chatgpt-ads-italia-come-funzionano', dir: 'guide', src: 'audit-sicurezza-skill-cloudflare', title: ['CHATGPT ADS', 'COME FUNZIONANO?'], icons: 'the ChatGPT logo and an orange megaphone' },
+  { slug: 'creare-sito-con-chatgpt-o-claude', dir: 'guide', src: 'scudo-checklist-installare-skill', title: ['SITO CON L’AI', 'QUALI LIMITI?'], icons: 'a website browser window and a yellow warning triangle' },
+  { slug: 'farsi-consigliare-da-chatgpt', dir: 'guide', src: 'android-agente-su-windows', title: ['CHATGPT', 'TI CONSIGLIA?'], icons: 'the ChatGPT logo and a thumbs-up' },
+  { slug: 'google-ads-per-artigiani-budget', dir: 'guide', src: 'voucher-cloud-cybersecurity-checklist', title: ['GOOGLE ADS', 'QUALE BUDGET?'], icons: 'the Google Ads logo and a stack of euro coins' },
+  { slug: 'quanto-costa-un-sito-web-all-anno', dir: 'guide', src: 'rtk-meno-token-claude-code', title: ['QUANTO COSTA', 'UN SITO ALL’ANNO?'], icons: 'a website browser window and a calendar with a euro sign' },
+  { slug: 'scheda-google-non-verificata-o-sospesa', dir: 'guide', src: 'scudo-checklist-installare-skill', title: ['SCHEDA GOOGLE', 'SOSPESA?'], icons: 'a red Google Maps pin and a red stop sign' },
+  { slug: 'seo-locale-milano-pavia-lodi-crema', dir: 'guide', src: 'android-agente-su-windows', title: ['FATTI TROVARE', 'NELLA TUA ZONA!'], icons: 'a red Google Maps pin and a magnifying glass' },
+  { slug: 'sito-vetrina-o-sito-multipagina', dir: 'guide', src: 'audit-sicurezza-skill-cloudflare', title: ['UNA PAGINA', 'O NOVE?'], icons: 'a single web page and a stack of web pages' },
+  { slug: 'wix-wordpress-o-sito-su-misura', dir: 'guide', src: 'voucher-cloud-cybersecurity-checklist', title: ['WIX O', 'SU MISURA?'], icons: 'a website builder grid and a code bracket </> symbol' },
+]

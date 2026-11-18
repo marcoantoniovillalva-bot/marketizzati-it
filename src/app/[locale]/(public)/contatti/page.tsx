@@ -24,9 +24,9 @@ export default async function ContactPage({ params }: Props) {
   const l = isLocale(locale) ? locale : 'it'
   const c = COPY[l]
   return (
-    <Section tint="peach" className="min-h-[80vh] pt-32 md:pt-40">
+    <Section tint="peach" className="min-h-[80vh] pt-24 md:pt-32">
       <Heading as="h1" label={c.label} title={c.title} italic={c.italic} intro={c.intro} />
-      <div className="mt-10 flex flex-wrap items-center gap-6">
+      <div className="mt-6 md:mt-10 flex flex-wrap items-center gap-6">
         <WhatsAppButton label={c.wa} variant="primary" />
         <ArrowLink href={pageHref('prezzi', l)}>{c.buy}</ArrowLink>
       </div>

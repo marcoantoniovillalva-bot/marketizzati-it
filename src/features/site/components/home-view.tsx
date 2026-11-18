@@ -6,6 +6,7 @@ import { pageHref, type Locale } from '../lib/routes'
 import { getVisualCopy } from '../content/visuals'
 import { DiyVsPro, OwnershipTimeline, PriceStack, StepsRail } from './explainers-site'
 import { BrowserBuild, PhoneChat } from './mockups'
+import { IconTile, iconFor } from './icons'
 import { ProjectCard } from './project-card'
 import { StepScene } from './step-scenes'
 import { SocialLinks } from './social-links'
@@ -19,8 +20,8 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
   const v = getVisualCopy(locale)
   return (
     <>
-      <Section tint="white" className="pt-32 md:pt-40">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+      <Section tint="white" className="pt-24 md:pt-32">
+        <div className="grid items-center gap-8 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <Heading as="h1" label={`01 · ${hero.label}`} title={hero.title} italic={hero.italic} />
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft">{hero.lead}</p>
@@ -38,7 +39,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
       </Section>
 
       <Section tint="peach">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
           <div>
           <Heading label={problem.label} title={problem.title} italic={problem.italic} intro={problem.text} />
           <ul className="mt-8 space-y-4">
@@ -55,7 +56,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
       <Section tint="orange" id="offerta">
         <Heading label={offer.label} title={offer.title} italic={offer.italic} />
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+        <div className="mt-8 md:mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <div className="flex flex-col gap-4">
             <PriceStack v={v} locale={locale} />
             <p className="sr-only">
@@ -100,10 +101,10 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
       <Section tint="white">
         <Heading label={steps.label} title={steps.title} italic={steps.italic} />
-        <div className="mx-auto mt-12 max-w-3xl">
+        <div className="mx-auto mt-8 md:mt-12 max-w-3xl">
           <StepsRail labels={v.steps} />
         </div>
-        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-6 md:mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.items.map((s, i) => (
             <li key={s.title} className="rounded-3xl bg-brand-cream p-5">
               <StepScene step={i} />
@@ -118,21 +119,24 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
         </div>
       </Section>
 
-      <Section tint="cream">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+      <Section tint="navy">
+        <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
           <div>
-            <Heading label={services.label} title={services.title} italic={services.italic} />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            <Heading dark label={services.label} title={services.title} italic={services.italic} />
+            <div className="mt-6 md:mt-10 grid gap-4 sm:grid-cols-2">
               {services.items.map((s) => (
-                <a key={s.key} href={pageHref(s.key, locale)} className="group rounded-3xl bg-white/85 p-6 ring-1 ring-ink/5 transition hover:-translate-y-1 hover:ring-brand/40">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-brand">{s.tag}</p>
-                  <p className="mt-2 text-lg font-bold">{s.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.text}</p>
+                <a key={s.key} href={pageHref(s.key, locale)} className="group flex gap-4 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-brand/60 sm:p-6">
+                  <IconTile icon={iconFor(`${s.title} ${s.tag}`)} dark />
+                  <span>
+                    <span className="block text-xs font-semibold uppercase tracking-wider text-brand-soft">{s.tag}</span>
+                    <span className="mt-1.5 block text-lg font-bold">{s.title}</span>
+                    <span className="mt-1.5 block text-sm leading-relaxed text-white/70">{s.text}</span>
+                  </span>
                 </a>
               ))}
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <span className="text-sm text-ink-muted">{services.quoteCta}</span>
+              <span className="text-sm text-white/60">{services.quoteCta}</span>
               <WhatsAppButton label="WhatsApp" />
             </div>
           </div>
@@ -142,7 +146,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
       <Section tint="white">
         <Heading label={projects.label} title={projects.title} italic={projects.italic} intro={projects.intro} />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 md:mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.slice(0, 3).map((p) => (
             <ProjectCard key={p.id} project={p} locale={locale} />
           ))}
@@ -153,7 +157,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
       </Section>
 
       <Section tint="navy">
-        <div className="grid items-center gap-12 md:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid items-center gap-8 lg:gap-12 md:grid-cols-[0.8fr_1.2fr]">
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             <figure className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-navy-soft">
               <Image src="/images/marco-villalva.png" alt="Marco Antonio Villalva" fill sizes="(min-width: 768px) 260px, 45vw" className="object-cover" />
@@ -198,7 +202,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
       <Section tint="cream">
         <Heading label={faq.label} title={faq.title} italic={faq.italic} />
-        <div className="mt-10">
+        <div className="mt-6 md:mt-10">
           <Faq items={faq.items} />
         </div>
       </Section>

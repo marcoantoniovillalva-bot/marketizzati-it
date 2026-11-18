@@ -150,9 +150,9 @@ export const sistemiIt: ServiceCopy = {
     },
     {
       label: '03 · Lavori fatti',
-      title: 'ProspectBot e Zernflow,',
-      italic: 'due sistemi privati.',
-      text: 'ProspectBot trova le attività senza sito, raccoglie i dati, prepara la proposta e fa chiamare un agente vocale che fissa l’appuntamento. Zernflow prende le richieste in arrivo, le smista, risponde e tiene traccia di tutto. Sono privati per i clienti, ma nella pagina progetti vedi come funzionano.',
+      title: 'Tre sistemi che ho costruito,',
+      italic: 'ognuno automatizza un pezzo.',
+      text: '**Marketizzati Flow** pubblica i contenuti su tutti i social e fa il follow-up: chi commenta riceve il messaggio in automatico. **ProspectBot** raccoglie i contatti da Google Maps, completa le informazioni di ogni attività e segue l’outreach, fino alla chiamata dell’agente vocale. **AIGENT** gestisce la comunicazione tra chi offre il servizio e i clienti: WhatsApp, email, chiamate con assistenti vocali AI e agenti che lavorano nel browser, su un computer in cloud o con un’estensione di Chrome.',
     },
   ],
   faq: [

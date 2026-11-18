@@ -31,8 +31,8 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
 
   return (
     <>
-      <Section tint="white" className="pt-32 md:pt-40">
-        <div className={`grid items-center gap-12 ${hasHeroVisual ? 'lg:grid-cols-[1.15fr_0.85fr]' : ''}`}>
+      <Section tint="white" className="pt-24 md:pt-32">
+        <div className={`grid items-center gap-8 lg:gap-12 ${hasHeroVisual ? 'lg:grid-cols-[1.15fr_0.85fr]' : ''}`}>
           <div>
             <Heading as="h1" label={copy.label} title={copy.title} italic={copy.italic} />
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft">
@@ -75,7 +75,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
               </div>
             )}
           {b.cards && (
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 md:mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {b.cards.map((card) => (
                 <div key={card.title} className="rounded-3xl bg-white/85 p-6 ring-1 ring-ink/5">
                   <IconTile icon={iconFor(`${card.title} ${card.text}`)} />
@@ -97,7 +97,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
           <Faq items={copy.faq} />
         </div>
         {copy.related.length > 0 && (
-          <div className="mt-10">
+          <div className="mt-6 md:mt-10">
             <p className="text-sm font-semibold uppercase tracking-wider text-ink-muted">{c.related}</p>
             <ul className="mt-3 flex flex-wrap gap-x-8 gap-y-2">
               {copy.related.map((key) => (

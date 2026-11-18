@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "ARTEMIS su Windows, Claude Code, Codex e Cursor. Configurazione, ripristino, dieci prove e tre prompt per sviluppatori. Controllo: 13 novembre 2026.",
   "date": "2026-11-13",
   "readTime": 11,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "ANDROID",
     "configurare l’agente su Windows + 10 prove sicure",

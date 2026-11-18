@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Checklist in 10 punti, SkillSpector su Windows, report, modello hook da verificare e tre prompt. Controllo: 12 novembre 2026.",
   "date": "2026-11-12",
   "readTime": 9,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "SCUDO",
     "la checklist prima di installare una skill",

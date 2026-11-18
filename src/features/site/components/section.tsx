@@ -26,7 +26,7 @@ export function Section({ id, tint, children, className = '' }: SectionProps) {
       id={id}
       data-tinta={TINT[tint]}
       data-dark={dark}
-      className={`relative scroll-mt-24 px-4 py-20 sm:px-6 md:py-28 ${dark ? 'text-white' : 'text-ink'} ${className}`}
+      className={`relative scroll-mt-24 px-4 py-12 sm:px-6 sm:py-16 md:py-20 ${dark ? 'text-white' : 'text-ink'} ${className}`}
     >
       <div className="mx-auto max-w-6xl 2xl:max-w-7xl">{children}</div>
     </section>
@@ -48,11 +48,11 @@ interface HeadingProps {
 /** Numbered label + Inter title with an Instrument Serif italic tail, the house style of the site. */
 export function Heading({ label, title, italic, as = 'h2', intro, dark = false, center = false }: HeadingProps) {
   const Tag = as
-  const size = as === 'h1' ? 'text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl' : 'text-[2.1rem] leading-[1.06] sm:text-5xl'
+  const size = as === 'h1' ? 'text-[2.2rem] leading-[1.04] sm:text-6xl md:text-7xl' : 'text-[1.8rem] leading-[1.08] sm:text-4xl md:text-5xl'
   return (
     <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''}`}>
       {label && (
-        <p className={`mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-brand-soft' : 'text-brand'} ${center ? 'justify-center' : ''}`}>
+        <p className={`mb-3 flex items-center gap-3 text-[11px] sm:mb-5 sm:text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-brand-soft' : 'text-brand'} ${center ? 'justify-center' : ''}`}>
           <span className={`h-px w-8 ${dark ? 'bg-brand-soft' : 'bg-brand'}`} aria-hidden />
           {label}
         </p>
@@ -66,7 +66,7 @@ export function Heading({ label, title, italic, as = 'h2', intro, dark = false, 
           </>
         )}
       </Tag>
-      {intro && <div className={`mt-6 text-lg leading-relaxed ${dark ? 'text-white/75' : 'text-ink-soft'}`}>{intro}</div>}
+      {intro && <div className={`mt-4 text-base leading-relaxed sm:mt-6 sm:text-lg ${dark ? 'text-white/75' : 'text-ink-soft'}`}>{intro}</div>}
     </div>
   )
 }

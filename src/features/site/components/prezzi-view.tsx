@@ -14,8 +14,8 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
   const v = getVisualCopy(locale)
   return (
     <>
-      <Section tint="white" className="pt-32 md:pt-40">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+      <Section tint="white" className="pt-24 md:pt-32">
+        <div className="grid items-center gap-8 lg:gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <Heading as="h1" label={copy.label} title={copy.title} italic={copy.italic} />
             <p className="mt-8 max-w-3xl text-xl leading-relaxed">
@@ -24,7 +24,7 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
           </div>
           <PriceStack v={v} locale={locale} />
         </div>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-6 md:mt-10 grid gap-4 md:grid-cols-3">
           <div className="rounded-3xl bg-brand-cream p-6">
             <p className="text-sm font-semibold uppercase tracking-wider text-ink-muted">{offer.marketLabel}</p>
             <p className="mt-1 text-3xl font-bold text-ink-muted line-through decoration-brand decoration-2">{euro(OFFER.marketValue, locale)}</p>
@@ -46,7 +46,7 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
             </p>
           </div>
         </div>
-        <div className="mt-10 grid gap-8 rounded-3xl bg-white/80 p-7 ring-1 ring-ink/5 md:grid-cols-2 md:p-9">
+        <div className="mt-6 md:mt-10 grid gap-8 rounded-3xl bg-white/80 p-7 ring-1 ring-ink/5 md:grid-cols-2 md:p-9">
           <div>
             <p className="mb-5 text-lg font-bold">{offer.includedTitle}</p>
             <CheckList items={offer.included} />
@@ -66,7 +66,7 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
 
       <Section tint="peach">
         <Heading label={copy.compare.label} title={copy.compare.title} italic={copy.compare.italic} />
-        <div className="mt-10 overflow-x-auto rounded-3xl bg-white/90 ring-1 ring-ink/5">
+        <div className="mt-6 md:mt-10 overflow-x-auto rounded-3xl bg-white/90 ring-1 ring-ink/5">
           <table className="w-full min-w-[640px] text-left">
             <thead>
               <tr className="border-b border-ink/10">
@@ -102,7 +102,7 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
             <CheckList items={copy.ads.points} />
           </div>
         </div>
-        <div className="mt-12 grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="mt-8 md:mt-12 grid gap-8 md:grid-cols-2 md:items-center">
           <AdsPriceChart v={v} locale={locale} />
           <AdsFlow v={v} />
         </div>
@@ -117,7 +117,7 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
 
       <Section tint="white">
         <Heading label={copy.faq.label} title={copy.faq.title} italic={copy.faq.italic} />
-        <div className="mt-10">
+        <div className="mt-6 md:mt-10">
           <Faq items={copy.faq.items} />
         </div>
       </Section>

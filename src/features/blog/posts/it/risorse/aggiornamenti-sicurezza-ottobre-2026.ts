@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "I prompt promessi nel video per controllare con Claude Code e Codex, progetto per progetto, cosa aggiornare dopo le correzioni di sicurezza di ottobre…",
   "date": "2026-10-23",
   "readTime": 16,
-  "category": "Risorse gratuite",
+  "category": "Siti web",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "aggiornamenti di sicurezza di ottobre 2026 (PHP",

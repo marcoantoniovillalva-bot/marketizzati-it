@@ -33,7 +33,7 @@ export default async function ProjectsPage({ params }: Props) {
   const rest = PROJECTS.filter((p) => p.kind === 'private' && !p.tour)
   return (
     <>
-      <Section tint="white" className="pt-32 md:pt-40">
+      <Section tint="white" className="pt-24 md:pt-32">
         <Heading as="h1" label={c.label} title={c.title} italic={c.italic} intro={c.intro} />
       </Section>
       {sites.map((p, i) => (

@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Template cinematografici, strumenti dei web designer e le domande da fare prima di pagare un sito. Per imprenditori e piccole aziende.",
   "date": "2026-10-20",
   "readTime": 11,
-  "category": "Risorse gratuite",
+  "category": "Siti web",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "il tuo sito cinematografico senza farti fregare",

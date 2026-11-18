@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Checklist AUDIT per la skill Cloudflare: preparazione, isolamento Docker da adattare, installazione ufficiale, tre passi e report inventato a scopo…",
   "date": "2026-11-16",
   "readTime": 10,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "AUDIT",
     "la checklist per preparare l’audit di sicurezza con la skill di Cloudflare + un esempio di report",

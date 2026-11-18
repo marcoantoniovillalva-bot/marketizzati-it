@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Requisiti, date e passi per la domanda del contributo MIMIT",
   "date": "2026-11-04",
   "readTime": 6,
-  "category": "Risorse gratuite",
+  "category": "Siti web",
+  "freeGuide": true,
   "keywords": [
     "Checklist Voucher Cloud & Cybersecurity",
     "Requisiti",

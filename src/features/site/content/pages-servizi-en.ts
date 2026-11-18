@@ -65,7 +65,7 @@ export const sistemiEn: ServiceCopy = {
       { title: 'Custom business tools', text: 'Customers, jobs, photos and documents in one place, accessible from your phone on site too.' },
       { title: 'Voice assistants', text: 'An assistant that calls, listens and books appointments, then leaves you a summary.' },
     ] },
-    { label: '03 · Completed work', title: 'ProspectBot and Zernflow,', italic: 'two private systems.', text: 'ProspectBot finds businesses without a website, collects their details, prepares a proposal and has a voice assistant call to book an appointment. Zernflow receives enquiries, routes them, replies and keeps track of everything. They are private client systems, but you can see how they work on the projects page.' },
+    { label: '03 · Completed work', title: 'Three systems I built,', italic: 'each one automates a part.', text: '**Marketizzati Flow** publishes content on every social channel and handles the follow-up: commenters get the message automatically. **ProspectBot** collects leads from Google Maps, completes the details on each business and runs the outreach, up to the voice agent call. **AIGENT** handles communication between the business and its clients: WhatsApp, email, calls with AI voice assistants and agents that work in the browser, on a cloud computer or through a Chrome extension.' },
   ],
   faq: [
     { q: 'How much does a custom system cost?', a: 'It depends on what it needs to do. Tell me about your work on WhatsApp and I will prepare a quote.' },

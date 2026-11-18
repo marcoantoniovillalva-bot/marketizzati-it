@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Il flusso reale di Marco e il percorso semplificato per un imprenditore",
   "date": "2026-10-31",
   "readTime": 10,
-  "category": "Risorse gratuite",
+  "category": "Contenuti e social",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica Reel con Claude",
     "Il flusso reale di Marco e il percorso semplificato per un imprenditore",

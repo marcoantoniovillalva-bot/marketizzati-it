@@ -176,11 +176,11 @@ export default async function TermsPage({ params }: Props) {
   const copy = TEXT[l]
   const clauses = { it: CLAUSES, es: CLAUSES_ES, en: CLAUSES_EN }[l]
   return (
-    <Section tint="white" className="pt-32 md:pt-40">
+    <Section tint="white" className="pt-24 md:pt-32">
       {copy.binding && <p className="mb-6 text-sm text-ink-muted">{copy.binding}</p>}
       <Heading as="h1" label={copy.label} title={copy.title} italic={copy.italic} />
       <p className="mt-4 text-sm text-ink-muted">{copy.version} {TERMS_VERSION}</p>
-      <div className="mt-10 max-w-3xl space-y-8">
+      <div className="mt-6 md:mt-10 max-w-3xl space-y-8">
         {clauses.map((c) => (
           <section key={c.title}>
             <h2 className="text-xl font-bold">{c.title}</h2>

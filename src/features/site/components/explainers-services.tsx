@@ -1,4 +1,4 @@
-import { Bell, Bot, CalendarCheck, Clapperboard, Database, Globe, Inbox, Music, Phone, Search, Sparkles, Type } from 'lucide-react'
+import { Bell, Bot, CalendarCheck, Clapperboard, Database, FileText, Globe, Inbox, MapPin, MessageCircle, MessageSquare, MonitorSmartphone, Music, Phone, PhoneCall, Search, Send, Share2, Sparkles, Type } from 'lucide-react'
 import type { VisualCopy } from '../content/visuals'
 import { ADS, euro } from '../lib/offer'
 import type { Locale } from '../lib/routes'
@@ -220,6 +220,50 @@ export function VideoEditor({ v }: { v: VisualCopy }) {
             ✓ {v.video.export}
           </p>
         </div>
+      </div>
+    </Frame>
+  )
+}
+
+/** The three systems Marco built, each lane showing what it automates, with data moving through it. */
+export function AutomationShowcase({ v }: { v: VisualCopy }) {
+  const s = v.showcase
+  const lanes = [
+    { name: 'Marketizzati Flow', tag: s.flowTag, steps: s.flow, icons: [Clapperboard, Share2, MessageSquare, Send] },
+    { name: 'ProspectBot', tag: s.prospectTag, steps: s.prospect, icons: [MapPin, Database, FileText, PhoneCall] },
+    { name: 'AIGENT', tag: s.aigentTag, steps: s.aigent, icons: [MessageCircle, Bot, MonitorSmartphone, CalendarCheck] },
+  ]
+  return (
+    <Frame className="max-w-xl">
+      <div className="space-y-4">
+        {lanes.map((lane, l) => (
+          <div key={lane.name} className="rounded-2xl bg-brand-cream p-3 sm:p-4">
+            <p className="flex items-baseline justify-between gap-2">
+              <span className="text-sm font-bold">{lane.name}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">{lane.tag}</span>
+            </p>
+            <div className="mt-3 flex items-center">
+              {lane.steps.map((step, i) => {
+                const Icon = lane.icons[i]
+                return (
+                  <div key={step} className={`flex items-center ${i < lane.steps.length - 1 ? 'flex-1' : ''}`}>
+                    <div className="flex w-14 flex-col items-center gap-1 text-center sm:w-16">
+                      <span className={`mk-pop flex h-9 w-9 items-center justify-center rounded-xl text-white ${i === 1 ? 'bg-brand' : 'bg-ink'}`} style={d(0.3 + l * 0.9 + i * 0.25)}>
+                        <Icon size={16} />
+                      </span>
+                      <span className="text-[9px] font-semibold leading-tight text-ink-soft sm:text-[10px]">{step}</span>
+                    </div>
+                    {i < lane.steps.length - 1 && (
+                      <div className="mb-5 flex-1 px-0.5">
+                        <Dots />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </Frame>
   )

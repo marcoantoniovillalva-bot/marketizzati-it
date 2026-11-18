@@ -141,9 +141,9 @@ export const PROJECTS: Project[] = [
     kind: 'private',
     tag: { it: 'Privato per i clienti', es: 'Privado para clientes', en: 'Private, for clients' },
     text: {
-      it: 'Trova le attività senza sito, raccoglie i loro dati, prepara una proposta e fa chiamare un agente vocale che fissa l’appuntamento.',
-      es: 'Encuentra negocios sin web, recoge sus datos, prepara una propuesta y hace llamar a un agente de voz que concierta la cita.',
-      en: 'Finds businesses without a website, gathers their details, prepares a proposal and has a voice agent call them to book a meeting.',
+      it: 'Automatizza la raccolta dei contatti da Google Maps, le informazioni su ogni attività e il follow-up: prepara la proposta e fa chiamare un agente vocale che fissa l’appuntamento.',
+      es: 'Automatiza la captación de contactos en Google Maps, la información de cada negocio y el seguimiento: prepara la propuesta y hace llamar a un agente de voz que concierta la cita.',
+      en: 'Automates lead collection from Google Maps, the details on each business and the follow-up: it prepares the proposal and has a voice agent call to book a meeting.',
     },
     flow: {
       it: ['Cerca attività senza sito', 'Raccoglie i dati', 'Prepara la proposta', 'L’agente vocale chiama', 'Appuntamento in agenda'],
@@ -163,13 +163,13 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'zernflow',
-    name: 'Zernflow',
+    name: 'Marketizzati Flow',
     kind: 'private',
     tag: { it: 'Privato per i clienti', es: 'Privado para clientes', en: 'Private, for clients' },
     text: {
-      it: 'Sistema su misura che prende le richieste in arrivo, le smista, risponde e tiene traccia di tutto, così le parti ripetitive del lavoro vanno da sole.',
-      es: 'Sistema a medida que recibe las solicitudes, las clasifica, responde y lo registra todo, para que las tareas repetitivas se hagan solas.',
-      en: 'A custom system that takes incoming requests, sorts them, replies and keeps track of everything, so repetitive work runs on its own.',
+      it: 'Automatizza la pubblicazione dei contenuti e il follow-up: un video esce su tutti i social insieme e chi commenta riceve il messaggio giusto in automatico.',
+      es: 'Automatiza la publicación de contenidos y el seguimiento: un vídeo sale en todas las redes a la vez y quien comenta recibe el mensaje adecuado automáticamente.',
+      en: 'Automates content publishing and the follow-up: one video goes out on every social channel at once and commenters get the right message automatically.',
     },
     flow: {
       it: ['Arriva una richiesta', 'La smista da solo', 'Risponde o richiama', 'Aggiorna il gestionale', 'Ti avvisa solo se serve'],

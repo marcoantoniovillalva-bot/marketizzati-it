@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Come collegare Instagram a Claude con Composio, i prompt pronti per pubblicare, rispondere ai commenti e leggere le statistiche, e i limiti da…",
   "date": "2026-10-22",
   "readTime": 12,
-  "category": "Risorse gratuite",
+  "category": "Contenuti e social",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "Claude che lavora sul tuo Instagram",

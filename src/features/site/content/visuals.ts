@@ -16,6 +16,7 @@ export interface VisualCopy {
   automation: { nodes: [string, string, string, string]; caption: string }
   social: { days: string[]; post: string; reel: string; story: string; ads: string }
   video: { raw: string; cut: string; subs: string; music: string; export: string }
+  showcase: { flow: [string, string, string, string]; prospect: [string, string, string, string]; aigent: [string, string, string, string]; flowTag: string; prospectTag: string; aigentTag: string }
 }
 
 const IT: VisualCopy = {
@@ -33,6 +34,7 @@ const IT: VisualCopy = {
   automation: { nodes: ['Richiesta', 'AI legge', 'Gestionale', 'Avviso a te'], caption: 'Succede da solo, ogni volta' },
   social: { days: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'], post: 'Post', reel: 'Reel', story: 'Storia', ads: 'Meta Ads' },
   video: { raw: 'Girato', cut: 'Taglio', subs: 'Sottotitoli', music: 'Musica', export: 'Pronto per Reel e TikTok' },
+  showcase: { flow: ['Video', 'Tutti i social', 'Commento', 'Messaggio'], prospect: ['Google Maps', 'Dati attività', 'Proposta', 'Chiamata AI'], aigent: ['WhatsApp, email', 'Agente AI', 'Browser e cloud', 'Appuntamento'], flowTag: 'Contenuti e follow-up', prospectTag: 'Contatti e outreach', aigentTag: 'Comunicazione con i clienti' },
 }
 
 const ES: VisualCopy = {
@@ -50,6 +52,7 @@ const ES: VisualCopy = {
   automation: { nodes: ['Solicitud', 'La IA lee', 'Gestión', 'Aviso para ti'], caption: 'Pasa solo, cada vez' },
   social: { days: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'], post: 'Post', reel: 'Reel', story: 'Story', ads: 'Meta Ads' },
   video: { raw: 'Grabado', cut: 'Corte', subs: 'Subtítulos', music: 'Música', export: 'Listo para Reels y TikTok' },
+  showcase: { flow: ['Vídeo', 'Todas las redes', 'Comentario', 'Mensaje'], prospect: ['Google Maps', 'Datos', 'Propuesta', 'Llamada IA'], aigent: ['WhatsApp, email', 'Agente IA', 'Navegador y nube', 'Cita'], flowTag: 'Contenidos y seguimiento', prospectTag: 'Contactos y outreach', aigentTag: 'Comunicación con clientes' },
 }
 
 const EN: VisualCopy = {
@@ -67,6 +70,7 @@ const EN: VisualCopy = {
   automation: { nodes: ['Request', 'AI reads it', 'Your system', 'You get notified'], caption: 'It happens on its own, every time' },
   social: { days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], post: 'Post', reel: 'Reel', story: 'Story', ads: 'Meta Ads' },
   video: { raw: 'Footage', cut: 'Cut', subs: 'Subtitles', music: 'Music', export: 'Ready for Reels and TikTok' },
+  showcase: { flow: ['Video', 'Every channel', 'Comment', 'Message'], prospect: ['Google Maps', 'Business data', 'Proposal', 'AI call'], aigent: ['WhatsApp, email', 'AI agent', 'Browser and cloud', 'Appointment'], flowTag: 'Content and follow-up', prospectTag: 'Leads and outreach', aigentTag: 'Client communication' },
 }
 
 export const getVisualCopy = (locale: Locale): VisualCopy => ({ it: IT, es: ES, en: EN })[locale] ?? IT

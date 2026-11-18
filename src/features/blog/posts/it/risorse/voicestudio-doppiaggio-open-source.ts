@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "La guida promessa nel video: link al repository ufficiale di VoiceStudio, requisiti, installazione passo passo su Windows, Mac e Linux, prima voce…",
   "date": "2026-10-27",
   "readTime": 11,
-  "category": "Risorse gratuite",
+  "category": "Contenuti e social",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "VoiceStudio",

@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Scarica, installa e usa la skill hook-virali su Claude",
   "date": "2026-11-02",
   "readTime": 5,
-  "category": "Risorse gratuite",
+  "category": "Contenuti e social",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica 70 ganci virali",
     "Scarica",

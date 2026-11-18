@@ -6,7 +6,8 @@ const post: BlogPost = {
   "description": "Come collegare Pluralsight a Claude Code, Codex e agli altri strumenti IA per creare percorsi formativi da obiettivi di business e misurarne i risultati.",
   "date": "2026-10-20",
   "readTime": 9,
-  "category": "Risorse gratuite",
+  "category": "AI e automazioni",
+  "freeGuide": true,
   "keywords": [
     "Guida pratica",
     "Pluralsight AI MCP",

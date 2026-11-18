@@ -74,7 +74,7 @@ function renderSection(section: BlogSection, index: number, locale: string) {
       )
     case 'h2':
       return (
-        <div key={index} className="mt-10">
+        <div key={index} className="mt-6 md:mt-10">
           <h2 className="font-heading text-display-sm mb-4">{renderInline(section.heading)}</h2>
           <p className="text-body-md text-foreground-secondary leading-relaxed">{renderInline(section.content)}</p>
         </div>
@@ -171,7 +171,7 @@ function renderSection(section: BlogSection, index: number, locale: string) {
       return (
         <div
           key={index}
-          className="mt-12 p-8 bg-surface-elevated border border-surface-border rounded-2xl text-center"
+          className="mt-8 md:mt-12 p-8 bg-surface-elevated border border-surface-border rounded-2xl text-center"
         >
           <h3 className="font-heading text-display-xs mb-3">{renderInline(section.heading)}</h3>
           <p className="text-body-md text-foreground-secondary mb-6">{renderInline(section.content)}</p>

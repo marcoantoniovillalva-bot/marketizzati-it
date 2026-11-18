@@ -45,7 +45,7 @@ export default async function ThanksPage({ params }: Props) {
           </ol>
         }
       />
-      <div className="mt-10">
+      <div className="mt-6 md:mt-10">
         <WhatsAppButton label={copy.whatsapp} variant="primary" />
       </div>
     </Section>
