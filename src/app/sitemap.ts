@@ -1,46 +1,31 @@
 import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/features/blog/posts'
+import { BASE_URL } from '@/features/site/lib/links'
+import { LOCALES, PAGES, pageHref, type PageKey } from '@/features/site/lib/routes'
 
-const baseUrl = 'https://www.marketizzati.it'
-
-const pages = [
-  '',
-  '/servizi',
-  '/metodo',
-  '/chi-siamo',
-  '/consulenza',
-  '/blog',
-  '/privacy',
-  '/cookie',
-  '/termini',
-]
-
-const locales = ['it', 'en', 'es']
+const MONEY: PageKey[] = ['home', 'prezzi', 'siti', 'artigiani']
+const SKIP: PageKey[] = ['grazie']
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Static pages
-  const staticEntries = pages.flatMap((page) =>
-    locales.map((locale) => ({
-      url: `${baseUrl}/${locale}${page}`,
+  const keys = (Object.keys(PAGES) as PageKey[]).filter((k) => !SKIP.includes(k))
+  const pages = keys.flatMap((key) =>
+    LOCALES.map((locale) => ({
+      url: `${BASE_URL}${pageHref(key, locale)}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: page === '' ? 1.0 : 0.8,
-      alternates: {
-        languages: Object.fromEntries(
-          locales.map((l) => [l, `${baseUrl}/${l}${page}`])
-        ),
-      },
-    }))
+      priority: MONEY.includes(key) ? 1 : 0.7,
+      alternates: { languages: Object.fromEntries(LOCALES.map((l) => [l, `${BASE_URL}${pageHref(key, l)}`])) },
+    })),
   )
 
-  // Blog posts (Italian only for now)
-  const itPosts = await getAllPosts('it')
-  const blogEntries = itPosts.map((post) => ({
-    url: `${baseUrl}/it/blog/${post.slug}`,
+  // Blog: Italian articles (Spanish and English are added as they get translated)
+  const posts = await getAllPosts('it')
+  const blog = posts.map((post) => ({
+    url: `${BASE_URL}/it/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    priority: 0.6,
   }))
 
-  return [...staticEntries, ...blogEntries]
+  return [...pages, ...blog]
 }

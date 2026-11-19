@@ -29,6 +29,11 @@
   --color-error: #EF4444;
 }
 
+/* public site: everything is in rem, so on big screens the whole layout grows instead of floating in white space */
+@media (min-width: 1700px) { html:has(.site-shell) { font-size: 17.5px; } }
+@media (min-width: 2200px) { html:has(.site-shell) { font-size: 20px; } }
+@media (min-width: 2800px) { html:has(.site-shell) { font-size: 24px; } }
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -77,6 +82,9 @@ h1, h2, h3, h4, h5, h6, .heading {
   font-weight: 600;
   letter-spacing: -0.02em;
 }
+
+/* public site: two fonts only, Inter for everything and Instrument Serif for the italic accents */
+.site-shell :is(h1, h2, h3, h4, h5, h6, .heading) { font-family: var(--font-inter), system-ui, sans-serif; }
 
 @layer components {
   /* Animated gradient header — Marketizzati brand colors */
@@ -165,4 +173,106 @@ h1, h2, h3, h4, h5, h6, .heading {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* ============================================
+   SITE MOCKUPS (src/features/site/components/mockups.tsx)
+   CSS-only, looping slowly; still with reduced motion.
+   ============================================ */
+body { transition: background-color 0.25s linear; }
+
+.mk-float { animation: mkFloat 7s ease-in-out infinite; }
+.mk-build { animation: mkBuild 12s cubic-bezier(.2,.8,.2,1) infinite both; }
+.mk-msg { animation: mkMsg 10s ease-out infinite both; }
+.mk-typing { display: inline-flex; gap: 4px; }
+.mk-typing i { width: 6px; height: 6px; border-radius: 9999px; background: #F2541B; animation: mkDot 0.9s ease-in-out infinite; }
+.mk-typing i:nth-child(2) { animation-delay: .15s; }
+.mk-typing i:nth-child(3) { animation-delay: .3s; }
+
+@keyframes mkFloat { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+@keyframes mkBuild {
+  0% { opacity: 0; transform: translateY(14px) scale(.97) }
+  6%, 94% { opacity: 1; transform: none }
+  100% { opacity: 0; transform: translateY(-6px) }
+}
+@keyframes mkMsg {
+  0% { opacity: 0; transform: translateY(10px) scale(.95) }
+  6%, 90% { opacity: 1; transform: none }
+  100% { opacity: 0 }
+}
+@keyframes mkDot { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
+
+
+/* explainers (src/features/site/components/explainers-*.tsx): one 12s cycle, delays set inline */
+.mk-grow-x { transform-origin: left center; animation: mkGrowX 12s cubic-bezier(.2,.8,.2,1) infinite both; }
+.mk-grow-y { transform-origin: center bottom; animation: mkGrowY 12s cubic-bezier(.2,.8,.2,1) infinite both; }
+.mk-strike { transform-origin: left center; animation: mkStrike 12s ease-out infinite both; }
+.mk-pop { animation: mkPop 12s cubic-bezier(.3,1.6,.5,1) infinite both; }
+.mk-travel { animation: mkTravel 4s linear infinite; }
+.mk-pulse { animation: mkPulse 1.8s ease-out infinite; }
+.mk-wave { transform-origin: center; animation: mkWave .9s ease-in-out infinite alternate; }
+.mk-type { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; animation: mkType 12s steps(22) infinite both; }
+.mk-play { animation: mkPlay 6s linear infinite; }
+.mk-spin { animation: mkSpin 1s linear infinite; }
+
+/* inside an explainer (PlayOnView): build up once, then stay; delays stay inline */
+.mk-scope .mk-build, .mk-scope .mk-msg { animation: mkIn .7s cubic-bezier(.2,.8,.2,1) both; }
+.mk-scope .mk-pop { animation: mkPopIn .55s cubic-bezier(.3,1.6,.5,1) both; }
+.mk-scope .mk-grow-x, .mk-scope .mk-strike { animation: mkGrowXIn .9s cubic-bezier(.2,.8,.2,1) both; }
+.mk-scope .mk-grow-y { animation: mkGrowYIn .9s cubic-bezier(.2,.8,.2,1) both; }
+.mk-scope .mk-type { animation: mkTypeIn 1.6s steps(22) both; }
+@keyframes mkIn { from { opacity: 0; transform: translateY(14px) scale(.97) } to { opacity: 1; transform: none } }
+@keyframes mkPopIn { from { opacity: 0; transform: scale(.6) } to { opacity: 1; transform: none } }
+@keyframes mkGrowXIn { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes mkGrowYIn { from { transform: scaleY(0) } to { transform: scaleY(1) } }
+@keyframes mkTypeIn { from { max-width: 0 } to { max-width: 100% } }
+
+/* icon tiles (icons.tsx): pop in while scrolling into view where supported, then a slow breathe */
+.mk-breathe { animation: mkBreathe 3.2s ease-in-out infinite; transform-origin: center; }
+@keyframes mkBreathe { 0%, 100% { transform: scale(1) rotate(0) } 50% { transform: scale(1.12) rotate(-4deg) } }
+@supports (animation-timeline: view()) {
+  .mk-icon { animation: mkPopIn linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+}
+
+/* app tours (app-tour.tsx): slow camera on each real screen, cursor that clicks */
+.mk-tour-zoom { animation: mkTourZoom 3.8s ease-out both; transform-origin: 30% 20%; }
+.mk-tour-pan-y { animation: mkTourPan 3.8s ease-in-out both; }
+.mk-tour-cursor { animation: mkTourCursor 3.8s ease-in-out both; }
+@keyframes mkTourZoom { from { transform: scale(1) } to { transform: scale(1.06) } }
+@keyframes mkTourPan { 0%, 15% { object-position: 50% 0% } 85%, 100% { object-position: 50% 100% } }
+@keyframes mkTourCursor { 0% { opacity: 0; transform: translate(40px, 30px) } 30% { opacity: 1; transform: translate(0, 0) } 45% { transform: scale(.85) } 55%, 85% { opacity: 1; transform: scale(1) } 100% { opacity: 0 } }
+
+/* plan cards (plan-cards.tsx): glowing moving border on the featured plan, light sweep, staggered entry */
+@property --mk-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.mk-plan-featured { background: conic-gradient(from var(--mk-angle), #F2541B, #FFB38A, #16120F 40%, #F2541B 60%, #FFB38A, #F2541B); animation: mkAngle 6s linear infinite; box-shadow: 0 30px 70px -30px rgba(242,84,27,.65); }
+@keyframes mkAngle { to { --mk-angle: 360deg } }
+.mk-shine::before { content: ''; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.12), transparent); animation: mkShine 5s ease-in-out infinite; }
+@keyframes mkShine { 0%, 55% { left: -60% } 85%, 100% { left: 130% } }
+.mk-plan { animation: mkPlanIn .7s cubic-bezier(.2,.8,.2,1) backwards; }
+.mk-plan-featured { animation: mkAngle 6s linear infinite, mkPlanIn .7s cubic-bezier(.2,.8,.2,1) backwards; }
+@keyframes mkPlanIn { from { opacity: 0; transform: translateY(40px) scale(.96) } to { opacity: 1; transform: none } }
+
+/* phones: card lists become one horizontal row you swipe (less vertical scrolling); grid again from 768px */
+@media (max-width: 767px) {
+  .rail { display: flex !important; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; margin-left: -1rem; margin-right: -1rem; padding: .25rem 1rem 1rem; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * { flex: 0 0 82%; scroll-snap-align: center; }
+  .rail-sm > * { flex-basis: 46%; }
+}
+
+@keyframes mkGrowX { 0% { transform: scaleX(0) } 8%, 92% { transform: scaleX(1) } 100% { transform: scaleX(0) } }
+@keyframes mkGrowY { 0% { transform: scaleY(0) } 8%, 92% { transform: scaleY(1) } 100% { transform: scaleY(0) } }
+@keyframes mkStrike { 0% { transform: scaleX(0) } 6%, 92% { transform: scaleX(1) } 100% { transform: scaleX(0) } }
+@keyframes mkPop { 0% { opacity: 0; transform: scale(.6) } 5%, 92% { opacity: 1; transform: none } 100% { opacity: 0; transform: scale(.9) } }
+@keyframes mkTravel { 0% { left: 0; opacity: 0 } 8% { opacity: 1 } 92% { opacity: 1 } 100% { left: calc(100% - 12px); opacity: 0 } }
+@keyframes mkPulse { 0% { transform: scale(.9); opacity: .55 } 100% { transform: scale(2.1); opacity: 0 } }
+@keyframes mkWave { 0% { transform: scaleY(.25) } 100% { transform: scaleY(1) } }
+@keyframes mkType { 0% { max-width: 0 } 18%, 92% { max-width: 100% } 100% { max-width: 0 } }
+@keyframes mkPlay { 0% { left: 0 } 100% { left: 100% } }
+@keyframes mkSpin { to { transform: rotate(360deg) } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-grow-x, .mk-grow-y, .mk-strike, .mk-pop, .mk-travel, .mk-pulse, .mk-wave, .mk-type, .mk-play, .mk-spin, .mk-breathe, .mk-icon, .mk-plan, .mk-plan-featured, .mk-shine::before, .mk-tour-zoom, .mk-tour-pan-y, .mk-tour-cursor { animation: none !important; opacity: 1 !important; transform: none !important; max-width: none !important; }
+  .mk-float, .mk-build, .mk-msg, .mk-typing i { animation: none !important; opacity: 1 !important; transform: none !important; }
+  body { transition: none; }
 }

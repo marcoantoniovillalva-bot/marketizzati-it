@@ -1,9 +1,19 @@
+import { CoverImage } from '@/features/blog/components/cover-image'
+import { TikTokVideo } from '@/features/blog/components/tiktok-video'
 import { notFound } from 'next/navigation'
 import NextLink from 'next/link'
 import { getAllPosts, getPostBySlug } from '@/features/blog/posts'
 import type { BlogSection } from '@/features/blog/types'
 import { toAbsoluteSiteUrl } from '@/lib/media-url'
 import { Clock, ArrowLeft, ArrowRight } from 'lucide-react'
+import { WA_LINK } from '@/features/site/lib/links'
+import { isLocale, pageHref } from '@/features/site/lib/routes'
+
+const CTA = {
+  it: { prices: 'Vedi i prezzi', plans: 'Vedi i piani automazioni', wa: 'Scrivimi su WhatsApp' },
+  es: { prices: 'Ver los precios', plans: 'Ver los planes de automatización', wa: 'Escríbeme por WhatsApp' },
+  en: { prices: 'See the prices', plans: 'See the automation plans', wa: 'Message me on WhatsApp' },
+} as const
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>
@@ -44,39 +54,57 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
-function renderSection(section: BlogSection, index: number, locale: string) {
+function renderInline(text: string, links = true) {
+  return text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^\s)]+\))/g).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) return <strong key={index}>{renderInline(part.slice(2, -2), links)}</strong>
+    const link = links ? /^\[([^\]]+)\]\(([^\s)]+)\)$/.exec(part) : null
+    if (link && /^(https?:\/\/|\/(?!\/)|mailto:|tel:)/i.test(link[2])) {
+      return <a key={index} href={link[2]} {...(/^https?:/.test(link[2]) ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="font-medium text-brand underline underline-offset-4">{link[1]}</a>
+    }
+    return part
+  })
+}
+
+const VIDEO_LABELS = {
+  it: { play: 'Guarda il video', note: 'Il video si apre con il player di TikTok.', open: 'Non parte? Guardalo su TikTok →' },
+  es: { play: 'Ver el vídeo', note: 'El vídeo se abre con el reproductor de TikTok.', open: '¿No arranca? Míralo en TikTok →' },
+  en: { play: 'Watch the video', note: 'The video opens in the TikTok player.', open: 'Not playing? Watch it on TikTok →' },
+}
+
+/** `automation`: AI and automation articles point their call to action at the automation plans. */
+function renderSection(section: BlogSection, index: number, locale: string, automation = false) {
   switch (section.type) {
     case 'intro':
       return (
         <p key={index} className="text-body-lg text-foreground-secondary leading-relaxed">
-          {section.content}
+          {renderInline(section.content)}
         </p>
       )
     case 'h2':
       return (
-        <div key={index} className="mt-10">
-          <h2 className="font-heading text-display-sm mb-4">{section.heading}</h2>
-          <p className="text-body-md text-foreground-secondary leading-relaxed">{section.content}</p>
+        <div key={index} className="mt-6 md:mt-10">
+          <h2 className="font-heading text-display-sm mb-4">{renderInline(section.heading)}</h2>
+          <p className="text-body-md text-foreground-secondary leading-relaxed">{renderInline(section.content)}</p>
         </div>
       )
     case 'h3':
       return (
         <div key={index} className="mt-6">
-          <h3 className="font-heading text-body-xl font-semibold mb-3">{section.heading}</h3>
-          <p className="text-body-md text-foreground-secondary leading-relaxed">{section.content}</p>
+          <h3 className="font-heading text-body-xl font-semibold mb-3">{renderInline(section.heading)}</h3>
+          <p className="text-body-md text-foreground-secondary leading-relaxed">{renderInline(section.content)}</p>
         </div>
       )
     case 'list':
       return (
         <div key={index} className="mt-6">
           {section.heading && (
-            <p className="font-medium mb-3">{section.heading}</p>
+            <p className="font-medium mb-3">{renderInline(section.heading)}</p>
           )}
           <ul className="space-y-3">
             {section.items.map((item, i) => (
               <li key={i} className="flex gap-3 text-body-md text-foreground-secondary">
                 <span className="text-accent font-bold mt-0.5 shrink-0">→</span>
-                <span>{item}</span>
+                <span>{renderInline(item, true)}</span>
               </li>
             ))}
           </ul>
@@ -88,13 +116,34 @@ function renderSection(section: BlogSection, index: number, locale: string) {
           key={index}
           className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-2xl"
         >
-          <p className="text-body-md leading-relaxed">{section.content}</p>
+          <p className="text-body-md leading-relaxed">{renderInline(section.content, true)}</p>
+        </div>
+      )
+    case 'table':
+      return (
+        <div key={index} className="mt-8 overflow-x-auto rounded-2xl border border-surface-border">
+          <table className="w-full text-left text-body-md text-foreground-secondary">
+            {section.caption && <caption className="p-3 text-sm text-foreground-muted">{section.caption}</caption>}
+            <thead className="bg-accent/5">
+              <tr>{section.headers.map((header, i) => <th key={i} scope="col" className="p-3 font-semibold">{renderInline(header)}</th>)}</tr>
+            </thead>
+            <tbody>{section.rows.map((row, i) => (
+              <tr key={i} className="border-t border-surface-border">{row.map((cell, j) => <td key={j} className="p-3 align-top">{renderInline(cell)}</td>)}</tr>
+            ))}</tbody>
+          </table>
+        </div>
+      )
+    case 'code':
+      return (
+        <div key={index} className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-2xl">
+          {section.label && <p className="mb-3 text-xs font-semibold text-foreground-muted">{section.label}</p>}
+          <pre className="overflow-x-auto whitespace-pre-wrap break-words text-sm leading-relaxed"><code>{section.content}</code></pre>
         </div>
       )
     case 'paragraph':
       return (
         <p key={index} className="text-body-md text-foreground-secondary leading-relaxed mt-4">
-          {section.content}
+          {renderInline(section.content)}
         </p>
       )
     case 'image':
@@ -130,16 +179,21 @@ function renderSection(section: BlogSection, index: number, locale: string) {
       return (
         <div
           key={index}
-          className="mt-12 p-8 bg-surface-elevated border border-surface-border rounded-2xl text-center"
+          className="mt-8 md:mt-12 p-8 bg-surface-elevated border border-surface-border rounded-2xl text-center"
         >
-          <h3 className="font-heading text-display-xs mb-3">{section.heading}</h3>
-          <p className="text-body-md text-foreground-secondary mb-6">{section.content}</p>
-          <NextLink
-            href={`/${locale}/consulenza`}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-colors"
-          >
-            Prenota la consulenza gratuita <ArrowRight size={16} />
-          </NextLink>
+          <h3 className="font-heading text-display-xs mb-3">{renderInline(section.heading)}</h3>
+          <p className="text-body-md text-foreground-secondary mb-6">{renderInline(section.content)}</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <NextLink
+              href={automation ? pageHref('sistemi', locale, '#piani') : pageHref('prezzi', locale)}
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-dark"
+            >
+              {CTA[isLocale(locale) ? locale : 'it'][automation ? 'plans' : 'prices']} <ArrowRight size={16} />
+            </NextLink>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 font-semibold">
+              {CTA[isLocale(locale) ? locale : 'it'].wa}
+            </a>
+          </div>
         </div>
       )
   }
@@ -184,8 +238,9 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      <article className="pt-32 pb-32 px-6">
-        <div className="max-w-2xl mx-auto">
+      <article className="bg-white px-4 pb-32 pt-32 sm:px-6" data-tinta="#FFFFFF">
+        <div className={post.tiktok ? 'mx-auto max-w-6xl lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-14' : 'mx-auto max-w-2xl'}>
+        <div className="mx-auto w-full max-w-2xl min-w-0">
           {/* Back */}
           <NextLink
             href={`/${locale}/blog`}
@@ -214,17 +269,17 @@ export default async function BlogPostPage({ params }: Props) {
           </header>
 
           {/* Hero image */}
-          <div className="w-full rounded-2xl overflow-hidden mb-10">
-            <img
-              src={post.image}
-              alt={post.imageAlt}
-              className="w-full h-64 md:h-80 object-cover"
-            />
-          </div>
+          {post.tiktok ? (
+            <div className="lg:hidden">
+              <TikTokVideo video={post.tiktok} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+            </div>
+          ) : (
+            <CoverImage post={post} priority className="mb-10 w-full rounded-2xl" />
+          )}
 
           {/* Content */}
           <div>
-            {post.sections.map((section, i) => renderSection(section, i, locale))}
+            {post.sections.map((section, i) => renderSection(section, i, locale, post.category === 'AI e automazioni'))}
           </div>
 
           {/* Prev / Next */}
@@ -258,6 +313,12 @@ export default async function BlogPostPage({ params }: Props) {
               )}
             </nav>
           )}
+        </div>
+        {post.tiktok && (
+          <aside className="sticky top-28 hidden lg:block">
+            <TikTokVideo video={post.tiktok} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+          </aside>
+        )}
         </div>
       </article>
     </>

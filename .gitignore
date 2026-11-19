@@ -70,3 +70,7 @@ supabase/.temp
 # Large media files
 "Stile videivo idee"/
 generate-images.js
+
+scripts/qa/.video-tmp/
+scripts/.cover-src/
+docs/preview-telefono/

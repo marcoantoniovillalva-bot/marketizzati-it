@@ -7,6 +7,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // new public site (2026-11): warm whites, brand orange, one navy block
+        brand: { DEFAULT: '#F2541B', dark: '#D4410C', soft: '#FFE3D4', cream: '#FFF8F2', peach: '#FFEEE3' },
+        ink: { DEFAULT: '#16120F', soft: '#4B433D', muted: '#7A706A' },
+        navy: { DEFAULT: '#121A2F', soft: '#1C2540' },
         background: '#F7F7F7',
         surface: {
           DEFAULT: '#FFFFFF',
@@ -44,6 +48,7 @@ const config: Config = {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         heading: ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
       },
       fontSize: {
         'display-2xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
