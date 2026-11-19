@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 import { Check } from 'lucide-react'
 import { PayModal } from '@/features/checkout/components/pay-modal'
 import type { PlanKey } from '@/features/checkout/lib/plans'
+import { CAL_LINK } from '../content/automation'
+import { PAYMENTS_ENABLED } from '../lib/offer'
 import type { Locale } from '../lib/routes'
+
+const BOOK: Record<Locale, string> = { it: 'Richiedi un appuntamento', es: 'Pide una cita', en: 'Book a call' }
 
 export interface PlanCardData {
   title: string
@@ -95,14 +99,24 @@ export function PlanCards({ plans, locale }: { plans: PlanCardData[]; locale: Lo
                     </li>
                   ))}
                 </ul>
-                {plan.addon && (
+                {PAYMENTS_ENABLED && plan.addon && (
                   <label className={`mt-4 flex cursor-pointer items-start gap-2.5 rounded-xl p-3 text-[13px] leading-snug ${featured ? 'bg-white/10' : 'bg-brand-cream'}`}>
                     <input type="checkbox" checked={Boolean(addons[i])} onChange={(e) => setAddons((a) => ({ ...a, [i]: e.target.checked }))} className="mt-0.5 h-4 w-4 shrink-0 accent-[#F2541B]" />
                     <span>{plan.addon}</span>
                   </label>
                 )}
                 <div className="mt-auto grid gap-2 pt-5">
-                  {plan.pay && (
+                  {!PAYMENTS_ENABLED && (
+                    <a
+                      href={CAL_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`rounded-2xl px-5 py-3.5 text-center text-[15px] font-semibold transition ${featured ? 'bg-brand text-white shadow-[0_12px_30px_-10px_rgba(242,84,27,0.9)] hover:bg-brand-dark' : 'bg-ink text-white hover:bg-ink-soft'}`}
+                    >
+                      {BOOK[locale]}
+                    </a>
+                  )}
+                  {PAYMENTS_ENABLED && plan.pay && (
                     <button
                       type="button"
                       onClick={() => setPaying({ plan: plan.pay!.plan, adsLaunch: Boolean(addons[i]) })}
@@ -111,6 +125,7 @@ export function PlanCards({ plans, locale }: { plans: PlanCardData[]; locale: Lo
                       {plan.pay.label}
                     </button>
                   )}
+                  {(PAYMENTS_ENABLED || plan.talk.href !== CAL_LINK) && (
                   <a
                     href={plan.talk.href}
                     target="_blank"
@@ -119,6 +134,7 @@ export function PlanCards({ plans, locale }: { plans: PlanCardData[]; locale: Lo
                   >
                     {plan.talk.label}
                   </a>
+                  )}
                 </div>
               </div>
             </article>

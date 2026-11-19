@@ -16,7 +16,7 @@ export interface PricesCopy {
 export const prezziIt: PricesCopy = {
   meta: {
     title: `Quanto costa un sito web? ${OFFER.oneOff} € o ${OFFER.monthly} €/mese, logo incluso | Marketizzati`,
-    description: `Quanto costa un sito web nel 2026: con Marketizzati ${OFFER.oneOff} € una volta sola oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi, logo e scheda Google inclusi. Prezzo scritto, acquisto online.`,
+    description: `Quanto costa un sito web nel 2026: con Marketizzati ${OFFER.oneOff} € una volta sola oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi, logo e scheda Google inclusi. Prezzo scritto, una call e si parte.`,
   },
   label: '01 · Prezzi',
   title: 'Quanto costa un sito web?',

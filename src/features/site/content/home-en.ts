@@ -28,12 +28,12 @@ export const homeEn: HomeCopy = {
     ownership: '**After the last instalment, the website is yours**, including the code. No ongoing fees to pay me.',
     hosting: `Separate cost: domain and email with VHosting, around ${OFFER.hostingPerYear} € a year, registered and paid for by you.`,
     stamp: `+ ${OFFER.stampDuty} € stamp duty per invoice (Italian flat-rate tax scheme, no VAT).`,
-    ctaBuy: 'Buy your website', ctaTalk: 'Want to talk first?', source: 'A business website costs an average of 1.000–3.000 € (sources: futuraweb.eu, uretech.it, milowebapp.it).',
+    ctaBuy: 'Book a call', ctaTalk: 'Want to talk first?', source: 'A business website costs an average of 1.000–3.000 € (sources: futuraweb.eu, uretech.it, milowebapp.it).',
   },
   steps: {
     label: '04 · How it works', title: 'Four steps,', italic: 'then your website is online.',
     items: [
-      { title: 'Choose how to pay', text: 'Pay here on the website, or talk to me on WhatsApp first.' },
+      { title: 'Book a call', text: 'Pick a time in the calendar, or message me on WhatsApp.' },
       { title: 'Send me your material', text: 'Your logo if you have one, photos of your work, services and areas. Then a 20-minute call.' },
       { title: 'I write and build', text: 'Your website goes online around 2 weeks after I receive your material.' },
       { title: 'You get 30 days of support', text: 'Corrections and small changes are included. After that, changes are quoted on request.' },
@@ -75,5 +75,5 @@ export const homeEn: HomeCopy = {
       { q: 'What happens after 30 days?', a: 'Changes are available on request with a small quote. There are no monthly fees to pay me.' },
     ],
   },
-  final: { title: 'Your website,', italic: 'online in two weeks.', text: `${OFFER.oneOff} € or ${OFFER.monthly} € a month. Logo and Google Business Profile included.`, ctaBuy: 'Buy your website', ctaWhatsapp: 'Message me on WhatsApp' },
+  final: { title: 'Your website,', italic: 'online in two weeks.', text: `${OFFER.oneOff} € or ${OFFER.monthly} € a month. Logo and Google Business Profile included.`, ctaBuy: 'Book a call', ctaWhatsapp: 'Message me on WhatsApp' },
 }

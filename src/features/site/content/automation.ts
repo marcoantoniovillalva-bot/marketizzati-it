@@ -31,7 +31,7 @@ const IT: AutomationCopy = {
   label: 'Piani automazioni',
   title: 'Automazioni e agenti AI,',
   italic: 'in abbonamento.',
-  intro: 'Un prezzo chiaro al mese, oppure un progetto a corpo. Paghi qui se mi conosci già, o prenoti 30 minuti per parlarne prima.',
+  intro: 'Un prezzo chiaro al mese, oppure un progetto a corpo. Prenota 30 minuti e ne parliamo.',
   pillars: [
     { title: 'Capisco', text: 'Prima di costruire guardiamo **cosa ti fa perdere tempo** e cosa conviene automatizzare davvero.' },
     { title: 'Costruisco', text: 'Agenti su WhatsApp, email e telefono, collegamenti tra i tuoi programmi, **AI locale** se i dati sono delicati.' },
@@ -53,7 +53,7 @@ const ES: AutomationCopy = {
   label: 'Planes de automatización',
   title: 'Automatizaciones y agentes de IA,',
   italic: 'en suscripción.',
-  intro: 'Un precio claro al mes o un proyecto cerrado. Pagas aquí si ya me conoces, o reservas 30 minutos para hablarlo antes.',
+  intro: 'Un precio claro al mes o un proyecto cerrado. Reserva 30 minutos y lo hablamos.',
   pillars: [
     { title: 'Entiendo', text: 'Antes de construir vemos **qué te hace perder tiempo** y qué conviene automatizar de verdad.' },
     { title: 'Construyo', text: 'Agentes en WhatsApp, email y teléfono, conexiones entre tus programas, **IA local** si los datos son delicados.' },
@@ -75,7 +75,7 @@ const EN: AutomationCopy = {
   label: 'Automation plans',
   title: 'Automations and AI agents,',
   italic: 'by subscription.',
-  intro: 'One clear monthly price, or a fixed-price project. Pay here if you already know me, or book 30 minutes to talk first.',
+  intro: 'One clear monthly price, or a fixed-price project. Book 30 minutes and we talk it through.',
   pillars: [
     { title: 'Understand', text: 'Before building we look at **what wastes your time** and what is really worth automating.' },
     { title: 'Build', text: 'Agents on WhatsApp, email and phone, links between your tools, **local AI** when data is sensitive.' },

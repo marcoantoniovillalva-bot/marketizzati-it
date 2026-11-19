@@ -4,7 +4,7 @@ import { ADS, OFFER } from '../lib/offer'
 export const prezziEs: PricesCopy = {
   meta: {
     title: `¿Cuánto cuesta una web? ${OFFER.oneOff} € o ${OFFER.monthly} €/mes, logo incluido | Marketizzati`,
-    description: `Precios de una web en 2026: con Marketizzati, ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses, con logo y ficha de Google incluidos. Precio público, compra online.`,
+    description: `Precios de una web en 2026: con Marketizzati, ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses, con logo y ficha de Google incluidos. Precio público, una llamada y empezamos.`,
   },
   label: '01 · Precios', title: '¿Cuánto cuesta una web?', italic: 'Aquí tienes el precio.',
   answer: `Una web profesional con Marketizzati cuesta **${OFFER.oneOff} € en un pago** o **${OFFER.monthly} € al mes durante ${OFFER.months} meses**, con logo, ficha de Google, hasta ${OFFER.maxPages} páginas y ${OFFER.supportDays} días de asistencia incluidos. Después de la última cuota, la web es tuya. Aparte solo pagas dominio y correo, unos ${OFFER.hostingPerYear} € al año.`,

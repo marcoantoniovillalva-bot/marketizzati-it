@@ -4,6 +4,8 @@ import { PARTNERS, PROJECTS } from '../content/projects'
 import { euro, OFFER, totalInstalments } from '../lib/offer'
 import { pageHref, type Locale } from '../lib/routes'
 import { getVisualCopy } from '../content/visuals'
+import { CAL_LINK } from '../content/automation'
+import { PAYMENTS_ENABLED } from '../lib/offer'
 import { DiyVsPro, OwnershipTimeline, PriceStack, StepsRail } from './explainers-site'
 import { BrowserBuild, PhoneChat } from './mockups'
 import { IconTile, iconFor } from './icons'
@@ -16,6 +18,8 @@ import { ArrowLink, Button, CheckList, Faq, Rich, StatCards, WhatsAppButton } fr
 /** The home page, all sections; copy comes from content/home-<locale>.ts. */
 export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
   const buy = pageHref('prezzi', locale, '#acquista')
+  // while online payments are off, the buy buttons book a call on cal.com
+  const book = PAYMENTS_ENABLED ? buy : CAL_LINK
   const { hero, problem, offer, steps, services, projects, about, faq, final } = copy
   const v = getVisualCopy(locale)
   return (
@@ -87,7 +91,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
             </p>
             <p className="mt-3 text-sm text-ink-muted">{offer.hosting}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Button href={buy}>{offer.ctaBuy}</Button>
+              <Button href={book} external={!PAYMENTS_ENABLED}>{offer.ctaBuy}</Button>
               <span className="text-sm text-ink-muted">{offer.ctaTalk}</span>
               <WhatsAppButton label="WhatsApp" />
             </div>
@@ -211,7 +215,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
         <div className="text-center">
           <Heading center title={final.title} italic={final.italic} intro={final.text} />
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href={buy}>{final.ctaBuy}</Button>
+            <Button href={book} external={!PAYMENTS_ENABLED}>{final.ctaBuy}</Button>
             <WhatsAppButton label={final.ctaWhatsapp} />
           </div>
         </div>

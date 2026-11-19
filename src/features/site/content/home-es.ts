@@ -28,12 +28,12 @@ export const homeEs: HomeCopy = {
     ownership: '**Después de la última cuota, la web es tuya**, incluido el código. Sin cuotas que pagarme.',
     hosting: `Aparte: dominio y correo en VHosting, unos ${OFFER.hostingPerYear} € al año, a tu nombre y pagados por ti.`,
     stamp: `+ ${OFFER.stampDuty} € de impuesto de timbre por factura (régimen fiscal italiano forfettario, sin IVA).`,
-    ctaBuy: 'Compra tu web', ctaTalk: '¿Prefieres hablarlo antes?', source: 'Una web de presentación cuesta de media entre 1.000 y 3.000 € (fuentes: futuraweb.eu, uretech.it, milowebapp.it).',
+    ctaBuy: 'Pide una cita', ctaTalk: '¿Prefieres hablarlo antes?', source: 'Una web de presentación cuesta de media entre 1.000 y 3.000 € (fuentes: futuraweb.eu, uretech.it, milowebapp.it).',
   },
   steps: {
     label: '04 · Cómo funciona', title: 'Cuatro pasos,', italic: 'y tu web está publicada.',
     items: [
-      { title: 'Elige cómo pagar', text: 'Aquí en la web, o lo hablamos antes por WhatsApp.' },
+      { title: 'Reserva una llamada', text: 'Elige una hora en el calendario, o escríbeme por WhatsApp.' },
       { title: 'Envíame el material', text: 'Tu logo si lo tienes, fotos de tus trabajos, servicios y zonas. Después, una llamada de 20 minutos.' },
       { title: 'Escribo y construyo', text: 'La web se publica en unas 2 semanas desde que recibo el material.' },
       { title: 'Te acompaño durante 30 días', text: 'Correcciones y pequeños ajustes incluidos. Después, los cambios se presupuestan a petición.' },
@@ -75,5 +75,5 @@ export const homeEs: HomeCopy = {
       { q: '¿Y después de los 30 días?', a: 'Los cambios se hacen a petición, con un pequeño presupuesto. No hay cuotas mensuales que pagarme.' },
     ],
   },
-  final: { title: 'Tu web,', italic: 'publicada en dos semanas.', text: `${OFFER.oneOff} € o ${OFFER.monthly} € al mes. Logo y ficha de Google incluidos.`, ctaBuy: 'Compra tu web', ctaWhatsapp: 'Escríbeme por WhatsApp' },
+  final: { title: 'Tu web,', italic: 'publicada en dos semanas.', text: `${OFFER.oneOff} € o ${OFFER.monthly} € al mes. Logo y ficha de Google incluidos.`, ctaBuy: 'Pide una cita', ctaWhatsapp: 'Escríbeme por WhatsApp' },
 }

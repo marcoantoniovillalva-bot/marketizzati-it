@@ -54,7 +54,7 @@ export const homeIt: HomeCopy = {
     ownership: '**Dopo l’ultima rata il sito è tuo**, codice compreso. Niente canoni da pagarmi.',
     hosting: `A parte: dominio ed email su VHosting, circa ${OFFER.hostingPerYear} € l’anno, intestati e pagati da te.`,
     stamp: `+ ${OFFER.stampDuty} € di marca da bollo per fattura (regime forfettario, niente IVA).`,
-    ctaBuy: 'Compra il sito',
+    ctaBuy: 'Richiedi un appuntamento',
     ctaTalk: 'Preferisci parlarne prima?',
     source: 'Un sito vetrina costa in media 1.000–3.000 € (fonti: futuraweb.eu, uretech.it, milowebapp.it).',
   },
@@ -63,7 +63,7 @@ export const homeIt: HomeCopy = {
     title: 'Quattro passi,',
     italic: 'e il sito è online.',
     items: [
-      { title: 'Scegli come pagare', text: 'Online qui sul sito, oppure ne parliamo prima su WhatsApp.' },
+      { title: 'Prenota una call', text: 'Scegli un orario sul calendario, oppure scrivimi su WhatsApp.' },
       { title: 'Mi mandi il materiale', text: 'Logo se ce l’hai, foto dei tuoi lavori, servizi e zone. Poi una call di 20 minuti.' },
       { title: 'Scrivo e costruisco', text: 'Il sito è online in circa 2 settimane da quando ho il materiale.' },
       { title: 'Ti seguo per 30 giorni', text: 'Correzioni e ritocchi inclusi. Dopo, le modifiche si fanno su richiesta.' },
@@ -152,7 +152,7 @@ export const homeIt: HomeCopy = {
     title: 'Il tuo sito,',
     italic: 'online in due settimane.',
     text: `${OFFER.oneOff} € oppure ${OFFER.monthly} € al mese. Logo e scheda Google inclusi.`,
-    ctaBuy: 'Compra il sito',
+    ctaBuy: 'Richiedi un appuntamento',
     ctaWhatsapp: 'Scrivimi su WhatsApp',
   },
 }

@@ -15,7 +15,7 @@ export function GET() {
 - Inclusi: logo e identità visiva (o sistemazione di quelli esistenti), sito fino a ${OFFER.maxPages} pagine con testi sulle ricerche reali della zona, pulsanti chiama e WhatsApp, modulo contatti, indicizzazione Google e Bing, scheda Google Business Profile creata o sistemata, HTTPS, ${OFFER.supportDays} giorni di assistenza.
 - A parte: dominio ed email su VHosting, circa ${OFFER.hostingPerYear} € l’anno, pagati dal cliente.
 - Regime forfettario, niente IVA; marca da bollo di ${OFFER.stampDuty} € sulle fatture sopra 77,47 €.
-- Online in circa ${OFFER.deliveryWeeks} settimane dal ricevimento del materiale. Acquisto online con Stripe.
+- Online in circa ${OFFER.deliveryWeeks} settimane dal ricevimento del materiale. Si parte dopo una call: https://cal.com/marketizzati/30min
 - Se le rate si interrompono il sito viene sospeso.
 
 ## Gestione pubblicità Google Ads + ChatGPT Ads

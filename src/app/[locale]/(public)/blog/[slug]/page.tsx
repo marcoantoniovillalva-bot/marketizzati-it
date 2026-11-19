@@ -10,9 +10,9 @@ import { WA_LINK } from '@/features/site/lib/links'
 import { isLocale, pageHref } from '@/features/site/lib/routes'
 
 const CTA = {
-  it: { prices: 'Vedi prezzi e acquista', plans: 'Vedi i piani automazioni', wa: 'Scrivimi su WhatsApp' },
-  es: { prices: 'Ver precios y comprar', plans: 'Ver los planes de automatización', wa: 'Escríbeme por WhatsApp' },
-  en: { prices: 'See pricing and buy', plans: 'See the automation plans', wa: 'Message me on WhatsApp' },
+  it: { prices: 'Vedi i prezzi', plans: 'Vedi i piani automazioni', wa: 'Scrivimi su WhatsApp' },
+  es: { prices: 'Ver los precios', plans: 'Ver los planes de automatización', wa: 'Escríbeme por WhatsApp' },
+  en: { prices: 'See the prices', plans: 'See the automation plans', wa: 'Message me on WhatsApp' },
 } as const
 
 interface Props {

@@ -17,6 +17,12 @@ export const OFFER = {
 } as const
 
 /** Google Ads + ChatGPT Ads management, both channels together. Ad budget is paid to Google / OpenAI. */
+/**
+ * Online payments with Stripe. Off for now: every buy button becomes "book a call" on cal.com.
+ * Turn on (true) once the Stripe keys and webhook are set on Vercel.
+ */
+export const PAYMENTS_ENABLED = false
+
 /** Automation subscriptions (same structure as montelli.dev): monthly price, quarterly needs 3 months. */
 export const AUTOMATION = {
   quarterly: 2500,

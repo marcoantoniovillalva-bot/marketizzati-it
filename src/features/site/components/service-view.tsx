@@ -4,7 +4,8 @@ import { getHomeCopy } from '../content/home'
 import { ADS, euro, OFFER } from '../lib/offer'
 import { pageHref, type Locale } from '../lib/routes'
 import type { ServicePageKey } from '../content/service-pages'
-import { getAutomationCopy } from '../content/automation'
+import { CAL_LINK, getAutomationCopy } from '../content/automation'
+import { PAYMENTS_ENABLED } from '../lib/offer'
 import { AutomationPricing } from './automation-pricing'
 import { PlanCards } from './plan-cards'
 import { RelatedPosts } from '@/features/blog/components/related-posts'
@@ -23,12 +24,14 @@ const CTA_COPY: Record<Locale, { buy: string; ads: string; quote: string; talk: 
 
 const TINTS: Tint[] = ['peach', 'cream', 'white', 'orange']
 
+const BOOK_CTA: Record<Locale, string> = { it: 'Richiedi un appuntamento', es: 'Pide una cita', en: 'Book a call' }
+
 const PLANS_LABEL: Record<Locale, string> = { it: 'Vedi piani e prezzi', es: 'Ver planes y precios', en: 'See plans and prices' }
 
 const PLANS_HEADING: Record<Locale, { label: string; title: string; italic: string }> = {
-  it: { label: 'Prezzi', title: 'Il prezzo è scritto,', italic: 'paghi qui.' },
-  es: { label: 'Precios', title: 'El precio está aquí,', italic: 'pagas aquí.' },
-  en: { label: 'Prices', title: 'The price is right here,', italic: 'pay here.' },
+  it: { label: 'Prezzi', title: 'Il prezzo è scritto,', italic: 'si parte con una call.' },
+  es: { label: 'Precios', title: 'El precio está aquí,', italic: 'empezamos con una llamada.' },
+  en: { label: 'Prices', title: 'The price is right here,', italic: 'we start with a call.' },
 }
 
 /** Template of the service, guide and local pages: answer first, blocks, FAQ, then the right call to action. */
@@ -43,7 +46,13 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
   const home = getHomeCopy(locale)
   const labels = Object.fromEntries(LAYOUT[locale].footer.columns.flatMap((col) => col.items).map((i) => [i.key, i.label]))
   const primary =
-    copy.cta === 'quote' ? <WhatsAppButton label={c.quote} variant="primary" /> : <Button href={pageHref('prezzi', locale, '#acquista')}>{copy.cta === 'ads' ? c.ads : c.buy}</Button>
+    copy.cta === 'quote' ? (
+      <WhatsAppButton label={c.quote} variant="primary" />
+    ) : PAYMENTS_ENABLED ? (
+      <Button href={pageHref('prezzi', locale, '#acquista')}>{copy.cta === 'ads' ? c.ads : c.buy}</Button>
+    ) : (
+      <Button href={CAL_LINK} external>{BOOK_CTA[locale]}</Button>
+    )
   const priceLine = copy.cta === 'buy' ? c.price : copy.cta === 'ads' ? c.adsPrice : c.quoteNote
 
   return (
