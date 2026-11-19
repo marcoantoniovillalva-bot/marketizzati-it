@@ -280,7 +280,8 @@ const post: BlogPost = {
   ],
   "freeGuide": true,
   "imageTall": "/images/blog/covers/seo-gratis-strumenti-ia-tall.webp",
-  "videoPreview": "/videos/preview/seo-gratis-strumenti-ia.mp4"
+  "videoPreview": "/videos/preview/seo-gratis-strumenti-ia.mp4",
+  "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7709865961075264800"
 }
 
 export default post
