@@ -370,7 +370,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_RTK_Meno_Token.pdf](/guide/rtk-meno-token-claude-code.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/rtk-meno-token-claude-code.pdf)"
     }
   ]
 }

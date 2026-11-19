@@ -325,7 +325,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Voucher_Cloud_Cybersecurity.pdf](/guide/voucher-cloud-cybersecurity-checklist.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/voucher-cloud-cybersecurity-checklist.pdf)"
     }
   ]
 }

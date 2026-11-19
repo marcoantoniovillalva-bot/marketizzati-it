@@ -377,7 +377,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_AUDIT_Cloudflare.pdf](/guide/audit-sicurezza-skill-cloudflare.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/audit-sicurezza-skill-cloudflare.pdf)"
     }
   ]
 }

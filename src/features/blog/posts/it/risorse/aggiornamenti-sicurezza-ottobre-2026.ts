@@ -468,7 +468,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Sicurezza_Aggiornamenti_Ottobre_2026.pdf](/guide/aggiornamenti-sicurezza-ottobre-2026.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/aggiornamenti-sicurezza-ottobre-2026.pdf)"
     }
   ]
 }

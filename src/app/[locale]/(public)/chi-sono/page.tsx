@@ -57,7 +57,7 @@ const COPY: Record<Locale, AboutCopy> = {
     pathTitle: 'Dall’industria',
     pathItalic: 'all’AI per le imprese.',
     path: [
-      { when: '2016 – 2025', what: 'Tecnico industriale', text: 'Collaudo, diagnostica e messa in servizio di impianti per Atom, Comi Packaging ed EOS Engineering: problemi veri, da risolvere sul posto.' },
+      { when: '2016 – 2025', what: 'Tecnico industriale', text: 'Collaudo, diagnostica e messa in servizio di impianti in aziende strutturate. Lì ho imparato a programmare PLC e macchine, a lavorare in team IT con metodo agile e a fare testing. Intanto studiavo Java, HTML, CSS, JavaScript e Python.' },
       { when: '2025', what: 'Nasce Marketizzati', text: 'Siti web, automazioni e contenuti video sull’AI per artigiani e piccole imprese, da Vigevano.' },
       { when: '2026', what: 'AIGENT', text: 'Piattaforma AI per agenzie immobiliari: segreteria, immobili, documenti, marketing, voce e WhatsApp, con l’approvazione di una persona dove serve.' },
       { when: 'Oggi', what: 'Sistemi miei', text: 'Marketizzati Flow per i contenuti, ProspectBot per i contatti e una pipeline che monta i miei video in automatico.' },
@@ -87,7 +87,7 @@ const COPY: Record<Locale, AboutCopy> = {
     pathTitle: 'De la industria',
     pathItalic: 'a la IA para empresas.',
     path: [
-      { when: '2016 – 2025', what: 'Técnico industrial', text: 'Pruebas, diagnóstico y puesta en marcha de instalaciones para Atom, Comi Packaging y EOS Engineering: problemas reales, resueltos in situ.' },
+      { when: '2016 – 2025', what: 'Técnico industrial', text: 'Pruebas, diagnóstico y puesta en marcha de instalaciones en empresas estructuradas. Allí aprendí a programar PLC y máquinas, a trabajar en equipos IT con metodología ágil y a hacer testing. Mientras tanto estudiaba Java, HTML, CSS, JavaScript y Python.' },
       { when: '2025', what: 'Nace Marketizzati', text: 'Webs, automatizaciones y vídeos sobre IA para artesanos y pequeñas empresas, desde Vigevano.' },
       { when: '2026', what: 'AIGENT', text: 'Plataforma de IA para inmobiliarias: secretaría, inmuebles, documentos, marketing, voz y WhatsApp, con aprobación de una persona donde hace falta.' },
       { when: 'Hoy', what: 'Sistemas propios', text: 'Marketizzati Flow para los contenidos, ProspectBot para los contactos y una pipeline que monta mis vídeos automáticamente.' },
@@ -117,7 +117,7 @@ const COPY: Record<Locale, AboutCopy> = {
     pathTitle: 'From industry',
     pathItalic: 'to AI for businesses.',
     path: [
-      { when: '2016 – 2025', what: 'Industrial technician', text: 'Testing, diagnostics and commissioning of plants for Atom, Comi Packaging and EOS Engineering: real problems, solved on site.' },
+      { when: '2016 – 2025', what: 'Industrial technician', text: 'Testing, diagnostics and commissioning of industrial plants in established companies. There I learned to program PLCs and machines, to work in IT teams with an agile method and to do testing. Meanwhile I studied Java, HTML, CSS, JavaScript and Python.' },
       { when: '2025', what: 'Marketizzati starts', text: 'Websites, automations and AI videos for tradespeople and small businesses, from Vigevano.' },
       { when: '2026', what: 'AIGENT', text: 'An AI platform for estate agencies: front desk, listings, documents, marketing, voice and WhatsApp, with a person approving where it matters.' },
       { when: 'Today', what: 'My own systems', text: 'Marketizzati Flow for content, ProspectBot for leads and a pipeline that edits my videos automatically.' },

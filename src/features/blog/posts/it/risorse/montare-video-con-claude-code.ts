@@ -311,7 +311,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Montare_Video_Claude_Code.pdf](/guide/montare-video-con-claude-code.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/montare-video-con-claude-code.pdf)"
     }
   ]
 }

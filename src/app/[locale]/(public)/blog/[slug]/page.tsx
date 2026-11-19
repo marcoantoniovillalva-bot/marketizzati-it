@@ -1,8 +1,9 @@
+import { BlogCard } from '@/features/blog/components/blog-card'
 import { CoverImage } from '@/features/blog/components/cover-image'
 import { TikTokVideo } from '@/features/blog/components/tiktok-video'
 import { notFound } from 'next/navigation'
 import NextLink from 'next/link'
-import { getAllPosts, getPostBySlug } from '@/features/blog/posts'
+import { getAllPosts, getPostBySlug, sortPosts } from '@/features/blog/posts'
 import type { BlogSection } from '@/features/blog/types'
 import { toAbsoluteSiteUrl } from '@/lib/media-url'
 import { Clock, ArrowLeft, ArrowRight } from 'lucide-react'
@@ -64,6 +65,12 @@ function renderInline(text: string, links = true) {
     return part
   })
 }
+
+const NAV_LABELS = {
+  it: { prev: '← Articolo precedente', next: 'Articolo successivo →' },
+  es: { prev: '← Artículo anterior', next: 'Artículo siguiente →' },
+  en: { prev: '← Previous article', next: 'Next article →' },
+} as const
 
 const VIDEO_LABELS = {
   it: { play: 'Guarda il video', note: 'Il video si apre con il player di TikTok.', open: 'Non parte? Guardalo su TikTok →' },
@@ -205,10 +212,11 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound()
 
-  const allPosts = await getAllPosts(locale)
+  const allPosts = sortPosts(await getAllPosts(locale))
   const currentIndex = allPosts.findIndex((p) => p.slug === slug)
   const prevPost = allPosts[currentIndex + 1]
   const nextPost = allPosts[currentIndex - 1]
+  const lang = isLocale(locale) ? locale : 'it'
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -251,7 +259,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Header */}
           <header className="mb-8">
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex flex-wrap items-center gap-3 mb-5">
               <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent/10 text-accent">
                 {post.category}
               </span>
@@ -277,39 +285,23 @@ export default async function BlogPostPage({ params }: Props) {
             <CoverImage post={post} priority className="mb-10 w-full rounded-2xl" />
           )}
 
-          {/* Content */}
-          <div>
+          {/* Content: long URLs, file names and code wrap instead of widening the page on phones */}
+          <div className="min-w-0 [overflow-wrap:anywhere]">
             {post.sections.map((section, i) => renderSection(section, i, locale, post.category === 'AI e automazioni'))}
           </div>
 
-          {/* Prev / Next */}
+          {/* Prev / Next: full cards with the autoplaying video preview, like the other blog lists */}
           {(prevPost || nextPost) && (
-            <nav className="mt-16 pt-8 border-t border-surface-border grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {prevPost && (
-                <NextLink
-                  href={`/${locale}/blog/${prevPost.slug}`}
-                  className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors"
-                >
-                  <span className="text-xs text-foreground-muted flex items-center gap-1 mb-2">
-                    <ArrowLeft size={12} /> Articolo precedente
-                  </span>
-                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2 block">
-                    {prevPost.title}
-                  </span>
-                </NextLink>
-              )}
-              {nextPost && (
-                <NextLink
-                  href={`/${locale}/blog/${nextPost.slug}`}
-                  className="group p-5 bg-surface-elevated border border-surface-border rounded-xl hover:border-accent/40 transition-colors sm:text-right sm:col-start-2"
-                >
-                  <span className="text-xs text-foreground-muted flex items-center gap-1 mb-2 sm:justify-end">
-                    Articolo successivo <ArrowRight size={12} />
-                  </span>
-                  <span className="text-sm font-medium group-hover:text-accent transition-colors line-clamp-2 block">
-                    {nextPost.title}
-                  </span>
-                </NextLink>
+            <nav className="mt-16 grid grid-cols-2 gap-3 border-t border-surface-border pt-8 sm:gap-4" aria-label="Altri articoli">
+              {[{ p: prevPost, label: NAV_LABELS[lang].prev }, { p: nextPost, label: NAV_LABELS[lang].next }].map(({ p, label }) =>
+                p ? (
+                  <div key={p.slug} className="flex min-w-0 flex-col gap-2">
+                    <span className="text-xs text-foreground-muted">{label}</span>
+                    <BlogCard post={p} href={`/${locale}/blog/${p.slug}`} locale={lang} compact autoPlay />
+                  </div>
+                ) : (
+                  <span key={label} />
+                ),
               )}
             </nav>
           )}

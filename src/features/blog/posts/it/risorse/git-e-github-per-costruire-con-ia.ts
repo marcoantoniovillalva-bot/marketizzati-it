@@ -556,7 +556,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Git_GitHub.pdf](/guide/git-e-github-per-costruire-con-ia.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/git-e-github-per-costruire-con-ia.pdf)"
     }
   ]
 }

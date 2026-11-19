@@ -524,7 +524,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Claude_Duet_Agenti_IA.pdf](/guide/claude-duet-agenti-ia-sempre-attivi.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/claude-duet-agenti-ia-sempre-attivi.pdf)"
     }
   ]
 }

@@ -411,7 +411,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_ANDROID_Artemis.pdf](/guide/android-agente-su-windows.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/android-agente-su-windows.pdf)"
     }
   ]
 }

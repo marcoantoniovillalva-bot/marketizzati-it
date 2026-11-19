@@ -457,7 +457,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Pluralsight_AI_MCP.pdf](/guide/pluralsight-ai-mcp.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/pluralsight-ai-mcp.pdf)"
     }
   ]
 }

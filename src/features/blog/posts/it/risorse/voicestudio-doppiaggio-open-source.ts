@@ -498,7 +498,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_VoiceStudio.pdf](/guide/voicestudio-doppiaggio-open-source.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/voicestudio-doppiaggio-open-source.pdf)"
     }
   ]
 }

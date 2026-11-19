@@ -334,7 +334,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_SCUDO_Checklist_Skill.pdf](/guide/scudo-checklist-installare-skill.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/scudo-checklist-installare-skill.pdf)"
     }
   ]
 }

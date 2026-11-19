@@ -251,7 +251,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_WhatsApp_Business_Agent.pdf](/guide/meta-business-agent-whatsapp.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/meta-business-agent-whatsapp.pdf)"
     }
   ]
 }

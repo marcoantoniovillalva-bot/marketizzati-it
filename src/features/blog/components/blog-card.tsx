@@ -9,11 +9,11 @@ const TEXT: Record<Locale, { free: string; read: string }> = {
 }
 
 /** One article card: cover (with the hover video preview), category, free-guide badge, title, description. */
-export function BlogCard({ post, href, locale, compact = false }: { post: BlogPost; href: string; locale: Locale; compact?: boolean }) {
+export function BlogCard({ post, href, locale, compact = false, autoPlay = false }: { post: BlogPost; href: string; locale: Locale; compact?: boolean; autoPlay?: boolean }) {
   const t = TEXT[locale]
   return (
     <a href={href} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-xl">
-      <CoverImage post={post} />
+      <CoverImage post={post} autoPlay={autoPlay} />
       <div className={`flex flex-1 flex-col ${compact ? 'p-4 sm:p-5' : 'p-3 sm:p-6'}`}>
         <p className="flex flex-wrap items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-brand sm:gap-2 sm:text-xs">
           {post.category}

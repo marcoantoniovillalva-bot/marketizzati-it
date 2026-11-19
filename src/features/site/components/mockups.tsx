@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { PlayOnView } from './play-on-view'
 
 /**
  * Pure-CSS animated mockups (keyframes in globals.css, section "site mockups"), no JS.
@@ -69,7 +70,10 @@ interface PhoneProps {
   messages: ChatMessage[]
 }
 
-/** A phone with a WhatsApp chat that writes itself. */
+/**
+ * A phone with a WhatsApp chat that writes itself. Text colour is set here because the phone sits in the
+ * navy section (white text): without it the bubbles were white-on-green and white-on-white.
+ */
 export function PhoneChat({ title, status, messages }: PhoneProps) {
   return (
     <div className="mk-float mx-auto w-[260px] rounded-[2.6rem] bg-ink p-2.5 shadow-[0_40px_80px_-30px_rgba(22,18,15,0.55)]" style={delay(1)}>
@@ -81,11 +85,12 @@ export function PhoneChat({ title, status, messages }: PhoneProps) {
             <p className="text-[10px] text-white/70">{status}</p>
           </div>
         </div>
-        <div className="flex min-h-[340px] flex-col gap-2 p-3">
+        <PlayOnView className="min-h-[340px] p-3 text-[#111b21]">
+          <div className="flex flex-col gap-2">
           {messages.map((m, i) => (
             <p
               key={m.text}
-              className={`mk-msg max-w-[85%] rounded-xl px-3 py-2 text-[12px] leading-snug shadow-sm ${m.from === 'client' ? 'self-start rounded-tl-sm bg-white' : 'self-end rounded-tr-sm bg-[#d9fdd3]'}`}
+              className={`mk-msg max-w-[85%] rounded-xl px-3 py-2 text-[12px] leading-snug text-[#111b21] shadow-sm ${m.from === 'client' ? 'self-start rounded-tl-sm bg-white' : 'self-end rounded-tr-sm bg-[#d9fdd3]'}`}
               style={delay(0.6 + i * 1.4)}
             >
               {m.text}
@@ -96,7 +101,8 @@ export function PhoneChat({ title, status, messages }: PhoneProps) {
             <i />
             <i />
           </span>
-        </div>
+          </div>
+        </PlayOnView>
       </div>
     </div>
   )

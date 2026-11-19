@@ -312,7 +312,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Open_WebUI.pdf](/guide/open-webui-guida.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/open-webui-guida.pdf)"
     }
   ]
 }

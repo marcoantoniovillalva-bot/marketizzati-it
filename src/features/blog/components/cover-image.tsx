@@ -10,9 +10,10 @@ type CoverPost = Pick<BlogPost, 'image' | 'imageTall' | 'imageAlt' | 'videoPrevi
  * Article cover, art-directed: 4:5 on phones when the post has a tall version, 16:10 from 640px up.
  * Posts with a social video get a 5-second muted preview like YouTube: it plays while the mouse is over
  * the card (desktop) or while the card is in the middle of the screen (touch). The clip is downloaded
- * only then (preload="none"), and never with reduced motion or data saver on.
+ * only then (preload="none"), and never with reduced motion or data saver on. `autoPlay`: plays whenever
+ * the cover is on screen, also on desktop (cards at the end of an article).
  */
-export function CoverImage({ post, priority = false, className = '' }: { post: CoverPost; priority?: boolean; className?: string }) {
+export function CoverImage({ post, priority = false, autoPlay = false, className = '' }: { post: CoverPost; priority?: boolean; autoPlay?: boolean; className?: string }) {
   const box = useRef<HTMLDivElement>(null)
   const video = useRef<HTMLVideoElement>(null)
   const [playing, setPlaying] = useState(false)
@@ -26,15 +27,15 @@ export function CoverImage({ post, priority = false, className = '' }: { post: C
     const card = (el.closest('a, article') as HTMLElement | null) ?? el
     const play = () => { clip.play().then(() => setPlaying(true)).catch(() => {}) }
     const stop = () => { clip.pause(); setPlaying(false) }
-    if (window.matchMedia('(hover: hover)').matches) {
+    if (!autoPlay && window.matchMedia('(hover: hover)').matches) {
       card.addEventListener('mouseenter', play)
       card.addEventListener('mouseleave', stop)
       return () => { card.removeEventListener('mouseenter', play); card.removeEventListener('mouseleave', stop) }
     }
-    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? play() : stop()), { rootMargin: '-30% 0px -30% 0px' })
+    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? play() : stop()), { rootMargin: autoPlay ? '0px' : '-30% 0px -30% 0px', threshold: autoPlay ? 0.5 : 0 })
     io.observe(el)
     return () => io.disconnect()
-  }, [])
+  }, [autoPlay])
 
   return (
     <div ref={box} className={`relative overflow-hidden bg-brand-cream ${post.imageTall ? 'aspect-[4/5] sm:aspect-[16/10]' : 'aspect-[16/10]'} ${className}`}>

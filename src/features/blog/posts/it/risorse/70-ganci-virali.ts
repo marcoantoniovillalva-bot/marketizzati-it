@@ -226,7 +226,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_70_Ganci_Virali.pdf](/guide/70-ganci-virali.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/70-ganci-virali.pdf)"
     }
   ]
 }

@@ -616,7 +616,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Claude_Instagram.pdf](/guide/claude-per-instagram.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/claude-per-instagram.pdf)"
     }
   ]
 }

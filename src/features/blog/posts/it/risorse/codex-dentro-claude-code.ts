@@ -581,7 +581,7 @@ const post: BlogPost = {
     },
     {
       "type": "callout",
-      "content": "**Scarica la guida in PDF:** [Guida_Marketizzati_Codex_Claude_Code.pdf](/guide/codex-dentro-claude-code.pdf)"
+      "content": "**Guida gratuita in PDF:** [Scarica il PDF](/guide/codex-dentro-claude-code.pdf)"
     }
   ]
 }
