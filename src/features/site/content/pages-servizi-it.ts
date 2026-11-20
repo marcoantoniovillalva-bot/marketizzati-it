@@ -44,7 +44,7 @@ export const googleAdsIt: ServiceCopy = {
 
 export const chatgptAdsIt: ServiceCopy = {
   meta: {
-    title: 'ChatGPT Ads in Italia: come funzionano e quanto costano',
+    title: 'Gestione ChatGPT Ads in Italia: prezzi e come funziona',
     description: `ChatGPT Ads in Italia: cosa sono, come funzionano gli annunci in ChatGPT, quanto costano e per chi hanno senso. Gestione con Google Ads da ${ADS.monthly} €/mese.`,
   },
   label: '01 · ChatGPT Ads',

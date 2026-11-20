@@ -1,4 +1,13 @@
+import type { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+
+/** Own title per legal page (they all shared the default site title). */
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'legal.cookie' })
+  return { title: { absolute: `${t('title')} | Marketizzati` } }
+}
 
 export default function CookiePage() {
   const t = useTranslations('legal.cookie')
