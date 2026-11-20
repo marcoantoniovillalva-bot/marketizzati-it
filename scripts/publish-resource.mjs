@@ -4,12 +4,14 @@
 // 1. imports lead-magnets/<folder> (content.json, slides, PDF -> /guide/<slug>.pdf) as a free-guide article
 // 2. covers: renders/covers/video-N-cover-*.jpg -> AI scene (Replicate) -> wide + tall cover with the title
 // 3. 5-second preview from renders/talking-head/<folder>-social.mp4
-// 4. typecheck, commit, push to main, waits for the Vercel deploy and for the URL to answer 200, prints the URL
+// 4. typecheck, commit, push to main, waits for the Vercel deploy and for the URL to answer 200,
+//    tells Google (sitemap) and Bing/Copilot/ChatGPT search (IndexNow), prints the URL
 // Re-running it for the same folder updates the article (keeps the TikTok link if not passed again).
 import { execFileSync } from 'node:child_process'
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { buildPost, postFile, postsDir, readSlugs, renderer, site, slugify } from './lib/lead-magnet.mjs'
+import { notifySearchEngines } from './seo/notify.mjs'
 
 const CATEGORIES = ['Siti web', 'Scheda Google e SEO locale', 'Pubblicità Google e ChatGPT', 'AI e automazioni', 'Contenuti e social']
 const BASE = 'https://www.marketizzati.it'
@@ -128,6 +130,8 @@ for (let i = 0; i < 80; i++) {
   if (state !== 'success') continue
   const res = await fetch(url, { redirect: 'manual' }).catch(() => null)
   if (res?.status === 200) {
+    step('telling Google and Bing')
+    await notifySearchEngines([`/it/blog/${slug}`, '/it/blog'])
     console.log(`\n✔ Live: ${url}`)
     process.exit(0)
   }
