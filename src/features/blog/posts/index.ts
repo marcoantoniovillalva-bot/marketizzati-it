@@ -2,6 +2,7 @@ import type { BlogPost } from '../types'
 import { rowToPost } from '../types'
 import { risorsePosts } from './it/risorse'
 import { guidePosts } from './it/guide'
+import { isRetiredPost } from '../retired-posts'
 
 const staticPosts: Record<string, BlogPost[]> = {
   it: [
@@ -27,7 +28,7 @@ export async function getAllPosts(locale: string): Promise<BlogPost[]> {
     const { getPublicPosts } = await import('../actions/blog')
     const rows = (await getPublicPosts(locale)).map(rowToPost)
     const slugs = new Set(rows.map((p) => p.slug))
-    return [...rows, ...fallback.filter((p) => !slugs.has(p.slug))]
+    return [...rows, ...fallback.filter((p) => !slugs.has(p.slug))].filter((p) => !isRetiredPost(p.slug))
   } catch {
     return fallback // DB not configured (local dev)
   }
