@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 
-const origin = 'http://localhost:3000'
+// node scripts/qa/check-seo.mjs [origin]   default http://localhost:3000 (npm run start); pass https://www.marketizzati.it to check the live site
+const origin = process.argv[2] ?? 'http://localhost:3000'
 const errors = []
 async function get(path) {
   const response = await fetch(`${origin}${path}`, { redirect: 'manual' })
