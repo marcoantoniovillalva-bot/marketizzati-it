@@ -27,6 +27,7 @@ export function CookieBanner() {
         analytics_storage: 'granted',
       })
     }
+    window.dispatchEvent(new Event('cookie-consent-granted'))
     setIsVisible(false)
   }
 
