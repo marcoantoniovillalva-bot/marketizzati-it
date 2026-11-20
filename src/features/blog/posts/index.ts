@@ -3,6 +3,7 @@ import { rowToPost } from '../types'
 import { risorsePosts } from './it/risorse'
 import { guidePosts } from './it/guide'
 import { isRetiredPost } from '../retired-posts'
+import { getPublishedRow, getPublishedRows } from '../lib/public-posts'
 
 const staticPosts: Record<string, BlogPost[]> = {
   it: [
@@ -25,8 +26,7 @@ export function getStaticPostBySlug(locale: string, slug: string): BlogPost | un
 export async function getAllPosts(locale: string): Promise<BlogPost[]> {
   const fallback = getStaticPosts(locale)
   try {
-    const { getPublicPosts } = await import('../actions/blog')
-    const rows = (await getPublicPosts(locale)).map(rowToPost)
+    const rows = (await getPublishedRows(locale)).map(rowToPost)
     const slugs = new Set(rows.map((p) => p.slug))
     return [...rows, ...fallback.filter((p) => !slugs.has(p.slug))].filter((p) => !isRetiredPost(p.slug))
   } catch {
@@ -36,8 +36,7 @@ export async function getAllPosts(locale: string): Promise<BlogPost[]> {
 
 export async function getPostBySlug(locale: string, slug: string): Promise<BlogPost | undefined> {
   try {
-    const { getPublicPostBySlug } = await import('../actions/blog')
-    const row = await getPublicPostBySlug(locale, slug)
+    const row = await getPublishedRow(locale, slug)
     if (row) return rowToPost(row)
   } catch {
     // fallback

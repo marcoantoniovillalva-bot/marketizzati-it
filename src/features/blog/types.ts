@@ -30,6 +30,8 @@ export interface BlogPost {
   videoPreview?: string
   /** TikTok video id or URL of the full video, shown at the top of the article. */
   tiktok?: string
+  /** Full video served by the site (public/videos/full/<slug>.mp4), played instead of the TikTok embed. */
+  video?: string
   sections: BlogSection[]
 }
 
@@ -50,6 +52,10 @@ export interface BlogPostRow {
   locale: string
   created_at: string
   updated_at: string
+  image_tall?: string | null
+  video_preview?: string | null
+  tiktok?: string | null
+  free_guide?: boolean | null
 }
 
 export function rowToPost(row: BlogPostRow): BlogPost {
@@ -57,12 +63,16 @@ export function rowToPost(row: BlogPostRow): BlogPost {
     slug: row.slug,
     title: row.title,
     description: row.description,
-    date: row.date,
+    date: String(row.date).slice(0, 10),
     readTime: row.read_time,
     category: row.category,
     keywords: row.keywords ?? [],
     image: toPublicMediaUrl(row.image),
     imageAlt: row.image_alt ?? '',
+    ...(row.image_tall ? { imageTall: toPublicMediaUrl(row.image_tall) } : {}),
+    ...(row.video_preview ? { videoPreview: row.video_preview } : {}),
+    ...(row.tiktok ? { tiktok: row.tiktok } : {}),
+    ...(row.free_guide ? { freeGuide: true } : {}),
     sections: ((row.sections as BlogSection[]) ?? []).map((section) =>
       section.type === 'image' ? { ...section, url: toPublicMediaUrl(section.url) } : section
     ),

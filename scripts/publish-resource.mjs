@@ -1,17 +1,20 @@
 // One command from a finished lead magnet to a live article:
 //   node scripts/publish-resource.mjs --folder video-23-ahrefs --slug seo-gratis-strumenti-ia \
-//     --title "SEO GRATIS|CON L'IA!" --category "Scheda Google e SEO locale" [--tiktok <url>] [--no-push] [--skip-covers]
+//     --title "SEO GRATIS|CON L'IA!" --category "Scheda Google e SEO locale" [--tiktok <url>] [--skip-covers] [--draft] [--git [--no-push]]
 // 1. imports lead-magnets/<folder> (content.json, slides, PDF -> /guide/<slug>.pdf) as a free-guide article
 // 2. covers: renders/covers/video-N-cover-*.jpg -> AI scene (Replicate) -> wide + tall cover with the title
 // 3. 5-second preview from renders/talking-head/<folder>-social.mp4
-// 4. typecheck, commit, push to main, waits for the Vercel deploy and for the URL to answer 200,
-//    tells Google (sitemap) and Bing/Copilot/ChatGPT search (IndexNow), prints the URL
+// 4. DEFAULT (no git, no deploy): uploads slides, PDF, covers and preview to Supabase (bucket blog-media), sends the
+//    article to /api/blog/publish (live in seconds, also in sitemap and llms.txt), checks the URL answers 200,
+//    tells Google (sitemap) and Bing/Copilot/ChatGPT search (IndexNow), prints the URL. --draft saves it unpublished.
+//    --git: the old way (article as a .ts file, commit, push, Vercel deploy).
 // Re-running it for the same folder updates the article (keeps the TikTok link if not passed again).
 import { execFileSync } from 'node:child_process'
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { buildPost, postFile, postsDir, readSlugs, renderer, site, slugify } from './lib/lead-magnet.mjs'
 import { notifySearchEngines } from './seo/notify.mjs'
+import { env, mediaUrl, publishPost, rewriteUrls, uploadDir, uploadFile } from './lib/blog-publish.mjs'
 
 const CATEGORIES = ['Siti web', 'Scheda Google e SEO locale', 'Pubblicità Google e ChatGPT', 'AI e automazioni', 'Contenuti e social']
 const BASE = 'https://www.marketizzati.it'
@@ -26,6 +29,15 @@ if (!CATEGORIES.includes(category)) throw new Error(`--category must be one of: 
 const run = (cmd, args, opts = {}) => execFileSync(cmd, args, { cwd: site, stdio: 'inherit', shell: process.platform === 'win32' && cmd === 'npx', ...opts })
 const out = (cmd, args) => execFileSync(cmd, args, { cwd: site, encoding: 'utf8' }).trim()
 const step = (text) => console.log(`\n▶ ${text}`)
+const useGit = flag('git')
+
+/** The article already online (database), to keep its date and TikTok link when re-publishing. */
+async function existingRow(slug) {
+  const res = await fetch(`${env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/blog_posts?select=date,tiktok&locale=eq.it&slug=eq.${slug}`, {
+    headers: { apikey: env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` },
+  }).catch(() => null)
+  return res?.ok ? (await res.json())[0] ?? null : null
+}
 
 // --- 1. article ---------------------------------------------------------------------------------------
 const slugs = await readSlugs()
@@ -38,12 +50,13 @@ if (slugs[folder] !== slug) {
 step(`article ${slug}`)
 const file = path.join(postsDir, `${slug}.ts`)
 const previous = existsSync(file) ? readFileSync(file, 'utf8') : ''
-const tiktok = opt('tiktok') ?? /"tiktok": "([^"]+)"/.exec(previous)?.[1]
+const online = useGit ? null : await existingRow(slug)
+const tiktok = opt('tiktok') ?? online?.tiktok ?? /"tiktok": "([^"]+)"/.exec(previous)?.[1]
 const { post, coverSlide } = await buildPost(folder, slug)
 const coverDir = 'public/images/blog/covers'
 const article = {
   ...post,
-  date: /"date": "([^"]+)"/.exec(previous)?.[1] ?? new Date().toLocaleDateString('sv-SE'),
+  date: online?.date?.slice(0, 10) ?? /"date": "([^"]+)"/.exec(previous)?.[1] ?? new Date().toLocaleDateString('sv-SE'),
   category,
   freeGuide: true,
   image: `/images/blog/covers/${slug}-wide.webp`,
@@ -54,13 +67,13 @@ const article = {
   // the first slide (the guide's cover) opens the article, the YouTube-style cover is for the cards
   sections: [{ type: 'image', url: coverSlide, alt: `${post.title} — guida gratuita` }, ...post.sections],
 }
-writeFileSync(file, postFile(article))
+if (useGit) writeFileSync(file, postFile(article))
 
-// index: newest first, keeps every existing import
+// index: newest first, keeps every existing import (git mode only)
 const indexFile = path.join(postsDir, 'index.ts')
 const listed = [...readFileSync(indexFile, 'utf8').matchAll(/import \w+ from '\.\/([^']+)'/g)].map((m) => m[1])
 const order = [slug, ...listed.filter((s) => s !== slug)]
-writeFileSync(indexFile, `import type { BlogPost } from '../../../types'\n${order.map((s, i) => `import post${i} from './${s}'`).join('\n')}\n\nexport const risorsePosts: BlogPost[] = [${order.map((_, i) => `post${i}`).join(', ')}]\n`)
+if (useGit) writeFileSync(indexFile, `import type { BlogPost } from '../../../types'\n${order.map((s, i) => `import post${i} from './${s}'`).join('\n')}\n\nexport const risorsePosts: BlogPost[] = [${order.map((_, i) => `post${i}`).join(', ')}]\n`)
 
 // --- 2. covers ----------------------------------------------------------------------------------------
 const n = /^video-(\d+)/.exec(folder)?.[1]
@@ -99,7 +112,31 @@ execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '1.5', '-t', '5', '-i
   '-c:v', 'libx264', '-profile:v', 'main', '-pix_fmt', 'yuv420p', '-crf', '26', '-preset', 'slow', '-movflags', '+faststart', preview])
 console.log(`  preview ${Math.round(statSync(preview).size / 1024)} KB`)
 
-// --- 4. check, commit, push, deploy -------------------------------------------------------------------
+// --- 4a. default: publish through the site, no git -----------------------------------------------------
+if (!useGit) {
+  step('uploading media to Supabase')
+  const map = {
+    ...(await uploadDir(path.join(site, `public/images/blog/risorse/${slug}`), `/images/blog/risorse/${slug}`, `${slug}/slides`)),
+    [`/guide/${slug}.pdf`]: await uploadFile(path.join(site, `public/guide/${slug}.pdf`), `${slug}/${slug}.pdf`),
+    [`/videos/preview/${slug}.mp4`]: await uploadFile(preview, `${slug}/preview.mp4`),
+  }
+  for (const layout of ['wide', 'tall']) {
+    const local = path.join(site, `${coverDir}/${slug}-${layout}.webp`)
+    if (existsSync(local)) map[`/images/blog/covers/${slug}-${layout}.webp`] = await uploadFile(local, `${slug}/cover-${layout}.webp`)
+  }
+  console.log(`  ${Object.keys(map).length} files in ${mediaUrl(slug)}/`)
+  step(flag('draft') ? 'saving the draft' : 'publishing')
+  const result = await publishPost(BASE, { locale: 'it', ...rewriteUrls(article, map), published: !flag('draft') })
+  if (flag('draft')) { console.log(`\nSaved as draft (not visible): ${result.url}`); process.exit(0) }
+  const live = await fetch(result.url).catch(() => null)
+  if (live?.status !== 200) throw new Error(`Published but ${result.url} answers ${live?.status}`)
+  step('telling Google and Bing')
+  await notifySearchEngines([`/it/blog/${slug}`, '/it/blog'])
+  console.log(`\n✔ Live: ${result.url}`)
+  process.exit(0)
+}
+
+// --- 4b. --git: check, commit, push, deploy ------------------------------------------------------------
 step('typecheck')
 run('npx', ['tsc', '--noEmit', '-p', '.'])
 const url = `${BASE}/it/blog/${slug}`
