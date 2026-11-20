@@ -10,23 +10,30 @@ export function tiktokId(value: string): string | null {
 }
 
 interface Props {
-  video: string
+  /** TikTok id or URL (optional when the article has a YouTube Short). */
+  video?: string
+  /** YouTube id of the same Short: when present it is played instead of TikTok (more reliable, works everywhere). */
+  youtube?: string
   poster: string
   title: string
-  labels: { play: string; note: string; open: string }
+  labels: { play: string; note: string; open: string; also: string }
 }
 
 /**
- * The full social video at the top of the article, played with TikTok's official embed player.
+ * The full social video at the top of the article: the YouTube Short when there is one (youtube-nocookie player),
+ * otherwise TikTok's official embed player.
  * Click-to-load: until the visitor presses play we show the cover, so TikTok's scripts and cookies
  * are loaded only for people who actually want to watch.
  */
-export function TikTokVideo({ video, poster, title, labels }: Props) {
+export function TikTokVideo({ video, youtube, poster, title, labels }: Props) {
   const [on, setOn] = useState(false)
-  const id = tiktokId(video)
-  if (!id) return null
-  // no extra parameters: `autoplay=1` makes the player fail for visitors without TikTok cookies
-  const src = `https://www.tiktok.com/player/v1/${id}`
+  const id = video ? tiktokId(video) : null
+  const yt = youtube && /^[A-Za-z0-9_-]{11}$/.test(youtube) ? youtube : null
+  if (!id && !yt) return null
+  // TikTok: no extra parameters, `autoplay=1` makes its player fail for visitors without TikTok cookies
+  const src = yt
+    ? `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&playsinline=1&rel=0`
+    : `https://www.tiktok.com/player/v1/${id}`
   return (
     <figure className="mx-auto mb-10 w-full max-w-[340px] lg:mb-0 lg:max-w-none">
       <div className={`relative overflow-hidden rounded-3xl bg-ink shadow-2xl ring-1 ring-ink/10 transition-[aspect-ratio] ${on ? 'aspect-[9/16]' : 'aspect-[4/5]'}`}>
@@ -44,10 +51,12 @@ export function TikTokVideo({ video, poster, title, labels }: Props) {
         )}
       </div>
       <figcaption className="mt-3 text-center text-xs text-ink-muted">
-        {labels.note}{' '}
-        <a href={`https://www.tiktok.com/@marco.villalva3/video/${id}`} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-ink underline">
-          {labels.open}
-        </a>
+        {!yt && <>{labels.note}{' '}</>}
+        {id && (
+          <a href={`https://www.tiktok.com/@marco.villalva3/video/${id}`} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-ink underline">
+            {yt ? labels.also : labels.open}
+          </a>
+        )}
       </figcaption>
     </figure>
   )

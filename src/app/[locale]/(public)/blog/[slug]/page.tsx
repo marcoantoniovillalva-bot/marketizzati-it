@@ -9,6 +9,7 @@ import { toAbsoluteSiteUrl } from '@/lib/media-url'
 import { Clock, ArrowLeft, ArrowRight } from 'lucide-react'
 import { WA_LINK } from '@/features/site/lib/links'
 import { isLocale, pageHref } from '@/features/site/lib/routes'
+import { categoryLabel } from '@/features/blog/categories'
 
 const CTA = {
   it: { prices: 'Vedi i prezzi', plans: 'Vedi i piani automazioni', wa: 'Scrivimi su WhatsApp' },
@@ -38,12 +39,18 @@ export async function generateMetadata({ params }: Props) {
 
   const baseUrl = 'https://www.marketizzati.it'
   const url = `${baseUrl}/${locale}/blog/${post.slug}`
+  // hreflang: the same article in the other languages it exists in (Italian is the x-default)
+  const found = await Promise.all((['it', 'es', 'en'] as const).map(async (l) => ((await getPostBySlug(l, post.slug)) ? l : null)))
+  const langs = found.filter((l): l is 'it' | 'es' | 'en' => l !== null)
+  const languages = langs.length > 1
+    ? { ...Object.fromEntries(langs.map((l) => [l, `${baseUrl}/${l}/blog/${post.slug}`])), ...(langs.includes('it') ? { 'x-default': `${baseUrl}/it/blog/${post.slug}` } : {}) }
+    : undefined
 
   return {
     title: { absolute: seoTitle(post.title) },
     description: post.description,
     keywords: post.keywords.join(', '),
-    alternates: { canonical: url },
+    alternates: { canonical: url, ...(languages ? { languages } : {}) },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -83,9 +90,9 @@ const NAV_LABELS = {
 } as const
 
 const VIDEO_LABELS = {
-  it: { play: 'Guarda il video', note: 'Il video si apre con il player di TikTok.', open: 'Non parte? Guardalo su TikTok →' },
-  es: { play: 'Ver el vídeo', note: 'El vídeo se abre con el reproductor de TikTok.', open: '¿No arranca? Míralo en TikTok →' },
-  en: { play: 'Watch the video', note: 'The video opens in the TikTok player.', open: 'Not playing? Watch it on TikTok →' },
+  it: { play: 'Guarda il video', note: 'Il video si apre con il player di TikTok.', open: 'Non parte? Guardalo su TikTok →', also: 'Guardalo anche su TikTok →' },
+  es: { play: 'Ver el vídeo', note: 'El vídeo se abre con el reproductor de TikTok.', open: '¿No arranca? Míralo en TikTok →', also: 'Míralo también en TikTok →' },
+  en: { play: 'Watch the video', note: 'The video opens in the TikTok player.', open: 'Not playing? Watch it on TikTok →', also: 'Watch it on TikTok too →' },
 }
 
 /** `automation`: AI and automation articles point their call to action at the automation plans. */
@@ -247,6 +254,19 @@ export default async function BlogPostPage({ params }: Props) {
       logo: { '@type': 'ImageObject', url: 'https://www.marketizzati.it/favicon.png' },
     },
     keywords: post.keywords.join(', '),
+    inLanguage: lang,
+    // the article's YouTube Short: lets Google show the video in search and in the Videos tab
+    ...(post.youtube ? {
+      video: {
+        '@type': 'VideoObject',
+        name: post.title,
+        description: post.description,
+        thumbnailUrl: `https://i.ytimg.com/vi/${post.youtube}/hqdefault.jpg`,
+        uploadDate: post.date,
+        embedUrl: `https://www.youtube.com/embed/${post.youtube}`,
+        contentUrl: `https://www.youtube.com/shorts/${post.youtube}`,
+      },
+    } : {}),
   }
 
   return (
@@ -257,7 +277,7 @@ export default async function BlogPostPage({ params }: Props) {
       />
 
       <article className="bg-white px-4 pb-32 pt-32 sm:px-6" data-tinta="#FFFFFF">
-        <div className={post.tiktok ? 'mx-auto max-w-6xl lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-14' : 'mx-auto max-w-2xl'}>
+        <div className={post.tiktok || post.youtube ? 'mx-auto max-w-6xl lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-14' : 'mx-auto max-w-2xl'}>
         <div className="mx-auto w-full max-w-2xl min-w-0">
           {/* Back */}
           <NextLink
@@ -271,7 +291,7 @@ export default async function BlogPostPage({ params }: Props) {
           <header className="mb-8">
             <div className="flex flex-wrap items-center gap-3 mb-5">
               <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent/10 text-accent">
-                {post.category}
+                {categoryLabel(post.category, isLocale(locale) ? locale : 'it')}
               </span>
               <span className="flex items-center gap-1 text-xs text-foreground-muted">
                 <Clock size={12} /> {post.readTime} min di lettura
@@ -287,9 +307,9 @@ export default async function BlogPostPage({ params }: Props) {
           </header>
 
           {/* Hero image */}
-          {post.tiktok ? (
+          {post.tiktok || post.youtube ? (
             <div className="lg:hidden">
-              <TikTokVideo video={post.tiktok} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+              <TikTokVideo video={post.tiktok} youtube={post.youtube} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
             </div>
           ) : (
             <CoverImage post={post} priority className="mb-10 w-full rounded-2xl" />
@@ -316,9 +336,9 @@ export default async function BlogPostPage({ params }: Props) {
             </nav>
           )}
         </div>
-        {post.tiktok && (
+        {(post.tiktok || post.youtube) && (
           <aside className="sticky top-28 hidden lg:block">
-            <TikTokVideo video={post.tiktok} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+            <TikTokVideo video={post.tiktok} youtube={post.youtube} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
           </aside>
         )}
         </div>

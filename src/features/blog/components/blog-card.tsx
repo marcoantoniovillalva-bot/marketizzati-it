@@ -1,6 +1,7 @@
 import type { Locale } from '@/features/site/lib/routes'
 import type { BlogPost } from '../types'
 import { CoverImage } from './cover-image'
+import { categoryLabel } from '../categories'
 
 const TEXT: Record<Locale, { free: string; read: string }> = {
   it: { free: 'Guida gratuita in PDF', read: 'min di lettura' },
@@ -16,7 +17,7 @@ export function BlogCard({ post, href, locale, compact = false, autoPlay = false
       <CoverImage post={post} autoPlay={autoPlay} />
       <div className={`flex flex-1 flex-col ${compact ? 'p-4 sm:p-5' : 'p-3 sm:p-6'}`}>
         <p className="flex flex-wrap items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-brand-ink sm:gap-2 sm:text-xs">
-          {post.category}
+          {categoryLabel(post.category, locale)}
           {post.freeGuide && <span className="rounded-full bg-[#e9f8ee] px-2 py-0.5 text-[10px] tracking-normal text-[#1c8a43]">{t.free}</span>}
         </p>
         <h3 className={`mt-1.5 font-bold leading-snug sm:mt-2 ${compact ? 'line-clamp-2 text-base' : 'line-clamp-3 text-sm sm:line-clamp-none sm:text-lg'}`}>{post.title}</h3>

@@ -117,7 +117,11 @@ function fullPages(): string {
 export async function llmsContent(full: boolean): Promise<string> {
   const posts = await getAllPosts('it')
   const blog = posts.map((p) => link(p.title, `${BASE_URL}/it/blog/${p.slug}`, p.description)).join('\n')
-  const languages = (['es', 'en'] as const).map((l) => `## ${l.toUpperCase()}\n\n${getHomeCopy(l).meta.description}\n${BASE_URL}/${l}`).join('\n\n')
+  const translated = { es: await getAllPosts('es'), en: await getAllPosts('en') }
+  const languages = (['es', 'en'] as const).map((l) => {
+    const list = translated[l].map((p) => link(p.title, `${BASE_URL}/${l}/blog/${p.slug}`, p.description)).join('\n')
+    return `## ${l.toUpperCase()}\n\n${getHomeCopy(l).meta.description}\n${BASE_URL}/${l}${list ? `\n\n### Blog (${l})\n\n${list}` : ''}`
+  }).join('\n\n')
   const home = getHomeCopy('it')
   const faqs = [...home.faq.items, ...prezziIt.faq.items].map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n')
   const more = full ? `\n## Domande frequenti\n\n${faqs}\n\n${fullPages()}\n` : `\nTesto completo delle pagine e domande frequenti: ${BASE_URL}/llms-full.txt\n`

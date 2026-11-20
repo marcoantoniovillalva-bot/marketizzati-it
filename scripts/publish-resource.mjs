@@ -1,6 +1,6 @@
 // One command from a finished lead magnet to a live article:
 //   node scripts/publish-resource.mjs --folder video-23-ahrefs --slug seo-gratis-strumenti-ia \
-//     --title "SEO GRATIS|CON L'IA!" --category "Scheda Google e SEO locale" [--tiktok <url>] [--skip-covers] [--draft] [--git [--no-push]]
+//     --title "SEO GRATIS|CON L'IA!" --category "Scheda Google e SEO locale" [--tiktok <url>] [--skip-covers] [--draft] [--no-translate] [--git [--no-push]]
 // 1. imports lead-magnets/<folder> (content.json, slides, PDF -> /guide/<slug>.pdf) as a free-guide article
 // 2. covers: renders/covers/video-N-cover-*.jpg -> AI scene (Replicate) -> wide + tall cover with the title
 // 3. 5-second preview from renders/talking-head/<folder>-social.mp4
@@ -15,6 +15,7 @@ import path from 'node:path'
 import { buildPost, postFile, postsDir, readSlugs, renderer, site, slugify } from './lib/lead-magnet.mjs'
 import { notifySearchEngines } from './seo/notify.mjs'
 import { env, mediaUrl, publishPost, rewriteUrls, uploadDir, uploadFile } from './lib/blog-publish.mjs'
+import { translatePost } from './lib/translate.mjs'
 
 const CATEGORIES = ['Siti web', 'Scheda Google e SEO locale', 'Pubblicità Google e ChatGPT', 'AI e automazioni', 'Contenuti e social']
 const BASE = 'https://www.marketizzati.it'
@@ -126,12 +127,25 @@ if (!useGit) {
   }
   console.log(`  ${Object.keys(map).length} files in ${mediaUrl(slug)}/`)
   step(flag('draft') ? 'saving the draft' : 'publishing')
-  const result = await publishPost(BASE, { locale: 'it', ...rewriteUrls(article, map), published: !flag('draft') })
+  const italian = rewriteUrls(article, map)
+  const result = await publishPost(BASE, { locale: 'it', ...italian, published: !flag('draft') })
   if (flag('draft')) { console.log(`\nSaved as draft (not visible): ${result.url}`); process.exit(0) }
   const live = await fetch(result.url).catch(() => null)
   if (live?.status !== 200) throw new Error(`Published but ${result.url} answers ${live?.status}`)
+  // Spanish and English versions (same slug and media), unless --no-translate
+  const urls = [`/it/blog/${slug}`, '/it/blog']
+  if (!flag('no-translate')) {
+    for (const lang of ['es', 'en']) {
+      step(`translating to ${lang}`)
+      try {
+        const r = await publishPost(BASE, { locale: lang, ...(await translatePost(italian, lang)), published: true })
+        urls.push(`/${lang}/blog/${slug}`, `/${lang}/blog`)
+        console.log(`  ${r.url}`)
+      } catch (e) { console.log(`  ! ${lang} not published: ${e.message} (re-run later, the Italian article is live)`) }
+    }
+  }
   step('telling Google and Bing')
-  await notifySearchEngines([`/it/blog/${slug}`, '/it/blog'])
+  await notifySearchEngines(urls)
   console.log(`\n✔ Live: ${result.url}`)
   process.exit(0)
 }

@@ -21,14 +21,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   )
 
-  // Blog: Italian articles (Spanish and English are added as they get translated)
-  const posts = await getAllPosts('it')
-  const blog = posts.map((post) => ({
-    url: `${BASE_URL}/it/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
+  // Blog: every article in every language it exists in, linked to its translations (hreflang)
+  const byLocale = Object.fromEntries(await Promise.all(LOCALES.map(async (l) => [l, await getAllPosts(l)] as const)))
+  const has = (l: string, slug: string): boolean => byLocale[l].some((p) => p.slug === slug)
+  const blog = LOCALES.flatMap((locale) =>
+    byLocale[locale].map((post) => {
+      const langs = LOCALES.filter((l) => has(l, post.slug))
+      return {
+        url: `${BASE_URL}/${locale}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+        ...(langs.length > 1 ? { alternates: { languages: Object.fromEntries(langs.map((l) => [l, `${BASE_URL}/${l}/blog/${post.slug}`])) } } : {}),
+      }
+    }),
+  )
 
   return [...pages, ...blog]
 }

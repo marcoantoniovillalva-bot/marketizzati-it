@@ -30,6 +30,17 @@ export const getPublishedRows = unstable_cache(
   { tags: [BLOG_TAG], revalidate: 3600 },
 )
 
+/** slug -> YouTube video id (the Short of that article), same in every language. */
+export const getBlogVideos = unstable_cache(
+  async (): Promise<Record<string, string>> => {
+    const { data, error } = await anonClient().from('blog_videos').select('slug, youtube_id')
+    if (error) throw new Error(error.message)
+    return Object.fromEntries((data ?? []).map((row: { slug: string; youtube_id: string }) => [row.slug, row.youtube_id]))
+  },
+  ['blog-videos'],
+  { tags: [BLOG_TAG], revalidate: 3600 },
+)
+
 export async function getPublishedRow(locale: string, slug: string): Promise<BlogPostRow | null> {
   return (await getPublishedRows(locale)).find((row) => row.slug === slug) ?? null
 }

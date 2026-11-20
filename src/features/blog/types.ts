@@ -28,6 +28,8 @@ export interface BlogPost {
   freeGuide?: boolean
   /** 5-second muted clip played on the blog card on hover (public/videos/preview). */
   videoPreview?: string
+  /** YouTube id of the article's Short (from blog_videos): shown at the top instead of TikTok. */
+  youtube?: string
   /** TikTok video id or URL of the full video, shown at the top of the article. */
   tiktok?: string
   /** Full video served by the site (public/videos/full/<slug>.mp4), played instead of the TikTok embed. */

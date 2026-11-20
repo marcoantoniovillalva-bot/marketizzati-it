@@ -2,16 +2,25 @@ import type { BlogPost } from '../types'
 import { rowToPost } from '../types'
 import { risorsePosts } from './it/risorse'
 import { guidePosts } from './it/guide'
+import { esPosts } from './es'
+import { enPosts } from './en'
 import { isRetiredPost } from '../retired-posts'
-import { getPublishedRow, getPublishedRows } from '../lib/public-posts'
+import { getBlogVideos, getPublishedRow, getPublishedRows } from '../lib/public-posts'
+
+/** Adds the YouTube Short of each article (blog_videos), if it has one. */
+async function withVideos(posts: BlogPost[]): Promise<BlogPost[]> {
+  const videos = await getBlogVideos().catch(() => ({} as Record<string, string>))
+  return posts.map((p) => (videos[p.slug] ? { ...p, youtube: videos[p.slug] } : p))
+}
 
 const staticPosts: Record<string, BlogPost[]> = {
   it: [
     ...risorsePosts,
     ...guidePosts,
   ],
-  en: [],
-  es: [],
+  // translations (same slug and media as the Italian article)
+  en: enPosts,
+  es: esPosts,
 }
 
 export function getStaticPosts(locale: string): BlogPost[] {
@@ -28,7 +37,7 @@ export async function getAllPosts(locale: string): Promise<BlogPost[]> {
   try {
     const rows = (await getPublishedRows(locale)).map(rowToPost)
     const slugs = new Set(rows.map((p) => p.slug))
-    return [...rows, ...fallback.filter((p) => !slugs.has(p.slug))].filter((p) => !isRetiredPost(p.slug))
+    return withVideos([...rows, ...fallback.filter((p) => !slugs.has(p.slug))].filter((p) => !isRetiredPost(p.slug)))
   } catch {
     return fallback // DB not configured (local dev)
   }
@@ -37,14 +46,15 @@ export async function getAllPosts(locale: string): Promise<BlogPost[]> {
 export async function getPostBySlug(locale: string, slug: string): Promise<BlogPost | undefined> {
   try {
     const row = await getPublishedRow(locale, slug)
-    if (row) return rowToPost(row)
+    if (row) return (await withVideos([rowToPost(row)]))[0]
   } catch {
     // fallback
   }
-  return getStaticPostBySlug(locale, slug)
+  const post = getStaticPostBySlug(locale, slug)
+  return post ? (await withVideos([post]))[0] : undefined
 }
 
-const hasVideo = (p: BlogPost): boolean => Boolean(p.tiktok || p.videoPreview)
+const hasVideo = (p: BlogPost): boolean => Boolean(p.youtube || p.tiktok || p.videoPreview)
 
 /** Blog order: articles with a video first (newest first), then the others (newest first). */
 export function sortPosts(posts: BlogPost[]): BlogPost[] {
