@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props) {
   const url = `${baseUrl}/${locale}/blog/${post.slug}`
 
   return {
-    title: `${post.title} | Marketizzati`,
+    title: { absolute: seoTitle(post.title) },
     description: post.description,
     keywords: post.keywords.join(', '),
     alternates: { canonical: url },
@@ -53,6 +53,16 @@ export async function generateMetadata({ params }: Props) {
       images: [{ url: toAbsoluteSiteUrl(post.image, baseUrl), width: 1792, height: 1024, alt: post.imageAlt }],
     },
   }
+}
+
+/** Search result title: at most 60 characters (Google cuts longer ones); the page keeps the full title as H1. */
+function seoTitle(title: string): string {
+  const brand = `${title} | Marketizzati`
+  if (brand.length <= 60) return brand
+  const candidates = [title, title.split(' + ')[0], title.split(' (')[0], title.split(', ')[0]].map((t) => t.trim())
+  const fit = candidates.find((t) => t.length <= 60 && t.length >= 25)
+  if (fit) return fit
+  return title.slice(0, 58).replace(/\s+\S*$/, '').replace(/[\s,:;–—-]+$/, '') + '…'
 }
 
 function renderInline(text: string, links = true) {
