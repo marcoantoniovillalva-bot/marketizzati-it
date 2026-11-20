@@ -16,8 +16,8 @@ const post: BlogPost = {
     "práctica 70 ganchos",
     "70 ganchos virales"
   ],
-  "image": "/images/blog/covers/70-ganci-virali-wide.webp",
-  "imageTall": "/images/blog/covers/70-ganci-virali-tall.webp",
+  "image": "/images/blog/covers/70-ganci-virali-wide.es.webp",
+  "imageTall": "/images/blog/covers/70-ganci-virali-tall.es.webp",
   "videoPreview": "/videos/preview/70-ganci-virali.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7703698401770147105",
   "imageAlt": "70 ganchos virales — descarga la skill, instálala en Claude y escribe los ganchos de tus videos",

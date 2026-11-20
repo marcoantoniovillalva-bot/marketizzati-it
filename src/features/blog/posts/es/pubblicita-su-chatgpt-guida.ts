@@ -15,7 +15,7 @@ const post: BlogPost = {
     "Fuentes controladas el 19 de noviembre de 2026",
     "ADS cómo empezar"
   ],
-  "image": "/images/blog/covers/pubblicita-su-chatgpt-guida-wide.webp",
+  "image": "/images/blog/covers/pubblicita-su-chatgpt-guida-wide.es.webp",
   "imageAlt": "ADS: cómo empezar con la publicidad en ChatGPT — guía gratuita",
   "sections": [
     {
@@ -277,7 +277,7 @@ const post: BlogPost = {
     }
   ],
   "freeGuide": true,
-  "imageTall": "/images/blog/covers/pubblicita-su-chatgpt-guida-tall.webp",
+  "imageTall": "/images/blog/covers/pubblicita-su-chatgpt-guida-tall.es.webp",
   "videoPreview": "/videos/preview/pubblicita-su-chatgpt-guida.mp4"
 }
 

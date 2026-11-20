@@ -8,7 +8,15 @@ import sharp from 'sharp'
 import { COVERS } from './blog-covers.config.mjs'
 
 const SCENES = 'scripts/.cover-src/scenes'
-const only = process.argv.slice(2)
+const args = process.argv.slice(2)
+const langIndex = args.indexOf('--lang')
+let lang
+if (langIndex !== -1) {
+  lang = args[langIndex + 1]
+  if (!['es', 'en'].includes(lang)) throw new Error('--lang must be es or en')
+  args.splice(langIndex, 2)
+}
+const only = args
 
 /** Scene resized to the cover: wide crops the left edge (Marco is on the right), tall is already 4:5. */
 async function scene(slug, layout, w, h) {
@@ -36,10 +44,11 @@ const browser = await chromium.launch()
 const page = await browser.newPage()
 for (const c of COVERS) {
   if (only.length && !only.includes(c.slug)) continue
+  const title = lang ? c[`title_${lang}`] ?? c.title : c.title
   for (const [layout, w, h] of [['wide', 1600, 1000], ['tall', 1080, 1350]]) {
     const wide = layout === 'wide'
     await page.setViewportSize({ width: w, height: h })
-    await page.setContent(html({ w, h, bg: await scene(c.slug, layout, w, h), l1: c.title[0], l2: c.title[1], wide, titleW: c.titleW }), { waitUntil: 'networkidle' })
+    await page.setContent(html({ w, h, bg: await scene(c.slug, layout, w, h), l1: title[0], l2: title[1], wide, titleW: c.titleW }), { waitUntil: 'networkidle' })
     // biggest size where no word overflows and the (wrapped) lines fit the title area
     // each line on one row while the letters stay big; only below `minOneRow` it may wrap (balanced)
     await page.evaluate(async ({ max, maxH, minOneRow }) => {
@@ -57,7 +66,7 @@ for (const c of COVERS) {
       }
       if (fit(false) < minOneRow) fit(true)
     }, { max: wide ? 175 : 150, maxH: wide ? 600 : 400, minOneRow: wide ? 135 : 112 })
-    await sharp(await page.screenshot()).webp({ quality: 86 }).toFile(`public/images/blog/${c.dir}/${c.slug}-${layout}.webp`)
+    await sharp(await page.screenshot()).webp({ quality: 86 }).toFile(`public/images/blog/${c.dir}/${c.slug}-${layout}${lang ? `.${lang}` : ''}.webp`)
   }
   console.log(c.dir, c.slug)
 }

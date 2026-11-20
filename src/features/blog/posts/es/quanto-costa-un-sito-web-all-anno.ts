@@ -8,8 +8,8 @@ const post: BlogPost = {
   readTime: 6,
   category: 'Siti web',
   keywords: ['coste anual de una web', 'coste de dominio', 'mantenimiento web', 'web para profesionales', 'gastos de una web'],
-  image: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-wide.webp',
-  imageTall: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-tall.webp',
+  image: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-wide.es.webp',
+  imageTall: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-tall.es.webp',
   imageAlt: 'Gastos de creación y gestión anual de una web para profesionales de oficios',
   sections: [
     { type: 'intro', content: 'El coste anual de una web depende de las renovaciones y los servicios que elijas tras la entrega. En la oferta de Marketizzati, el dominio y el correo en VHosting cuestan unos 32 € al año aparte; la creación, los cambios futuros y la publicidad son conceptos distintos.' },

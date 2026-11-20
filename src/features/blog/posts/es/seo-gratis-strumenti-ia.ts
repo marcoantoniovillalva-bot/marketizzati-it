@@ -15,7 +15,7 @@ const post: BlogPost = {
     "SEO los 3",
     "los 3 instrumentos"
   ],
-  "image": "/images/blog/covers/seo-gratis-strumenti-ia-wide.webp",
+  "image": "/images/blog/covers/seo-gratis-strumenti-ia-wide.es.webp",
   "imageAlt": "SEO: los 3 instrumentos gratuitos + cómo usarlos con Claude Code — guía gratuita",
   "sections": [
     {
@@ -279,7 +279,7 @@ const post: BlogPost = {
     }
   ],
   "freeGuide": true,
-  "imageTall": "/images/blog/covers/seo-gratis-strumenti-ia-tall.webp",
+  "imageTall": "/images/blog/covers/seo-gratis-strumenti-ia-tall.es.webp",
   "videoPreview": "/videos/preview/seo-gratis-strumenti-ia.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7709865961075264800"
 }

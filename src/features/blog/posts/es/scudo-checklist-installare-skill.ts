@@ -16,8 +16,8 @@ const post: BlogPost = {
     "informe",
     "modelo hook a verificar y tres prompts"
   ],
-  "image": "/images/blog/covers/scudo-checklist-installare-skill-wide.webp",
-  "imageTall": "/images/blog/covers/scudo-checklist-installare-skill-tall.webp",
+  "image": "/images/blog/covers/scudo-checklist-installare-skill-wide.es.webp",
+  "imageTall": "/images/blog/covers/scudo-checklist-installare-skill-tall.es.webp",
   "videoPreview": "/videos/preview/scudo-checklist-installare-skill.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7707559772744207649",
   "imageAlt": "SCUDO: la lista de verificación antes de instalar una skill",

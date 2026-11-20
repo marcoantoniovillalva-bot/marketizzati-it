@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Meta Business Agent",
     "Business Agent Activa"
   ],
-  "image": "/images/blog/covers/meta-business-agent-whatsapp-wide.webp",
-  "imageTall": "/images/blog/covers/meta-business-agent-whatsapp-tall.webp",
+  "image": "/images/blog/covers/meta-business-agent-whatsapp-wide.es.webp",
+  "imageTall": "/images/blog/covers/meta-business-agent-whatsapp-tall.es.webp",
   "videoPreview": "/videos/preview/meta-business-agent-whatsapp.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7704246025153678625",
   "imageAlt": "Meta Business Agent — el agente IA que responde a tus clientes en WhatsApp Business",

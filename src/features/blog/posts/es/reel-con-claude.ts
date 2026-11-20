@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Reel con Claude",
     "con Claude Il"
   ],
-  "image": "/images/blog/covers/reel-con-claude-wide.webp",
-  "imageTall": "/images/blog/covers/reel-con-claude-tall.webp",
+  "image": "/images/blog/covers/reel-con-claude-wide.es.webp",
+  "imageTall": "/images/blog/covers/reel-con-claude-tall.es.webp",
   "videoPreview": "/videos/preview/reel-con-claude.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7702845855186832673",
   "imageAlt": "Reel con Claude — el paso a paso para empezar y qué automatizar después",

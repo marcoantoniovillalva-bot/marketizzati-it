@@ -28,12 +28,17 @@ function collect(post) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
-/** One batch: up to 3 attempts for malformed JSON; on the per-minute token limit (429) it waits and tries again. */
+// Groq free tier: each model has its own daily token limit, so when one is used up the next one takes over
+const MODELS = [MODEL, 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b'].filter((m, i, a) => a.indexOf(m) === i)
+let current = 0
+
+/** One batch: up to 3 attempts for malformed JSON; per-minute limit (429) -> wait; daily limit -> next model. */
 async function translateBatch(texts, lang) {
   let last
   for (let attempt = 0, waits = 0; attempt < 3 && waits < 20;) {
-    try { return await callModel(texts, lang) } catch (e) {
+    try { return await callModel(texts, lang, MODELS[current]) } catch (e) {
       last = e
+      if (/tokens per day|TPD/.test(e.message) && current < MODELS.length - 1) { current++; continue }
       if (/Groq 429/.test(e.message)) { waits++; await sleep(65000); continue }
       attempt++
     }
@@ -41,14 +46,15 @@ async function translateBatch(texts, lang) {
   throw last
 }
 
-async function callModel(texts, lang) {
+async function callModel(texts, lang, model) {
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env.GROQ_API_KEY}`, 'Content-Type': 'application/json' },
+    signal: AbortSignal.timeout(120000), // a stuck request must not block the whole run
     body: JSON.stringify({
-      model: MODEL,
+      model,
       temperature: 0.2,
-      reasoning_effort: 'low',
+      ...(model.includes('gpt-oss') ? { reasoning_effort: 'low' } : {}),
       max_completion_tokens: 16000,
       messages: [
         { role: 'system', content: `You translate Italian marketing/tech articles into ${LANG[lang]}. Natural, native, not literal. Keep: numbers, prices (€), brand and product names, "Marketizzati", "Marco", markdown (**bold**, [label](url) — translate only the label, never the url), shell commands, code, file names, URLs, emojis. Descriptions stay under 155 characters. If a text mentions the PDF guide, add "(PDF in Italian)" for English or "(PDF en italiano)" for Spanish. Reply ONLY with JSON {"t": [...]} with exactly the same number of strings, same order.` },
@@ -70,7 +76,16 @@ async function callModel(texts, lang) {
 export async function translatePost(post, lang) {
   const items = collect(post)
   const translated = []
-  for (let i = 0; i < items.length; i += 15) translated.push(...(await translateBatch(items.slice(i, i + 15).map(([, t]) => t), lang)))
+  // batches by size (Groq free tier: 8,000 tokens per minute, input + output): ~3,500 characters each
+  let batch = []
+  let chars = 0
+  const flush = async () => { if (batch.length) translated.push(...(await translateBatch(batch, lang))); batch = []; chars = 0 }
+  for (const [, text] of items) {
+    if (batch.length && (chars + text.length > 3500 || batch.length >= 15)) await flush()
+    batch.push(text)
+    chars += text.length
+  }
+  await flush()
   const copy = JSON.parse(JSON.stringify(post))
   const root = { title: copy.title, description: copy.description, imageAlt: copy.imageAlt, keywords: copy.keywords, sections: copy.sections }
   items.forEach(([path], i) => {

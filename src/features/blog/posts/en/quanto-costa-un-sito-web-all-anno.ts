@@ -8,8 +8,8 @@ const post: BlogPost = {
   readTime: 6,
   category: 'Siti web',
   keywords: ['annual website cost', 'domain cost', 'website maintenance', 'website for tradespeople', 'website costs'],
-  image: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-wide.webp',
-  imageTall: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-tall.webp',
+  image: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-wide.en.webp',
+  imageTall: '/images/blog/guide/quanto-costa-un-sito-web-all-anno-tall.en.webp',
   imageAlt: 'Build and annual running costs for a tradesperson’s website',
   sections: [
     { type: 'intro', content: 'A website’s annual cost depends on renewals and the services you choose after delivery. With Marketizzati, domain and email through VHosting cost about €32 a year separately; the build, future changes and advertising are separate items.' },

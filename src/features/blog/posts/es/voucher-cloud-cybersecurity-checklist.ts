@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Voucher Cloud Cybersecurity",
     "Requisitos Cloud Cybersecurity"
   ],
-  "image": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-wide.webp",
-  "imageTall": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-tall.webp",
+  "image": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-wide.es.webp",
+  "imageTall": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-tall.es.webp",
   "videoPreview": "/videos/preview/voucher-cloud-cybersecurity-checklist.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7704624206952107297",
   "imageAlt": "Voucher Cloud & Cybersecurity — la checklist de requisitos para entregar al asesor fiscal",

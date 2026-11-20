@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Guía práctica Open",
     "práctica Open WebUI"
   ],
-  "image": "/images/blog/covers/open-webui-guida-wide.webp",
-  "imageTall": "/images/blog/covers/open-webui-guida-tall.webp",
+  "image": "/images/blog/covers/open-webui-guida-wide.es.webp",
+  "imageTall": "/images/blog/covers/open-webui-guida-tall.es.webp",
   "videoPreview": "/videos/preview/open-webui-guida.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7703989747957402912",
   "imageAlt": "Open WebUI en media hora — el chat IA de tu empresa, en tu ordenador o en tu servidor",

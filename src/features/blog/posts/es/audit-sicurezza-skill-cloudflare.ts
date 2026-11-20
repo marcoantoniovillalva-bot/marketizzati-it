@@ -16,8 +16,8 @@ const post: BlogPost = {
     "aislamiento Docker a adaptar",
     "instalación oficial"
   ],
-  "image": "/images/blog/covers/audit-sicurezza-skill-cloudflare-wide.webp",
-  "imageTall": "/images/blog/covers/audit-sicurezza-skill-cloudflare-tall.webp",
+  "image": "/images/blog/covers/audit-sicurezza-skill-cloudflare-wide.es.webp",
+  "imageTall": "/images/blog/covers/audit-sicurezza-skill-cloudflare-tall.es.webp",
   "videoPreview": "/videos/preview/audit-sicurezza-skill-cloudflare.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7708840763861372193",
   "imageAlt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe",

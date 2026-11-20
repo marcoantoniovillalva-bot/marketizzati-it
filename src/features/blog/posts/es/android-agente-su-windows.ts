@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Codex y Cursor",
     "Configuración"
   ],
-  "image": "/images/blog/covers/android-agente-su-windows-wide.webp",
-  "imageTall": "/images/blog/covers/android-agente-su-windows-tall.webp",
+  "image": "/images/blog/covers/android-agente-su-windows-wide.es.webp",
+  "imageTall": "/images/blog/covers/android-agente-su-windows-tall.es.webp",
   "videoPreview": "/videos/preview/android-agente-su-windows.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7707718630523407649",
   "imageAlt": "ANDROID: configurar el agente en Windows + 10 pruebas seguras",
