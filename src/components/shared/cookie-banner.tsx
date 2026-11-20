@@ -52,7 +52,7 @@ export function CookieBanner() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-body-sm text-foreground-secondary text-center md:text-left">
           {t('text')}{' '}
-          <Link href="/privacy" className="underline hover:text-foreground transition-colors">
+          <Link href="/cookie" className="underline hover:text-foreground transition-colors">
             {t('privacyLink')}
           </Link>
         </p>

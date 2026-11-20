@@ -6,7 +6,8 @@ export async function POST(request: Request) {
   const authHeader = request.headers.get('authorization')
   const expected = process.env.CRON_SECRET?.trim()
 
-  if (expected && authHeader !== `Bearer ${expected}`) {
+  // fail closed: without a configured secret nobody can trigger the automations
+  if (!expected || authHeader !== `Bearer ${expected}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

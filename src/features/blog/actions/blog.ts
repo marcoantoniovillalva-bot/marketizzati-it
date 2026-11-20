@@ -13,14 +13,29 @@ function publicBlogImageUrl(storagePath: string) {
   )}`
 }
 
+/** Server actions are public endpoints: everything that spends money or writes with the service key checks the admin first. */
+async function requireAdmin(): Promise<void> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Non autorizzato')
+  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  if (profile?.role !== 'admin') throw new Error('Non autorizzato')
+}
+
+const IMAGE_TYPES: Record<string, string> = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/avif': 'avif', 'image/gif': 'gif' }
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024
+
 // ── Image upload (direct REST — bypasses SDK abort issues) ───────────────────
 
 export async function uploadBlogImage(formData: FormData): Promise<string> {
-  const file = formData.get('file') as File
-  const folder = (formData.get('folder') as string) || 'covers'
-  if (!file || !file.size) throw new Error('File mancante')
-
-  const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+  await requireAdmin()
+  const file = formData.get('file')
+  if (!(file instanceof File) || !file.size) throw new Error('File mancante')
+  const ext = IMAGE_TYPES[file.type]
+  if (!ext) throw new Error('Formato immagine non supportato')
+  if (file.size > MAX_IMAGE_BYTES) throw new Error('Immagine troppo grande (max 10 MB)')
+  const rawFolder = formData.get('folder')
+  const folder = typeof rawFolder === 'string' && /^[a-z0-9-]{1,40}$/.test(rawFolder) ? rawFolder : 'covers'
   const storagePath = `${folder}/${Date.now()}.${ext}`
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
@@ -33,7 +48,7 @@ export async function uploadBlogImage(formData: FormData): Promise<string> {
       headers: {
         Authorization: `Bearer ${serviceKey}`,
         apikey: serviceKey,
-        'Content-Type': file.type || 'image/jpeg',
+        'Content-Type': file.type,
         'x-upsert': 'true',
       },
       body: bytes,
@@ -156,6 +171,7 @@ export async function togglePublish(id: string, published: boolean): Promise<voi
 // ── Image upload via Supabase Storage ────────────────────────────────────────
 
 export async function getUploadUrl(postId: string, filename: string): Promise<string> {
+  await requireAdmin()
   // Returns the public URL pattern — actual upload done client-side
   return publicBlogImageUrl(`${postId}/${filename}`)
 }
@@ -169,6 +185,7 @@ export async function generateArticleAI(keyword: string, trends: string[] = []):
   keywords: string[]
   sections: BlogSection[]
 }> {
+  await requireAdmin()
   const trendsContext = trends.length
     ? `\nTrending searches in Italy right now: ${trends.slice(0, 5).join(', ')}.`
     : ''
@@ -227,6 +244,7 @@ Requirements:
 // ── Trends: Google Trends Italy RSS ──────────────────────────────────────────
 
 export async function getItalyTrends(): Promise<string[]> {
+  await requireAdmin()
   try {
     const res = await fetch(
       'https://trends.google.com/trends/trendingsearches/daily/rss?geo=IT',

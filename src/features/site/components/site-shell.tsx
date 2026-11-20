@@ -6,6 +6,7 @@ import { SiteFooter } from './site-footer'
 import { SiteHeader } from './site-header'
 import { TintBackground } from './tint-background'
 import { WhatsAppIcon } from './ui'
+import { CookieBanner } from '@/components/shared/cookie-banner'
 
 /** Frame of every public page: header, scroll-tinted background, floating WhatsApp, footer. */
 export function SiteShell({ locale, children }: { locale: string; children: ReactNode }) {
@@ -26,6 +27,7 @@ export function SiteShell({ locale, children }: { locale: string; children: Reac
         <WhatsAppIcon size={28} />
       </a>
       <SiteFooter locale={l} copy={copy} />
+      <CookieBanner />
     </div>
   )
 }

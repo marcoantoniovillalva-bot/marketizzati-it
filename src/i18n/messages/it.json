@@ -384,11 +384,11 @@
     }
   },
   "cookieBanner": {
-    "text": "Usiamo cookie per migliorare la tua esperienza.",
+    "text": "Usiamo cookie tecnici e, solo se accetti, cookie di Google per misurare le visite e gli annunci. Puoi cambiare idea in qualsiasi momento.",
     "acceptAll": "Accetta tutti",
     "rejectAll": "Solo necessari",
     "customize": "Personalizza",
-    "privacyLink": "Privacy Policy"
+    "privacyLink": "Cookie policy"
   },
   "seo": {
     "home": {
