@@ -74,3 +74,6 @@ generate-images.js
 scripts/qa/.video-tmp/
 scripts/.cover-src/
 docs/preview-telefono/
+
+# Private key files (Google service account, etc.)
+.secrets/

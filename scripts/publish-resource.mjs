@@ -95,7 +95,7 @@ if (!video) throw new Error(`No render in ${talking} for ${folder}`)
 const preview = path.join(site, `public/videos/preview/${slug}.mp4`)
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '1.5', '-t', '5', '-i', video, '-an', '-vf', 'scale=540:-2,fps=30',
   '-c:v', 'libx264', '-profile:v', 'main', '-pix_fmt', 'yuv420p', '-crf', '26', '-preset', 'slow', '-movflags', '+faststart', preview])
-console.log(`  ${Math.round(statSync(preview).size / 1024)} KB`)
+console.log(`  preview ${Math.round(statSync(preview).size / 1024)} KB`)
 
 // --- 4. check, commit, push, deploy -------------------------------------------------------------------
 step('typecheck')

@@ -21,6 +21,7 @@ export const COVERS = [
   { slug: 'android-agente-su-windows', dir: 'covers', src: 'android-agente-su-windows', title: ['IL TELEFONO', 'VA DA SOLO!'] },
   { slug: 'audit-sicurezza-skill-cloudflare', dir: 'covers', src: 'audit-sicurezza-skill-cloudflare', title: ['LA TUA APP', 'È SICURA?'], titleW: 580 },
   { slug: 'seo-gratis-strumenti-ia', dir: 'covers', src: 'seo-gratis-strumenti-ia', title: ['SEO GRATIS','CON L’IA!'] },
+  { slug: 'pubblicita-su-chatgpt-guida', dir: 'covers', src: 'pubblicita-su-chatgpt-guida', title: ['PUBBLICITÀ','SU CHATGPT!'] },
   { slug: 'agente-ai-whatsapp-piccola-impresa', dir: 'guide', src: 'rtk-meno-token-claude-code', title: ['AGENTE AI', 'SU WHATSAPP!'], icons: 'a green WhatsApp logo and a small cute robot head' },
   { slug: 'chatgpt-ads-italia-come-funzionano', dir: 'guide', src: 'audit-sicurezza-skill-cloudflare', title: ['CHATGPT ADS', 'COME FUNZIONANO?'], icons: 'the ChatGPT logo and an orange megaphone' },
   { slug: 'creare-sito-con-chatgpt-o-claude', dir: 'guide', src: 'scudo-checklist-installare-skill', title: ['SITO CON L’AI', 'QUALI LIMITI?'], icons: 'a website browser window and a yellow warning triangle' },

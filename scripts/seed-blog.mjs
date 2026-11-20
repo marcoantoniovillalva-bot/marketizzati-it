@@ -2,7 +2,7 @@ import pg from 'pg'
 const { Client } = pg
 
 const client = new Client({
-  connectionString: 'postgresql://postgres:Quieroplata1!@db.luhfsvgbpnaxdeydxtrn.supabase.co:5432/postgres',
+  connectionString: process.env.DATABASE_URL, // never hardcode: the repo is public
   ssl: { rejectUnauthorized: false },
 })
 

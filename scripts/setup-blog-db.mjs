@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const SUPABASE_URL = 'https://luhfsvgbpnaxdeydxtrn.supabase.co'
-const SERVICE_ROLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1aGZzdmdicG5heGRleWR4dHJuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTMyOTkyMSwiZXhwIjoyMDg2OTA1OTIxfQ.saEh_Kb5iaDI_iKZKkBCMu5keuYVVZVVB6gQYT1NbTM'
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY // never hardcode: the repo is public
 
 const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY)
 
