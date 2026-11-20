@@ -56,7 +56,7 @@ export function SiteHeader({ locale, copy }: { locale: Locale; copy: LayoutCopy 
         </nav>
         <div className="flex items-center gap-2">
           <div className="hidden md:block">{languages}</div>
-          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-dark">
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" aria-label={copy.whatsapp} className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-dark">
             <WhatsAppIcon size={16} /> <span className="hidden sm:inline">{copy.whatsapp}</span>
           </a>
           <button type="button" onClick={() => setOpen((o) => !o)} className="rounded-full p-2 xl:hidden" aria-expanded={open} aria-label={open ? copy.close : copy.menu}>
