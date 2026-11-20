@@ -70,7 +70,7 @@ function renderInline(text: string, links = true) {
     if (part.startsWith('**') && part.endsWith('**')) return <strong key={index}>{renderInline(part.slice(2, -2), links)}</strong>
     const link = links ? /^\[([^\]]+)\]\(([^\s)]+)\)$/.exec(part) : null
     if (link && /^(https?:\/\/|\/(?!\/)|mailto:|tel:)/i.test(link[2])) {
-      return <a key={index} href={link[2]} {...(/^https?:/.test(link[2]) ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="font-medium text-brand underline underline-offset-4">{link[1]}</a>
+      return <a key={index} href={link[2]} {...(/^https?:/.test(link[2]) ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="font-medium text-brand-ink underline underline-offset-4">{link[1]}</a>
     }
     return part
   })

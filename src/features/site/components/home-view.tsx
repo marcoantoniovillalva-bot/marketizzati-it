@@ -72,7 +72,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
               <p className="mt-2 text-white/70">{offer.oneOff.note}</p>
             </div>
             <div className="rounded-3xl bg-white p-7 ring-1 ring-ink/5">
-              <p className="text-sm font-semibold uppercase tracking-wider text-brand">{offer.monthly.title}</p>
+              <p className="text-sm font-semibold uppercase tracking-wider text-brand-ink">{offer.monthly.title}</p>
               <p className="mt-1 text-5xl font-bold tracking-tight">
                 {euro(OFFER.monthly, locale)}
                 <span className="text-xl font-semibold text-ink-muted"> × {OFFER.months}</span>

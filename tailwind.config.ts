@@ -8,8 +8,9 @@ const config: Config = {
     extend: {
       colors: {
         // new public site (2026-11): warm whites, brand orange, one navy block.
-        // brand = readable orange (contrast >= 4.5 on white/cream/peach, WCAG AA); bright = the logo orange, decorative only
-        brand: { DEFAULT: '#C8370C', dark: '#A82E09', bright: '#F2541B', soft: '#FFE3D4', cream: '#FFF8F2', peach: '#FFEEE3' },
+        // brand = the logo orange (buttons, headings, icons, decoration); brand-ink = same hue, darker, for SMALL text only
+        // (contrast >= 4.5 on white/cream/peach, WCAG AA). Large text needs only 3:1, which brand passes (3.47).
+        brand: { DEFAULT: '#F2541B', dark: '#D4410C', ink: '#C8370C', bright: '#F2541B', soft: '#FFE3D4', cream: '#FFF8F2', peach: '#FFEEE3' },
         ink: { DEFAULT: '#16120F', soft: '#4B433D', muted: '#7A706A' },
         navy: { DEFAULT: '#121A2F', soft: '#1C2540' },
         background: '#F7F7F7',

@@ -39,7 +39,7 @@ export function RelatedPosts({ pageKey, locale }: { pageKey: ServicePageKey; loc
     <div className="mt-8 md:mt-12">
       <div className="flex items-baseline justify-between gap-4">
         <p className="text-sm font-semibold uppercase tracking-wider text-ink-muted">{t.label}</p>
-        <a href={`/${locale}/blog`} className="text-sm font-semibold text-brand hover:underline">
+        <a href={`/${locale}/blog`} className="text-sm font-semibold text-brand-ink hover:underline">
           {t.all} →
         </a>
       </div>

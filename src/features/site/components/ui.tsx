@@ -45,7 +45,7 @@ export function WhatsAppButton({ label, variant = 'ghost' }: { label: string; va
 
 export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a href={href} className="group inline-flex items-center gap-1.5 font-semibold text-brand">
+    <a href={href} className="group inline-flex items-center gap-1.5 font-semibold text-brand-ink">
       {children}
       <ArrowRight size={16} className="transition group-hover:translate-x-1" aria-hidden />
     </a>

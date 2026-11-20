@@ -44,7 +44,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
         )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-6">
-        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
+        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-ink">
           {project.kind === 'private' && <Lock size={12} aria-hidden />}
           {project.tag[locale]}
         </p>

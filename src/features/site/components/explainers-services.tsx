@@ -18,7 +18,7 @@ export function AdsPriceChart({ v, locale }: { v: VisualCopy; locale: Locale }) 
             <div key={i} className="flex h-full flex-1 items-end justify-center gap-1">
               <span className="mk-grow-y relative w-1/2 rounded-t-md bg-brand" style={{ height: height(withSite), ...d(0.3 + i * 0.35) }}>
                 {(i === 0 || i === ADS.launchMonths) && (
-                  <span className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-brand">{euro(withSite, locale)}</span>
+                  <span className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-brand-ink">{euro(withSite, locale)}</span>
                 )}
               </span>
               <span className="mk-grow-y w-1/2 rounded-t-md bg-ink/20" style={{ height: height(ADS.monthly), ...d(0.45 + i * 0.35) }} />
@@ -73,7 +73,7 @@ export function AdsFlow({ v }: { v: VisualCopy }) {
         <p className="mk-build mt-2 text-xs text-ink-soft" style={d(2)}>{v.ads.answer}</p>
         <p className="mk-build mt-1.5 flex items-center justify-between rounded-lg bg-white px-3 py-2 text-xs font-semibold ring-1 ring-brand/30" style={d(2.5)}>
           {v.phone.brand}
-          <span className="rounded bg-brand-soft px-1.5 py-0.5 text-[9px] font-bold uppercase text-brand">{v.ads.sponsored}</span>
+          <span className="rounded bg-brand-soft px-1.5 py-0.5 text-[9px] font-bold uppercase text-brand-ink">{v.ads.sponsored}</span>
         </p>
       </div>
       <div className="my-4 px-8">
@@ -240,7 +240,7 @@ export function AutomationShowcase({ v }: { v: VisualCopy }) {
           <div key={lane.name} className="rounded-2xl bg-brand-cream p-3 sm:p-4">
             <p className="flex items-baseline justify-between gap-2">
               <span className="text-sm font-bold">{lane.name}</span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">{lane.tag}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-brand-ink">{lane.tag}</span>
             </p>
             <div className="mt-3 flex items-center">
               {lane.steps.map((step, i) => {

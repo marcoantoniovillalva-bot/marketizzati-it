@@ -45,7 +45,7 @@ export function TikTokVideo({ video, poster, title, labels }: Props) {
       </div>
       <figcaption className="mt-3 text-center text-xs text-ink-muted">
         {labels.note}{' '}
-        <a href={`https://www.tiktok.com/@marco.villalva3/video/${id}`} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline">
+        <a href={`https://www.tiktok.com/@marco.villalva3/video/${id}`} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-ink underline">
           {labels.open}
         </a>
       </figcaption>

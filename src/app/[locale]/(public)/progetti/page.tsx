@@ -40,7 +40,7 @@ export default async function ProjectsPage({ params }: Props) {
         <Section key={p.id} tint={i % 2 ? 'cream' : 'peach'}>
           <div className="grid gap-10 lg:grid-cols-[1.4fr_0.6fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand">{p.tag[l]}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink">{p.tag[l]}</p>
               <h2 className="mt-2 text-4xl font-bold tracking-tight">{p.name}</h2>
               <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">{p.text[l]}</p>
               <div className="mt-8 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-ink/10">
@@ -80,7 +80,7 @@ export default async function ProjectsPage({ params }: Props) {
         <Section key={p.id} tint={(sites.length + i) % 2 ? 'cream' : 'peach'}>
           <div className={`grid items-center gap-10 ${p.tour?.device === 'phone' ? 'lg:grid-cols-[1fr_0.8fr]' : 'lg:grid-cols-[0.7fr_1.3fr]'}`}>
             <div>
-              <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
+              <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-ink">
                 {p.kind === 'private' && <Lock size={12} aria-hidden />}
                 {p.tag[l]}
               </p>

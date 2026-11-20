@@ -297,7 +297,7 @@ export function MapsCard({ v }: { v: VisualCopy }) {
         <p className="mt-1 text-sm font-semibold text-[#1c8a43]">{v.maps.open}</p>
         <div className="mt-4 grid grid-cols-3 gap-2">
           {actions.map(({ label, Icon }, i) => (
-            <span key={label} className="mk-pop flex flex-col items-center gap-1 rounded-xl bg-brand-cream py-2 text-[11px] font-semibold text-brand" style={d(4 + i * 0.25)}>
+            <span key={label} className="mk-pop flex flex-col items-center gap-1 rounded-xl bg-brand-cream py-2 text-[11px] font-semibold text-brand-ink" style={d(4 + i * 0.25)}>
               <Icon size={15} /> {label}
             </span>
           ))}

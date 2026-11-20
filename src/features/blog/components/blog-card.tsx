@@ -15,7 +15,7 @@ export function BlogCard({ post, href, locale, compact = false, autoPlay = false
     <a href={href} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-xl">
       <CoverImage post={post} autoPlay={autoPlay} />
       <div className={`flex flex-1 flex-col ${compact ? 'p-4 sm:p-5' : 'p-3 sm:p-6'}`}>
-        <p className="flex flex-wrap items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-brand sm:gap-2 sm:text-xs">
+        <p className="flex flex-wrap items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-brand-ink sm:gap-2 sm:text-xs">
           {post.category}
           {post.freeGuide && <span className="rounded-full bg-[#e9f8ee] px-2 py-0.5 text-[10px] tracking-normal text-[#1c8a43]">{t.free}</span>}
         </p>

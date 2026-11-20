@@ -52,7 +52,7 @@ export function Heading({ label, title, italic, as = 'h2', intro, dark = false, 
   return (
     <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''}`}>
       {label && (
-        <p className={`mb-3 flex items-center gap-3 text-[11px] sm:mb-5 sm:text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-brand-soft' : 'text-brand'} ${center ? 'justify-center' : ''}`}>
+        <p className={`mb-3 flex items-center gap-3 text-[11px] sm:mb-5 sm:text-xs font-semibold uppercase tracking-[0.22em] ${dark ? 'text-brand-soft' : 'text-brand-ink'} ${center ? 'justify-center' : ''}`}>
           <span className={`h-px w-8 ${dark ? 'bg-brand-soft' : 'bg-brand'}`} aria-hidden />
           {label}
         </p>

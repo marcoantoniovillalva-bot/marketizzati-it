@@ -95,7 +95,7 @@ export function PrezziView({ copy, offer, locale }: { copy: PricesCopy; offer: H
               <tr className="border-b border-ink/10">
                 <th className="p-3 sm:p-5" />
                 {copy.compare.columns.map((c, i) => (
-                  <th key={c} className={`p-3 text-sm font-bold sm:p-5 ${i === 0 ? 'text-brand' : 'text-ink-soft'}`}>
+                  <th key={c} className={`p-3 text-sm font-bold sm:p-5 ${i === 0 ? 'text-brand-ink' : 'text-ink-soft'}`}>
                     {c}
                   </th>
                 ))}

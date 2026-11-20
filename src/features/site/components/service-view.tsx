@@ -64,7 +64,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft">
               <Rich text={copy.answer} />
             </p>
-            <p className="mt-5 text-sm font-semibold text-brand">{priceLine}</p>
+            <p className="mt-5 text-sm font-semibold text-brand-ink">{priceLine}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               {primary}
               {copy.cta !== 'quote' && <WhatsAppButton label={c.talk} />}

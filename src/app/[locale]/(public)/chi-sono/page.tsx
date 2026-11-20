@@ -169,7 +169,7 @@ export default async function AboutPage({ params }: Props) {
             <li key={step.what} className="relative rounded-3xl bg-white p-5 ring-1 ring-ink/5">
               <span className="flex items-center gap-2">
                 <span className={`flex h-8 w-8 items-center justify-center rounded-full font-serif text-lg italic text-white ${i === c.path.length - 1 ? 'bg-brand' : 'bg-ink'}`}>{i + 1}</span>
-                <span className="text-xs font-semibold uppercase tracking-wider text-brand">{step.when}</span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-brand-ink">{step.when}</span>
               </span>
               <p className="mt-3 text-lg font-bold">{step.what}</p>
               <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{step.text}</p>
@@ -187,12 +187,12 @@ export default async function AboutPage({ params }: Props) {
                 <Image src={p.photo} alt={p.name} fill sizes="(min-width: 1024px) 208px, (min-width: 640px) 192px, 90vw" className="object-cover object-[50%_20%]" />
               </div>
               <div className="flex flex-col gap-3 p-6">
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand">{p.role}</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink">{p.role}</p>
                 <h2 className="text-xl font-bold">{p.name}</h2>
                 <p className="leading-relaxed text-ink-soft">{p.text}</p>
                 <blockquote className="font-serif text-lg italic text-ink">«{p.quote}»</blockquote>
                 {p.link && (
-                  <a href={p.link.href} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-brand hover:underline">
+                  <a href={p.link.href} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-brand-ink hover:underline">
                     {p.link.label} →
                   </a>
                 )}
