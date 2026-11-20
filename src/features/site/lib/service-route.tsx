@@ -5,7 +5,7 @@ import { getServiceCopy, type ServicePageKey } from '../content/service-pages'
 import { BASE_URL } from './links'
 import { pageMetadata } from './metadata'
 import { isLocale, pageHref } from './routes'
-import { faqPage, professionalService, websiteOffer } from './schema'
+import { breadcrumb, faqPage, professionalService, websiteOffer } from './schema'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -22,7 +22,7 @@ export function serviceRoute(key: ServicePageKey) {
     const l = isLocale(locale) ? locale : 'it'
     const copy = getServiceCopy(key, l)
     const url = `${BASE_URL}${pageHref(key, l)}`
-    const blocks = [professionalService(l), faqPage(copy.faq)]
+    const blocks = [professionalService(l), faqPage(copy.faq), breadcrumb(l, copy.title, url)]
     if (copy.cta === 'buy') blocks.push(websiteOffer(l, copy.meta.title, url))
     return (
       <>

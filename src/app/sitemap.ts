@@ -6,12 +6,15 @@ import { LOCALES, PAGES, pageHref, type PageKey } from '@/features/site/lib/rout
 const MONEY: PageKey[] = ['home', 'prezzi', 'siti', 'artigiani']
 const SKIP: PageKey[] = ['grazie']
 
+/** Static pages change only with a deploy: their date is the build date (posts keep their own date). */
+const BUILT_AT = new Date()
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const keys = (Object.keys(PAGES) as PageKey[]).filter((k) => !SKIP.includes(k))
   const pages = keys.flatMap((key) =>
     LOCALES.map((locale) => ({
       url: `${BASE_URL}${pageHref(key, locale)}`,
-      lastModified: new Date(),
+      lastModified: BUILT_AT,
       changeFrequency: 'weekly' as const,
       priority: MONEY.includes(key) ? 1 : 0.7,
       alternates: { languages: Object.fromEntries(LOCALES.map((l) => [l, `${BASE_URL}${pageHref(key, l)}`])) },

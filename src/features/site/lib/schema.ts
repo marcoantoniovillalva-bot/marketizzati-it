@@ -1,12 +1,12 @@
 import type { FaqItem } from '../components/ui'
-import { BASE_URL, BUSINESS, SOCIAL, WA_LINK } from './links'
+import { BASE_URL, BUSINESS, SOCIAL } from './links'
 import { OFFER } from './offer'
 
 /** schema.org blocks shared by the public pages (Google rich results, and ChatGPT / Bing reading prices). */
 export function professionalService(locale: string): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': ['Organization', 'ProfessionalService'],
     '@id': `${BASE_URL}/#business`,
     name: BUSINESS.name,
     founder: { '@type': 'Person', name: BUSINESS.person },
@@ -14,8 +14,9 @@ export function professionalService(locale: string): Record<string, unknown> {
     image: `${BASE_URL}/images/logo-light.png`,
     vatID: `IT${BUSINESS.vat}`,
     address: { '@type': 'PostalAddress', addressLocality: BUSINESS.city, addressRegion: 'PV', addressCountry: 'IT' },
-    areaServed: BUSINESS.areaServed.map((name) => ({ '@type': 'City', name })),
-    sameAs: [WA_LINK, ...Object.values(SOCIAL)],
+    areaServed: [...BUSINESS.areaServed, 'Italia'].map((name) => ({ '@type': 'Place', name })),
+    email: 'marco.villalva@marketizzati.it',
+    sameAs: Object.values(SOCIAL),
     priceRange: `${OFFER.monthly}–${OFFER.oneOff} €`,
   }
 }
@@ -58,4 +59,11 @@ export function faqPage(items: FaqItem[]): Record<string, unknown> {
       acceptedAnswer: { '@type': 'Answer', text: i.a.replace(/\*\*/g, '') },
     })),
   }
+}
+
+export function breadcrumb(locale: string, name: string, url: string): Record<string, unknown> {
+  return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/${locale}` },
+    { '@type': 'ListItem', position: 2, name, item: url },
+  ] }
 }
