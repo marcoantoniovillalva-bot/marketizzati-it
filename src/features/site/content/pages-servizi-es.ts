@@ -4,7 +4,7 @@ import type { ServiceCopy } from './service-types'
 const adsPrice = `${ADS.monthly} € al mes para Google y ChatGPT juntos; si la compras con la web, los primeros ${ADS.launchMonths} meses cuestan ${ADS.launchMonthly} € al mes`
 
 export const googleAdsEs: ServiceCopy = {
-  meta: { title: `Gestión de Google Ads para profesionales y pequeñas empresas desde ${ADS.monthly} €/mes | Marketizzati`, description: `Gestión de Google Ads y ChatGPT Ads para profesionales en Lombardía: ${adsPrice}. Presupuesto pagado directamente a Google, cuenta a tu nombre.` },
+  meta: { title: `Gestión de Google Ads para pymes desde ${ADS.monthly} €/mes`, description: `Google Ads y ChatGPT Ads para profesionales: ${ADS.monthly} €/mes por los dos; con la web, los primeros ${ADS.launchMonths} meses a ${ADS.launchMonthly} €/mes. Cuenta a tu nombre.` },
   label: '01 · Publicidad en Google Ads', title: 'Anuncios para quien te busca,', italic: 'con pago por clic.',
   answer: `Con Google Ads, tu anuncio puede aparecer arriba cuando alguien de tu zona busca tu servicio. La gestión cuesta **${adsPrice}**. El presupuesto de anuncios (desde ${ADS.minBudgetMonthly} € al mes) lo pagas directamente a Google, en una cuenta a tu nombre.`,
   cta: 'ads', visual: 'none',
@@ -21,7 +21,7 @@ export const googleAdsEs: ServiceCopy = {
 }
 
 export const chatgptAdsEs: ServiceCopy = {
-  meta: { title: 'ChatGPT Ads en Italia: cómo funcionan y cuánto cuestan | Marketizzati', description: `ChatGPT Ads en Italia: qué son, cómo funcionan los anuncios dentro de ChatGPT, cuánto cuestan y para quién tienen sentido. Gestión junto con Google Ads desde ${ADS.monthly} €/mes.` },
+  meta: { title: 'ChatGPT Ads en Italia: cómo funcionan y cuánto cuestan', description: `ChatGPT Ads en Italia: qué son, cómo funcionan los anuncios en ChatGPT, cuánto cuestan y para quién sirven. Gestión con Google Ads desde ${ADS.monthly} €/mes.` },
   label: '01 · ChatGPT Ads', title: 'La publicidad dentro de ChatGPT,', italic: 'explicada sin complicaciones.',
   answer: `Los **ChatGPT Ads** son anuncios que aparecen en conversaciones de ChatGPT, relacionados con lo que pregunta la persona. En Lombardía, las búsquedas de "chatgpt ads" crecieron más de un 1.300% en un año, y todavía hay poca competencia. Los gestiono junto con Google Ads: **${adsPrice}**.`,
   cta: 'ads', visual: 'none',
@@ -38,7 +38,7 @@ export const chatgptAdsEs: ServiceCopy = {
 }
 
 export const agentiEs: ServiceCopy = {
-  meta: { title: 'Asistentes de IA por WhatsApp y teléfono para empresas | Marketizzati', description: 'Asistentes de IA que responden por WhatsApp y teléfono, incluso de noche: dan información, reservan citas y te pasan los casos importantes. Con presupuesto.' },
+  meta: { title: 'Asistentes de IA por WhatsApp y teléfono para empresas', description: 'Asistentes de IA que responden por WhatsApp y teléfono, incluso de noche: información, citas y casos importantes para ti. Con presupuesto.' },
   label: '01 · Asistentes de IA en WhatsApp', title: 'Una respuesta para tus clientes,', italic: 'también mientras trabajas.',
   answer: 'Un **asistente de IA** responde a tus clientes por WhatsApp y, si lo necesitas, por teléfono con voz, a cualquier hora. Da precios y horarios, hace las preguntas necesarias, reserva citas y te pasa los casos importantes. Es un trabajo a medida: **preparo el presupuesto después de entender cómo trabajas**.',
   cta: 'quote', visual: 'phone',
@@ -54,7 +54,7 @@ export const agentiEs: ServiceCopy = {
 }
 
 export const sistemiEs: ServiceCopy = {
-  meta: { title: 'Sistemas automáticos y herramientas de gestión a medida con IA | Marketizzati', description: 'Sistemas a medida para automatizar presupuestos, recordatorios, facturas y llamadas de seguimiento, también con asistentes de voz. Con presupuesto.' },
+  meta: { title: 'Sistemas automáticos y herramientas a medida con IA', description: 'Sistemas a medida para automatizar presupuestos, recordatorios, facturas y llamadas de seguimiento, también con asistentes de voz. Con presupuesto.' },
   label: '01 · Sistemas automáticos', title: 'El trabajo repetitivo', italic: 'lo hace el sistema.',
   answer: 'Construyo **sistemas a medida** para hacer las tareas repetitivas: recoger solicitudes, preparar presupuestos, enviar recordatorios y facturas y devolver llamadas, también con un **asistente de voz**. Una web de varias páginas entra en la oferta de precio fijo. Un sistema como este **necesita un presupuesto propio**.',
   cta: 'quote', visual: 'none',
@@ -74,7 +74,7 @@ export const sistemiEs: ServiceCopy = {
 }
 
 export const socialEs: ServiceCopy = {
-  meta: { title: 'Gestión de redes sociales y publicidad en Meta para pequeñas empresas | Marketizzati', description: 'Creación de contenidos, publicación, gestión de perfiles y publicidad en Facebook e Instagram (Meta Ads) para profesionales y pequeñas empresas. Con presupuesto.' },
+  meta: { title: 'Gestión de redes sociales y Meta Ads para pymes', description: 'Contenidos, publicación, gestión de perfiles y anuncios en Facebook e Instagram (Meta Ads) para profesionales y pymes. Con presupuesto.' },
   label: '01 · Gestión de redes sociales', title: 'Muestra tu trabajo,', italic: 'con constancia.',
   answer: 'Me encargo de **crear contenidos, publicarlos y gestionar tus perfiles**, además de la **publicidad en Facebook e Instagram** (Meta Ads). Es un servicio a medida: **preparo un presupuesto** según cuántos contenidos necesitas y en qué canales.',
   cta: 'quote', visual: 'none',

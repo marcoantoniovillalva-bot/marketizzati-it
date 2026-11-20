@@ -5,8 +5,8 @@ const price = `${OFFER.oneOff} € una volta sola oppure ${OFFER.monthly} € al
 
 export const sitiIt: ServiceCopy = {
   meta: {
-    title: `Realizzazione siti web professionali da ${OFFER.oneOff} € | Marketizzati`,
-    description: `Realizzazione siti web per artigiani e piccole imprese in Lombardia: fino a ${OFFER.maxPages} pagine, testi sulle ricerche reali, logo e scheda Google inclusi. ${price}.`,
+    title: `Realizzazione siti web professionali da ${OFFER.oneOff} €`,
+    description: `Siti per artigiani in Lombardia: fino a ${OFFER.maxPages} pagine, testi sulle ricerche reali, logo e scheda Google: ${price}.`,
   },
   label: '01 · Realizzazione siti web',
   title: 'Un sito che ti fa',
@@ -52,8 +52,8 @@ export const sitiIt: ServiceCopy = {
 
 export const artigianiIt: ServiceCopy = {
   meta: {
-    title: 'Sito web per artigiani: idraulici, elettricisti, serramentisti | Marketizzati',
-    description: `Sito web per artigiani e piccole imprese: idraulico, elettricista, serramentista, impresa edile, estetista, ristorante. ${price}, logo e scheda Google inclusi.`,
+    title: 'Sito web per idraulici, elettricisti e artigiani',
+    description: `Sito per idraulico, elettricista, serramentista, impresa edile, estetista o ristorante: ${price}.`,
   },
   label: '01 · Sito per artigiani',
   title: 'Il sito per chi lavora',
@@ -99,8 +99,8 @@ export const artigianiIt: ServiceCopy = {
 
 export const schedaIt: ServiceCopy = {
   meta: {
-    title: 'Scheda Google Business Profile: come crearla e farla funzionare | Marketizzati',
-    description: 'Guida alla scheda Google Business Profile (Google My Business) per artigiani: creazione, verifica, categorie, foto, recensioni. Oppure la creo io, inclusa nel sito.',
+    title: 'Scheda Google Business: come crearla e farla funzionare',
+    description: 'Scheda Google Business Profile per artigiani: creazione, verifica, categorie, foto e recensioni. Oppure la creo io, inclusa nel sito.',
   },
   label: '01 · Scheda Google',
   title: 'La scheda Google,',

@@ -8,8 +8,8 @@ interface City { name: string; market: string; areas: string; trades: string }
 function localPage(c: City): ServiceCopy {
   return {
     meta: {
-      title: `Web design in ${c.name}: websites for tradespeople from ${OFFER.oneOff} € | Marketizzati`,
-      description: `Websites for tradespeople and small businesses in ${c.name} and the surrounding province: ${price}, logo and Google profile included. Public price, replies on WhatsApp.`,
+      title: `Web design in ${c.name}: websites for tradespeople from ${OFFER.oneOff} €`,
+      description: `Websites for tradespeople in ${c.name} and province: ${OFFER.oneOff} € upfront or ${OFFER.monthly} €/month for ${OFFER.months} months, logo and Google profile included.`,
     },
     label: `01 · Web design in ${c.name}`, title: `Your website in ${c.name},`, italic: 'with the price already here.',
     answer: `I build websites for tradespeople and small businesses in **${c.name} and the surrounding province**: up to ${OFFER.maxPages} pages, text based on what local customers search for, logo and Google profile included. It costs **${price}** and goes online in around ${OFFER.deliveryWeeks} weeks.`,

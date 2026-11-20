@@ -3,8 +3,8 @@ import type { HomeCopy } from './home-types'
 
 export const homeEn: HomeCopy = {
   meta: {
-    title: 'Websites for tradespeople and small businesses from 800 € | Marketizzati',
-    description: `A professional website with up to ${OFFER.maxPages} pages, logo and Google Business Profile included: ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months. Built by Marco, online in around 2 weeks.`,
+    title: 'Websites for tradespeople and small businesses from 800 €',
+    description: `Professional website, up to ${OFFER.maxPages} pages, logo and Google Business Profile included: ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months. Online in about 2 weeks.`,
   },
   hero: {
     label: 'Websites for tradespeople and small businesses', title: 'A website built to make your phone ring,', italic: 'not just to be seen.',

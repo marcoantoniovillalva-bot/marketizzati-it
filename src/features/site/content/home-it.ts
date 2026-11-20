@@ -4,8 +4,8 @@ import type { HomeCopy } from './home-types'
 /** Home, Italian. Prices come from lib/offer.ts. */
 export const homeIt: HomeCopy = {
   meta: {
-    title: 'Sito web per artigiani e piccole imprese da 800 € | Marketizzati',
-    description: `Sito professionale fino a ${OFFER.maxPages} pagine con logo e scheda Google inclusi: ${OFFER.oneOff} € una volta sola o ${OFFER.monthly} € al mese per ${OFFER.months} mesi. Fatto da Marco, online in circa 2 settimane.`,
+    title: 'Sito web per artigiani e piccole imprese da 800 €',
+    description: `Sito professionale fino a ${OFFER.maxPages} pagine con logo e scheda Google inclusi: ${OFFER.oneOff} € una volta sola o ${OFFER.monthly} € al mese per ${OFFER.months} mesi. Online in circa 2 settimane.`,
   },
   hero: {
     label: 'Siti per artigiani e piccole imprese',

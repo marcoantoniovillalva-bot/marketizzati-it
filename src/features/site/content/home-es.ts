@@ -3,8 +3,8 @@ import type { HomeCopy } from './home-types'
 
 export const homeEs: HomeCopy = {
   meta: {
-    title: 'Webs para profesionales de oficios y pequeñas empresas desde 800 € | Marketizzati',
-    description: `Web profesional de hasta ${OFFER.maxPages} páginas, con logo y ficha de Google incluidos: ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses. La hace Marco, lista en unas 2 semanas.`,
+    title: 'Webs para oficios y pequeñas empresas desde 800 €',
+    description: `Web profesional de hasta ${OFFER.maxPages} páginas, con logo y ficha de Google incluidos: ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses. Lista en unas 2 semanas.`,
   },
   hero: {
     label: 'Webs para profesionales de oficios y pequeñas empresas', title: 'Una web hecha para que te llamen,', italic: 'no solo para que te vean.',

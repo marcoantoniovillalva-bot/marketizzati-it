@@ -4,7 +4,7 @@ import type { ServiceCopy } from './service-types'
 const price = `${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses`
 
 export const sitiEs: ServiceCopy = {
-  meta: { title: `Diseño de webs profesionales desde ${OFFER.oneOff} € | Marketizzati`, description: `Webs para profesionales de oficios y pequeñas empresas en Lombardía: hasta ${OFFER.maxPages} páginas, textos basados en búsquedas reales, logo y ficha de Google incluidos. ${price}.` },
+  meta: { title: `Diseño de webs profesionales desde ${OFFER.oneOff} €`, description: `Webs para oficios en Lombardía: hasta ${OFFER.maxPages} páginas, textos según búsquedas reales, logo y ficha de Google. ${price}.` },
   label: '01 · Diseño de webs', title: 'Una web que facilite', italic: 'el contacto contigo.',
   answer: `Creo **webs profesionales de varias páginas** para profesionales de oficios y pequeñas empresas: textos basados en lo que buscan tus clientes en Google, botones para llamarte y escribirte, logo y ficha de Google incluidos. Cuesta **${price}** y se publica en unas ${OFFER.deliveryWeeks} semanas.`,
   cta: 'buy', visual: 'browser',
@@ -22,7 +22,7 @@ export const sitiEs: ServiceCopy = {
 }
 
 export const artigianiEs: ServiceCopy = {
-  meta: { title: 'Webs para profesionales: fontaneros, electricistas, instaladores de ventanas | Marketizzati', description: `Webs para profesionales de oficios y pequeñas empresas: fontanería, electricidad, ventanas, construcción, estética y restaurantes. ${price}, logo y ficha de Google incluidos.` },
+  meta: { title: 'Webs para fontaneros, electricistas y otros oficios', description: `Webs para fontaneros, electricistas, ventanas, reformas, estética y restaurantes: ${price}, logo incluido.` },
   label: '01 · Webs para profesionales de oficios', title: 'La web para quien trabaja', italic: 'con las manos.',
   answer: `Una web para tu oficio con Marketizzati cuesta **${price}**, con logo y ficha de Google incluidos. Está pensada para ti si trabajas todo el día y tienes poco tiempo: me mandas fotos e información, yo me encargo del resto y en unas ${OFFER.deliveryWeeks} semanas tu web está publicada.`,
   cta: 'buy', visual: 'browser',
@@ -46,7 +46,7 @@ export const artigianiEs: ServiceCopy = {
 }
 
 export const schedaEs: ServiceCopy = {
-  meta: { title: 'Ficha de Google Business Profile: cómo crearla y usarla | Marketizzati', description: 'Google Business Profile (Google My Business) para profesionales de oficios: creación, verificación, categorías, fotos y reseñas. O la creo yo, incluida con tu web.' },
+  meta: { title: 'Ficha de Google Business Profile: cómo crearla y usarla', description: 'Ficha de Google Business Profile para oficios: creación, verificación, categorías, fotos y reseñas. O la creo yo, incluida con tu web.' },
   label: '01 · Ficha de Google', title: 'Tu ficha de Google,', italic: 'lo primero que suelen ver.',
   answer: `La **ficha de Google Business Profile** (antes Google My Business) muestra tu nombre, teléfono, horarios, fotos y reseñas en Google y Maps. Es otra forma de que tus clientes puedan llamarte. Crearla en Google es gratis. Con Marketizzati, **la creo o la arreglo yo**, incluida con tu web desde ${OFFER.oneOff} €.`,
   cta: 'buy', visual: 'none',

@@ -8,8 +8,8 @@ interface City { name: string; market: string; areas: string; trades: string }
 function localPage(c: City): ServiceCopy {
   return {
     meta: {
-      title: `Diseño web en ${c.name}: webs para profesionales desde ${OFFER.oneOff} € | Marketizzati`,
-      description: `Webs para profesionales de oficios y pequeñas empresas en ${c.name} y su provincia: ${price}, logo y ficha de Google incluidos. Precio público, respuesta por WhatsApp.`,
+      title: `Diseño web en ${c.name}: webs para profesionales desde ${OFFER.oneOff} €`,
+      description: `Webs para oficios y pymes en ${c.name} y provincia: ${price}, logo y ficha de Google incluidos.`,
     },
     label: `01 · Diseño web en ${c.name}`, title: `Tu web en ${c.name},`, italic: 'con el precio ya publicado.',
     answer: `Creo webs para profesionales de oficios y pequeñas empresas de **${c.name} y su provincia**: hasta ${OFFER.maxPages} páginas, textos basados en lo que buscan tus clientes, logo y ficha de Google incluidos. Cuesta **${price}** y se publica en unas ${OFFER.deliveryWeeks} semanas.`,

@@ -4,7 +4,7 @@ import type { ServiceCopy } from './service-types'
 const adsPrice = `${ADS.monthly} € a month for Google and ChatGPT together; buy it with your website and the first ${ADS.launchMonths} months cost ${ADS.launchMonthly} € a month`
 
 export const googleAdsEn: ServiceCopy = {
-  meta: { title: `Google Ads management for tradespeople and small businesses from ${ADS.monthly} €/month | Marketizzati`, description: `Google Ads and ChatGPT Ads management for tradespeople in Lombardy: ${adsPrice}. Ad budget paid directly to Google, account in your name.` },
+  meta: { title: `Google Ads management for small businesses from ${ADS.monthly} €/month`, description: `Google Ads and ChatGPT Ads for tradespeople: ${ADS.monthly} €/month for both; with your website the first ${ADS.launchMonths} months cost ${ADS.launchMonthly} €/month.` },
   label: '01 · Google Ads advertising', title: 'Ads for people searching for you,', italic: 'with payment per click.',
   answer: `With Google Ads, your ad can appear at the top when someone in your area searches for your service. Management costs **${adsPrice}**. You pay the ad budget (from ${ADS.minBudgetMonthly} € a month) directly to Google, using an account in your name.`,
   cta: 'ads', visual: 'none',
@@ -21,7 +21,7 @@ export const googleAdsEn: ServiceCopy = {
 }
 
 export const chatgptAdsEn: ServiceCopy = {
-  meta: { title: 'ChatGPT Ads in Italy: how they work and what they cost | Marketizzati', description: `ChatGPT Ads in Italy: what they are, how ads inside ChatGPT work, what they cost and who they suit. Management together with Google Ads from ${ADS.monthly} €/month.` },
+  meta: { title: 'ChatGPT Ads in Italy: how they work and what they cost', description: `ChatGPT Ads in Italy: what they are, how ads inside ChatGPT work, what they cost and who they suit. Management together with Google Ads from ${ADS.monthly} €/month.` },
   label: '01 · ChatGPT Ads', title: 'Advertising inside ChatGPT,', italic: 'in plain language.',
   answer: `**ChatGPT Ads** are ads that appear in ChatGPT conversations, related to what someone is asking. In Lombardy, searches for "chatgpt ads" grew by over 1.300% in a year, with little competition so far. I manage them together with Google Ads: **${adsPrice}**.`,
   cta: 'ads', visual: 'none',
@@ -38,7 +38,7 @@ export const chatgptAdsEn: ServiceCopy = {
 }
 
 export const agentiEn: ServiceCopy = {
-  meta: { title: 'AI assistants for business on WhatsApp and the phone | Marketizzati', description: 'AI assistants that answer customers on WhatsApp and the phone, even at night: information, appointments and important cases passed to you. Quoted individually.' },
+  meta: { title: 'AI assistants for business on WhatsApp and the phone', description: 'AI assistants that answer customers on WhatsApp and the phone, even at night: information, bookings, and important cases passed to you.' },
   label: '01 · AI assistants on WhatsApp', title: 'An answer for your customers,', italic: 'even while you work.',
   answer: 'An **AI assistant** answers your customers on WhatsApp, and by voice on the phone if needed, at any hour. It shares prices and opening hours, asks relevant questions, books appointments and passes important cases to you. This is custom work: **I quote after understanding how you work**.',
   cta: 'quote', visual: 'phone',
@@ -54,7 +54,7 @@ export const agentiEn: ServiceCopy = {
 }
 
 export const sistemiEn: ServiceCopy = {
-  meta: { title: 'Custom automated systems and business tools with AI | Marketizzati', description: 'Custom systems to automate quotes, reminders, invoices and follow-up calls, including voice assistants. Quoted individually.' },
+  meta: { title: 'Custom automated systems and business tools with AI', description: 'Custom systems to automate quotes, reminders, invoices and follow-up calls, including voice assistants. Quoted individually.' },
   label: '01 · Automated systems', title: 'Let the system handle', italic: 'the repetitive tasks.',
   answer: 'I build **custom systems** to handle repetitive work: collect enquiries, prepare quotes, send reminders and invoices, and call customers back, including through a **voice assistant**. A website with several pages is part of the fixed-price offer. A system like this **needs an individual quote**.',
   cta: 'quote', visual: 'none',
@@ -74,7 +74,7 @@ export const sistemiEn: ServiceCopy = {
 }
 
 export const socialEn: ServiceCopy = {
-  meta: { title: 'Social media management and Meta advertising for small businesses | Marketizzati', description: 'Content creation, publishing, profile management and Facebook and Instagram advertising (Meta Ads) for tradespeople and small businesses. Quoted individually.' },
+  meta: { title: 'Social media management and Meta ads for small businesses', description: 'Content, publishing, profile management and Facebook and Instagram ads (Meta Ads) for tradespeople and small businesses. Quoted individually.' },
   label: '01 · Social media management', title: 'Show your work,', italic: 'regularly.',
   answer: 'I handle **content creation, publishing and profile management**, plus **Facebook and Instagram advertising** (Meta Ads). This is a custom service: **I prepare a quote** based on how much content you need and which channels you use.',
   cta: 'quote', visual: 'none',
@@ -86,7 +86,7 @@ export const socialEn: ServiceCopy = {
 }
 
 export const videoEn: ServiceCopy = {
-  meta: { title: 'Videos for social media and websites: reels and animation | Marketizzati', description: 'Vertical videos, reels and animated graphics to present your business on Instagram, TikTok and your website. Quoted individually.' },
+  meta: { title: 'Videos for social media and websites: reels and animation', description: 'Vertical videos, reels and animated graphics to present your business on Instagram, TikTok and your website. Quoted individually.' },
   label: '01 · Video content', title: 'Videos that explain', italic: 'in thirty seconds.',
   answer: 'I create **vertical videos, reels and animated graphics**: from editing footage shot on your phone to animations explaining a service. This service is **quoted individually**, on its own or with social media management.',
   cta: 'quote', visual: 'none',

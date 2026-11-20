@@ -5,8 +5,8 @@ const adsPrice = `${ADS.monthly} € al mese per Google e ChatGPT insieme; se la
 
 export const googleAdsIt: ServiceCopy = {
   meta: {
-    title: `Gestione Google Ads per artigiani e piccole imprese da ${ADS.monthly} €/mese | Marketizzati`,
-    description: `Gestione campagne Google Ads e ChatGPT Ads per artigiani in Lombardia: ${adsPrice}. Budget pagato direttamente a Google, account a tuo nome.`,
+    title: `Gestione Google Ads per artigiani e PMI da ${ADS.monthly} €/mese`,
+    description: `Google Ads e ChatGPT Ads per artigiani: ${ADS.monthly} € al mese per entrambi; con il sito i primi ${ADS.launchMonths} mesi costano ${ADS.launchMonthly} € al mese. Account a tuo nome.`,
   },
   label: '01 · Pubblicità Google Ads',
   title: 'Compari quando ti cercano,',
@@ -44,8 +44,8 @@ export const googleAdsIt: ServiceCopy = {
 
 export const chatgptAdsIt: ServiceCopy = {
   meta: {
-    title: 'ChatGPT Ads in Italia: come funzionano e quanto costano | Marketizzati',
-    description: `ChatGPT Ads in Italia: cosa sono, come funzionano gli annunci dentro ChatGPT, quanto costano e per chi hanno senso. Gestione insieme a Google Ads da ${ADS.monthly} €/mese.`,
+    title: 'ChatGPT Ads in Italia: come funzionano e quanto costano',
+    description: `ChatGPT Ads in Italia: cosa sono, come funzionano gli annunci in ChatGPT, quanto costano e per chi hanno senso. Gestione con Google Ads da ${ADS.monthly} €/mese.`,
   },
   label: '01 · ChatGPT Ads',
   title: 'La pubblicità dentro ChatGPT,',
@@ -88,8 +88,8 @@ export const chatgptAdsIt: ServiceCopy = {
 
 export const agentiIt: ServiceCopy = {
   meta: {
-    title: 'Agenti AI su WhatsApp e al telefono per aziende | Marketizzati',
-    description: 'Agenti AI che rispondono ai clienti su WhatsApp e al telefono, anche di notte: danno informazioni, prenotano appuntamenti e passano a te i casi importanti. Su preventivo.',
+    title: 'Agenti AI su WhatsApp e al telefono per aziende',
+    description: 'Agenti AI che rispondono ai clienti su WhatsApp e al telefono, anche di notte: informazioni, appuntamenti e casi importanti a te. Su preventivo.',
   },
   label: '01 · Agenti AI su WhatsApp',
   title: 'Il primo che risponde,',
@@ -127,7 +127,7 @@ export const agentiIt: ServiceCopy = {
 
 export const sistemiIt: ServiceCopy = {
   meta: {
-    title: 'Sistemi automatizzati e gestionali su misura con AI | Marketizzati',
+    title: 'Sistemi automatizzati e gestionali su misura con AI',
     description: 'Sistemi su misura che automatizzano preventivi, promemoria, fatture e richiami, anche con agenti vocali. Su preventivo.',
   },
   label: '01 · Sistemi automatizzati',
@@ -164,8 +164,8 @@ export const sistemiIt: ServiceCopy = {
 
 export const socialIt: ServiceCopy = {
   meta: {
-    title: 'Social media manager e pubblicità Meta per piccole imprese | Marketizzati',
-    description: 'Creazione dei contenuti, pubblicazione, gestione dei profili e pubblicità su Facebook e Instagram (Meta Ads) per artigiani e piccole imprese. Su preventivo.',
+    title: 'Social media manager e pubblicità Meta per piccole imprese',
+    description: 'Contenuti, pubblicazione, gestione dei profili e pubblicità su Facebook e Instagram (Meta Ads) per artigiani e piccole imprese. Su preventivo.',
   },
   label: '01 · Social media manager',
   title: 'Far vedere il tuo lavoro,',
@@ -195,7 +195,7 @@ export const socialIt: ServiceCopy = {
 
 export const videoIt: ServiceCopy = {
   meta: {
-    title: 'Contenuti video per social e sito: reel e motion graphics | Marketizzati',
+    title: 'Contenuti video per social e sito: reel e motion graphics',
     description: 'Video verticali, reel e motion graphics per far conoscere la tua attività su Instagram, TikTok e sul sito. Su preventivo.',
   },
   label: '01 · Contenuti video',

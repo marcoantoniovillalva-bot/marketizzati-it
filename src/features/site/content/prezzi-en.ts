@@ -3,8 +3,8 @@ import { ADS, OFFER } from '../lib/offer'
 
 export const prezziEn: PricesCopy = {
   meta: {
-    title: `How much does a website cost? ${OFFER.oneOff} € or ${OFFER.monthly} €/month, logo included | Marketizzati`,
-    description: `Website prices in 2026: with Marketizzati, ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months, logo and Google Business Profile included. Public price, online purchase.`,
+    title: `How much does a website cost? ${OFFER.oneOff} € or ${OFFER.monthly} €/month`,
+    description: `Website prices in 2026: ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months, logo and Google Business Profile included. Public price, no quote to wait for.`,
   },
   label: '01 · Prices', title: 'How much does a website cost?', italic: 'Here is the price.',
   answer: `A professional website with Marketizzati costs **${OFFER.oneOff} € upfront** or **${OFFER.monthly} € a month for ${OFFER.months} months**, including a logo, Google Business Profile, up to ${OFFER.maxPages} pages and ${OFFER.supportDays} days of support. After the last instalment, the website is yours. The only separate cost is domain and email, around ${OFFER.hostingPerYear} € a year.`,

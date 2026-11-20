@@ -4,7 +4,7 @@ import type { ServiceCopy } from './service-types'
 const price = `${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months`
 
 export const sitiEn: ServiceCopy = {
-  meta: { title: `Professional website design from ${OFFER.oneOff} € | Marketizzati`, description: `Websites for tradespeople and small businesses in Lombardy: up to ${OFFER.maxPages} pages, text based on real searches, logo and Google profile included. ${price}.` },
+  meta: { title: `Professional website design from ${OFFER.oneOff} €`, description: `Websites for tradespeople in Lombardy: up to ${OFFER.maxPages} pages, text based on real searches, logo and Google profile. ${price}.` },
   label: '01 · Website design', title: 'A website that makes it easy', italic: 'to get in touch.',
   answer: `I build **professional websites with several pages** for tradespeople and small businesses: text based on what customers in your area search for on Google, call and message buttons, logo and Google Business Profile included. It costs **${price}** and goes online in around ${OFFER.deliveryWeeks} weeks.`,
   cta: 'buy', visual: 'browser',
@@ -22,7 +22,7 @@ export const sitiEn: ServiceCopy = {
 }
 
 export const artigianiEn: ServiceCopy = {
-  meta: { title: 'Websites for tradespeople: plumbers, electricians, window fitters | Marketizzati', description: `Websites for tradespeople and small businesses: plumbers, electricians, window fitters, builders, beauty salons and restaurants. ${price}, logo and Google profile included.` },
+  meta: { title: 'Websites for plumbers, electricians and other trades', description: `Websites for plumbers, electricians, window fitters, builders, salons and restaurants: ${price}, logo included.` },
   label: '01 · Websites for tradespeople', title: 'A website for people', italic: 'who work with their hands.',
   answer: `A website for tradespeople with Marketizzati costs **${price}**, logo and Google profile included. It is designed for you if you work all day and have little time: send me photos and information, I handle the rest, and your website goes online in around ${OFFER.deliveryWeeks} weeks.`,
   cta: 'buy', visual: 'browser',
@@ -46,7 +46,7 @@ export const artigianiEn: ServiceCopy = {
 }
 
 export const schedaEn: ServiceCopy = {
-  meta: { title: 'Google Business Profile: how to set it up and use it | Marketizzati', description: 'Google Business Profile (Google My Business) for tradespeople: setup, verification, categories, photos and reviews. Or I create it for you, included with your website.' },
+  meta: { title: 'Google Business Profile: how to set it up and use it', description: 'Google Business Profile for tradespeople: setup, verification, categories, photos and reviews. Or I create it for you with your website.' },
   label: '01 · Google Business Profile', title: 'Your Google profile,', italic: 'often the first thing people see.',
   answer: `Your **Google Business Profile** (formerly Google My Business) is the panel showing your name, phone number, opening hours, photos and reviews on Google and Maps. It gives customers another way to call you. Creating one on Google is free. With Marketizzati, **I create or update it for you**, included with your website from ${OFFER.oneOff} €.`,
   cta: 'buy', visual: 'none',

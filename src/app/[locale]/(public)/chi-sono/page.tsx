@@ -48,7 +48,7 @@ const NEXOFT = 'https://www.nexoft.it/'
 const COPY: Record<Locale, AboutCopy> = {
   it: {
     meta: 'Chi siamo: Marco e Gabriela Villalva | Marketizzati',
-    desc: 'Marco Antonio Villalva, sviluppatore backend e creator, e Gabriela Villalva, designer e sviluppatrice: siti web, AI e automazioni per artigiani e piccole imprese.',
+    desc: 'Marco Antonio Villalva, sviluppatore backend, e Gabriela Villalva, designer: siti web, AI e automazioni per artigiani e piccole imprese.',
     label: 'Chi sono',
     title: 'Ciao, sono Marco.',
     italic: 'E lavoro con Gabriela.',
@@ -78,7 +78,7 @@ const COPY: Record<Locale, AboutCopy> = {
   },
   es: {
     meta: 'Quiénes somos: Marco y Gabriela Villalva | Marketizzati',
-    desc: 'Marco Antonio Villalva, desarrollador backend y creador, y Gabriela Villalva, diseñadora y desarrolladora: webs, IA y automatizaciones para artesanos y pequeñas empresas.',
+    desc: 'Marco Antonio Villalva, desarrollador backend, y Gabriela Villalva, diseñadora: webs, IA y automatizaciones para artesanos y pequeñas empresas.',
     label: 'Sobre mí',
     title: 'Hola, soy Marco.',
     italic: 'Y trabajo con Gabriela.',
@@ -108,7 +108,7 @@ const COPY: Record<Locale, AboutCopy> = {
   },
   en: {
     meta: 'About us: Marco and Gabriela Villalva | Marketizzati',
-    desc: 'Marco Antonio Villalva, backend developer and creator, and Gabriela Villalva, designer and developer: websites, AI and automations for tradespeople and small businesses.',
+    desc: 'Marco Antonio Villalva, backend developer, and Gabriela Villalva, designer: websites, AI and automations for tradespeople and small businesses.',
     label: 'About',
     title: 'Hi, I’m Marco.',
     italic: 'And I work with Gabriela.',

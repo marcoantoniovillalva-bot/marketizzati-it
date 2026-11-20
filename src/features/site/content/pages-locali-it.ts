@@ -14,8 +14,8 @@ interface City {
 function localPage(c: City): ServiceCopy {
   return {
     meta: {
-      title: `Web agency ${c.name}: sito web per artigiani da ${OFFER.oneOff} € | Marketizzati`,
-      description: `Realizzazione siti web a ${c.name} e provincia per artigiani e piccole imprese: ${price}, logo e scheda Google inclusi. Prezzo scritto, risposta su WhatsApp.`,
+      title: `Web agency ${c.name}: sito web per artigiani da ${OFFER.oneOff} €`,
+      description: `Siti web per artigiani e piccole imprese a ${c.name} e provincia: ${price}, logo e scheda Google inclusi.`,
     },
     label: `01 · Web agency ${c.name}`,
     title: `Il tuo sito a ${c.name},`,
