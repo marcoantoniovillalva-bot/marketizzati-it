@@ -7,8 +7,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // new public site (2026-11): warm whites, brand orange, one navy block
-        brand: { DEFAULT: '#F2541B', dark: '#D4410C', soft: '#FFE3D4', cream: '#FFF8F2', peach: '#FFEEE3' },
+        // new public site (2026-11): warm whites, brand orange, one navy block.
+        // brand = readable orange (contrast >= 4.5 on white/cream/peach, WCAG AA); bright = the logo orange, decorative only
+        brand: { DEFAULT: '#C8370C', dark: '#A82E09', bright: '#F2541B', soft: '#FFE3D4', cream: '#FFF8F2', peach: '#FFEEE3' },
         ink: { DEFAULT: '#16120F', soft: '#4B433D', muted: '#7A706A' },
         navy: { DEFAULT: '#121A2F', soft: '#1C2540' },
         background: '#F7F7F7',
@@ -23,8 +24,8 @@ const config: Config = {
           muted: '#666666',
         },
         accent: {
-          DEFAULT: '#FE3313',
-          hover: '#FF4D33',
+          DEFAULT: '#C8370C',
+          hover: '#A82E09',
           dark: '#CC2910',
           glow: 'rgba(254, 51, 19, 0.3)',
         },
