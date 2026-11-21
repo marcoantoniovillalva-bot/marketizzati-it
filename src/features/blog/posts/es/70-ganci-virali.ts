@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/70-ganci-virali/01-slide-01.webp",
+      "url": "/images/blog/risorse/70-ganci-virali/01-slide-01.es.webp",
       "alt": "70 ganchos virales — descarga la skill, instálala en Claude y escribe los ganchos de tus videos"
     },
     {
@@ -60,7 +60,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/70-ganci-virali/02-slide-02.webp",
+      "url": "/images/blog/risorse/70-ganci-virali/02-slide-02.es.webp",
       "alt": "Guía práctica 70 ganchos virales"
     },
     {
@@ -85,7 +85,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/70-ganci-virali/03-slide-03.webp",
+      "url": "/images/blog/risorse/70-ganci-virali/03-slide-03.es.webp",
       "alt": "Guía práctica 70 ganchos virales"
     },
     {
@@ -113,7 +113,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/70-ganci-virali/04-slide-04.webp",
+      "url": "/images/blog/risorse/70-ganci-virali/04-slide-04.es.webp",
       "alt": "Guía práctica 70 ganchos virales"
     },
     {
@@ -145,7 +145,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/70-ganci-virali/05-slide-05.webp",
+      "url": "/images/blog/risorse/70-ganci-virali/05-slide-05.es.webp",
       "alt": "Guía práctica 70 ganchos virales"
     },
     {
@@ -216,7 +216,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/70-ganci-virali/06-slide-06.webp",
+      "url": "/images/blog/risorse/70-ganci-virali/06-slide-06.es.webp",
       "alt": "Guía práctica 70 ganchos virales"
     },
     {

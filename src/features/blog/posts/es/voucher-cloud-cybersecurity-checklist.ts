@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/01-slide-01.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/01-slide-01.es.webp",
       "alt": "Voucher Cloud & Cybersecurity — la checklist de requisitos para entregar al asesor fiscal"
     },
     {
@@ -78,7 +78,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/02-slide-02.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/02-slide-02.es.webp",
       "alt": "Checklist Voucher Cloud & Ciberseguridad"
     },
     {
@@ -92,7 +92,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/03-slide-03.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/03-slide-03.es.webp",
       "alt": "Checklist Voucher Cloud & Ciberseguridad"
     },
     {
@@ -115,7 +115,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/04-slide-04.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/04-slide-04.es.webp",
       "alt": "Checklist Voucher Cloud & Ciberseguridad"
     },
     {
@@ -133,7 +133,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/05-slide-05.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/05-slide-05.es.webp",
       "alt": "Lista de verificación Voucher Cloud & Cybersecurity"
     },
     {
@@ -155,7 +155,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/06-slide-06.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/06-slide-06.es.webp",
       "alt": "Lista de verificación Voucher Cloud & Cybersecurity"
     },
     {
@@ -179,7 +179,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/07-slide-07.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/07-slide-07.es.webp",
       "alt": "Checklist Voucher Cloud & Cybersecurity"
     },
     {
@@ -212,7 +212,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/08-slide-08.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/08-slide-08.es.webp",
       "alt": "Lista de verificación Voucher Cloud & Cybersecurity"
     },
     {
@@ -315,7 +315,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/09-slide-09.webp",
+      "url": "/images/blog/risorse/voucher-cloud-cybersecurity-checklist/09-slide-09.es.webp",
       "alt": "Lista de verificación Voucher Cloud & Cybersecurity"
     },
     {

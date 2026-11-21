@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/01-slide-01.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/01-slide-01.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code — guía gratuita TOKEN"
     },
     {
@@ -34,7 +34,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/02-slide-02.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/02-slide-02.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {
@@ -70,7 +70,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/03-slide-03.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/03-slide-03.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {
@@ -135,7 +135,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/04-slide-04.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/04-slide-04.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {
@@ -185,7 +185,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/05-slide-05.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/05-slide-05.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {
@@ -253,7 +253,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/06-slide-06.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/06-slide-06.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {
@@ -308,7 +308,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/07-slide-07.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/07-slide-07.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {
@@ -351,7 +351,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/rtk-meno-token-claude-code/08-slide-08.webp",
+      "url": "/images/blog/risorse/rtk-meno-token-claude-code/08-slide-08.es.webp",
       "alt": "RTK: menos tokens desperdiciados con Claude Code"
     },
     {

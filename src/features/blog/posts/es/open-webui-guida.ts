@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/01-slide-01.webp",
+      "url": "/images/blog/risorse/open-webui-guida/01-slide-01.es.webp",
       "alt": "Open WebUI en media hora — el chat IA de tu empresa, en tu ordenador o en tu servidor"
     },
     {
@@ -77,7 +77,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/02-slide-02.webp",
+      "url": "/images/blog/risorse/open-webui-guida/02-slide-02.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {
@@ -91,7 +91,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/03-slide-03.webp",
+      "url": "/images/blog/risorse/open-webui-guida/03-slide-03.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {
@@ -146,7 +146,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/04-slide-04.webp",
+      "url": "/images/blog/risorse/open-webui-guida/04-slide-04.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {
@@ -193,7 +193,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/05-slide-05.webp",
+      "url": "/images/blog/risorse/open-webui-guida/05-slide-05.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {
@@ -220,7 +220,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/06-slide-06.webp",
+      "url": "/images/blog/risorse/open-webui-guida/06-slide-06.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {
@@ -283,7 +283,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/07-slide-07.webp",
+      "url": "/images/blog/risorse/open-webui-guida/07-slide-07.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {
@@ -302,7 +302,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/open-webui-guida/08-slide-08.webp",
+      "url": "/images/blog/risorse/open-webui-guida/08-slide-08.es.webp",
       "alt": "Guía práctica Open WebUI"
     },
     {

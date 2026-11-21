@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/01-slide-01.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/01-slide-01.es.webp",
       "alt": "El flujo de trabajo con Git y GitHub, los comandos, los prompts para Claude Code y Codex y las reglas para delegar proyectos sin caos"
     },
     {
@@ -89,7 +89,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/02-slide-02.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/02-slide-02.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -167,7 +167,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/03-slide-03.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/03-slide-03.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -195,7 +195,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/04-slide-04.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/04-slide-04.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -221,7 +221,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/05-slide-05.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/05-slide-05.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -311,7 +311,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/06-slide-06.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/06-slide-06.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -374,7 +374,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/07-slide-07.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/07-slide-07.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -399,7 +399,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/08-slide-08.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/08-slide-08.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {
@@ -458,7 +458,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/09-slide-09.webp",
+      "url": "/images/blog/risorse/git-e-github-per-costruire-con-ia/09-slide-09.es.webp",
       "alt": "Guía práctica: Git y GitHub para construir con IA de forma profesional, estructurada y delegable"
     },
     {

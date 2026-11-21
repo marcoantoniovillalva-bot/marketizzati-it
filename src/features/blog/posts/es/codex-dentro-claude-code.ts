@@ -23,7 +23,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/01-slide-01.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/01-slide-01.es.webp",
       "alt": "El plugin oficial de OpenAI que hace trabajar a Codex dentro de Claude Code: instalación, comandos, prompts listos, limitaciones y costos"
     },
     {
@@ -86,7 +86,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/02-slide-02.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/02-slide-02.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {
@@ -129,7 +129,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/03-slide-03.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/03-slide-03.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {
@@ -187,7 +187,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/04-slide-04.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/04-slide-04.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en una sola conversación"
     },
     {
@@ -223,7 +223,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/05-slide-05.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/05-slide-05.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {
@@ -291,7 +291,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/06-slide-06.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/06-slide-06.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {
@@ -377,7 +377,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/07-slide-07.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/07-slide-07.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {
@@ -430,7 +430,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/08-slide-08.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/08-slide-08.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {
@@ -494,7 +494,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/codex-dentro-claude-code/09-slide-09.webp",
+      "url": "/images/blog/risorse/codex-dentro-claude-code/09-slide-09.es.webp",
       "alt": "Guía práctica: Codex dentro de Claude Code, dos agentes IA en un solo chat"
     },
     {

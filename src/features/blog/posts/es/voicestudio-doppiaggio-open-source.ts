@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/01-slide-01.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/01-slide-01.es.webp",
       "alt": "VoiceStudio, la alternativa de código abierto y local a ElevenLabs: enlace, requisitos, instalación, licencias y casos de uso"
     },
     {
@@ -88,7 +88,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/02-slide-02.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/02-slide-02.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {
@@ -146,7 +146,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/03-slide-03.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/03-slide-03.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {
@@ -205,7 +205,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/04-slide-04.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/04-slide-04.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje de código abierto en tu ordenador"
     },
     {
@@ -242,7 +242,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/05-slide-05.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/05-slide-05.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje de código abierto en tu ordenador"
     },
     {
@@ -264,7 +264,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/06-slide-06.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/06-slide-06.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {
@@ -295,7 +295,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/07-slide-07.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/07-slide-07.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {
@@ -344,7 +344,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/08-slide-08.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/08-slide-08.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {
@@ -397,7 +397,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/09-slide-09.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/09-slide-09.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {
@@ -461,7 +461,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/10-slide-10.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/10-slide-10.es.webp",
       "alt": "Guía práctica: VoiceStudio, el estudio de doblaje open source en tu ordenador"
     },
     {

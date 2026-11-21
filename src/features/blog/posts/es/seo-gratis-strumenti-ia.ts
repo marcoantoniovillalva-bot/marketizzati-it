@@ -20,7 +20,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/01-slide-01.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/01-slide-01.es.webp",
       "alt": "SEO: los 3 instrumentos gratuitos + cómo usarlos con Claude Code — guía gratuita"
     },
     {
@@ -30,7 +30,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/02-slide-02.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/02-slide-02.es.webp",
       "alt": "SEO: los 3 instrumentos gratuitos + cómo usarlos con Claude Code"
     },
     {
@@ -62,7 +62,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/03-slide-03.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/03-slide-03.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {
@@ -99,7 +99,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/04-slide-04.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/04-slide-04.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {
@@ -136,7 +136,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/05-slide-05.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/05-slide-05.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {
@@ -167,7 +167,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/06-slide-06.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/06-slide-06.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {
@@ -195,7 +195,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/07-slide-07.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/07-slide-07.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {
@@ -230,7 +230,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/08-slide-08.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/08-slide-08.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {
@@ -261,7 +261,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/09-slide-09.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/09-slide-09.es.webp",
       "alt": "SEO: los 3 herramientas gratuitas + cómo usarlas con Claude Code"
     },
     {

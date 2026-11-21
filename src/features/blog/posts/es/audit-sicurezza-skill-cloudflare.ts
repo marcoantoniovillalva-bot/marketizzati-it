@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/01-slide-01.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/01-slide-01.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -34,7 +34,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/02-slide-02.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/02-slide-02.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -72,7 +72,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/03-slide-03.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/03-slide-03.es.webp",
       "alt": "AUDIT: la lista de verificación para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -113,7 +113,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/04-slide-04.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/04-slide-04.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -146,7 +146,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/05-slide-05.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/05-slide-05.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -205,7 +205,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/06-slide-06.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/06-slide-06.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -249,7 +249,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/07-slide-07.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/07-slide-07.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -318,7 +318,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/08-slide-08.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/08-slide-08.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
@@ -353,7 +353,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/09-slide-09.webp",
+      "url": "/images/blog/risorse/audit-sicurezza-skill-cloudflare/09-slide-09.es.webp",
       "alt": "AUDIT: la checklist para preparar la auditoría de seguridad con la skill de Cloudflare + un ejemplo de informe"
     },
     {
