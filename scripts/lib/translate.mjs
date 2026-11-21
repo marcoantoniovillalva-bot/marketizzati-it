@@ -29,17 +29,20 @@ function collect(post) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 // Groq free tier: each model has its own daily token limit, so when one is used up the next one takes over
-const MODELS = [MODEL, 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b'].filter((m, i, a) => a.indexOf(m) === i)
+// fallback models return broken JSON on long batches: only the main model (it waits for its limit to refill)
+const MODELS = [MODEL]
 let current = 0
 
 /** One batch: up to 3 attempts for malformed JSON; per-minute limit (429) -> wait; daily limit -> next model. */
 async function translateBatch(texts, lang) {
   let last
-  for (let attempt = 0, waits = 0; attempt < 3 && waits < 20;) {
+  for (let attempt = 0, waits = 0; attempt < 3 && waits < 80;) {
     try { return await callModel(texts, lang, MODELS[current]) } catch (e) {
       last = e
       if (/tokens per day|TPD/.test(e.message) && current < MODELS.length - 1) { current++; continue }
-      if (/Groq 429/.test(e.message)) { waits++; await sleep(65000); continue }
+      // daily limit: fail fast (publish-resource keeps the Italian article live), unless TRANSLATE_PATIENT=1 (bulk runs)
+      if (/tokens per day|TPD/.test(e.message) && !process.env.TRANSLATE_PATIENT) throw new Error("Groq daily token limit reached: re-run the translation later (scripts/translate-published.mjs)")
+      if (/Groq 429/.test(e.message)) { waits++; await sleep(/tokens per day|TPD/.test(e.message) ? 600000 : 65000); continue }
       attempt++
     }
   }

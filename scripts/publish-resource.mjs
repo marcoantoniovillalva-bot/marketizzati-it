@@ -141,7 +141,7 @@ if (!useGit) {
         const r = await publishPost(BASE, { locale: lang, ...(await translatePost(italian, lang)), published: true })
         urls.push(`/${lang}/blog/${slug}`, `/${lang}/blog`)
         console.log(`  ${r.url}`)
-      } catch (e) { console.log(`  ! ${lang} not published: ${e.message} (re-run later, the Italian article is live)`) }
+      } catch (e) { console.log(`  ! ${lang} not published: ${e.message} (later: node scripts/translate-published.mjs ${slug})`) }
     }
   }
   step('telling Google and Bing')
