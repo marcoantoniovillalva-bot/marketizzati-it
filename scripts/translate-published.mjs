@@ -4,7 +4,7 @@
 // Uses Groq (scripts/lib/translate.mjs). If the daily limit is reached it stops: run it again later, it resumes.
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import { env, publishPost } from './lib/blog-publish.mjs'
+import { env, localizeMedia, publishPost, uploadTranslatedMedia } from './lib/blog-publish.mjs'
 import { site } from './lib/lead-magnet.mjs'
 import { translatePost } from './lib/translate.mjs'
 import { notifySearchEngines } from './seo/notify.mjs'
@@ -28,12 +28,23 @@ const toPost = (r) => ({
   ...(r.tiktok ? { tiktok: r.tiktok } : {}), ...(r.free_guide ? { freeGuide: true } : {}),
 })
 const urls = []
+const mediaOnly = process.argv.includes('--media-only')
 for (const row of rows.filter((r) => !only.length || only.includes(r.slug))) {
+  const uploaded = await uploadTranslatedMedia(row.slug, site)
+  if (uploaded) console.log(`${row.slug}: ${uploaded} translated images uploaded`)
+  // existing ES/EN database rows: just point them to the translated images
+  for (const lang of ['es', 'en']) {
+    const existing = (await rest(`select=*&locale=eq.${lang}&slug=eq.${row.slug}`))[0]
+    if (!existing) continue
+    await publishPost(BASE, { locale: lang, ...(await localizeMedia(toPost(existing), lang)), published: existing.published })
+    console.log(`${row.slug} (${lang}): images re-linked`)
+  }
+  if (mediaOnly) continue
   for (const lang of ['es', 'en']) {
     if (has(lang, row.slug)) continue
     process.stdout.write(`${row.slug} -> ${lang} ... `)
     try {
-      const r = await publishPost(BASE, { locale: lang, ...(await translatePost(toPost(row), lang)), published: true })
+      const r = await publishPost(BASE, { locale: lang, ...(await localizeMedia(await translatePost(toPost(row), lang), lang)), published: true })
       urls.push(`/${lang}/blog/${row.slug}`)
       console.log(r.url)
     } catch (e) {

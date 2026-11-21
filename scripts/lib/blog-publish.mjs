@@ -43,6 +43,38 @@ export function rewriteUrls(post, map) {
   return JSON.parse(json)
 }
 
+/**
+ * Translated media: every blog-media URL ".../<name>.webp" of the post becomes ".../<name>.<lang>.webp" when that file
+ * exists in the bucket (covers and slides rendered in Spanish/English). Untranslated images stay as they are.
+ */
+export async function localizeMedia(post, lang) {
+  const prefix = mediaUrl('')
+  const urls = [...new Set(JSON.stringify(post).match(new RegExp(`${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^"\\\\]+?\\.webp`, 'g')) ?? [])]
+  const map = {}
+  for (const url of urls) {
+    if (/\.(es|en)\.webp$/.test(url)) continue
+    const candidate = url.replace(/\.webp$/, `.${lang}.webp`)
+    const res = await fetch(candidate, { method: 'HEAD' }).catch(() => null)
+    if (res?.ok) map[url] = candidate
+  }
+  return rewriteUrls(post, map)
+}
+
+/** Uploads the translated covers/slides found locally (public/images/blog/.../*.es|en.webp) for one slug. */
+export async function uploadTranslatedMedia(slug, sitePath) {
+  const { existsSync, readdirSync } = await import('node:fs')
+  let n = 0
+  for (const lang of ['es', 'en']) {
+    for (const layout of ['wide', 'tall']) {
+      const f = `${sitePath}/public/images/blog/covers/${slug}-${layout}.${lang}.webp`
+      if (existsSync(f)) { await uploadFile(f, `${slug}/cover-${layout}.${lang}.webp`); n++ }
+    }
+    const dir = `${sitePath}/public/images/blog/risorse/${slug}`
+    if (existsSync(dir)) for (const name of readdirSync(dir).filter((x) => x.endsWith(`.${lang}.webp`))) { await uploadFile(`${dir}/${name}`, `${slug}/slides/${name}`); n++ }
+  }
+  return n
+}
+
 /** Sends the article to the site; it is live (and in sitemap/llms.txt) as soon as this returns. */
 export async function publishPost(base, article) {
   if (!env.BLOG_PUBLISH_TOKEN) throw new Error('BLOG_PUBLISH_TOKEN missing in .env.local')
