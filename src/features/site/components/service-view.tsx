@@ -13,6 +13,8 @@ import { adsPlans, sitePlans, socialPlans } from '../content/plans'
 import { Explainer, SERVICE_EXPLAINERS } from './explainer'
 import { IconTile, iconFor } from './icons'
 import { BrowserBuild, PhoneChat } from './mockups'
+import { PriceStack } from './explainers-site'
+import { getVisualCopy } from '../content/visuals'
 import { Heading, Section, type Tint } from './section'
 import { ArrowLink, Button, CheckList, Faq, Rich, WhatsAppButton } from './ui'
 
@@ -117,6 +119,8 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
           </Section>
         )
       })}
+
+      {pageKey === 'siti' && <Section tint="orange"><div className="grid items-center gap-8 md:grid-cols-2"><PriceStack v={getVisualCopy(locale)} locale={locale} /><div><Heading title={home.offer.includedTitle} /><p className="mt-4 leading-relaxed text-ink-soft">{home.offer.included[5]}</p></div></div></Section>}
 
       {pageKey === 'sistemi' || pageKey === 'agenti' ? (
         <Section tint="peach" id="piani">

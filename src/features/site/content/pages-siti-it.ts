@@ -38,7 +38,7 @@ export const sitiIt: ServiceCopy = {
       label: '04 · Cosa resta a te',
       title: 'Il sito è tuo,',
       italic: 'non in affitto.',
-      text: 'Dominio, email, logo e scheda Google sono intestati a te dal primo giorno. Dopo l’ultima rata anche il sito, codice compreso. Non c’è un canone per tenerlo online: paghi solo dominio ed email, circa 32 € l’anno.',
+      text: `Dominio, email, logo e scheda Google sono intestati a te dal primo giorno. Dopo l’ultima rata anche il sito, codice compreso. Non c’è un canone per tenerlo online: paghi solo dominio ed email, circa ${OFFER.hostingPerYear} € l’anno.`,
     },
   ],
   faq: [

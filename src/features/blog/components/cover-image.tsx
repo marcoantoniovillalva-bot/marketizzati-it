@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Play } from 'lucide-react'
 import type { BlogPost } from '../types'
 
-type CoverPost = Pick<BlogPost, 'image' | 'imageTall' | 'imageAlt' | 'videoPreview'>
+type CoverPost = Pick<BlogPost, 'image' | 'imageTall' | 'imageAlt' | 'videoPreview' | 'video'>
 
 /**
  * Article cover, art-directed: 4:5 on phones when the post has a tall version, 16:10 from 640px up.
@@ -32,7 +32,7 @@ export function CoverImage({ post, priority = false, autoPlay = false, className
       card.addEventListener('mouseleave', stop)
       return () => { card.removeEventListener('mouseenter', play); card.removeEventListener('mouseleave', stop) }
     }
-    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? play() : stop()), { rootMargin: autoPlay ? '0px' : '-30% 0px -30% 0px', threshold: autoPlay ? 0.5 : 0 })
+    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? play() : stop()), { rootMargin: autoPlay ? '0px' : '-20% -30% -20% -30%', threshold: autoPlay ? 0.5 : 0 })
     io.observe(el)
     return () => io.disconnect()
   }, [autoPlay])
@@ -49,11 +49,12 @@ export function CoverImage({ post, priority = false, autoPlay = false, className
           className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
       </picture>
-      {post.videoPreview && (
+      {(post.videoPreview || post.video) && (
         <>
           <video
             ref={video}
-            src={post.videoPreview}
+            src={post.videoPreview || post.video}
+            poster={post.image}
             muted
             loop
             playsInline
