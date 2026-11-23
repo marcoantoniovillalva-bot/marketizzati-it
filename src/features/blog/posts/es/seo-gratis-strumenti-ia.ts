@@ -201,27 +201,27 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "1 — ANALIZA LOS DATOS",
-      "content": "Leggi i file in ricerca-seo. Riassumi temi e domande ricorrenti per ATTIVITÀ e AREA. Cita file e righe o valori usati. Distingui interesse relativo Trends, stime e intervalli Keyword Planner. Segnala dati mancanti senza inventare volumi."
+      "content": "Lee los archivos de ricerca-seo. Resume temas y preguntas frecuentes por ACTIVIDAD y ZONA. Cita archivos y filas o valores usados. Distingue el interés relativo de Trends de las estimaciones y rangos de Keyword Planner. Señala los datos que faltan sin inventar volúmenes."
     },
     {
       "type": "code",
       "label": "2 — MAPA DE TEMAS Y PÁGINAS",
-      "content": "Usa contesto.txt e i dati raccolti. Crea una tabella: argomento, intento ipotizzato, pagina esistente o proposta, evidenza e domanda da verificare. Non assumere che una pagina esista se non è nell’elenco."
+          "content": "Usa contesto.txt y los datos recopilados. Crea una tabla con tema, intención supuesta, página existente o propuesta, evidencia y pregunta por verificar. No des por hecho que una página existe si no figura en la lista."
     },
     {
       "type": "code",
       "label": "3 — REVISIÓN DE LA PÁGINA",
-      "content": "Analizza toolbar.txt per URL. Confronta title, description, heading, link e alt disponibili con il contenuto e l’obiettivo indicati. Elenca osservazioni, evidenza, proposta e controllo umano. Non dichiarare errori su dati assenti e non modificare il sito."
+          "content": "Analiza toolbar.txt por URL. Compara los títulos, descripciones, encabezados, enlaces y textos alternativos disponibles con el contenido y el objetivo indicados. Enumera observaciones, evidencias, propuestas y comprobaciones humanas. No declares errores sobre datos ausentes ni modifiques el sitio."
     },
     {
       "type": "code",
       "label": "4 — PLAN EDITORIAL",
-      "content": "Proponi un piano editoriale di 30 giorni per ATTIVITÀ, con date, argomento, formato, intento, pagina collegata e fonte nei file. Rispetta RISORSE disponibili. Distingui ipotesi e dati; non promettere posizioni o traffico."
+          "content": "Propón un plan editorial de 30 días para NEGOCIO, con fechas, tema, formato, intención, página enlazada y fuente en los archivos. Respeta los RECURSOS disponibles. Distingue hipótesis y datos; no prometas posiciones ni tráfico."
     },
     {
       "type": "code",
       "label": "5 — PRIORIDAD",
-      "content": "Ordina le correzioni emerse per impatto ipotizzato, impegno e dipendenze. Per ciascuna indica URL, evidenza, azione, responsabile e verifica. Segna DA VERIFICARE quando mancano informazioni. Non effettuare modifiche."
+          "content": "Ordena las correcciones detectadas por impacto previsto, esfuerzo y dependencias. Para cada una indica URL, evidencia, acción, responsable y verificación. Marca POR VERIFICAR cuando falte información. No hagas cambios."
     },
     {
       "type": "h2",

@@ -282,7 +282,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Il nostro obiettivo è ridurre i bug nel servizio pagamenti. Analizza il repository e crea un piano di formazione Pluralsight per il mio team, con corsi, laboratori e un test finale. Proponi la durata in settimane."
+      "content": "Nuestro objetivo es reducir los bugs en el servicio de pagos. Analiza el repositorio y crea un plan de formación de Pluralsight para mi equipo, con cursos, laboratorios y una prueba final. Propón la duración en semanas."
     },
     {
       "type": "paragraph",
@@ -298,7 +298,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Trasforma gli errori emersi negli ultimi test e nelle ultime code review in un percorso Pluralsight mirato, una sezione per ogni tipo di errore."
+      "content": "Convierte los errores surgidos en las últimas pruebas y en las últimas code reviews en un itinerario de Pluralsight específico, con una sección por cada tipo de error."
     },
     {
       "type": "paragraph",
@@ -372,7 +372,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Usando Jira e GitLab, confronta il tempo medio di chiusura dei ticket e i commit del team [NOME TEAM] nei 60 giorni prima e nei 60 giorni dopo la formazione Pluralsight. Scrivi un report di una pagina con i numeri e 3 conclusioni."
+      "content": "Usando Jira y GitLab, compara el tiempo medio de cierre de los tickets y los commits del equipo [NOMBRE DEL EQUIPO] en los 60 días anteriores y en los 60 días posteriores a la formación de Pluralsight. Escribe un informe de una página con los números y 3 conclusiones."
     },
     {
       "type": "paragraph",

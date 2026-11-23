@@ -262,27 +262,27 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "PRUEBA 1 — VERSIÓN ANDROID",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Apri Impostazioni e leggi la versione Android. Non riportare IMEI, seriali hardware o dati dell’account. Non cambiare impostazioni. Termina entro 8 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Abre Ajustes y lee la versión de Android. No indiques IMEI, números de serie del hardware ni datos de la cuenta. No cambies ajustes. Termina en un máximo de 8 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 2 — CAPTURA DE PANTALLA",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Apri la pagina principale di Impostazioni. Acquisisci uno screenshot solo se non mostra dati personali. Restituisci l’evidenza disponibile. Non inventare un percorso file. Termina entro 4 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Abre la página principal de Ajustes. Haz una captura de pantalla solo si no muestra datos personales. Devuelve la evidencia disponible. No inventes una ruta de archivo. Termina en un máximo de 4 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 3 — BATERÍA",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Apri Impostazioni → Batteria. Leggi la percentuale se disponibile. Non attivare risparmio energetico o altri interruttori. Segnala eventuali dialoghi di errore. Termina entro 6 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Abre Ajustes → Batería. Lee el porcentaje si está disponible. No actives el ahorro de energía ni otros interruptores. Informa de cualquier diálogo de error. Termina en un máximo de 6 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 4 — CALCULADORA",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Apri la Calcolatrice di sistema se presente. Calcola 17 + 25. Verifica che il risultato sia 42. Non aprire la cronologia. Se manca, dichiaralo. Termina entro 8 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Abre la Calculadora del sistema si está presente. Calcula 17 + 25. Comprueba que el resultado sea 42. No abras el historial. Si no existe, indícalo. Termina en un máximo de 8 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 5 — NAVEGACIÓN",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Da Impostazioni apri Display, torna indietro e poi vai alla Home. Verifica ogni passaggio senza toccare interruttori. Riporta il punto in cui ti blocchi. Termina entro 6 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Desde Ajustes abre Pantalla, vuelve atrás y luego ve a Inicio. Comprueba cada paso sin tocar los interruptores. Indica el punto en el que te bloqueas. Termina en un máximo de 6 acciones."
     },
     {
       "type": "paragraph",
@@ -305,27 +305,27 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "PRUEBA 6 — BUSCAR EN AJUSTES",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. In Impostazioni cerca Batteria. Apri il risultato pertinente e verifica il titolo. Non cambiare opzioni. Se la ricerca non esiste, dichiaralo. Termina entro 8 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. En Ajustes busca Batería. Abre el resultado pertinente y comprueba el título. No cambies opciones. Si la búsqueda no existe, indícalo. Termina en un máximo de 8 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 7 — INFO CALCULADORA",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Da Impostazioni apri le informazioni dell’app Calcolatrice di sistema. Leggi la versione se visibile. Non cancellare dati, non disinstallare e non modificare permessi. Termina entro 8 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Desde Ajustes abre la información de la app Calculadora del sistema. Lee la versión si es visible. No borres datos, no desinstales y no modifiques permisos. Termina en un máximo de 8 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 8 — CAMPOS VACÍOS",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Usa il profilo Pro. Apri il login di APP_DEMO e invia il modulo vuoto una sola volta. Verifica gli errori sui campi obbligatori. Non usare altri account. Termina entro 6 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Usa el perfil Pro. Abre el login de APP_DEMO y envía el formulario vacío una sola vez. Comprueba los errores en los campos obligatorios. No uses otras cuentas. Termina en un máximo de 6 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 9 — INICIO DE SESIÓN FICTICIO",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Usa il profilo Pro. In APP_DEMO inserisci demo@example.test e la password fittizia prova-sbagliata. Invia una sola volta. Verifica il rifiuto atteso, senza riprovare. Non usare recupero password. Termina entro 8 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Usa el perfil Pro. En APP_DEMO introduce demo@example.test y la contraseña ficticia prova-sbagliata. Envía una sola vez. Comprueba el rechazo esperado, sin reintentar. No uses la recuperación de contraseña. Termina en un máximo de 8 acciones."
     },
     {
       "type": "code",
       "label": "PRUEBA 10 — SIN RESULTADO",
-      "content": "Usa ARTEMIS solo sul dispositivo di prova SERIAL. Fermati se compaiono dati personali. Usa il profilo Pro. Nella ricerca locale di APP_DEMO scrivi zzz-nessun-risultato. Verifica lo stato vuoto. Torna alla schermata iniziale. Non creare o eliminare elementi. Termina entro 8 azioni."
+      "content": "Usa ARTEMIS solo en el dispositivo de prueba SERIAL. Detente si aparecen datos personales. Usa el perfil Pro. En la búsqueda local de APP_DEMO escribe zzz-nessun-risultato. Comprueba el estado vacío. Vuelve a la pantalla de inicio. No crees ni elimines elementos. Termina en un máximo de 8 acciones."
     },
     {
       "type": "paragraph",
@@ -354,17 +354,17 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "DESARROLLADOR 1 — REPRODUCE UN BUG",
-      "content": "Con ARTEMIS Pro, solo su SERIAL, esplora APP_DEMO: Home → Cerca → testo zzz. Atteso: stato vuoto, nessun crash. Prepara un piano breve, poi verifica il percorso entro 12 azioni. Raccogli screenshot e log disponibili senza dati personali. Riporta atteso, osservato e passaggi ripetibili. Non modificare codice o dati. Se manca un’evidenza, scrivi NON VERIFICATO."
+      "content": "Con ARTEMIS Pro, solo en SERIAL, explora APP_DEMO: Inicio → Buscar → texto zzz. Esperado: estado vacío, ningún fallo. Prepara un plan breve y luego verifica el recorrido en un máximo de 12 acciones. Recoge capturas y logs disponibles sin datos personales. Indica lo esperado, lo observado y los pasos repetibles. No modifiques código ni datos. Si falta una evidencia, escribe NO VERIFICADO."
     },
     {
       "type": "code",
       "label": "DESARROLLADOR 2 — REGRESIÓN UI",
-      "content": "Con ARTEMIS Pro, solo su SERIAL, verifica in APP_DEMO tre percorsi: Home → Dettaglio → Indietro; ricerca senza risultati; login vuoto. Usa solo dati sintetici. Massimo 8 azioni per percorso. Per ciascuno riporta atteso, osservato, esito ed evidenza. Non inviare messaggi, non acquistare e non cambiare permessi. Fermati se appare un account reale."
+      "content": "Con ARTEMIS Pro, solo en SERIAL, verifica en APP_DEMO tres recorridos: Inicio → Detalle → Atrás; búsqueda sin resultados; login vacío. Usa solo datos sintéticos. Máximo 8 acciones por recorrido. Para cada uno indica lo esperado, lo observado, el resultado y la evidencia. No envíes mensajes, no compres y no cambies permisos. Detente si aparece una cuenta real."
     },
     {
       "type": "code",
       "label": "DESARROLLADOR 3 — DEL TEST AL CÓDIGO",
-      "content": "Con ARTEMIS Pro esplora su SERIAL il percorso Home → Cerca di APP_DEMO, entro 8 azioni. Poi proponi un test eseguibile nel framework già presente nel mio progetto. Usa locator osservati e attese esplicite. Non inventare ID o coordinate. Indica prerequisiti e assert. Non installare dipendenze e non modificare file senza una mia richiesta. Marca DA VERIFICARE le parti che non hai eseguito."
+      "content": "Con ARTEMIS Pro explora en SERIAL el recorrido Inicio → Buscar de APP_DEMO, en un máximo de 8 acciones. Después propón una prueba ejecutable en el framework que ya existe en mi proyecto. Usa locators observados y esperas explícitas. No inventes IDs ni coordenadas. Indica requisitos previos y asserts. No instales dependencias y no modifiques archivos sin que yo te lo pida. Marca como POR VERIFICAR las partes que no hayas ejecutado."
     },
     {
       "type": "callout",

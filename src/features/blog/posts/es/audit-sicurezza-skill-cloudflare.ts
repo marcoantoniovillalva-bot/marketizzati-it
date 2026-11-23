@@ -122,7 +122,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "# compose.audit.yaml — DA ADATTARE, NON TESTATO\nservices:\n  check:\n    image: audit-runtime:local # Immagine fidata già locale\n    pull_policy: never       # Runtime e dipendenze già pronti\n    network_mode: none       # Nessuna rete esterna\n    read_only: true          # Root filesystem non scrivibile\n    user: \"10001:10001\"      # UID/GID da verificare\n    cap_drop: [ALL]\n    security_opt: [\"no-new-privileges:true\"]\n    cpus: 1\n    mem_limit: 512m\n    memswap_limit: 512m\n    pids_limit: 64\n    ulimits: {fsize: 10485760, nofile: 128}\n    volumes:\n      - ./audit-source:/src:ro # Copia SENZA segreti\n    tmpfs:\n      - /scratch:rw,nosuid,nodev,size=64m,uid=10001,gid=10001,mode=0700\n    working_dir: /scratch\n    # env -i pulisce l’ambiente; verificare i percorsi dei tool.\n    entrypoint:\n      [\"/usr/bin/env\", \"-i\", \"PATH=/usr/local/bin:/usr/bin:/bin\",\n       \"HOME=/scratch\", \"TMPDIR=/scratch\", \"XDG_CACHE_HOME=/scratch\",\n       \"/usr/bin/timeout\", \"--kill-after=5s\", \"60s\"]\n    command: [\"node\", \"/src/tests/security-local.cjs\"]"
+      "content": "# compose.audit.yaml — POR ADAPTAR, SIN PROBAR\nservices:\n  check:\n    image: audit-runtime:local # Imagen de confianza ya local\n    pull_policy: never       # Runtime y dependencias ya listos\n    network_mode: none       # Sin red externa\n    read_only: true          # Sistema de archivos raíz no escribible\n    user: \"10001:10001\"      # UID/GID por verificar\n    cap_drop: [ALL]\n    security_opt: [\"no-new-privileges:true\"]\n    cpus: 1\n    mem_limit: 512m\n    memswap_limit: 512m\n    pids_limit: 64\n    ulimits: {fsize: 10485760, nofile: 128}\n    volumes:\n      - ./audit-source:/src:ro # Copia SIN secretos\n    tmpfs:\n      - /scratch:rw,nosuid,nodev,size=64m,uid=10001,gid=10001,mode=0700\n    working_dir: /scratch\n    # env -i limpia el entorno; verifica las rutas de las herramientas.\n    entrypoint:\n      [\"/usr/bin/env\", \"-i\", \"PATH=/usr/local/bin:/usr/bin:/bin\",\n       \"HOME=/scratch\", \"TMPDIR=/scratch\", \"XDG_CACHE_HOME=/scratch\",\n       \"/usr/bin/timeout\", \"--kill-after=5s\", \"60s\"]\n    command: [\"node\", \"/src/tests/security-local.cjs\"]"
     },
     {
       "type": "paragraph",
@@ -215,12 +215,12 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "1 — AUDITORÍA COMPLETA",
-      "content": "Usa security-audit di Cloudflare per un audit completo di questa codebase. Perimetro: PERCORSI. Profilo: PROFILO. Massimo BUDGET_AGENTI invocazioni totali. Scrivi i report fuori dal repo in CARTELLA_OUTPUT_NUOVA. Registra commit, copertura e limiti. Non modificare il sorgente. Esegui codice solo nella sandbox già verificata: niente rete esterna, segreti o download; ambiente ammesso esplicitamente, sorgente in sola lettura, scratch separati e limiti di risorse/tempo. Se manca un requisito, non eseguire. Distingui confirmed, needs_validation e rejected. Dichiara eventuale incompletezza."
+      "content": "Usa security-audit de Cloudflare para una auditoría completa de esta codebase. Perímetro: PERCORSI. Perfil: PROFILO. Máximo BUDGET_AGENTI invocaciones en total. Escribe los informes fuera del repo, en CARTELLA_OUTPUT_NUOVA. Registra commit, cobertura y límites. No modifiques el código fuente. Ejecuta código solo en la sandbox ya verificada: sin red externa, secretos ni descargas; entorno permitido explícitamente, código fuente en solo lectura, scratch separados y límites de recursos/tiempo. Si falta algún requisito, no ejecutes. Distingue confirmed, needs_validation y rejected. Declara cualquier incompletitud."
     },
     {
       "type": "code",
       "label": "2 — CORRECCIÓN EN UN SEGUNDO CHAT",
-      "content": "Leggi il report allegato e il codice al commit COMMIT. Verifica ogni confirmed prima della patch. Correggi sul branch dedicato i problemi ancora dimostrabili. Per ogni correzione spiega il motivo e aggiungi una verifica di regressione pertinente. I needs_validation richiedono prima il fatto mancante. Non correggere automaticamente i rejected. Non cambiare i verdetti per far sembrare risolto il report. Esegui test solo nella sandbox verificata, con dati fittizi. Non installare nulla. Consegna diff, controlli eseguiti e limiti."
+      "content": "Lee el informe adjunto y el código en el commit COMMIT. Verifica cada confirmed antes del parche. Corrige en la rama dedicada los problemas que aún se puedan demostrar. Por cada corrección explica el motivo y añade una verificación de regresión pertinente. Los needs_validation requieren primero el dato que falta. No corrijas automáticamente los rejected. No cambies los veredictos para que el informe parezca resuelto. Ejecuta pruebas solo en la sandbox verificada, con datos ficticios. No instales nada. Entrega diff, comprobaciones realizadas y límites."
     },
     {
       "type": "paragraph",
@@ -229,12 +229,12 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "3 — NUEVA AUDITORÍA",
-      "content": "Ripeti security-audit sul commit corretto COMMIT_NUOVO. Usa i report precedenti in CARTELLA_PRECEDENTE e un nuovo output esterno in CARTELLA_NUOVA. Rivalida le correzioni, cerca regressioni e aggiorna la copertura. Mantieni i vincoli del primo audit e il massimo BUDGET_AGENTI. Distingui risolto, ancora confermato e da verificare. Dichiara esclusioni e parti incomplete. Non certificare che l’app sia sicura."
+      "content": "Repite security-audit sobre el commit corregido COMMIT_NUOVO. Usa los informes anteriores en CARTELLA_PRECEDENTE y una nueva salida externa en CARTELLA_NUOVA. Revalida las correcciones, busca regresiones y actualiza la cobertura. Mantén las restricciones de la primera auditoría y el máximo BUDGET_AGENTI. Distingue resuelto, aún confirmado y por verificar. Declara exclusiones y partes incompletas. No certifiques que la app sea segura."
     },
     {
       "type": "code",
       "label": "VERIFICACIÓN CRUZADA — CODEX",
-      "content": "Rivedi in modo indipendente il diff della correzione e il codice interessato. Prima formula la tua valutazione dal sorgente; poi confrontala con il report allegato. Cerca bypass e regressioni. Non modificare file. Non eseguire codice fuori dalla sandbox verificata. Riporta percorso, evidenza e limite. Se non puoi dimostrare un punto, scrivi DA VERIFICARE."
+      "content": "Revisa de forma independiente el diff de la corrección y el código afectado. Primero formula tu valoración a partir del código fuente; después compárala con el informe adjunto. Busca bypasses y regresiones. No modifiques archivos. No ejecutes código fuera de la sandbox verificada. Indica ruta, evidencia y límite. Si no puedes demostrar un punto, escribe POR VERIFICAR."
     },
     {
       "type": "list",

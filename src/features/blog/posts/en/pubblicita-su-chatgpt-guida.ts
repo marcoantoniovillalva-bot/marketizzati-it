@@ -168,12 +168,12 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "1 — PREPARE ADS",
-      "content": "Usa il plugin ChatGPT Ads Manager. Analizza la pagina URL e prepara tre varianti di titolo e descrizione per OFFERTA e PUBBLICO. Mostrami un’anteprima. Non creare né pubblicare nulla."
+      "content": "Use the ChatGPT Ads Manager plugin. Analyze the page URL and prepare three title and description variants for OFFERTA and PUBBLICO. Show me a preview. Don't create or publish anything."
     },
     {
       "type": "code",
       "label": "2 — DESIGN CAMPAIGN",
-      "content": "Usa il plugin per preparare una campagna per OFFERTA, destinazione URL e paese Italia. Proponi obiettivo, gruppo di annunci e contesti pertinenti. Chiedimi il budget e mostra tutte le impostazioni prima di qualunque modifica."
+      "content": "Use the plugin to prepare a campaign for OFFERTA, destination URL and country Italy. Propose objective, ad group and relevant contexts. Ask me for the budget and show all settings before any change."
     },
     {
       "type": "code",
@@ -183,12 +183,12 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "4 — READ THE RESULTS",
-      "content": "Usa il plugin per analizzare CAMPAGNA dal DATA al DATA. Riporta impression, clic, spesa e conversioni disponibili. Evidenzia dati mancanti e limiti di attribuzione. Non modificare la campagna."
+      "content": "Use the plugin to analyze CAMPAGNA from DATA to DATA. Report impressions, clicks, spend and available conversions. Highlight missing data and attribution limits. Don't modify the campaign."
     },
     {
       "type": "code",
       "label": "5 — FIND THE PROBLEMS",
-      "content": "Usa il plugin per capire perché CAMPAGNA non viene erogata. Distingui i dati osservati dalle ipotesi e proponi controlli in ordine di priorità. Non effettuare modifiche."
+      "content": "Use the plugin to understand why CAMPAGNA is not being served. Distinguish observed data from hypotheses and propose checks in priority order. Don't make any changes."
     },
     {
       "type": "list",

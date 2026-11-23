@@ -391,7 +391,7 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "MENSAJE LISTO",
-      "content": "Ciao, a ottobre 2026 PHP ha pubblicato correzioni critiche (CVE-2026-109618 e CVE-2026-109619, versioni 8.2.35, 8.3.36, 8.4.27 e 8.5.12), Node.js ha rilasciato 22.23.4, 24.22.1 e 26.12.1 e sono stati aggiornati i certificati di sistema per il caso eMudhra. Mi confermi per iscritto, per il mio sito/progetto [nome]: 1) la versione esatta di PHP e Node.js in uso; 2) se è stato aggiornato il pacchetto ca-certificates; 3) se i servizi sono stati riavviati o ridistribuiti; 4) se avete controllato i log dal 17 ottobre? Grazie."
+      "content": "Hola, en octubre de 2026 PHP publicó correcciones críticas (CVE-2026-109618 y CVE-2026-109619, versiones 8.2.35, 8.3.36, 8.4.27 y 8.5.12), Node.js lanzó 22.23.4, 24.22.1 y 26.12.1 y se han actualizado los certificados del sistema por el caso eMudhra. ¿Me confirmas por escrito, para mi sitio/proyecto [nombre]: 1) la versión exacta de PHP y Node.js en uso; 2) si se ha actualizado el paquete ca-certificates; 3) si los servicios se han reiniciado o vuelto a desplegar; 4) si habéis revisado los logs desde el 17 de octubre? Gracias."
     },
     {
       "type": "paragraph",

@@ -303,7 +303,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Crea un video di 8 secondi in loop, vista cinematografica al tramonto di [IL TUO LUOGO / PRODOTTO], camera che avanza lentamente, luce calda, stile premium, nessun testo, adatto come sfondo di un sito web."
+      "content": "Crea un vídeo de 8 segundos en bucle, vista cinematográfica al atardecer de [TU LUGAR / PRODUCTO], cámara que avanza lentamente, luz cálida, estilo premium, sin texto, adecuado como fondo de una web."
     },
     {
       "type": "paragraph",
@@ -438,7 +438,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Ti incollo il preventivo che ho ricevuto per il mio sito. Dimmi cosa è incluso, cosa manca rispetto a dominio e hosting a mio nome, revisioni, velocità da smartphone, SEO, cookie e manutenzione, e quali domande dovrei fare al web designer prima di firmare. [INCOLLA IL PREVENTIVO]"
+      "content": "Te pego el presupuesto que he recibido para mi web. Dime qué incluye, qué falta en cuanto a dominio y hosting a mi nombre, revisiones, velocidad en móvil, SEO, cookies y mantenimiento, y qué preguntas debería hacerle al diseñador web antes de firmar. [PEGA EL PRESUPUESTO]"
     },
     {
       "type": "paragraph",
@@ -446,7 +446,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Questo è il link del sito che vorrei far realizzare come esempio: [LINK]. Spiegami con parole semplici quali strumenti probabilmente sono stati usati, cosa lo rende lento o veloce e come adattarlo a un'attività di [IL TUO SETTORE] a [CITTÀ]."
+      "content": "Este es el enlace de la web que me gustaría que me hicieran como ejemplo: [ENLACE]. Explícame con palabras sencillas qué herramientas probablemente se han usado, qué la hace lenta o rápida y cómo adaptarla a un negocio de [TU SECTOR] en [CIUDAD]."
     },
     {
       "type": "paragraph",
@@ -493,7 +493,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "# MCP di motionsites per Claude Code (si apre il login nel browser)\nclaude mcp add motionsites --scope user --transport http https://xgdzyqfalbibzelpdpvr.supabase.co/functions/v1/mcp"
+      "content": "# MCP de motionsites para Claude Code (se abre el login en el navegador)\nclaude mcp add motionsites --scope user --transport http https://xgdzyqfalbibzelpdpvr.supabase.co/functions/v1/mcp"
     },
     {
       "type": "h3",
@@ -599,7 +599,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Usa la skill frontend-design. Crea la sezione iniziale del sito per [LA TUA ATTIVITÀ] a [CITTÀ]: video di sfondo a tutto schermo con anteprima statica, titolo grande, sottotitolo e un pulsante \"Prenota\" che apre WhatsApp. Ispirati a [LINK DEL SITO DI RIFERIMENTO], usa componenti di Magic UI per le animazioni del testo, rispetta \"riduci movimento\" e fai in modo che si carichi in meno di 2,5 secondi da smartphone."
+      "content": "Usa la skill frontend-design. Crea la sección inicial de la web para [TU NEGOCIO] en [CIUDAD]: vídeo de fondo a pantalla completa con vista previa estática, título grande, subtítulo y un botón \"Reserva\" que abre WhatsApp. Inspírate en [ENLACE DE LA WEB DE REFERENCIA], usa componentes de Magic UI para las animaciones del texto, respeta \"reducir movimiento\" y haz que cargue en menos de 2,5 segundos en móvil."
     },
     {
       "type": "paragraph",

@@ -370,7 +370,7 @@ const post: BlogPost = {
     },
     {
       "type": "paragraph",
-      "content": "Controles de código: [hook RTK](https://github.com/rtk-ai/rtk/blob/master/src/hooks/constants.rs), [npm](https://github.com/rtk-ai/rtk/blob/master/src/cmds/js/npm_cmd.rs), [log Docker](https://github.com/rtk-ai/rtk/blob/master/src/cmds/cloud/container.rs). Para Claude Code: [hook PowerShell](https://code.claude.com/docs/en/hooks#windows-powershell-tool), [setup](https://code.claude.com/docs/en/setup), [salida de los comandos](https://code.claude.com/docs/en/tools-reference#output-limits) y [costos](https://code.claude.com/docs/en/costs). Repositorio: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)."
+      "content": "Controles de código: [hook RTK](https://github.com/rtk-ai/rtk/blob/master/src/hooks/constants.rs), [npm](https://github.com/rtk-ai/rtk/blob/master/src/cmds/js/npm_cmd.rs), [log Docker](https://github.com/rtk-ai/rtk/blob/master/src/cmds/cloud/container.rs). Para Claude Code: [hook PowerShell](https://code.claude.com/docs/en/hooks#windows-powershell-tool), [setup](https://code.claude.com/docs/en/setup), [salida de los comandos](https://code.claude.com/docs/en/tools-reference#output-limits) y [costes](https://code.claude.com/docs/en/costs). Repositorio: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)."
     },
     {
       "type": "callout",

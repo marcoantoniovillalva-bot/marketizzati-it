@@ -236,7 +236,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "# dal terminale\nclaude mcp add --transport http composio https://connect.composio.dev/mcp\n\n# poi dentro Claude Code: /mcp → Composio → autenticati nel browser\n/mcp"
+      "content": "# desde el terminal\nclaude mcp add --transport http composio https://connect.composio.dev/mcp\n\n# luego dentro de Claude Code: /mcp → Composio → autentícate en el navegador\n/mcp"
     },
     {
       "type": "callout",
@@ -316,7 +316,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Usa Composio e controlla il mio account Instagram: dimmi nome utente, numero di follower, gli ultimi 5 post con data e numero di like e commenti, e quanti post posso ancora pubblicare nelle prossime 24 ore. Non pubblicare nulla."
+      "content": "Usa Composio y revisa mi cuenta de Instagram: dime nombre de usuario, número de seguidores, las últimas 5 publicaciones con fecha y número de likes y comentarios, y cuántas publicaciones puedo publicar aún en las próximas 24 horas. No publiques nada."
     },
     {
       "type": "paragraph",
@@ -329,7 +329,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Prepara un post Instagram con questa foto: [LINK PUBBLICO DELLA FOTO .jpg]. Argomento: [ARGOMENTO]. Scrivi una didascalia per [IL TUO CLIENTE IDEALE] con: prima riga che incuriosisce, 3 frasi utili, invito a commentare [PAROLA] e massimo 5 hashtag pertinenti. Mostrami l'anteprima e pubblica solo quando ti scrivo \"OK pubblica\"."
+      "content": "Prepara una publicación de Instagram con esta foto: [ENLACE PÚBLICO DE LA FOTO .jpg]. Tema: [TEMA]. Escribe un pie de foto para [TU CLIENTE IDEAL] con: primera línea que despierte curiosidad, 3 frases útiles, invitación a comentar [PALABRA] y máximo 5 hashtags pertinentes. Muéstrame la vista previa y publica solo cuando te escriba \"OK publica\"."
     },
     {
       "type": "paragraph",
@@ -337,7 +337,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Crea un carosello Instagram con queste immagini, in quest'ordine: [LINK 1], [LINK 2], [LINK 3]. Tema: [TEMA]. Scrivi una didascalia che riassuma il carosello e inviti a salvarlo. Prima di pubblicare mostrami ordine delle immagini e testo."
+      "content": "Crea un carrusel de Instagram con estas imágenes, en este orden: [ENLACE 1], [ENLACE 2], [ENLACE 3]. Tema: [TEMA]. Escribe un pie de foto que resuma el carrusel e invite a guardarlo. Antes de publicar muéstrame el orden de las imágenes y el texto."
     },
     {
       "type": "paragraph",
@@ -345,7 +345,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Pubblica come Reel questo video: [LINK PUBBLICO DEL VIDEO .mp4]. Scrivi una didascalia con la parola chiave [PAROLA CHIAVE] nella prima riga, una domanda per i commenti e 3-5 hashtag. Il contenuto [È / NON È] creato con l'IA: se lo è, segnalo come contenuto generato con l'IA. Mostrami tutto prima di pubblicare."
+      "content": "Publica como Reel este vídeo: [ENLACE PÚBLICO DEL VÍDEO .mp4]. Escribe un pie de foto con la palabra clave [PALABRA CLAVE] en la primera línea, una pregunta para los comentarios y 3-5 hashtags. El contenido [ESTÁ / NO ESTÁ] creado con IA: si lo está, márcalo como contenido generado con IA. Muéstramelo todo antes de publicar."
     },
     {
       "type": "paragraph",
@@ -353,7 +353,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Pubblica questa immagine come storia: [LINK PUBBLICO .jpg]. Poi dimmi se è stata pubblicata correttamente."
+      "content": "Publica esta imagen como historia: [ENLACE PÚBLICO .jpg]. Después dime si se ha publicado correctamente."
     },
     {
       "type": "paragraph",
@@ -366,7 +366,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Analizza i miei ultimi 20 post Instagram e dimmi quali argomenti e formati hanno avuto più interazioni. Poi proponi un piano editoriale di 7 giorni per [LA MIA ATTIVITÀ] a [CITTÀ]: per ogni giorno formato (reel, carosello, foto o storia), idea, prima riga della didascalia e orario consigliato in base ai miei dati. Non pubblicare nulla."
+      "content": "Analiza mis últimas 20 publicaciones de Instagram y dime qué temas y formatos han tenido más interacciones. Después propón un plan editorial de 7 días para [MI NEGOCIO] en [CIUDAD]: para cada día, formato (reel, carrusel, foto o historia), idea, primera línea del pie de foto y hora recomendada según mis datos. No publiques nada."
     },
     {
       "type": "paragraph",
@@ -379,7 +379,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Leggi i commenti degli ultimi 3 post e dividili in: domande, complimenti, critiche e spam. Per domande e complimenti scrivi una risposta breve, cordiale e nel mio tono ([DESCRIVI IL TUO TONO: es. diretto, simpatico, dai del tu]). Mostrami l'elenco commento → risposta e rispondi solo a quelli che approvo. Non eliminare nulla senza chiedermelo."
+      "content": "Lee los comentarios de las últimas 3 publicaciones y clasifícalos en: preguntas, cumplidos, críticas y spam. Para preguntas y cumplidos escribe una respuesta breve, cordial y con mi tono ([DESCRIBE TU TONO: p. ej. directo, simpático, de tú]). Muéstrame la lista comentario → respuesta y responde solo a los que yo apruebe. No elimines nada sin preguntarme."
     },
     {
       "type": "paragraph",
@@ -387,7 +387,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Controlla i messaggi diretti non letti. Fammi un riassunto di chi ha scritto e cosa chiede, segnala le possibili richieste di preventivo e prepara una bozza di risposta per ognuno. Non inviare nulla senza la mia conferma."
+      "content": "Revisa los mensajes directos sin leer. Hazme un resumen de quién ha escrito y qué pide, señala las posibles solicitudes de presupuesto y prepara un borrador de respuesta para cada una. No envíes nada sin mi confirmación."
     },
     {
       "type": "paragraph",
@@ -400,7 +400,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Fammi il report Instagram degli ultimi 7 giorni: copertura, interazioni, nuovi follower, i 3 post migliori e i 3 peggiori con il motivo probabile. Chiudi con 3 azioni concrete per la prossima settimana. Scrivilo in modo semplice, come se lo spiegassi a un imprenditore che non è esperto di social."
+      "content": "Hazme el informe de Instagram de los últimos 7 días: alcance, interacciones, nuevos seguidores, las 3 mejores publicaciones y las 3 peores con el motivo probable. Termina con 3 acciones concretas para la semana que viene. Escríbelo de forma sencilla, como si se lo explicaras a un empresario que no es experto en redes sociales."
     },
     {
       "type": "paragraph",
@@ -408,7 +408,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Prendi il mio post con più interazioni degli ultimi 3 mesi e proponi 3 modi per riutilizzarlo: un carosello, un reel parlato (con il testo da leggere) e una storia. Non pubblicare: voglio solo le bozze."
+      "content": "Coge mi publicación con más interacciones de los últimos 3 meses y propón 3 formas de reutilizarla: un carrusel, un reel hablado (con el texto para leer) y una historia. No publiques: solo quiero los borradores."
     },
     {
       "type": "paragraph",
@@ -563,7 +563,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Ogni lunedì mattina: usa Composio, leggi le statistiche Instagram della settimana passata, scrivi il report in 10 righe con 3 azioni consigliate e prepara 3 bozze di post per la settimana (formato, testo, idea per l'immagine). Salva tutto in un documento e non pubblicare nulla."
+      "content": "Cada lunes por la mañana: usa Composio, lee las estadísticas de Instagram de la semana pasada, escribe el informe en 10 líneas con 3 acciones recomendadas y prepara 3 borradores de publicaciones para la semana (formato, texto, idea para la imagen). Guarda todo en un documento y no publiques nada."
     },
     {
       "type": "paragraph",

@@ -8,5 +8,17 @@ import p5 from './chatgpt-ads-italia-come-funzionano'
 import p6 from './google-ads-per-artigiani-budget'
 import p7 from './farsi-consigliare-da-chatgpt'
 import p8 from './agente-ai-whatsapp-piccola-impresa'
+import p9 from './70-ganci-virali'
+import p10 from './android-agente-su-windows'
+import p11 from './claude-duet-agenti-ia-sempre-attivi'
+import p12 from './claude-per-instagram'
+import p13 from './codex-dentro-claude-code'
+import p14 from './meta-business-agent-whatsapp'
+import p15 from './montare-video-con-claude-code'
+import p16 from './rtk-meno-token-claude-code'
+import p17 from './scudo-checklist-installare-skill'
+import p18 from './seo-gratis-strumenti-ia'
+import p19 from './voicestudio-doppiaggio-open-source'
+import p20 from './voucher-cloud-cybersecurity-checklist'
 
-export const enPosts: BlogPost[] = [p0, p1, p2, p3, p4, p5, p6, p7, p8]
+export const enPosts: BlogPost[] = [p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20]

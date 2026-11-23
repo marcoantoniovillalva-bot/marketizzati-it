@@ -424,7 +424,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Ogni mattina alle 8 mandami un brief di massimo 10 righe: le 3 cose più urgenti tra email e calendario, i clienti che aspettano una mia risposta da più di 2 giorni e gli appuntamenti di oggi. Non inviare nulla: prepara solo le bozze che approvo io."
+      "content": "Cada mañana a las 8 mándame un resumen de máximo 10 líneas: las 3 cosas más urgentes entre correo y calendario, los clientes que llevan más de 2 días esperando mi respuesta y las citas de hoy. No envíes nada: prepara solo los borradores que yo apruebe."
     },
     {
       "type": "paragraph",
@@ -432,7 +432,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Controlla in [Stripe / QuickBooks / il mio gestionale] le fatture scadute da più di 15 giorni. Per ognuna prepara un sollecito cortese, nel mio tono, con importo e scadenza. Mostrami l'elenco e invia solo quelli che approvo."
+      "content": "Revisa en [Stripe / QuickBooks / mi sistema de gestión] las facturas vencidas hace más de 15 días. Para cada una prepara un recordatorio cortés, con mi tono, con importe y fecha de vencimiento. Muéstrame la lista y envía solo los que yo apruebe."
     },
     {
       "type": "paragraph",
@@ -440,7 +440,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Analizza gli ordini e le disdette degli ultimi 3 mesi e dimmi se ci sono zone, prodotti o periodi in cui i clienti abbandonano di più. Collega quello che trovi ai cambiamenti che ho fatto (prezzi, spedizione, offerte) e proponi una prova concreta da fare per 2 settimane, con il risultato da misurare."
+      "content": "Analiza los pedidos y las bajas de los últimos 3 meses y dime si hay zonas, productos o periodos en los que los clientes abandonan más. Relaciona lo que encuentres con los cambios que he hecho (precios, envío, ofertas) y propón una prueba concreta para hacer durante 2 semanas, con el resultado que medir."
     },
     {
       "type": "paragraph",
@@ -448,7 +448,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Queste sono le tue regole: puoi leggere, riassumere e preparare bozze senza chiedermelo. Devi chiedermi l'ok prima di inviare messaggi a clienti o fornitori, pagare, firmare, cancellare o modificare dati. Non toccare mai [conto bancario / dati dei dipendenti / ...]. Ripetimi le regole per conferma."
+      "content": "Estas son tus reglas: puedes leer, resumir y preparar borradores sin preguntarme. Debes pedirme el visto bueno antes de enviar mensajes a clientes o proveedores, pagar, firmar, borrar o modificar datos. No toques nunca [cuenta bancaria / datos de los empleados / ...]. Repíteme las reglas para confirmar."
     },
     {
       "type": "paragraph",
@@ -456,7 +456,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "Ogni venerdì preparami un report della settimana: vendite, nuovi clienti, richieste di preventivo senza risposta e 3 azioni consigliate per la settimana dopo. Indica sempre da quale email, file o foglio prendi ogni numero."
+      "content": "Cada viernes prepárame un informe de la semana: ventas, clientes nuevos, solicitudes de presupuesto sin respuesta y 3 acciones recomendadas para la semana siguiente. Indica siempre de qué correo, archivo u hoja sacas cada número."
     },
     {
       "type": "paragraph",

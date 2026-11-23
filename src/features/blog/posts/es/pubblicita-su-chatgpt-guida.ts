@@ -168,12 +168,12 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "1 — PREPARA ANUNCIOS",
-      "content": "Usa il plugin ChatGPT Ads Manager. Analizza la pagina URL e prepara tre varianti di titolo e descrizione per OFFERTA e PUBBLICO. Mostrami un’anteprima. Non creare né pubblicare nulla."
+      "content": "Usa el plugin ChatGPT Ads Manager. Analiza la página URL y prepara tres variantes de título y descripción para OFFERTA y PUBBLICO. Muéstrame una vista previa. No crees ni publiques nada."
     },
     {
       "type": "code",
       "label": "2 — DISEÑA CAMPAÑA",
-      "content": "Usa il plugin per preparare una campagna per OFFERTA, destinazione URL e paese Italia. Proponi obiettivo, gruppo di annunci e contesti pertinenti. Chiedimi il budget e mostra tutte le impostazioni prima di qualunque modifica."
+      "content": "Usa el plugin para preparar una campaña para OFFERTA, destino URL y país Italia. Propón objetivo, grupo de anuncios y contextos pertinentes. Pídeme el presupuesto y muestra todos los ajustes antes de cualquier cambio."
     },
     {
       "type": "code",
@@ -183,12 +183,12 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "4 — LEE LOS RESULTADOS",
-      "content": "Usa il plugin per analizzare CAMPAGNA dal DATA al DATA. Riporta impression, clic, spesa e conversioni disponibili. Evidenzia dati mancanti e limiti di attribuzione. Non modificare la campagna."
+      "content": "Usa el plugin para analizar CAMPAGNA del DATA al DATA. Indica impresiones, clics, gasto y conversiones disponibles. Destaca los datos que faltan y los límites de atribución. No modifiques la campaña."
     },
     {
       "type": "code",
       "label": "5 — ENCUENTRA PROBLEMAS",
-      "content": "Usa il plugin per capire perché CAMPAGNA non viene erogata. Distingui i dati osservati dalle ipotesi e proponi controlli in ordine di priorità. Non effettuare modifiche."
+      "content": "Usa el plugin para entender por qué CAMPAGNA no se está entregando. Distingue los datos observados de las hipótesis y propón comprobaciones por orden de prioridad. No hagas cambios."
     },
     {
       "type": "list",

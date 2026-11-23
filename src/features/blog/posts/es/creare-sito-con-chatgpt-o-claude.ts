@@ -49,7 +49,7 @@ const post: BlogPost = {
     {
       "type": "code",
       "label": "Una solicitud a adaptar a tu negocio",
-      "content": "Prepara una bozza per la pagina del mio servizio di riparazione tapparelle. Lavoro nei comuni che ti elenco. Usa soltanto i dati che ti fornisco. Non inventare prezzi, recensioni, certificazioni o disponibilità. Se manca un dato, fammi una domanda. Apri con una risposta chiara su cosa faccio e dove lavoro."
+      "content": "Prepara un borrador para la página de mi servicio de reparación de persianas. Trabajo en los municipios que te indico. Usa solo los datos que te doy. No inventes precios, reseñas, certificaciones ni disponibilidad. Si falta algún dato, hazme una pregunta. Empieza con una respuesta clara sobre qué hago y dónde trabajo."
     },
     {
       "type": "table",

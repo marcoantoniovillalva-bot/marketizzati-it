@@ -196,7 +196,7 @@ const post: BlogPost = {
     },
     {
       "type": "code",
-      "content": "# 1. Aggiunge il marketplace di OpenAI (il \"negozio\" da cui arriva il plugin)\n/plugin marketplace add openai/codex-plugin-cc\n# 2. Installa il plugin \"codex\" dal marketplace \"openai-codex\"\n/plugin install codex@openai-codex\n# 3. Ricarica i plugin per attivarlo subito\n/reload-plugins\n# 4. Controlla che Codex sia installato e collegato\n/codex:setup\n# 5. Se /codex:setup dice che non hai fatto l'accesso:\n!codex login"
+      "content": "# 1. Añade el marketplace de OpenAI (la \"tienda\" de la que llega el plugin)\n/plugin marketplace add openai/codex-plugin-cc\n# 2. Instala el plugin \"codex\" desde el marketplace \"openai-codex\"\n/plugin install codex@openai-codex\n# 3. Recarga los plugins para activarlo enseguida\n/reload-plugins\n# 4. Comprueba que Codex esté instalado y conectado\n/codex:setup\n# 5. Si /codex:setup dice que no has iniciado sesión:\n!codex login"
     },
     {
       "type": "list",

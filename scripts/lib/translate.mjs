@@ -7,6 +7,13 @@ const MODEL = env.TRANSLATE_MODEL || 'openai/gpt-oss-120b'
 const LANG = { es: 'Spanish (neutral, for Spain and Latin America)', en: 'English (international)' }
 const TEXT_KEYS = new Set(['title', 'description', 'imageAlt', 'content', 'heading', 'alt', 'caption', 'label'])
 
+// Require several Italian prose markers and reject shell syntax or command lines.
+function isItalianProse(text) {
+  if (typeof text !== 'string' || /[$\x7b\x7d;=|]/.test(text)) return false
+  if (/^\s*(?:[#/!$]|(?:git|npm|npx|pnpm|yarn|node|curl|docker|claude|python|pip|cd|mkdir|echo)\b)/im.test(text)) return false
+  return (text.match(/\b(?:il|la|di|che|per|con|non|una|sono|del|della|nel|sul|gli|le|un|dati)\b|(?:^|\s)è(?:\s|$)/gi) ?? []).length >= 3
+}
+
 /** Collects [path, text] for every translatable string. */
 function collect(post) {
   const out = []
@@ -17,8 +24,8 @@ function collect(post) {
     }
     if (Array.isArray(value)) value.forEach((v, i) => walk(v, [...path, i], key))
     else if (value && typeof value === 'object') {
-      // shell/code blocks: keep commands, translate only prompts written in Italian (label "Prompt ...")
-      if (value.type === 'code' && !/prompt/i.test(value.label ?? '')) { if (value.label) out.push([[...path, 'label'], value.label]); return }
+      // Preserve code and commands, but translate Italian prose even without a Prompt label.
+      if (value.type === 'code' && !/prompt/i.test(value.label ?? '') && !isItalianProse(value.content)) { if (value.label) out.push([[...path, 'label'], value.label]); return }
       for (const [k, v] of Object.entries(value)) walk(v, [...path, k], k)
     }
   }

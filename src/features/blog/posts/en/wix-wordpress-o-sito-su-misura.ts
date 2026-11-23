@@ -2,7 +2,7 @@ import type { BlogPost } from '../../types'
 
 const post: BlogPost = {
   "slug": "wix-wordpress-o-sito-su-misura",
-  "title": "Wix, WordPress or Custom Site: What to Pick When You're Short on Time",
+  "title": "Wix, WordPress or Custom Site: What to Choose",
   "description": "Compare Wix, WordPress, and a custom site based on time, updates, ownership, and costs to watch.",
   "date": "2026-11-17",
   "readTime": 6,

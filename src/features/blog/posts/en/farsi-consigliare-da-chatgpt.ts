@@ -2,7 +2,7 @@ import type { BlogPost } from '../../types'
 
 const post: BlogPost = {
   "slug": "farsi-consigliare-da-chatgpt",
-  "title": "How to get ChatGPT to recommend you when a client looks for a craftsman",
+  "title": "How to Get ChatGPT to Recommend Your Trade Business",
   "description": "Make your site a clear source for AI assistants, without promises of guaranteed citations or recommendations",
   "date": "2026-11-17",
   "readTime": 6,
