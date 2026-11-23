@@ -9,6 +9,8 @@ const SKIP: PageKey[] = ['grazie']
 /** Static pages change only with a deploy: their date is the build date (posts keep their own date). */
 const BUILT_AT = new Date()
 
+const xml = (s: string): string => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const keys = (Object.keys(PAGES) as PageKey[]).filter((k) => !SKIP.includes(k))
   const pages = keys.flatMap((key) =>
@@ -32,6 +34,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(post.date),
         changeFrequency: 'monthly' as const,
         priority: 0.6,
+        // the article's YouTube Short: video sitemap entry so Google links the video to this page (Next does not escape XML)
+        ...(post.youtube ? {
+          videos: [{
+            title: xml(post.title),
+            description: xml(post.description),
+            thumbnail_loc: `https://i.ytimg.com/vi/${post.youtube}/hqdefault.jpg`,
+            player_loc: `https://www.youtube.com/embed/${post.youtube}`,
+            publication_date: `${post.date}T00:00:00+00:00`,
+          }],
+        } : {}),
         ...(langs.length > 1 ? { alternates: { languages: Object.fromEntries(langs.map((l) => [l, `${BASE_URL}/${l}/blog/${post.slug}`])) } } : {}),
       }
     }),
