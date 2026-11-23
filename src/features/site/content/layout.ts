@@ -22,6 +22,7 @@ export interface LayoutCopy {
 
 const it: LayoutCopy = {
   nav: [
+    { key: 'home', label: 'Home' },
     { key: 'prezzi', label: 'Prezzi' },
     { key: 'siti', label: 'Siti web' },
     { key: 'googleAds', label: 'Pubblicità' },
@@ -89,6 +90,7 @@ const it: LayoutCopy = {
 
 const es: LayoutCopy = {
   nav: [
+    { key: 'home', label: 'Inicio' },
     { key: 'prezzi', label: 'Precios' },
     { key: 'siti', label: 'Páginas web' },
     { key: 'googleAds', label: 'Publicidad' },
@@ -156,6 +158,7 @@ const es: LayoutCopy = {
 
 const en: LayoutCopy = {
   nav: [
+    { key: 'home', label: 'Home' },
     { key: 'prezzi', label: 'Pricing' },
     { key: 'siti', label: 'Websites' },
     { key: 'googleAds', label: 'Advertising' },

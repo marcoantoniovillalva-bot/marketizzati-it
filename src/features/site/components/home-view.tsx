@@ -7,7 +7,7 @@ import { getVisualCopy } from '../content/visuals'
 import { CAL_LINK } from '../content/automation'
 import { PAYMENTS_ENABLED } from '../lib/offer'
 import { DiyVsPro, OwnershipTimeline, PriceStack, StepsRail } from './explainers-site'
-import { BrowserBuild, PhoneChat } from './mockups'
+import { BrowserBuild } from './mockups'
 import { IconTile, iconFor } from './icons'
 import { ProjectCard } from './project-card'
 import { StepScene } from './step-scenes'
@@ -20,7 +20,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
   const buy = pageHref('prezzi', locale, '#acquista')
   // while online payments are off, the buy buttons book a call on cal.com
   const book = PAYMENTS_ENABLED ? buy : CAL_LINK
-  const { hero, problem, offer, steps, services, projects, about, faq, final } = copy
+  const { hero, problem, offer, steps, services, blog, projects, about, faq, final } = copy
   const v = getVisualCopy(locale)
   return (
     <>
@@ -33,7 +33,7 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
               <Rich text={hero.price} />
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={buy}>{hero.ctaPrimary}</Button>
+              <Button href="#servizi">{hero.ctaPrimary}</Button>
               <WhatsAppButton label={hero.ctaWhatsapp} />
             </div>
             <p className="mt-4 text-sm text-ink-muted">{hero.note}</p>
@@ -41,6 +41,8 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
           <BrowserBuild {...hero.browser} />
         </div>
       </Section>
+
+      <ServicesSection services={services} locale={locale} />
 
       <Section tint="peach">
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
@@ -123,31 +125,6 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
         </div>
       </Section>
 
-      <Section tint="navy">
-        <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
-          <div className="min-w-0">
-            <Heading dark label={services.label} title={services.title} italic={services.italic} />
-            <div className="rail mt-6 grid gap-4 md:mt-10 md:grid-cols-2">
-              {services.items.map((s) => (
-                <a key={s.key} href={pageHref(s.key, locale)} className="group flex gap-4 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-brand/60 sm:p-6">
-                  <IconTile icon={iconFor(`${s.title} ${s.tag}`)} dark />
-                  <span>
-                    <span className="block text-xs font-semibold uppercase tracking-wider text-brand-soft">{s.tag}</span>
-                    <span className="mt-1.5 block text-lg font-bold">{s.title}</span>
-                    <span className="mt-1.5 block text-sm leading-relaxed text-white/70">{s.text}</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <span className="text-sm text-white/60">{services.quoteCta}</span>
-              <WhatsAppButton label="WhatsApp" />
-            </div>
-          </div>
-          <PhoneChat {...services.chat} />
-        </div>
-      </Section>
-
       <Section tint="white">
         <Heading label={projects.label} title={projects.title} italic={projects.italic} intro={projects.intro} />
         <div className="rail mt-8 grid gap-6 md:mt-12 md:grid-cols-2 lg:grid-cols-3">
@@ -204,10 +181,16 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
         </div>
       </Section>
 
+      <Section tint="peach">
+        <Heading title={blog.title} intro={blog.text} />
+        <div className="mt-6"><ArrowLink href={pageHref('blog', locale)}>{blog.cta}</ArrowLink></div>
+      </Section>
+
       <Section tint="cream">
         <Heading label={faq.label} title={faq.title} italic={faq.italic} />
         <div className="mt-6 md:mt-10">
           <Faq items={faq.items} />
+          <div className="mt-6"><ArrowLink href={pageHref('prezzi', locale)}>{faq.linkLabel}</ArrowLink></div>
         </div>
       </Section>
 
@@ -221,5 +204,28 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
         </div>
       </Section>
     </>
+  )
+}
+
+function ServicesSection({ services, locale }: { services: HomeCopy['services']; locale: Locale }) {
+  return (
+    <Section tint="navy" id="servizi">
+      <Heading dark label={services.label} title={services.title} italic={services.italic} />
+      <div className="rail mt-8 grid gap-4 md:grid-cols-2">
+        {services.items.map((item) => (
+          <article key={item.key} className="flex gap-4 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 sm:p-6">
+            <IconTile icon={iconFor(item.title + ' ' + item.tag)} dark />
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-soft">{item.tag}</p>
+              <h3 className="mt-1.5 text-lg font-bold">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-white/70">{item.text}</p>
+              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                {item.links.map((link) => <a key={link.key} className="text-sm font-semibold text-brand-soft underline" href={pageHref(link.key, locale)}>{link.label} ?</a>)}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Section>
   )
 }

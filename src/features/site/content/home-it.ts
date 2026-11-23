@@ -1,25 +1,16 @@
-import { ADS, OFFER, savingIfPaidNow } from '../lib/offer'
+import { OFFER, savingIfPaidNow } from '../lib/offer'
 import type { HomeCopy } from './home-types'
 
 /** Home, Italian. Prices come from lib/offer.ts. */
 export const homeIt: HomeCopy = {
-  meta: {
-    title: 'Sito web per artigiani e piccole imprese da 800 €',
-    description: `Sito professionale fino a ${OFFER.maxPages} pagine con logo e scheda Google inclusi: ${OFFER.oneOff} € una volta sola o ${OFFER.monthly} € al mese per ${OFFER.months} mesi. Online in circa 2 settimane.`,
-  },
+  meta: { title: "Siti web, Google Ads e automazioni AI | Marketizzati", description: "Siti web, pubblicit? Google e ChatGPT, agenti AI e contenuti social per artigiani e piccole imprese in tutta Italia." },
   hero: {
-    label: 'Siti per artigiani e piccole imprese',
-    title: 'Un sito fatto per farti chiamare,',
-    italic: 'non solo per farti vedere.',
-    lead: `Sito fino a ${OFFER.maxPages} pagine, logo e scheda Google inclusi. Online in circa ${OFFER.deliveryWeeks} settimane da quando ci mandi il materiale.`,
-    price: `**${OFFER.oneOff} € una volta sola, oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi.** Poi è tuo.`,
-    ctaPrimary: 'Vedi cosa è incluso',
-    ctaWhatsapp: 'Scrivimi su WhatsApp',
-    note: 'Il prezzo è scritto qui: niente preventivo da aspettare.',
+    label: "I nostri servizi", title: "Siti web e marketing digitale", italic: "per piccole imprese", lead: "Dal sito alla pubblicit?, dagli agenti AI ai contenuti social: soluzioni su misura per trovare clienti e risparmiare tempo, in tutta Italia.",
+    price: '', ctaPrimary: "I nostri servizi", ctaWhatsapp: 'WhatsApp', note: '',
     browser: {
       url: 'idraulicorossi.it',
       brand: 'Idraulico Rossi',
-      headline: 'Pronto intervento idraulico a Pavia, in giornata.',
+      headline: 'Pronto intervento idraulico, in giornata.',
       cta: 'Chiama ora',
       services: ['Perdite e guasti', 'Caldaie', 'Bagni nuovi'],
     },
@@ -75,48 +66,16 @@ export const homeIt: HomeCopy = {
     { value: '~2 settimane', label: 'dal materiale alla messa online' },
     { value: `${OFFER.supportDays} giorni`, label: 'di assistenza inclusa' },
   ],
-  services: {
-    label: '05 · Non solo siti',
-    title: 'Quando il sito non basta,',
-    italic: 'ci pensa il resto.',
+  services: { label: "I nostri servizi", title: "Quattro soluzioni,", italic: "un solo progetto.",
     items: [
-      {
-        key: 'googleAds',
-        title: 'Pubblicità su Google e ChatGPT',
-        text: `Gestione dei due canali a ${ADS.monthly} € al mese. Se la prendi insieme al sito, i primi ${ADS.launchMonths} mesi costano ${ADS.launchMonthly} € al mese. Il budget lo paghi direttamente a Google e OpenAI.`,
-        tag: 'Si attiva online',
-      },
-      {
-        key: 'agenti',
-        title: 'Agenti AI su WhatsApp',
-        text: 'Rispondono ai clienti anche di notte, danno prezzi e orari e fissano gli appuntamenti. Anche con la voce.',
-        tag: 'Su preventivo',
-      },
-      {
-        key: 'sistemi',
-        title: 'Sistemi automatizzati su misura',
-        text: 'Gestionali e flussi che fanno da soli le parti ripetitive del lavoro: preventivi, promemoria, fatture, richiami.',
-        tag: 'Su preventivo',
-      },
-      {
-        key: 'social',
-        title: 'Contenuti e social',
-        text: 'Creo i contenuti, li pubblico, gestisco i profili e la pubblicità su Facebook e Instagram.',
-        tag: 'Su preventivo',
-      },
+      { key: "siti", title: "Realizzazione siti web", text: `Un sito professionale con logo e scheda Google Business inclusi. Da ${OFFER.oneOff} ? una tantum oppure ${OFFER.monthly} ? al mese per ${OFFER.months} mesi.`, tag: "Siti web", links: [{ key: "siti", label: "Scopri i siti" }, { key: "prezzi", label: "Prezzi siti web" }] },
+      { key: "googleAds", title: "Agenzia Google Ads e ChatGPT Ads", text: "Campagne per intercettare chi cerca i tuoi servizi. Annunci su ChatGPT dove disponibili; budget pubblicitario separato.", tag: "Pubblicit?", links: [{ key: "googleAds", label: "Scopri Google Ads" }, { key: "chatgptAds", label: "Scopri ChatGPT Ads" }] },
+      { key: "agenti", title: "Agente AI WhatsApp e automazione aziendale", text: "Assistenti per rispondere, raccogliere richieste e fissare appuntamenti. Automazioni su misura per i processi aziendali.", tag: "AI e automazioni", links: [{ key: "agenti", label: "Scopri gli agenti AI" }, { key: "sistemi", label: "Scopri le automazioni" }] },
+      { key: "social", title: "Social media manager e contenuti video", text: "Piano editoriale, gestione dei profili e contenuti per i tuoi canali. Video brevi e pubblicit? social su preventivo.", tag: "Contenuti", links: [{ key: "social", label: "Scopri i social" }, { key: "video", label: "Scopri i video" }] },
     ],
-    chat: {
-      title: 'Idraulico Rossi',
-      status: 'risponde l’assistente',
-      messages: [
-        { from: 'client', text: 'Buonasera, mi perde il rubinetto in cucina. Venite domani?' },
-        { from: 'agent', text: 'Buonasera! Domani abbiamo posto alle 9:30 o alle 15:00. Quale preferisce?' },
-        { from: 'client', text: 'Alle 9:30 va benissimo' },
-        { from: 'agent', text: 'Fatto ✅ Le arriva un promemoria domattina alle 8.' },
-      ],
-    },
-    quoteCta: 'Per i lavori su preventivo',
+    chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },
+  blog: { title: "Blog e guide gratuite", text: "Consigli e guide tratte dai nostri video per orientarti nel digitale.", cta: "Leggi il blog" },
   projects: {
     label: '06 · Lavori fatti',
     title: 'Guardali qui,',
@@ -133,19 +92,16 @@ export const homeIt: HomeCopy = {
     partnersTitle: 'Lavoro insieme a',
     cta: 'Conosciamoci',
   },
-  faq: {
+  faq: { linkLabel: "Scopri prezzi e inclusioni",
     label: '08 · Domande',
     title: 'Le domande',
     italic: 'che mi fanno tutti.',
     items: [
-      { q: 'Quanto costa un sito web all’anno?', a: `${OFFER.oneOff} € una volta, oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi. Poi solo dominio ed email, circa ${OFFER.hostingPerYear} € l’anno, pagati a VHosting.` },
-      { q: 'Posso pagare il sito a rate?', a: `Sì: ${OFFER.months} rate da ${OFFER.monthly} €. Dopo l’ultima il sito è tuo, codice compreso. Se le rate si interrompono, il sito viene sospeso finché non riprendi a pagare.` },
-      { q: 'Il sito resta mio?', a: 'Sì. Dominio, email, logo e scheda Google sono intestati a te dal primo giorno, il sito dopo l’ultima rata.' },
-      { q: 'Serve avere già un logo?', a: 'No, è incluso. Se ce l’hai, lo sistemo.' },
-      { q: 'Ho già una scheda Google o un vecchio sito.', a: 'Il prezzo non cambia: li sistemo o li rifaccio.' },
-      { q: 'In quanto tempo è online?', a: 'In circa 2 settimane dal materiale. La verifica della scheda Google ha i tempi che decide Google.' },
-      { q: 'C’è l’IVA?', a: `No: lavoro in regime forfettario, quindi niente IVA. Su ogni fattura c’è una marca da bollo da ${OFFER.stampDuty} €.` },
-      { q: 'E dopo i 30 giorni?', a: 'Le modifiche si fanno su richiesta, con un piccolo preventivo. Non ci sono canoni mensili da pagarmi.' },
+      { q: "Quanto costa un sito web?", a: `Da ${OFFER.oneOff} ? una tantum oppure ${OFFER.monthly} ? al mese per ${OFFER.months} mesi, con logo e scheda Google inclusi.` },
+      { q: "Quanto costa fare un sito web?", a: "Il costo dipende dal progetto: scopri inclusioni e modalit? di pagamento." },
+      { q: "Quanto costa un sito internet?", a: "Il costo dipende dal progetto: scopri inclusioni e modalit? di pagamento." },
+      { q: "Quanto costa un sito web semplice?", a: "Dipende da contenuti e funzionalit?: consulta cosa comprende l?offerta." },
+      { q: "Quanto costa fare un sito web professionale?", a: "Il costo dipende dal progetto: scopri inclusioni e modalit? di pagamento." },
     ],
   },
   final: {

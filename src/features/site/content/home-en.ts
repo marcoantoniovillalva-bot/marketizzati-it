@@ -1,17 +1,12 @@
-﻿import { ADS, OFFER, savingIfPaidNow } from '../lib/offer'
+﻿import { OFFER, savingIfPaidNow } from '../lib/offer'
 import type { HomeCopy } from './home-types'
 
 export const homeEn: HomeCopy = {
-  meta: {
-    title: 'Websites for tradespeople and small businesses from 800 €',
-    description: `Professional website, up to ${OFFER.maxPages} pages, logo and Google Business Profile included: ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months. Online in about 2 weeks.`,
-  },
+  meta: { title: "Websites, Google Ads & AI automation | Marketizzati", description: "Websites, Google and ChatGPT advertising, AI agents and social content for small businesses across Italy." },
   hero: {
-    label: 'Websites for tradespeople and small businesses', title: 'A website built to make your phone ring,', italic: 'not just to be seen.',
-    lead: `Up to ${OFFER.maxPages} pages, logo and Google Business Profile included. Online in about ${OFFER.deliveryWeeks} weeks from when you send us the material.`,
-    price: `**${OFFER.oneOff} € upfront, or ${OFFER.monthly} € a month for ${OFFER.months} months.** Then it is yours.`,
-    ctaPrimary: 'See what is included', ctaWhatsapp: 'Message me on WhatsApp', note: 'The price is right here. No waiting for a quote.',
-    browser: { url: 'idraulicorossi.it', brand: 'Idraulico Rossi', headline: 'Same-day emergency plumbing in Pavia.', cta: 'Call now', services: ['Leaks and repairs', 'Boilers', 'New bathrooms'] },
+    label: "Our services", title: "Websites and digital marketing", italic: "for small businesses", lead: "From websites and advertising to AI agents and social content, tailored solutions help you find customers and save time throughout Italy.",
+    price: '', ctaPrimary: "Our services", ctaWhatsapp: 'WhatsApp', note: '',
+    browser: { url: 'idraulicorossi.it', brand: 'Idraulico Rossi', headline: 'Same-day emergency plumbing.', cta: 'Call now', services: ['Leaks and repairs', 'Boilers', 'New bathrooms'] },
   },
   problem: {
     label: '02 · Sound familiar?', title: 'You tried Wix or ChatGPT.', italic: 'Then work got in the way.',
@@ -45,34 +40,26 @@ export const homeEn: HomeCopy = {
     { value: '~2 weeks', label: 'from your material to launch' },
     { value: `${OFFER.supportDays} days`, label: 'of support included' },
   ],
-  services: {
-    label: '05 · More than websites', title: 'Need more than a website?', italic: 'Here is what else I do.',
+  services: { label: "Our services", title: "Four solutions,", italic: "one joined-up approach.",
     items: [
-      { key: 'googleAds', title: 'Google and ChatGPT advertising', text: `Management of both channels for ${ADS.monthly} € a month. Buy it with your website and the first ${ADS.launchMonths} months cost ${ADS.launchMonthly} € a month. You pay the ad budget directly to Google and OpenAI.`, tag: 'Available online' },
-      { key: 'agenti', title: 'AI assistants on WhatsApp', text: 'They answer customers even at night, share prices and opening hours and book appointments. Voice calls too.', tag: 'Quoted individually' },
-      { key: 'sistemi', title: 'Custom automated systems', text: 'Tools that handle repetitive tasks for you: quotes, reminders, invoices and follow-up calls.', tag: 'Quoted individually' },
-      { key: 'social', title: 'Content and social media', text: 'I create and publish content, manage your profiles and run Facebook and Instagram ads.', tag: 'Quoted individually' },
+      { key: "siti", title: "Website design", text: `A professional website with a logo and Google Business Profile included. From ${OFFER.oneOff} ? upfront or ${OFFER.monthly} ? a month for ${OFFER.months} months.`, tag: "Websites", links: [{ key: "siti", label: "Explore websites" }, { key: "prezzi", label: "See website pricing" }] },
+      { key: "googleAds", title: "Google and ChatGPT advertising", text: "Campaigns that reach people looking for your services. ChatGPT ads where available; ad spend is separate.", tag: "Advertising", links: [{ key: "googleAds", label: "Explore Google Ads" }, { key: "chatgptAds", label: "Explore ChatGPT Ads" }] },
+      { key: "agenti", title: "AI agents and automation", text: "Assistants that answer enquiries, collect requests and book appointments, plus custom business process automation.", tag: "AI and automation", links: [{ key: "agenti", label: "Explore AI agents" }, { key: "sistemi", label: "Explore automation" }] },
+      { key: "social", title: "Social media and video content", text: "Editorial planning, profile management and content for your channels. Short videos and social advertising quoted individually.", tag: "Content", links: [{ key: "social", label: "Explore social media" }, { key: "video", label: "Explore video" }] },
     ],
-    chat: { title: 'Idraulico Rossi', status: 'assistant replying', messages: [
-      { from: 'client', text: 'Good evening, my kitchen tap is leaking. Can you come tomorrow?' },
-      { from: 'agent', text: 'Good evening! We have 9:30 or 15:00 available tomorrow. Which works for you?' },
-      { from: 'client', text: '9:30 works for me' },
-      { from: 'agent', text: 'Booked ✅ You will get a reminder tomorrow morning at 8.' },
-    ] }, quoteCta: 'For work that needs a quote',
+    chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },
+  blog: { title: "Blog and free guides", text: "Practical advice and guides based on our videos to help you navigate digital marketing.", cta: "Read the blog" },
   projects: { label: '06 · Completed work', title: 'See the projects here,', italic: 'without leaving this website.', intro: 'Explore each project on marketizzati.it, with previews and animations showing how it works.', cta: 'See all projects' },
   about: { label: '07 · Who is behind this', title: 'Marco and Gabriela,', italic: 'real people behind your website.', text: 'I am Marco, a backend developer and content creator: I handle logic, automations and AI. Gabriela Villalva, of Villalva Digital Studio, designs and builds the websites with me. No agency with ten layers: on WhatsApp you talk to the people working on your project.', badges: ['Traffic Master Certified · Florida Global University', 'Local AI with Nexoft'], partnersTitle: 'I work with', cta: 'Let’s talk' },
-  faq: {
+  faq: { linkLabel: "See pricing and inclusions",
     label: '08 · Questions', title: 'The questions', italic: 'people ask me most.',
     items: [
-      { q: 'How much does a website cost per year?', a: `${OFFER.oneOff} € upfront, or ${OFFER.monthly} € a month for ${OFFER.months} months. Then just domain and email, around ${OFFER.hostingPerYear} € a year, paid to VHosting.` },
-      { q: 'Can I pay in instalments?', a: `Yes: ${OFFER.months} instalments of ${OFFER.monthly} €. After the last one, the website is yours, including the code. If payments stop, the website is suspended until you resume paying.` },
-      { q: 'Do I own the website?', a: 'Yes. Your domain, email, logo and Google profile are in your name from day one. The website becomes yours after the last instalment.' },
-      { q: 'Do I need a logo already?', a: 'No, it is included. If you have one, I tidy it up.' },
-      { q: 'I already have a Google profile or an old website.', a: 'The price stays the same. I update or rebuild them.' },
-      { q: 'How soon is it online?', a: 'Around 2 weeks after I receive your material. Google decides how long profile verification takes.' },
-      { q: 'Is VAT added?', a: `No. I use the Italian flat-rate tax scheme, so there is no VAT. Each invoice includes ${OFFER.stampDuty} € stamp duty.` },
-      { q: 'What happens after 30 days?', a: 'Changes are available on request with a small quote. There are no monthly fees to pay me.' },
+      { q: "How much does a website cost?", a: `From ${OFFER.oneOff} ? upfront or ${OFFER.monthly} ? a month for ${OFFER.months} months, including a logo and Google profile.` },
+      { q: "How much does it cost to build a website?", a: "It depends on the project. See what is included and the payment options." },
+      { q: "What is the price of a website?", a: "It depends on the project. See what is included and the payment options." },
+      { q: "How much does a simple website cost?", a: "It depends on its content and features. See what the offer includes." },
+      { q: "How much does a professional website cost?", a: "It depends on the project. See what is included and the payment options." },
     ],
   },
   final: { title: 'Your website,', italic: 'online in two weeks.', text: `${OFFER.oneOff} € or ${OFFER.monthly} € a month. Logo and Google Business Profile included.`, ctaBuy: 'Book a call', ctaWhatsapp: 'Message me on WhatsApp' },

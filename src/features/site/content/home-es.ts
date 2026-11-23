@@ -1,16 +1,11 @@
-﻿import { ADS, OFFER, savingIfPaidNow } from '../lib/offer'
+﻿import { OFFER, savingIfPaidNow } from '../lib/offer'
 import type { HomeCopy } from './home-types'
 
 export const homeEs: HomeCopy = {
-  meta: {
-    title: 'Webs para oficios y pequeñas empresas desde 800 €',
-    description: `Web profesional de hasta ${OFFER.maxPages} páginas, con logo y ficha de Google incluidos: ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses. Lista en unas 2 semanas.`,
-  },
+  meta: { title: "Webs, Google Ads y automatizaci?n IA | Marketizzati", description: "Webs, publicidad en Google y ChatGPT, agentes de IA y contenidos para peque?as empresas en toda Italia." },
   hero: {
-    label: 'Webs para profesionales de oficios y pequeñas empresas', title: 'Una web hecha para que te llamen,', italic: 'no solo para que te vean.',
-    lead: `Hasta ${OFFER.maxPages} páginas, logo y ficha de Google incluidos. Online en unas ${OFFER.deliveryWeeks} semanas desde que nos envías el material.`,
-    price: `**${OFFER.oneOff} € en un pago, o ${OFFER.monthly} € al mes durante ${OFFER.months} meses.** Después es tuya.`,
-    ctaPrimary: 'Ver qué incluye', ctaWhatsapp: 'Escríbeme por WhatsApp', note: 'El precio está aquí. No tienes que esperar un presupuesto.',
+    label: "Nuestros servicios", title: "Webs y marketing digital", italic: "para peque?as empresas", lead: "Desde tu web y publicidad hasta agentes de IA y contenidos para redes: soluciones a medida para atraer clientes y ahorrar tiempo en toda Italia.",
+    price: '', ctaPrimary: "Nuestros servicios", ctaWhatsapp: 'WhatsApp', note: '',
     browser: { url: 'idraulicorossi.it', brand: 'Idraulico Rossi', headline: 'Fontanería urgente en Pavia, en el mismo día.', cta: 'Llama ahora', services: ['Fugas y averías', 'Calderas', 'Baños nuevos'] },
   },
   problem: {
@@ -45,34 +40,26 @@ export const homeEs: HomeCopy = {
     { value: '~2 semanas', label: 'desde el material hasta la publicación' },
     { value: `${OFFER.supportDays} días`, label: 'de asistencia incluida' },
   ],
-  services: {
-    label: '05 · Más que webs', title: '¿Necesitas algo más?', italic: 'También me encargo de esto.',
+  services: { label: "Nuestros servicios", title: "Cuatro soluciones,", italic: "un mismo proyecto.",
     items: [
-      { key: 'googleAds', title: 'Publicidad en Google y ChatGPT', text: `Gestión de los dos canales por ${ADS.monthly} € al mes. Si la compras junto con la web, los primeros ${ADS.launchMonths} meses cuestan ${ADS.launchMonthly} € al mes. El presupuesto de anuncios lo pagas directamente a Google y OpenAI.`, tag: 'Se contrata online' },
-      { key: 'agenti', title: 'Asistentes de IA en WhatsApp', text: 'Responden a tus clientes incluso de noche, dan precios y horarios y reservan citas. También por voz.', tag: 'Con presupuesto' },
-      { key: 'sistemi', title: 'Sistemas automáticos a medida', text: 'Herramientas que se encargan de tareas repetitivas: presupuestos, recordatorios, facturas y llamadas de seguimiento.', tag: 'Con presupuesto' },
-      { key: 'social', title: 'Contenidos y redes sociales', text: 'Creo y publico contenidos, gestiono tus perfiles y la publicidad en Facebook e Instagram.', tag: 'Con presupuesto' },
+      { key: "siti", title: "Dise?o de p?ginas web", text: `Una web profesional con logo y ficha de Google Business incluidos. Desde ${OFFER.oneOff} ? en un pago o ${OFFER.monthly} ? al mes durante ${OFFER.months} meses.`, tag: "Webs", links: [{ key: "siti", label: "Descubre las webs" }, { key: "prezzi", label: "Ver precios" }] },
+      { key: "googleAds", title: "Publicidad en Google y ChatGPT", text: "Campa?as para llegar a quienes buscan tus servicios. Anuncios en ChatGPT donde est?n disponibles; presupuesto publicitario aparte.", tag: "Publicidad", links: [{ key: "googleAds", label: "Descubre Google Ads" }, { key: "chatgptAds", label: "Descubre ChatGPT Ads" }] },
+      { key: "agenti", title: "Agentes de IA y automatizaci?n", text: "Asistentes para responder, recoger consultas y concertar citas. Automatizaciones a medida para tus procesos.", tag: "IA y automatizaci?n", links: [{ key: "agenti", label: "Descubre los agentes" }, { key: "sistemi", label: "Descubre la automatizaci?n" }] },
+      { key: "social", title: "Redes sociales y v?deo", text: "Plan editorial, gesti?n de perfiles y contenidos para tus canales. V?deos cortos y publicidad social con presupuesto.", tag: "Contenidos", links: [{ key: "social", label: "Descubre las redes" }, { key: "video", label: "Descubre los v?deos" }] },
     ],
-    chat: { title: 'Idraulico Rossi', status: 'responde el asistente', messages: [
-      { from: 'client', text: 'Buenas noches, el grifo de la cocina pierde agua. ¿Podéis venir mañana?' },
-      { from: 'agent', text: '¡Buenas noches! Mañana tenemos hueco a las 9:30 o a las 15:00. ¿Qué hora te viene mejor?' },
-      { from: 'client', text: 'A las 9:30 me va muy bien' },
-      { from: 'agent', text: 'Reservado ✅ Mañana a las 8 te llega un recordatorio.' },
-    ] }, quoteCta: 'Para trabajos con presupuesto',
+    chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },
+  blog: { title: "Blog y gu?as gratuitas", text: "Consejos y gu?as basadas en nuestros v?deos para orientarte en el mundo digital.", cta: "Lee el blog" },
   projects: { label: '06 · Trabajos realizados', title: 'Míralos aquí,', italic: 'sin salir de esta web.', intro: 'Puedes ver cada proyecto dentro de marketizzati.it, con vistas previas y animaciones que muestran cómo funciona.', cta: 'Ver todos los proyectos' },
   about: { label: '07 · Quién está detrás', title: 'Marco y Gabriela,', italic: 'personas reales detrás de tu web.', text: 'Soy Marco, desarrollador backend y creador de contenidos: me ocupo de la lógica, las automatizaciones y la IA. Gabriela Villalva, de Villalva Digital Studio, diseña y construye las webs conmigo. Sin agencias con diez intermediarios: por WhatsApp hablas con quien trabaja en tu proyecto.', badges: ['Traffic Master Certified · Florida Global University', 'IA local con Nexoft'], partnersTitle: 'Trabajo con', cta: 'Hablemos' },
-  faq: {
+  faq: { linkLabel: "Ver precios y qu? incluye",
     label: '08 · Preguntas', title: 'Lo que', italic: 'más me preguntan.',
     items: [
-      { q: '¿Cuánto cuesta una web al año?', a: `${OFFER.oneOff} € en un pago, o ${OFFER.monthly} € al mes durante ${OFFER.months} meses. Después, solo dominio y correo, unos ${OFFER.hostingPerYear} € al año, pagados a VHosting.` },
-      { q: '¿Puedo pagar a plazos?', a: `Sí: ${OFFER.months} cuotas de ${OFFER.monthly} €. Después de la última, la web es tuya, incluido el código. Si dejas de pagar, la web se suspende hasta que retomes los pagos.` },
-      { q: '¿La web es mía?', a: 'Sí. Dominio, correo, logo y ficha de Google están a tu nombre desde el primer día. La web pasa a ser tuya tras la última cuota.' },
-      { q: '¿Necesito tener un logo?', a: 'No, está incluido. Si ya lo tienes, lo ajusto.' },
-      { q: 'Ya tengo ficha de Google o una web antigua.', a: 'El precio no cambia. Las arreglo o las rehago.' },
-      { q: '¿Cuándo se publica?', a: 'En unas 2 semanas desde que recibo el material. Google decide los plazos de verificación de la ficha.' },
-      { q: '¿Se añade IVA?', a: `No. Trabajo bajo el régimen fiscal italiano forfettario, sin IVA. Cada factura lleva ${OFFER.stampDuty} € de impuesto de timbre.` },
-      { q: '¿Y después de los 30 días?', a: 'Los cambios se hacen a petición, con un pequeño presupuesto. No hay cuotas mensuales que pagarme.' },
+      { q: "?Cu?nto cuesta una p?gina web?", a: `Desde ${OFFER.oneOff} ? en un pago o ${OFFER.monthly} ? al mes durante ${OFFER.months} meses, con logo y ficha de Google incluidos.` },
+      { q: "?Cu?nto cuesta crear una web?", a: "Depende del proyecto. Consulta qu? incluye la oferta y las formas de pago." },
+      { q: "?Cu?l es el precio de un sitio web?", a: "Depende del proyecto. Consulta qu? incluye la oferta y las formas de pago." },
+      { q: "?Cu?nto cuesta una web sencilla?", a: "Depende de los contenidos y las funcionalidades. Descubre qu? incluye la oferta." },
+      { q: "?Cu?nto cuesta una web profesional?", a: "Depende del proyecto. Consulta qu? incluye la oferta y las formas de pago." },
     ],
   },
   final: { title: 'Tu web,', italic: 'publicada en dos semanas.', text: `${OFFER.oneOff} € o ${OFFER.monthly} € al mes. Logo y ficha de Google incluidos.`, ctaBuy: 'Pide una cita', ctaWhatsapp: 'Escríbeme por WhatsApp' },

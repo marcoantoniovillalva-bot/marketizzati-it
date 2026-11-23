@@ -35,12 +35,13 @@ export interface HomeCopy {
   steps: Titled & { items: { title: string; text: string }[] }
   stats: Stat[]
   services: Titled & {
-    items: { key: PageKey; title: string; text: string; tag: string }[]
+    items: { key: PageKey; title: string; text: string; tag: string; links: { key: PageKey; label: string }[] }[]
     chat: { title: string; status: string; messages: { from: 'client' | 'agent'; text: string }[] }
     quoteCta: string
   }
+  blog: { title: string; text: string; cta: string }
   projects: Titled & { intro: string; cta: string }
   about: Titled & { text: string; badges: string[]; partnersTitle: string; cta: string }
-  faq: Titled & { items: FaqItem[] }
+  faq: Titled & { items: FaqItem[]; linkLabel: string }
   final: { title: string; italic: string; text: string; ctaBuy: string; ctaWhatsapp: string }
 }
