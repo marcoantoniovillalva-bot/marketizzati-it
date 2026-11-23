@@ -4,7 +4,8 @@
  */
 export const RETIRED_POSTS: Record<string, string> = {
   // the old price article competed with the price page
-  'costi-realizzazione-sito-web-professionale': '/it/blog/quanto-costa-un-sito-web-all-anno',
+  // old price article: people searching "quanto costa fare un sito" land on the price page (was: yearly costs article)
+  'costi-realizzazione-sito-web-professionale': '/it/quanto-costa-un-sito-web',
   'come-scegliere-agenzia-social-media-marketing': '/it/social-media-manager',
   'facebook-ads-come-generare-lead-qualificati': '/it/social-media-manager',
 }
