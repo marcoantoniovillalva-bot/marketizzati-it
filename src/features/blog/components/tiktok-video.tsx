@@ -17,6 +17,8 @@ interface Props {
   poster: string
   title: string
   labels: { play: string; note: string; open: string; also: string }
+  /** Page language: YouTube player UI and captions (forced on for es/en; the audio track follows YouTube's own choice). */
+  lang?: string
 }
 
 /**
@@ -25,14 +27,14 @@ interface Props {
  * Click-to-load: until the visitor presses play we show the cover, so TikTok's scripts and cookies
  * are loaded only for people who actually want to watch.
  */
-export function TikTokVideo({ video, youtube, poster, title, labels }: Props) {
+export function TikTokVideo({ video, youtube, poster, title, labels, lang = 'it' }: Props) {
   const [on, setOn] = useState(false)
   const id = video ? tiktokId(video) : null
   const yt = youtube && /^[A-Za-z0-9_-]{11}$/.test(youtube) ? youtube : null
   if (!id && !yt) return null
   // TikTok: no extra parameters, `autoplay=1` makes its player fail for visitors without TikTok cookies
   const src = yt
-    ? `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&playsinline=1&rel=0`
+    ? `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&playsinline=1&rel=0&hl=${lang}&cc_lang_pref=${lang}${lang === 'it' ? '' : '&cc_load_policy=1'}`
     : `https://www.tiktok.com/player/v1/${id}`
   return (
     <figure className="mx-auto mb-10 w-full max-w-[340px] lg:mb-0 lg:max-w-none">

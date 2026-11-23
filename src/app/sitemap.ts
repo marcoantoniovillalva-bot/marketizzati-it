@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             title: xml(post.title),
             description: xml(post.description),
             thumbnail_loc: `https://i.ytimg.com/vi/${post.youtube}/hqdefault.jpg`,
-            player_loc: `https://www.youtube.com/embed/${post.youtube}`,
+            player_loc: `https://www.youtube.com/embed/${post.youtube}?hl=${locale}`,
             publication_date: `${post.date}T00:00:00+00:00`,
           }],
         } : {}),

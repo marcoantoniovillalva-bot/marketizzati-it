@@ -263,7 +263,8 @@ export default async function BlogPostPage({ params }: Props) {
         description: post.description,
         thumbnailUrl: `https://i.ytimg.com/vi/${post.youtube}/hqdefault.jpg`,
         uploadDate: post.date,
-        embedUrl: `https://www.youtube.com/embed/${post.youtube}`,
+        embedUrl: `https://www.youtube.com/embed/${post.youtube}?hl=${lang}`,
+        inLanguage: lang,
         contentUrl: `https://www.youtube.com/shorts/${post.youtube}`,
       },
     } : {}),
@@ -309,7 +310,7 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Hero image */}
           {post.tiktok || post.youtube ? (
             <div className="lg:hidden">
-              <TikTokVideo video={post.tiktok} youtube={post.youtube} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+              <TikTokVideo video={post.tiktok} youtube={post.youtube} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} lang={isLocale(locale) ? locale : 'it'} />
             </div>
           ) : (
             <CoverImage post={post} priority className="mb-10 w-full rounded-2xl" />
@@ -338,7 +339,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
         {(post.tiktok || post.youtube) && (
           <aside className="sticky top-28 hidden lg:block">
-            <TikTokVideo video={post.tiktok} youtube={post.youtube} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} />
+            <TikTokVideo video={post.tiktok} youtube={post.youtube} poster={post.imageTall ?? post.image} title={post.title} labels={VIDEO_LABELS[isLocale(locale) ? locale : 'it']} lang={isLocale(locale) ? locale : 'it'} />
           </aside>
         )}
         </div>
