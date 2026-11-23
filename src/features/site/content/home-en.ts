@@ -42,7 +42,7 @@ export const homeEn: HomeCopy = {
   ],
   services: { label: "Our services", title: "Four solutions,", italic: "one joined-up approach.",
     items: [
-      { key: "siti", title: "Website design", text: `A professional website with a logo and Google Business Profile included. From ${OFFER.oneOff} ? upfront or ${OFFER.monthly} ? a month for ${OFFER.months} months.`, tag: "Websites", links: [{ key: "siti", label: "Explore websites" }, { key: "prezzi", label: "See website pricing" }] },
+      { key: "siti", title: "Website design", text: `A professional website with a logo and Google Business Profile included. From ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months.`, tag: "Websites", links: [{ key: "siti", label: "Explore websites" }, { key: "prezzi", label: "See website pricing" }] },
       { key: "googleAds", title: "Google and ChatGPT advertising", text: "Campaigns that reach people looking for your services. ChatGPT ads where available; ad spend is separate.", tag: "Advertising", links: [{ key: "googleAds", label: "Explore Google Ads" }, { key: "chatgptAds", label: "Explore ChatGPT Ads" }] },
       { key: "agenti", title: "AI agents and automation", text: "Assistants that answer enquiries, collect requests and book appointments, plus custom business process automation.", tag: "AI and automation", links: [{ key: "agenti", label: "Explore AI agents" }, { key: "sistemi", label: "Explore automation" }] },
       { key: "social", title: "Social media and video content", text: "Editorial planning, profile management and content for your channels. Short videos and social advertising quoted individually.", tag: "Content", links: [{ key: "social", label: "Explore social media" }, { key: "video", label: "Explore video" }] },
@@ -55,7 +55,7 @@ export const homeEn: HomeCopy = {
   faq: { linkLabel: "See pricing and inclusions",
     label: '08 · Questions', title: 'The questions', italic: 'people ask me most.',
     items: [
-      { q: "How much does a website cost?", a: `From ${OFFER.oneOff} ? upfront or ${OFFER.monthly} ? a month for ${OFFER.months} months, including a logo and Google profile.` },
+      { q: "How much does a website cost?", a: `From ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months, including a logo and Google profile.` },
       { q: "How much does it cost to build a website?", a: "It depends on the project. See what is included and the payment options." },
       { q: "What is the price of a website?", a: "It depends on the project. See what is included and the payment options." },
       { q: "How much does a simple website cost?", a: "It depends on its content and features. See what the offer includes." },

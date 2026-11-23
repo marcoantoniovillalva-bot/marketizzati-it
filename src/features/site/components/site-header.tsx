@@ -47,9 +47,9 @@ export function SiteHeader({ locale, copy }: { locale: Locale; copy: LayoutCopy 
           <Image src="/images/icon-light.png" alt="Marketizzati" width={36} height={36} priority className="h-9 w-9 sm:h-7 sm:w-7" />
           <Image src="/images/logo-light.png" alt="Marketizzati" width={164} height={24} priority className="hidden h-[17px] w-auto sm:block" />
         </a>
-        <nav className="hidden items-center gap-5 text-sm font-medium text-ink-soft xl:flex">
+        <nav className="hidden items-center gap-3 text-[13px] font-medium text-ink-soft xl:flex">
           {copy.nav.map((item) => (
-            <a key={item.key} href={pageHref(item.key, locale)} className="transition hover:text-ink">
+            <a key={item.key} href={pageHref(item.key, locale)} className="whitespace-nowrap transition hover:text-ink">
               {item.label}
             </a>
           ))}

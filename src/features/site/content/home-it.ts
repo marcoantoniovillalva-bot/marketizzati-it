@@ -3,9 +3,9 @@ import type { HomeCopy } from './home-types'
 
 /** Home, Italian. Prices come from lib/offer.ts. */
 export const homeIt: HomeCopy = {
-  meta: { title: "Siti web, Google Ads e automazioni AI | Marketizzati", description: "Siti web, pubblicit? Google e ChatGPT, agenti AI e contenuti social per artigiani e piccole imprese in tutta Italia." },
+  meta: { title: "Siti web, Google Ads e automazioni AI | Marketizzati", description: "Siti web, pubblicità Google e ChatGPT, agenti AI e contenuti social per artigiani e piccole imprese in tutta Italia." },
   hero: {
-    label: "I nostri servizi", title: "Siti web e marketing digitale", italic: "per piccole imprese", lead: "Dal sito alla pubblicit?, dagli agenti AI ai contenuti social: soluzioni su misura per trovare clienti e risparmiare tempo, in tutta Italia.",
+    label: "I nostri servizi", title: "Siti web e marketing digitale", italic: "per piccole imprese", lead: "Dal sito alla pubblicità, dagli agenti AI ai contenuti social: soluzioni su misura per trovare clienti e risparmiare tempo, in tutta Italia.",
     price: '', ctaPrimary: "I nostri servizi", ctaWhatsapp: 'WhatsApp', note: '',
     browser: {
       url: 'idraulicorossi.it',
@@ -68,10 +68,10 @@ export const homeIt: HomeCopy = {
   ],
   services: { label: "I nostri servizi", title: "Quattro soluzioni,", italic: "un solo progetto.",
     items: [
-      { key: "siti", title: "Realizzazione siti web", text: `Un sito professionale con logo e scheda Google Business inclusi. Da ${OFFER.oneOff} ? una tantum oppure ${OFFER.monthly} ? al mese per ${OFFER.months} mesi.`, tag: "Siti web", links: [{ key: "siti", label: "Scopri i siti" }, { key: "prezzi", label: "Prezzi siti web" }] },
-      { key: "googleAds", title: "Agenzia Google Ads e ChatGPT Ads", text: "Campagne per intercettare chi cerca i tuoi servizi. Annunci su ChatGPT dove disponibili; budget pubblicitario separato.", tag: "Pubblicit?", links: [{ key: "googleAds", label: "Scopri Google Ads" }, { key: "chatgptAds", label: "Scopri ChatGPT Ads" }] },
+      { key: "siti", title: "Realizzazione siti web", text: `Un sito professionale con logo e scheda Google Business inclusi. Da ${OFFER.oneOff} € una tantum oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi.`, tag: "Siti web", links: [{ key: "siti", label: "Scopri i siti" }, { key: "prezzi", label: "Prezzi siti web" }] },
+      { key: "googleAds", title: "Agenzia Google Ads e ChatGPT Ads", text: "Campagne per intercettare chi cerca i tuoi servizi. Annunci su ChatGPT dove disponibili; budget pubblicitario separato.", tag: "Pubblicità", links: [{ key: "googleAds", label: "Scopri Google Ads" }, { key: "chatgptAds", label: "Scopri ChatGPT Ads" }] },
       { key: "agenti", title: "Agente AI WhatsApp e automazione aziendale", text: "Assistenti per rispondere, raccogliere richieste e fissare appuntamenti. Automazioni su misura per i processi aziendali.", tag: "AI e automazioni", links: [{ key: "agenti", label: "Scopri gli agenti AI" }, { key: "sistemi", label: "Scopri le automazioni" }] },
-      { key: "social", title: "Social media manager e contenuti video", text: "Piano editoriale, gestione dei profili e contenuti per i tuoi canali. Video brevi e pubblicit? social su preventivo.", tag: "Contenuti", links: [{ key: "social", label: "Scopri i social" }, { key: "video", label: "Scopri i video" }] },
+      { key: "social", title: "Social media manager e contenuti video", text: "Piano editoriale, gestione dei profili e contenuti per i tuoi canali. Video brevi e pubblicità social su preventivo.", tag: "Contenuti", links: [{ key: "social", label: "Scopri i social" }, { key: "video", label: "Scopri i video" }] },
     ],
     chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },
@@ -97,11 +97,11 @@ export const homeIt: HomeCopy = {
     title: 'Le domande',
     italic: 'che mi fanno tutti.',
     items: [
-      { q: "Quanto costa un sito web?", a: `Da ${OFFER.oneOff} ? una tantum oppure ${OFFER.monthly} ? al mese per ${OFFER.months} mesi, con logo e scheda Google inclusi.` },
-      { q: "Quanto costa fare un sito web?", a: "Il costo dipende dal progetto: scopri inclusioni e modalit? di pagamento." },
-      { q: "Quanto costa un sito internet?", a: "Il costo dipende dal progetto: scopri inclusioni e modalit? di pagamento." },
-      { q: "Quanto costa un sito web semplice?", a: "Dipende da contenuti e funzionalit?: consulta cosa comprende l?offerta." },
-      { q: "Quanto costa fare un sito web professionale?", a: "Il costo dipende dal progetto: scopri inclusioni e modalit? di pagamento." },
+      { q: "Quanto costa un sito web?", a: `Da ${OFFER.oneOff} € una tantum oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi, con logo e scheda Google inclusi.` },
+      { q: "Quanto costa fare un sito web?", a: "Il costo dipende dal progetto: scopri inclusioni e modalità di pagamento." },
+      { q: "Quanto costa un sito internet?", a: "Il costo dipende dal progetto: scopri inclusioni e modalità di pagamento." },
+      { q: "Quanto costa un sito web semplice?", a: "Dipende da contenuti e funzionalità: consulta cosa comprende l’offerta." },
+      { q: "Quanto costa fare un sito web professionale?", a: "Il costo dipende dal progetto: scopri inclusioni e modalità di pagamento." },
     ],
   },
   final: {

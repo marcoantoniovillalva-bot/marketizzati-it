@@ -209,18 +209,18 @@ export function HomeView({ copy, locale }: { copy: HomeCopy; locale: Locale }) {
 
 function ServicesSection({ services, locale }: { services: HomeCopy['services']; locale: Locale }) {
   return (
-    <Section tint="navy" id="servizi">
-      <Heading dark label={services.label} title={services.title} italic={services.italic} />
+    <Section tint="cream" id="servizi">
+      <Heading label={services.label} title={services.title} italic={services.italic} />
       <div className="rail mt-8 grid gap-4 md:grid-cols-2">
         {services.items.map((item) => (
-          <article key={item.key} className="flex gap-4 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 sm:p-6">
-            <IconTile icon={iconFor(item.title + ' ' + item.tag)} dark />
+          <article key={item.key} className="flex gap-4 rounded-3xl border border-ink/10 bg-white p-5 sm:p-6">
+            <IconTile icon={iconFor(item.title + ' ' + item.tag)} />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand-soft">{item.tag}</p>
-              <h3 className="mt-1.5 text-lg font-bold">{item.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-white/70">{item.text}</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink">{item.tag}</p>
+              <h3 className="mt-1.5 text-lg font-bold text-ink">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{item.text}</p>
               <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-                {item.links.map((link) => <a key={link.key} className="text-sm font-semibold text-brand-soft underline" href={pageHref(link.key, locale)}>{link.label} ?</a>)}
+                {item.links.map((link) => <a key={link.key} className="text-sm font-semibold text-brand-ink underline" href={pageHref(link.key, locale)}>{link.label} →</a>)}
               </div>
             </div>
           </article>
