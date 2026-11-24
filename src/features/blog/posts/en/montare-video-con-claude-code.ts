@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/01-slide-01.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/01-slide-01.en.webp",
       "alt": "Editing videos with Claude Code: the 5 free tools, step by step on Windows"
     },
     {
@@ -80,7 +80,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/02-slide-02.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/02-slide-02.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -94,7 +94,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/03-slide-03.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/03-slide-03.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -147,7 +147,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/04-slide-04.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/04-slide-04.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -169,7 +169,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/05-slide-05.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/05-slide-05.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -195,7 +195,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/06-slide-06.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/06-slide-06.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -221,7 +221,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/07-slide-07.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/07-slide-07.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -243,7 +243,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/08-slide-08.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/08-slide-08.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -265,7 +265,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/09-slide-09.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/09-slide-09.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {
@@ -301,7 +301,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/montare-video-con-claude-code/10-slide-10.webp",
+      "url": "/images/blog/risorse/montare-video-con-claude-code/10-slide-10.en.webp",
       "alt": "Edit videos with Claude Code"
     },
     {

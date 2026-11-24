@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/01-slide-01.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/01-slide-01.en.webp",
       "alt": "Operational manual to have Claude publish, reply and analyze your Instagram profile, no code and no loss of control"
     },
     {
@@ -87,7 +87,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/02-slide-02.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/02-slide-02.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {
@@ -135,7 +135,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/03-slide-03.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/03-slide-03.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {
@@ -189,7 +189,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/04-slide-04.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/04-slide-04.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {
@@ -249,7 +249,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/05-slide-05.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/05-slide-05.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {
@@ -302,7 +302,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/06-slide-06.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/06-slide-06.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {
@@ -421,7 +421,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/07-slide-07.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/07-slide-07.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {
@@ -576,7 +576,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-per-instagram/08-slide-08.webp",
+      "url": "/images/blog/risorse/claude-per-instagram/08-slide-08.en.webp",
       "alt": "Practical guide: Claude working on your Instagram"
     },
     {

@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/01-slide-01.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/01-slide-01.en.webp",
       "alt": "Operational manual to connect Pluralsight to your AI, build training paths from a business goal and measure whether the training delivers results"
     },
     {
@@ -86,7 +86,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/02-slide-02.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/02-slide-02.en.webp",
       "alt": "Practical guide: Pluralsight AI MCP"
     },
     {
@@ -119,7 +119,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/03-slide-03.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/03-slide-03.en.webp",
       "alt": "Practical guide: Pluralsight AI MCP"
     },
     {
@@ -152,7 +152,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/04-slide-04.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/04-slide-04.en.webp",
       "alt": "Practical Guide: Pluralsight AI MCP"
     },
     {
@@ -243,7 +243,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/05-slide-05.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/05-slide-05.en.webp",
       "alt": "Practical guide: Pluralsight AI MCP"
     },
     {
@@ -315,7 +315,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/06-slide-06.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/06-slide-06.en.webp",
       "alt": "Practical guide: Pluralsight AI MCP"
     },
     {
@@ -418,7 +418,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/pluralsight-ai-mcp/07-slide-07.webp",
+      "url": "/images/blog/risorse/pluralsight-ai-mcp/07-slide-07.en.webp",
       "alt": "Practical guide: Pluralsight AI MCP"
     },
     {

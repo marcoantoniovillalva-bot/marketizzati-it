@@ -20,7 +20,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/01-slide-01.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/01-slide-01.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code — free guide"
     },
     {
@@ -30,7 +30,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/02-slide-02.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/02-slide-02.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -62,7 +62,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/03-slide-03.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/03-slide-03.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -99,7 +99,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/04-slide-04.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/04-slide-04.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -136,7 +136,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/05-slide-05.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/05-slide-05.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -167,7 +167,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/06-slide-06.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/06-slide-06.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -195,7 +195,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/07-slide-07.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/07-slide-07.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -230,7 +230,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/08-slide-08.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/08-slide-08.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {
@@ -261,7 +261,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/09-slide-09.webp",
+      "url": "/images/blog/risorse/seo-gratis-strumenti-ia/09-slide-09.en.webp",
       "alt": "SEO: the 3 free tools + how to use them with Claude Code"
     },
     {

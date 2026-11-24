@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/01-slide-01.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/01-slide-01.en.webp",
       "alt": "step‑by‑step guide to choose, commission or build your own cinematic website, knowing exactly what you’re paying for"
     },
     {
@@ -98,7 +98,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/02-slide-02.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/02-slide-02.en.webp",
       "alt": "Practical guide: your cinematic website without getting ripped off"
     },
     {
@@ -151,7 +151,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/03-slide-03.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/03-slide-03.en.webp",
       "alt": "Practical guide: your cinematic site without getting ripped off"
     },
     {
@@ -215,7 +215,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/04-slide-04.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/04-slide-04.en.webp",
       "alt": "Practical guide: your cinematic website without getting ripped off"
     },
     {
@@ -316,7 +316,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/05-slide-05.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/05-slide-05.en.webp",
       "alt": "Practical guide: your cinema website without getting ripped off"
     },
     {
@@ -389,7 +389,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/06-slide-06.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/06-slide-06.en.webp",
       "alt": "Practical guide: your cinematic website without getting ripped off"
     },
     {
@@ -612,7 +612,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/07-slide-07.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/07-slide-07.en.webp",
       "alt": "Practical guide: your cinematic website without getting ripped off"
     },
     {

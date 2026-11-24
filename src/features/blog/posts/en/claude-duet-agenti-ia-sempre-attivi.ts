@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/01-slide-01.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/01-slide-01.en.webp",
       "alt": "What the new AI agents that work even when you’re not there do, how much they cost, what you can use today from Italy and which to pick for your business"
     },
     {
@@ -89,7 +89,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/02-slide-02.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/02-slide-02.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {
@@ -152,7 +152,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/03-slide-03.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/03-slide-03.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {
@@ -205,7 +205,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/04-slide-04.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/04-slide-04.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {
@@ -352,7 +352,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/05-slide-05.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/05-slide-05.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {
@@ -401,7 +401,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/06-slide-06.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/06-slide-06.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {
@@ -415,7 +415,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/07-slide-07.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/07-slide-07.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {
@@ -484,7 +484,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/08-slide-08.webp",
+      "url": "/images/blog/risorse/claude-duet-agenti-ia-sempre-attivi/08-slide-08.en.webp",
       "alt": "Practical guide: Claude Duet and always‑on AI agents"
     },
     {

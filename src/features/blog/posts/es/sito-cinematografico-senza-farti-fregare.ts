@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/01-slide-01.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/01-slide-01.es.webp",
       "alt": "Manual operativo para elegir, hacer crear o construir tú mismo un sitio cinematográfico, sabiendo exactamente qué estás pagando"
     },
     {
@@ -98,7 +98,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/02-slide-02.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/02-slide-02.es.webp",
       "alt": "Guía práctica: tu sitio cinematográfico sin que te engañen"
     },
     {
@@ -151,7 +151,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/03-slide-03.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/03-slide-03.es.webp",
       "alt": "Guía práctica: tu sitio cinematográfico sin que te engañen"
     },
     {
@@ -215,7 +215,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/04-slide-04.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/04-slide-04.es.webp",
       "alt": "Guía práctica: tu sitio cinematográfico sin que te engañen"
     },
     {
@@ -316,7 +316,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/05-slide-05.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/05-slide-05.es.webp",
       "alt": "Guía práctica: tu sitio cinematográfico sin que te engañen"
     },
     {
@@ -389,7 +389,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/06-slide-06.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/06-slide-06.es.webp",
       "alt": "Guía práctica: tu sitio cinematográfico sin que te engañen"
     },
     {
@@ -612,7 +612,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/07-slide-07.webp",
+      "url": "/images/blog/risorse/sito-cinematografico-senza-farti-fregare/07-slide-07.es.webp",
       "alt": "Guía práctica: tu sitio cinematográfico sin que te engañen"
     },
     {

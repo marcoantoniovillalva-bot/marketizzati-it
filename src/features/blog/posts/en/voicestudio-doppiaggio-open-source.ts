@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/01-slide-01.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/01-slide-01.en.webp",
       "alt": "VoiceStudio, the open‑source, on‑premise alternative to ElevenLabs: link, requirements, installation, licenses and use cases"
     },
     {
@@ -88,7 +88,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/02-slide-02.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/02-slide-02.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your PC"
     },
     {
@@ -146,7 +146,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/03-slide-03.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/03-slide-03.en.webp",
       "alt": "Practical guide: VoiceStudio, the open-source dubbing studio on your computer"
     },
     {
@@ -205,7 +205,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/04-slide-04.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/04-slide-04.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your computer"
     },
     {
@@ -242,7 +242,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/05-slide-05.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/05-slide-05.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your computer"
     },
     {
@@ -264,7 +264,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/06-slide-06.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/06-slide-06.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your computer"
     },
     {
@@ -295,7 +295,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/07-slide-07.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/07-slide-07.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your computer"
     },
     {
@@ -344,7 +344,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/08-slide-08.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/08-slide-08.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your computer"
     },
     {
@@ -397,7 +397,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/09-slide-09.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/09-slide-09.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio on your computer"
     },
     {
@@ -461,7 +461,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/10-slide-10.webp",
+      "url": "/images/blog/risorse/voicestudio-doppiaggio-open-source/10-slide-10.en.webp",
       "alt": "Practical guide: VoiceStudio, the open‑source dubbing studio for your computer"
     },
     {

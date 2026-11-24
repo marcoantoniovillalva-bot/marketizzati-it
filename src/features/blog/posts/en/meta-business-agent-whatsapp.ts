@@ -24,7 +24,7 @@ const post: BlogPost = {
   "sections": [
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/01-slide-01.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/01-slide-01.en.webp",
       "alt": "Meta Business Agent — the AI agent that answers your customers on WhatsApp Business"
     },
     {
@@ -77,7 +77,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/02-slide-02.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/02-slide-02.en.webp",
       "alt": "Meta Business Agent Practical Guide"
     },
     {
@@ -91,7 +91,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/03-slide-03.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/03-slide-03.en.webp",
       "alt": "Meta Business Agent Practical Guide"
     },
     {
@@ -118,7 +118,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/04-slide-04.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/04-slide-04.en.webp",
       "alt": "Meta Business Agent Practical Guide"
     },
     {
@@ -150,7 +150,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/05-slide-05.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/05-slide-05.en.webp",
       "alt": "Meta Business Agent practical guide"
     },
     {
@@ -164,7 +164,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/06-slide-06.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/06-slide-06.en.webp",
       "alt": "Meta Business Agent practical guide"
     },
     {
@@ -221,7 +221,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/07-slide-07.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/07-slide-07.en.webp",
       "alt": "Practical guide Meta Business Agent"
     },
     {
@@ -241,7 +241,7 @@ const post: BlogPost = {
     },
     {
       "type": "image",
-      "url": "/images/blog/risorse/meta-business-agent-whatsapp/08-slide-08.webp",
+      "url": "/images/blog/risorse/meta-business-agent-whatsapp/08-slide-08.en.webp",
       "alt": "Practical guide Meta Business Agent"
     },
     {
