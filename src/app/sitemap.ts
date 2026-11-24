@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/features/blog/posts'
 import { BASE_URL } from '@/features/site/lib/links'
 import { LOCALES, PAGES, pageHref, type PageKey } from '@/features/site/lib/routes'
+import { toAbsoluteSiteUrl } from '@/lib/media-url'
 
 const MONEY: PageKey[] = ['home', 'prezzi', 'siti', 'artigiani']
 const SKIP: PageKey[] = ['grazie']
@@ -34,6 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(post.date),
         changeFrequency: 'monthly' as const,
         priority: 0.6,
+        images: [post.image, ...(post.imageTall ? [post.imageTall] : []), ...post.sections.filter((section) => section.type === 'image').map((section) => section.url)]
+          .map((url) => xml(toAbsoluteSiteUrl(url, BASE_URL))),
         // the article's YouTube Short: video sitemap entry so Google links the video to this page (Next does not escape XML)
         ...(post.youtube ? {
           videos: [{

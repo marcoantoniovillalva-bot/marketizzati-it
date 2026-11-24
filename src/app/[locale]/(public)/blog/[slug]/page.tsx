@@ -57,8 +57,9 @@ export async function generateMetadata({ params }: Props) {
       url,
       type: 'article',
       publishedTime: post.date,
-      images: [{ url: toAbsoluteSiteUrl(post.image, baseUrl), width: 1792, height: 1024, alt: post.imageAlt }],
+      images: [{ url: toAbsoluteSiteUrl(post.image, baseUrl), width: 1600, height: 1000, alt: post.imageAlt }],
     },
+    twitter: { card: 'summary_large_image' as const, images: [{ url: toAbsoluteSiteUrl(post.image, baseUrl), alt: post.imageAlt }] },
   }
 }
 
@@ -96,7 +97,7 @@ const VIDEO_LABELS = {
 }
 
 /** `automation`: AI and automation articles point their call to action at the automation plans. */
-function renderSection(section: BlogSection, index: number, locale: string, automation = false) {
+function renderSection(section: BlogSection, index: number, locale: string, title: string, automation = false) {
   switch (section.type) {
     case 'intro':
       return (
@@ -175,7 +176,11 @@ function renderSection(section: BlogSection, index: number, locale: string, auto
         <figure key={index} className="mt-8">
           <img
             src={section.url}
-            alt={section.alt}
+            alt={section.alt?.trim() || section.caption?.trim() || title}
+            width={section.width}
+            height={section.height}
+            loading="lazy"
+            decoding="async"
             className="w-full rounded-2xl object-cover"
           />
           {section.caption && (
@@ -241,11 +246,20 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    image: toAbsoluteSiteUrl(post.image),
+    dateModified: post.updated || post.date,
+    image: [
+      { '@type': 'ImageObject', url: toAbsoluteSiteUrl(post.image), width: 1600, height: 1000, caption: post.imageAlt },
+      ...(post.imageTall ? [{ '@type': 'ImageObject', url: toAbsoluteSiteUrl(post.imageTall), width: 1080, height: 1350, caption: post.imageAlt }] : []),
+      ...post.sections.filter((section) => section.type === 'image').map((section) => ({
+        '@type': 'ImageObject', url: toAbsoluteSiteUrl(section.url), caption: section.caption?.trim() || section.alt?.trim() || post.title,
+        ...(section.width ? { width: section.width } : {}), ...(section.height ? { height: section.height } : {}),
+      })),
+    ],
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.marketizzati.it/${locale}/blog/${post.slug}` },
     author: {
       '@type': 'Person',
       name: 'Marco Antonio Villalva',
-      url: 'https://www.marketizzati.it',
+      url: `https://www.marketizzati.it${pageHref('chiSono', lang)}`,
     },
     publisher: {
       '@type': 'Organization',
@@ -318,7 +332,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Content: long URLs, file names and code wrap instead of widening the page on phones */}
           <div className="min-w-0 [overflow-wrap:anywhere]">
-            {post.sections.map((section, i) => renderSection(section, i, locale, post.category === 'AI e automazioni'))}
+            {post.sections.map((section, i) => renderSection(section, i, locale, post.title, post.category === 'AI e automazioni'))}
           </div>
 
           {/* Prev / Next: full cards with the autoplaying video preview, like the other blog lists */}

@@ -9,7 +9,7 @@ export type BlogSection =
   | { type: 'table'; headers: string[]; rows: string[][]; caption?: string }
   | { type: 'code'; label?: string; content: string }
   | { type: 'cta'; heading: string; content: string }
-  | { type: 'image'; url: string; alt: string; caption?: string }
+  | { type: 'image'; url: string; alt: string; caption?: string; width?: number; height?: number }
   | { type: 'video'; youtubeId: string; caption?: string }
 
 export interface BlogPost {
@@ -17,6 +17,7 @@ export interface BlogPost {
   title: string
   description: string
   date: string
+  updated?: string
   readTime: number
   category: string
   keywords: string[]
@@ -66,6 +67,7 @@ export function rowToPost(row: BlogPostRow): BlogPost {
     title: row.title,
     description: row.description,
     date: String(row.date).slice(0, 10),
+    ...(row.updated_at ? { updated: row.updated_at } : {}),
     readTime: row.read_time,
     category: row.category,
     keywords: row.keywords ?? [],
