@@ -16,8 +16,8 @@ const post: BlogPost = {
     "practical 70 hooks",
     "70 viral hooks"
   ],
-  "image": "/images/blog/covers/70-ganci-virali-wide.webp",
-  "imageTall": "/images/blog/covers/70-ganci-virali-tall.webp",
+  "image": "/images/blog/covers/70-ganci-virali-wide.en.webp",
+  "imageTall": "/images/blog/covers/70-ganci-virali-tall.en.webp",
   "videoPreview": "/videos/preview/70-ganci-virali.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7703698401770147105",
   "imageAlt": "70 viral hooks — download the skill, install it on Claude and write your video hooks",

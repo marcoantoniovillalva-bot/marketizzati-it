@@ -16,8 +16,8 @@ const post: BlogPost = {
     "OpenAI dots",
     "Meta Muse"
   ],
-  "image": "/images/blog/covers/claude-duet-agenti-ia-sempre-attivi-wide.webp",
-  "imageTall": "/images/blog/covers/claude-duet-agenti-ia-sempre-attivi-tall.webp",
+  "image": "/images/blog/covers/claude-duet-agenti-ia-sempre-attivi-wide.en.webp",
+  "imageTall": "/images/blog/covers/claude-duet-agenti-ia-sempre-attivi-tall.en.webp",
   "videoPreview": "/videos/preview/claude-duet-agenti-ia-sempre-attivi.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7699927330872970529",
   "imageAlt": "What the new AI agents that work even when you’re not there do, how much they cost, what you can use today from Italy and which to pick for your business",

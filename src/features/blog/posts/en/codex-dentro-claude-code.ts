@@ -16,8 +16,8 @@ const post: BlogPost = {
     "what is the official OpenAI plugin that brings Codex into Claude Code",
     "what you need"
   ],
-  "image": "/images/blog/covers/codex-dentro-claude-code-wide.webp",
-  "imageTall": "/images/blog/covers/codex-dentro-claude-code-tall.webp",
+  "image": "/images/blog/covers/codex-dentro-claude-code-wide.en.webp",
+  "imageTall": "/images/blog/covers/codex-dentro-claude-code-tall.en.webp",
   "videoPreview": "/videos/preview/codex-dentro-claude-code.mp4",
   "imageAlt": "The official OpenAI plugin that runs Codex inside Claude Code: installation, commands, ready prompts, limits and costs",
   "sections": [

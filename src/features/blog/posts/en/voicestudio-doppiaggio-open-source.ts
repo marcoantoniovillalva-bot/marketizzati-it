@@ -16,8 +16,8 @@ const post: BlogPost = {
     "link to the official VoiceStudio repository",
     "requirements"
   ],
-  "image": "/images/blog/covers/voicestudio-doppiaggio-open-source-wide.webp",
-  "imageTall": "/images/blog/covers/voicestudio-doppiaggio-open-source-tall.webp",
+  "image": "/images/blog/covers/voicestudio-doppiaggio-open-source-wide.en.webp",
+  "imageTall": "/images/blog/covers/voicestudio-doppiaggio-open-source-tall.en.webp",
   "videoPreview": "/videos/preview/voicestudio-doppiaggio-open-source.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7701699199821253920",
   "imageAlt": "VoiceStudio, the open‑source, on‑premise alternative to ElevenLabs: link, requirements, installation, licenses and use cases",

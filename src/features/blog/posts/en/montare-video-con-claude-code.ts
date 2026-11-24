@@ -16,8 +16,8 @@ const post: BlogPost = {
     "videos with",
     "video with Claude"
   ],
-  "image": "/images/blog/covers/montare-video-con-claude-code-wide.webp",
-  "imageTall": "/images/blog/covers/montare-video-con-claude-code-tall.webp",
+  "image": "/images/blog/covers/montare-video-con-claude-code-wide.en.webp",
+  "imageTall": "/images/blog/covers/montare-video-con-claude-code-tall.en.webp",
   "videoPreview": "/videos/preview/montare-video-con-claude-code.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7706265157642685728",
   "imageAlt": "Editing videos with Claude Code: the 5 free tools, step by step on Windows",

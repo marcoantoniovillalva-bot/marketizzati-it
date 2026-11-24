@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Codex and Cursor",
     "Setup"
   ],
-  "image": "/images/blog/covers/android-agente-su-windows-wide.webp",
-  "imageTall": "/images/blog/covers/android-agente-su-windows-tall.webp",
+  "image": "/images/blog/covers/android-agente-su-windows-wide.en.webp",
+  "imageTall": "/images/blog/covers/android-agente-su-windows-tall.en.webp",
   "videoPreview": "/videos/preview/android-agente-su-windows.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7707718630523407649",
   "imageAlt": "ANDROID: set up the agent on Windows + 10 safe tests",

@@ -16,8 +16,8 @@ const post: BlogPost = {
     "reply to comments and read stats",
     "and the limits to know"
   ],
-  "image": "/images/blog/covers/claude-per-instagram-wide.webp",
-  "imageTall": "/images/blog/covers/claude-per-instagram-tall.webp",
+  "image": "/images/blog/covers/claude-per-instagram-wide.en.webp",
+  "imageTall": "/images/blog/covers/claude-per-instagram-tall.en.webp",
   "videoPreview": "/videos/preview/claude-per-instagram.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7700323352560274721",
   "imageAlt": "Operational manual to have Claude publish, reply and analyze your Instagram profile, no code and no loss of control",

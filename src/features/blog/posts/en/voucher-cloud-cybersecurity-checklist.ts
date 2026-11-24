@@ -16,8 +16,8 @@ const post: BlogPost = {
     "Cloud Cybersecurity Voucher",
     "Cloud Cybersecurity Requirements"
   ],
-  "image": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-wide.webp",
-  "imageTall": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-tall.webp",
+  "image": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-wide.en.webp",
+  "imageTall": "/images/blog/covers/voucher-cloud-cybersecurity-checklist-tall.en.webp",
   "videoPreview": "/videos/preview/voucher-cloud-cybersecurity-checklist.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7704624206952107297",
   "imageAlt": "Cloud & Cybersecurity Voucher – the requirements checklist to give to your accountant",

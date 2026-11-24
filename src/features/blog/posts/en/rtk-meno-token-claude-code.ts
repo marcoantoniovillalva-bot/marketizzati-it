@@ -16,8 +16,8 @@ const post: BlogPost = {
     "measurements",
     "five use cases and four prompts"
   ],
-  "image": "/images/blog/covers/rtk-meno-token-claude-code-wide.webp",
-  "imageTall": "/images/blog/covers/rtk-meno-token-claude-code-tall.webp",
+  "image": "/images/blog/covers/rtk-meno-token-claude-code-wide.en.webp",
+  "imageTall": "/images/blog/covers/rtk-meno-token-claude-code-tall.en.webp",
   "videoPreview": "/videos/preview/rtk-meno-token-claude-code.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7706859214056017185",
   "imageAlt": "RTK: fewer tokens wasted with Claude Code — free TOKEN guide",

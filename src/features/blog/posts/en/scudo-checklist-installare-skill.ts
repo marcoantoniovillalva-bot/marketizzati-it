@@ -16,8 +16,8 @@ const post: BlogPost = {
     "report",
     "hook template to verify and three prompts"
   ],
-  "image": "/images/blog/covers/scudo-checklist-installare-skill-wide.webp",
-  "imageTall": "/images/blog/covers/scudo-checklist-installare-skill-tall.webp",
+  "image": "/images/blog/covers/scudo-checklist-installare-skill-wide.en.webp",
+  "imageTall": "/images/blog/covers/scudo-checklist-installare-skill-tall.en.webp",
   "videoPreview": "/videos/preview/scudo-checklist-installare-skill.mp4",
   "tiktok": "https://www.tiktok.com/@marco.villalva3/video/7707559772744207649",
   "imageAlt": "SHIELD: the checklist before installing a skill",
