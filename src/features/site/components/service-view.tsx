@@ -42,7 +42,7 @@ export function ServiceView({ copy, locale, pageKey }: { copy: ServiceCopy; loca
   const automation = getAutomationCopy(locale)
   const showPlans = pageKey === 'sistemi' || pageKey === 'agenti'
   const planCards =
-    pageKey === 'googleAds' || pageKey === 'chatgptAds' ? adsPlans(locale) : pageKey === 'social' || pageKey === 'video' ? socialPlans(locale) : copy.cta === 'buy' ? sitePlans(locale) : null
+    pageKey === 'googleAds' || pageKey === 'chatgptAds' ? adsPlans(locale) : pageKey === 'social' || pageKey === 'videoServizio' ? socialPlans(locale) : copy.cta === 'buy' ? sitePlans(locale) : null
   const hasHeroVisual = copy.visual !== 'none' || Boolean(visuals.hero)
   const c = CTA_COPY[locale]
   const home = getHomeCopy(locale)

@@ -35,7 +35,7 @@
   "home": {
     "hero": {
       "title": "Mentre Tu Ci Pensi, i Tuoi Competitor Stanno Costruendo. Con l'AI.",
-      "subtitle": "Il Metodo Z·START in 6 fasi e una Digital Factory potenziata dall'intelligenza artificiale. Veloce, precisa e pronta per te.",
+      "subtitle": "Siti web, pubblicità, contenuti e automazioni AI per piccole imprese.",
       "socialProof": "Processo strutturato · Potenziato dall'AI · Risultati misurabili"
     },
     "whyItWorks": {
@@ -49,7 +49,7 @@
       "pillar3Desc": "Ogni componente è progettato per lavorare con gli altri. Niente pezzi scollegati, niente fornitori da coordinare."
     },
     "ecosystem": {
-      "title": "La Digital Factory Marketizzati",
+      "title": "I servizi digitali Marketizzati",
       "subtitle": "Non vendiamo singoli servizi. Costruiamo il tuo ecosistema digitale completo con un processo replicabile e potenziato dall'AI.",
       "step1": "Lead Magnet",
       "step1Desc": "Framework Z·START gratuito",
@@ -62,7 +62,7 @@
     },
     "services": {
       "title": "I Nostri Servizi",
-      "subtitle": "Ogni elemento della tua Digital Factory, progettato per lavorare in sinergia."
+      "subtitle": "Ogni elemento dei tuoi servizi digitali, progettato per lavorare in sinergia."
     },
     "method": {
       "title": "Il Metodo Z·START",
@@ -83,7 +83,7 @@
   "services": {
     "hero": {
       "title": "I Nostri Servizi",
-      "subtitle": "Ogni servizio è un modulo della tua Digital Factory, progettato per integrarsi e portarti risultati misurabili."
+      "subtitle": "Ogni servizio è un modulo dei tuoi servizi digitali, progettato per integrarsi e portarti risultati misurabili."
     },
     "strategia": {
       "title": "Strategia Digitale",
@@ -206,7 +206,7 @@
   "about": {
     "hero": {
       "title": "Chi Siamo",
-      "subtitle": "Marketizzati è la Digital Factory che trasforma la tua visione in un business digitale strutturato."
+      "subtitle": "Marketizzati realizza siti web, pubblicità e automazioni per piccole imprese."
     },
     "mission": {
       "title": "La Nostra Mission",
@@ -218,8 +218,8 @@
       "transparencyDesc": "Pricing chiaro, processi visibili, risultati misurabili. Zero sorprese.",
       "results": "Risultati Prima di Tutto",
       "resultsDesc": "Non contiamo le ore lavorate. Contiamo i risultati generati.",
-      "innovation": "Digital Factory AI-Native",
-      "innovationDesc": "Usiamo l'AI non come buzzword, ma come motore della nostra Digital Factory per costruire più velocemente e meglio.",
+      "innovation": "servizi digitali AI-Native",
+      "innovationDesc": "Usiamo l'AI non come buzzword, ma come motore dei nostri servizi digitali per costruire più velocemente e meglio.",
       "ecosystem": "Ecosistema, Non Servizi",
       "ecosystemDesc": "Non siamo un fornitore. Siamo un partner nel tuo percorso di crescita."
     },
@@ -418,7 +418,7 @@
   },
   "landing": {
     "hero": {
-      "badge": "Digital Factory Marketizzati",
+      "badge": "servizi digitali Marketizzati",
       "line1": "Mentre Tu Ci Pensi,",
       "line2": "i Tuoi Competitor",
       "line3": "Stanno Costruendo.",
@@ -440,7 +440,7 @@
     },
     "services": {
       "title": "Servizi",
-      "subtitle": "Nella Digital Factory ogni elemento è progettato per lavorare in sinergia.",
+      "subtitle": "I servizi digitali sono progettati per lavorare insieme.",
       "expandBtn": "Scopri di più",
       "collapseBtn": "Mostra meno",
       "waBtn": "Chiedi informazioni su WhatsApp",
@@ -492,9 +492,9 @@
     },
     "chiSono": {
       "title": "Chi c’è Dietro Marketizzati",
-      "subtitle": "Non un’agenzia. Una Digital Factory fondata su risultati reali.",
+      "subtitle": "Servizi digitali per piccole imprese.",
       "missionTitle": "La Mission",
-      "missionP1": "Ho costruito sistemi digitali prima di venderli. lurumi.it è il primo prodotto lanciato da Marketizzati: una PWA full-stack con AI, pagamenti Stripe e più di 200 funzionalità — costruita in {bold} usando la stessa Digital Factory che offro ai miei clienti.",
+      "missionP1": "Ho costruito sistemi digitali prima di venderli. lurumi.it è il primo prodotto lanciato da Marketizzati: una PWA full-stack con AI, pagamenti Stripe e più di 200 funzionalità — costruita in {bold}.",
       "missionP1Bold": "meno di un mese",
       "missionP2": "La mission è semplice: {bold} — non singoli servizi, ma un sistema integrato potenziato dall’intelligenza artificiale attraverso il Metodo Z·START.",
       "missionP2Bold": "aiutare PMI e professionisti a costruire il proprio ecosistema digitale completo",
@@ -530,7 +530,7 @@
       "study2Brief": "Prima infrastruttura digitale completa lanciata da Marketizzati: PWA full-stack con AI, pagamenti Stripe e 200+ funzionalità — live in meno di 1 mese.",
       "study2Headline": "Da zero a produzione in meno di 1 mese.",
       "study2Body1": "lurumi.it è una PWA full-stack per il mondo del crochet: AI integrata per generare pattern e immagini, pagamenti Stripe, oltre 200 funzionalità tra cui contatori, progetti, tutorial e chat AI.",
-      "study2Body2": "Costruita interamente con la Digital Factory Marketizzati — lo stesso sistema che offro ai miei clienti. Non una demo, un prodotto reale con utenti reali.",
+      "study2Body2": "Costruita interamente con i servizi digitali Marketizzati — lo stesso sistema che offro ai miei clienti. Non una demo, un prodotto reale con utenti reali.",
       "study2Body3": "È la prova concreta che il Metodo Z·START funziona: dall’idea alla messa in produzione, senza mesi di tentativi.",
       "study2GifCaption": "lurumi.it — live in produzione",
       "study2Quote": "Costruisco sistemi digitali prima di venderli."

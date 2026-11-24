@@ -35,7 +35,7 @@
   "home": {
     "hero": {
       "title": "Mientras Tú Lo Piensas, Tu Competencia Está Construyendo. Con IA.",
-      "subtitle": "El Método Z·START en 6 fases y una Digital Factory potenciada por inteligencia artificial. Rápida, precisa y lista para ti.",
+      "subtitle": "Páginas web, publicidad, contenidos y automatización con IA para pequeñas empresas.",
       "socialProof": "Proceso estructurado · Potenciado por IA · Resultados medibles"
     },
     "whyItWorks": {
@@ -49,7 +49,7 @@
       "pillar3Desc": "Cada componente está diseñado para trabajar con los demás. Sin piezas desconectadas, sin proveedores que coordinar."
     },
     "ecosystem": {
-      "title": "La Digital Factory Marketizzati",
+      "title": "Los servicios digitales Marketizzati",
       "subtitle": "No vendemos servicios individuales. Construimos tu ecosistema digital completo con un proceso replicable y potenciado por IA.",
       "step1": "Lead Magnet",
       "step1Desc": "Framework Z·START gratuito",
@@ -62,7 +62,7 @@
     },
     "services": {
       "title": "Nuestros Servicios",
-      "subtitle": "Cada componente de tu Digital Factory, diseñado para trabajar en sinergia."
+      "subtitle": "Cada componente de tus servicios digitales, diseñado para trabajar en sinergia."
     },
     "method": {
       "title": "El Método Z·START",
@@ -83,7 +83,7 @@
   "services": {
     "hero": {
       "title": "Nuestros Servicios",
-      "subtitle": "Cada servicio es un módulo de tu Digital Factory, diseñado para integrarse y ofrecerte resultados medibles."
+      "subtitle": "Cada servicio es un módulo de tus servicios digitales, diseñado para integrarse y ofrecerte resultados medibles."
     },
     "strategia": {
       "title": "Estrategia Digital",
@@ -206,7 +206,7 @@
   "about": {
     "hero": {
       "title": "Quiénes Somos",
-      "subtitle": "Marketizzati es la Digital Factory que transforma tu visión en un negocio digital estructurado."
+      "subtitle": "Marketizzati crea páginas web, publicidad y automatizaciones para pequeñas empresas."
     },
     "mission": {
       "title": "Nuestra Misión",
@@ -218,8 +218,8 @@
       "transparencyDesc": "Precios claros, procesos visibles, resultados medibles. Cero sorpresas.",
       "results": "Resultados Ante Todo",
       "resultsDesc": "No contamos horas trabajadas. Contamos resultados generados.",
-      "innovation": "Digital Factory AI-Native",
-      "innovationDesc": "Usamos la IA no como palabra de moda, sino como motor de nuestra Digital Factory para construir más rápido y mejor.",
+      "innovation": "servicios digitales AI-Native",
+      "innovationDesc": "Usamos la IA no como palabra de moda, sino como motor de nuestros servicios digitales para construir más rápido y mejor.",
       "ecosystem": "Ecosistema, No Servicios",
       "ecosystemDesc": "No somos un proveedor. Somos un socio en tu camino de crecimiento."
     },
@@ -397,7 +397,7 @@
     },
     "services": {
       "title": "Servicios — Estrategia, IA & Automatización, Web & Funnel | Marketizzati",
-      "description": "Estrategia digital, identidad de marca, automatización con IA, sitios web de alta conversión y funnels de ventas. Cada servicio de la Digital Factory Marketizzati trabaja en sinergia."
+      "description": "Páginas web, publicidad en Google y ChatGPT, contenidos y automatizaciones con IA para pequeñas empresas."
     },
     "method": {
       "title": "Método Z·START — Framework de 6 Fases para el Negocio Digital | Marketizzati",
@@ -405,7 +405,7 @@
     },
     "about": {
       "title": "Quiénes Somos — Marketizzati",
-      "description": "Marketizzati es la Digital Factory que transforma tu visión en un negocio digital estructurado con el Método Z·START."
+      "description": "Marketizzati crea páginas web, publicidad y automatizaciones para pequeñas empresas."
     },
     "consultation": {
       "title": "Consultoría Estratégica Gratuita — Marketizzati",
@@ -418,7 +418,7 @@
   },
   "landing": {
     "hero": {
-      "badge": "Digital Factory Marketizzati",
+      "badge": "servicios digitales Marketizzati",
       "line1": "Mientras Tú Lo Piensas,",
       "line2": "Tu Competencia",
       "line3": "Está Construyendo.",
@@ -440,7 +440,7 @@
     },
     "services": {
       "title": "Servicios",
-      "subtitle": "En la Digital Factory cada elemento está diseñado para trabajar en sinergia.",
+      "subtitle": "En los servicios digitales cada elemento está diseñado para trabajar en sinergia.",
       "expandBtn": "Descubrir más",
       "collapseBtn": "Mostrar menos",
       "waBtn": "Pregunta por WhatsApp",
@@ -492,9 +492,9 @@
     },
     "chiSono": {
       "title": "Quién Está Detrás de Marketizzati",
-      "subtitle": "No una agencia. Una Digital Factory fundada en resultados reales.",
+      "subtitle": "Servicios digitales para pequeñas empresas.",
       "missionTitle": "La Misión",
-      "missionP1": "Construyo sistemas digitales antes de venderlos. lurumi.it es el primer producto lanzado por Marketizzati: una PWA full-stack con IA, pagos Stripe y más de 200 funcionalidades — construida en {bold} usando la misma Digital Factory que ofrezco a mis clientes.",
+      "missionP1": "Construyo sistemas digitales antes de venderlos. lurumi.it es el primer producto lanzado por Marketizzati: una PWA full-stack con IA, pagos Stripe y más de 200 funcionalidades — construida en {bold}.",
       "missionP1Bold": "menos de un mes",
       "missionP2": "La misión es simple: {bold} — no servicios individuales, sino un sistema integrado potenciado por la inteligencia artificial a través del Método Z·START.",
       "missionP2Bold": "ayudar a PYMEs y profesionales a construir su ecosistema digital completo",
@@ -530,7 +530,7 @@
       "study2Brief": "Primera infraestructura digital completa lanzada por Marketizzati: PWA full-stack con IA, pagos Stripe y 200+ funcionalidades — en vivo en menos de 1 mes.",
       "study2Headline": "De cero a producción en menos de 1 mes.",
       "study2Body1": "lurumi.it es una PWA full-stack para el mundo del crochet: IA integrada para generar patrones e imágenes, pagos Stripe, más de 200 funcionalidades incluyendo contadores, proyectos, tutoriales y chat IA.",
-      "study2Body2": "Construida íntegramente con la Digital Factory Marketizzati — el mismo sistema que ofrezco a mis clientes. No una demo, un producto real con usuarios reales.",
+      "study2Body2": "Construida íntegramente con los servicios digitales Marketizzati — el mismo sistema que ofrezco a mis clientes. No una demo, un producto real con usuarios reales.",
       "study2Body3": "Es la prueba concreta de que el Método Z·START funciona: de la idea a la producción, sin meses de intentos.",
       "study2GifCaption": "lurumi.it — en vivo en producción",
       "study2Quote": "Construyo sistemas digitales antes de venderlos."

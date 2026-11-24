@@ -32,8 +32,8 @@ const BASE_URL = 'https://www.marketizzati.it'
 
 const keywordsByLocale: Record<string, string> = {
   it: 'realizzazione siti web, quanto costa un sito web, sito web per artigiani, web agency Milano, web agency Pavia, scheda Google Business Profile, Google Ads, ChatGPT Ads, agenti AI WhatsApp',
-  en: 'digital marketing SMB, digital consulting Italy, z start method, marketing automation, digital factory, AI marketing strategy, funnel marketing, high conversion web design',
-  es: 'marketing digital PYME, consultoría digital Italia, método z start, automatización marketing, digital factory, estrategia digital IA, funnel marketing',
+  en: 'websites for small businesses, Google Ads, ChatGPT Ads, social media, video content, AI agents, automation Italy',
+  es: 'páginas web para pequeñas empresas, Google Ads, ChatGPT Ads, redes sociales, vídeo, agentes IA, automatización Italia',
 }
 
 export async function generateMetadata({

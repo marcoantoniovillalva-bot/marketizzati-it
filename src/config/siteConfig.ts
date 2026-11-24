@@ -1,7 +1,7 @@
 export const siteConfig = {
   companyName: 'Marketizzati',
-  companySlogan: 'La Digital Factory per il tuo business',
-  companyDescription: 'Aiutiamo PMI e professionisti a trasformare la loro visione in un business digitale strutturato, attraverso il Metodo Z·START e una Digital Factory potenziata dall\'AI.',
+  companySlogan: 'Siti web e marketing digitale per piccole imprese',
+  companyDescription: 'Siti web, Google Ads e ChatGPT Ads, contenuti social e video, agenti AI e automazioni per piccole imprese in Italia.',
   partitaIva: '03028360182',
   codiceFiscale: '',
   codiceRea: '',

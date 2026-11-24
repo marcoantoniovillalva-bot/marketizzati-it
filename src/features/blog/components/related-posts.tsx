@@ -13,7 +13,7 @@ const TOPICS: Record<ServicePageKey, string[]> = {
   agenti: ['AI e automazioni'],
   sistemi: ['AI e automazioni'],
   social: ['Contenuti e social'],
-  video: ['Contenuti e social'],
+  videoServizio: ['Contenuti e social'],
   milano: ['Scheda Google e SEO locale', 'Siti web'],
   pavia: ['Scheda Google e SEO locale', 'Siti web'],
   lodi: ['Scheda Google e SEO locale', 'Siti web'],

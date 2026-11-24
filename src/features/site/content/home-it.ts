@@ -71,7 +71,7 @@ export const homeIt: HomeCopy = {
       { key: "siti", title: "Realizzazione siti web", text: `Un sito professionale con logo e scheda Google Business inclusi. Da ${OFFER.oneOff} € una tantum oppure ${OFFER.monthly} € al mese per ${OFFER.months} mesi.`, tag: "Siti web", links: [{ key: "siti", label: "Scopri i siti" }, { key: "prezzi", label: "Prezzi siti web" }] },
       { key: "googleAds", title: "Agenzia Google Ads e ChatGPT Ads", text: "Campagne per intercettare chi cerca i tuoi servizi. Annunci su ChatGPT dove disponibili; budget pubblicitario separato.", tag: "Pubblicità", links: [{ key: "googleAds", label: "Scopri Google Ads" }, { key: "chatgptAds", label: "Scopri ChatGPT Ads" }] },
       { key: "agenti", title: "Agente AI WhatsApp e automazione aziendale", text: "Assistenti per rispondere, raccogliere richieste e fissare appuntamenti. Automazioni su misura per i processi aziendali.", tag: "AI e automazioni", links: [{ key: "agenti", label: "Scopri gli agenti AI" }, { key: "sistemi", label: "Scopri le automazioni" }] },
-      { key: "social", title: "Social media manager e contenuti video", text: "Piano editoriale, gestione dei profili e contenuti per i tuoi canali. Video brevi e pubblicità social su preventivo.", tag: "Contenuti", links: [{ key: "social", label: "Scopri i social" }, { key: "video", label: "Scopri i video" }] },
+      { key: "social", title: "Social media manager e contenuti video", text: "Piano editoriale, gestione dei profili e contenuti per i tuoi canali. Video brevi e pubblicità social su preventivo.", tag: "Contenuti", links: [{ key: "social", label: "Scopri i social" }, { key: "videoServizio", label: "Scopri i video" }] },
     ],
     chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },

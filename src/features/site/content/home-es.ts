@@ -45,7 +45,7 @@ export const homeEs: HomeCopy = {
       { key: "siti", title: "Diseño de páginas web", text: `Una web profesional con logo y ficha de Google Business incluidos. Desde ${OFFER.oneOff} € en un pago o ${OFFER.monthly} € al mes durante ${OFFER.months} meses.`, tag: "Webs", links: [{ key: "siti", label: "Descubre las webs" }, { key: "prezzi", label: "Ver precios" }] },
       { key: "googleAds", title: "Publicidad en Google y ChatGPT", text: "Campañas para llegar a quienes buscan tus servicios. Anuncios en ChatGPT donde están disponibles; presupuesto publicitario aparte.", tag: "Publicidad", links: [{ key: "googleAds", label: "Descubre Google Ads" }, { key: "chatgptAds", label: "Descubre ChatGPT Ads" }] },
       { key: "agenti", title: "Agentes de IA y automatización", text: "Asistentes para responder, recoger consultas y concertar citas. Automatizaciones a medida para tus procesos.", tag: "IA y automatización", links: [{ key: "agenti", label: "Descubre los agentes" }, { key: "sistemi", label: "Descubre la automatización" }] },
-      { key: "social", title: "Redes sociales y vídeo", text: "Plan editorial, gestión de perfiles y contenidos para tus canales. Vídeos cortos y publicidad social con presupuesto.", tag: "Contenidos", links: [{ key: "social", label: "Descubre las redes" }, { key: "video", label: "Descubre los vídeos" }] },
+      { key: "social", title: "Redes sociales y vídeo", text: "Plan editorial, gestión de perfiles y contenidos para tus canales. Vídeos cortos y publicidad social con presupuesto.", tag: "Contenidos", links: [{ key: "social", label: "Descubre las redes" }, { key: "videoServizio", label: "Descubre los vídeos" }] },
     ],
     chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },

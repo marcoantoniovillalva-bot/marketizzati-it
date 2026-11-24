@@ -27,7 +27,7 @@ for (const file of fs.readdirSync('src/features/site/content').filter((name) => 
   }
 }
 // These page files use literal metadata fields rather than site content objects.
-for (const page of ['chi-sono', 'contatti', 'progetti', 'blog', 'condizioni-sito-web']) {
+for (const page of ['chi-sono', 'contatti', 'progetti', 'blog', 'video', 'condizioni-sito-web']) {
   const file = `src/app/[locale]/(public)/${page}/page.tsx`
   const source = fs.readFileSync(file, 'utf8')
   const regex = /\b(it|es|en):\s*\{\s*(?:meta|metaTitle):\s*(['"`])((?:\\.|(?!\2)[\s\S])*?)\2\s*,\s*(?:desc|description):\s*(['"`])((?:\\.|(?!\4)[\s\S])*?)\4/g

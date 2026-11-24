@@ -39,7 +39,7 @@ export const SERVICE_EXPLAINERS: Record<ServicePageKey, { hero?: ExplainerKind; 
   agenti: { blocks: ['voice', null] },
   sistemi: { hero: 'automation', blocks: [null, 'showcase'] },
   social: { hero: 'social', blocks: [null] },
-  video: { hero: 'video', blocks: [null] },
+  videoServizio: { hero: 'video', blocks: [null] },
   milano: { blocks: local, city: CITIES.milano },
   pavia: { blocks: local, city: CITIES.pavia },
   lodi: { blocks: local, city: CITIES.lodi },

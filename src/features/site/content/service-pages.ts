@@ -10,24 +10,24 @@ import { artigianiEs, schedaEs, sitiEs } from './pages-siti-es'
 import { artigianiEn, schedaEn, sitiEn } from './pages-siti-en'
 import type { ServiceCopy } from './service-types'
 
-export type ServicePageKey = 'siti' | 'artigiani' | 'schedaGoogle' | 'googleAds' | 'chatgptAds' | 'agenti' | 'sistemi' | 'social' | 'video' | 'milano' | 'pavia' | 'lodi' | 'crema'
+export type ServicePageKey = 'siti' | 'artigiani' | 'schedaGoogle' | 'googleAds' | 'chatgptAds' | 'agenti' | 'sistemi' | 'social' | 'videoServizio' | 'milano' | 'pavia' | 'lodi' | 'crema'
 
 const IT: Record<ServicePageKey, ServiceCopy> = {
   siti: sitiIt, artigiani: artigianiIt, schedaGoogle: schedaIt,
   googleAds: googleAdsIt, chatgptAds: chatgptAdsIt, agenti: agentiIt,
-  sistemi: sistemiIt, social: socialIt, video: videoIt,
+  sistemi: sistemiIt, social: socialIt, videoServizio: videoIt,
   milano: milanoIt, pavia: paviaIt, lodi: lodiIt, crema: cremaIt,
 }
 const ES: Record<ServicePageKey, ServiceCopy> = {
   siti: sitiEs, artigiani: artigianiEs, schedaGoogle: schedaEs,
   googleAds: googleAdsEs, chatgptAds: chatgptAdsEs, agenti: agentiEs,
-  sistemi: sistemiEs, social: socialEs, video: videoEs,
+  sistemi: sistemiEs, social: socialEs, videoServizio: videoEs,
   milano: milanoEs, pavia: paviaEs, lodi: lodiEs, crema: cremaEs,
 }
 const EN: Record<ServicePageKey, ServiceCopy> = {
   siti: sitiEn, artigiani: artigianiEn, schedaGoogle: schedaEn,
   googleAds: googleAdsEn, chatgptAds: chatgptAdsEn, agenti: agentiEn,
-  sistemi: sistemiEn, social: socialEn, video: videoEn,
+  sistemi: sistemiEn, social: socialEn, videoServizio: videoEn,
   milano: milanoEn, pavia: paviaEn, lodi: lodiEn, crema: cremaEn,
 }
 const BY_LOCALE: Record<Locale, Record<ServicePageKey, ServiceCopy>> = { it: IT, es: ES, en: EN }

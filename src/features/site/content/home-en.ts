@@ -45,7 +45,7 @@ export const homeEn: HomeCopy = {
       { key: "siti", title: "Website design", text: `A professional website with a logo and Google Business Profile included. From ${OFFER.oneOff} € upfront or ${OFFER.monthly} € a month for ${OFFER.months} months.`, tag: "Websites", links: [{ key: "siti", label: "Explore websites" }, { key: "prezzi", label: "See website pricing" }] },
       { key: "googleAds", title: "Google and ChatGPT advertising", text: "Campaigns that reach people looking for your services. ChatGPT ads where available; ad spend is separate.", tag: "Advertising", links: [{ key: "googleAds", label: "Explore Google Ads" }, { key: "chatgptAds", label: "Explore ChatGPT Ads" }] },
       { key: "agenti", title: "AI agents and automation", text: "Assistants that answer enquiries, collect requests and book appointments, plus custom business process automation.", tag: "AI and automation", links: [{ key: "agenti", label: "Explore AI agents" }, { key: "sistemi", label: "Explore automation" }] },
-      { key: "social", title: "Social media and video content", text: "Editorial planning, profile management and content for your channels. Short videos and social advertising quoted individually.", tag: "Content", links: [{ key: "social", label: "Explore social media" }, { key: "video", label: "Explore video" }] },
+      { key: "social", title: "Social media and video content", text: "Editorial planning, profile management and content for your channels. Short videos and social advertising quoted individually.", tag: "Content", links: [{ key: "social", label: "Explore social media" }, { key: "videoServizio", label: "Explore video" }] },
     ],
     chat: { title: '', status: '', messages: [] }, quoteCta: '',
   },

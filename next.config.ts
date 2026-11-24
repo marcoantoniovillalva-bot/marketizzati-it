@@ -2,6 +2,7 @@ import type { NextConfig } from 'next'
 import path from 'node:path'
 import createNextIntlPlugin from 'next-intl/plugin'
 import { RETIRED_POSTS } from './src/features/blog/retired-posts'
+import { LOCALES, pageHref } from './src/features/site/lib/routes'
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
@@ -28,11 +29,17 @@ const nextConfig: NextConfig = {
   },
   // old articles that now point elsewhere (one list, also used to keep them out of the blog and the sitemap)
   async redirects() {
-    return Object.entries(RETIRED_POSTS).map(([slug, destination]) => ({
+    return [...Object.entries(RETIRED_POSTS).map(([slug, destination]) => ({
       source: `/:locale(it|es|en)/blog/${slug}`,
       destination,
       permanent: true,
-    }))
+    })), ...(['metodo-z-start', 'pacchetti', 'portfolio'] as const).flatMap((slug, i) => {
+      const key = (['chiSono', 'prezzi', 'progetti'] as const)[i]
+      return [
+        { source: `/${slug}`, destination: pageHref(key, 'it'), permanent: true },
+        ...LOCALES.map((locale) => ({ source: `/${locale}/${slug}`, destination: pageHref(key, locale), permanent: true })),
+      ]
+    })]
   },
   images: {
     remotePatterns: [
